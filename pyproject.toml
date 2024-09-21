@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "chatbot-tlcn"
+version = "0.1.0"
+description = ""
+authors = ["Nguyễn Tấn Phát <phat.techapollo@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+gradio = "^4.44.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

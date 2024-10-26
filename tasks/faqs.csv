@@ -1,0 +1,112 @@
+id,title,category,question,answer
+1,Mục đích và phạm vi thu thập,Chính sách bảo mật,FPT Shop thu thập thông tin cá nhân của khách hàng với mục đích gì?,"FPTshop.com.vn thu thập thông tin cá nhân của khách hàng để cung cấp dịch vụ, xác minh danh tính, và đảm bảo các hoạt động giao dịch an toàn. Các thông tin được thu thập bao gồm số lần truy cập, số trang bạn xem, số liên kết bạn click và thông tin trình duyệt khi truy cập website."
+2,Phạm vi sử dụng thông tin,Chính sách bảo mật,Thông tin cá nhân của khách hàng được sử dụng trong phạm vi nào?,"FPTshop.com.vn chỉ sử dụng thông tin cá nhân của khách hàng trong phạm vi đã thông báo, bao gồm liên hệ trực tiếp qua thư ngỏ, đơn đặt hàng, thư cảm ơn, sms, thông tin bảo mật, và các dịch vụ khác liên quan."
+3,Thời gian lưu trữ thông tin,Chính sách bảo mật,Thông tin cá nhân của khách hàng được lưu trữ bao lâu?,"Dữ liệu cá nhân sẽ được lưu trữ đến khi có yêu cầu hủy bỏ từ khách hàng hoặc khi khách hàng tự hủy bỏ thông tin. Trong mọi trường hợp, dữ liệu cá nhân sẽ được bảo mật trên máy chủ của FPTshop.com.vn."
+4,Cam kết bảo mật thông tin,Chính sách bảo mật,FPT Shop cam kết bảo mật thông tin khách hàng như thế nào?,"FPTshop.com.vn cam kết bảo mật thông tin cá nhân của khách hàng tuyệt đối, chỉ thu thập và sử dụng khi có sự đồng ý từ khách hàng, và không chia sẻ với bên thứ ba trừ trường hợp có quy định của pháp luật."
+5,Quy định bảo mật khi thanh toán,Chính sách bảo mật,FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng như thế nào?,FPTShop đảm bảo thông tin thẻ thanh toán của khách hàng không được lưu trên hệ thống. Các đối tác cổng thanh toán sẽ lưu giữ và bảo mật thông tin này theo tiêu chuẩn quốc tế PCI DSS.
+6,Quyền yêu cầu xóa dữ liệu,Chính sách bảo mật,Làm thế nào để yêu cầu xóa dữ liệu cá nhân tại FPT Shop?,Khách hàng có thể gửi yêu cầu xóa dữ liệu qua email đến Trung tâm hỗ trợ của FPT Shop: fptshop@fpt.com.vn. Yêu cầu sẽ được chuyển đến bộ phận xử lý và khách hàng sẽ được cập nhật về tiến trình xóa dữ liệu.
+7,Chính sách giao hàng,Chính sách giao hàng & lắp đặt,FPT Shop có chính sách giao hàng tại nhà như thế nào?,"FPT Shop hỗ trợ giao hàng tại nhà trên toàn quốc với phạm vi phủ sóng 63 tỉnh thành. Miễn phí giao hàng trong bán kính 20km với đơn hàng dưới 100.000 VNĐ thu phí 10.000 VNĐ. Với khoảng cách xa hơn, nhân viên sẽ tư vấn chi tiết."
+8,Thanh toán khi mua hàng trực tuyến,Chính sách giao hàng & lắp đặt,Hình thức thanh toán khi mua hàng trực tuyến tại FPT Shop?,"Đơn hàng có giá trị từ 50 triệu trở lên: Quý khách phải thanh toán trước 100% giá trị đơn hàng nếu muốn giao hàng tại nhà.
+Đơn hàng có giá trị dưới 50 triệu: Quý khách có thể nhận hàng và thanh toán tại nhà khi đồng ý mua hàng."
+9,Hỗ trợ lắp đặt sản phẩm,Chính sách giao hàng & lắp đặt,FPT Shop có hỗ trợ lắp đặt sản phẩm tại nhà không?,"FPT Shop hỗ trợ lắp đặt miễn phí cho các sản phẩm cần lắp đặt như TV, điều hòa sau khi giao hàng đến nơi."
+10,Chính sách đổi trả,Chính sách khui hộp sản phẩm,FPT Shop hỗ trợ đổi trả sản phẩm như thế nào?,"Khách hàng có thể đổi sản phẩm nếu phát hiện lỗi ngoại quan trước khi kích hoạt bảo hành điện tử hoặc ngay khi nhận hàng. Nếu sản phẩm có lỗi kỹ thuật của nhà sản xuất, khách hàng được đổi sản phẩm mới tại FPT Shop."
+11,Chính sách máy đổi trả,Giới thiệu máy đổi trả,Chế độ bảo hành cho máy đổi trả tại FPT Shop như thế nào?,"Máy đổi trả tại FPT Shop được bảo hành 1 đổi 1 trong 30 ngày nếu có lỗi nhà sản xuất, và bảo hành theo chính sách của hãng nếu còn bảo hành mặc định. Hết bảo hành mặc định, FPT Shop bảo hành từ 1 đến 12 tháng tùy loại sản phẩm."
+12,,,,
+13,Đại lý uỷ quyền và TTBH uỷ quyền của Apple,Thông tin cửa hàng,FPT Shop có phải là đại lý ủy quyền của Apple không?,"FPT Shop là đại lý ủy quyền toàn cầu của Apple tại Việt Nam:
+- Cung cấp sản phẩm chính hãng Apple và dịch vụ bảo hành chuẩn hãng.
+- Đội ngũ tư vấn được đào tạo bởi chuyên gia Apple."
+14,Chính sách trả góp,Chính sách trả góp,Chính sách trả góp của FPT ?,"Tất cả sản phẩm tại FPT Shop kinh doanh đều là sản phẩm chính hãng và được bảo hành theo đúng chính sách của nhà sản xuất(*). Ngoài ra FPT Shop cũng hỗ trợ gửi bảo hành miễn phí giúp khách hàng đối với cả sản phẩm do FPT Shop bán ra và sản phẩm Quý khách mua tại các chuỗi bán lẻ khác.
+
+Mua hàng tại FPT Shop, Quý khách sẽ được hưởng những đặc quyền sau:
+
+- Bảo hành đổi sản phẩm mới ngay tại shop trong 30 ngày nếu có lỗi NSX.(**)
+- Gửi bảo hành chính hãng không mất phí vận chuyển.(***)
+- Theo dõi tiến độ bảo hành nhanh chóng qua kênh hotline hoặc tự tra cứu Tại đây.
+- Hỗ trợ làm việc với hãng để xử lý phát sinh trong quá trình bảo hành.
+Bên cạnh đó Quý khách có thể tham khảo một số các trường hợp thường gặp nằm ngoài chính sách bảo hành sau để xác định sơ bộ máy có đủ điều kiện bảo hành hãng:
+
+- Sản phẩm hết hạn bảo hành (Vui lòng tra cứu thời hạn bảo hành sản phẩm Tại đây.
+
+- Sản phẩm đã bị thay đổi, sửa chữa không thuộc các Trung Tâm Bảo Hành Ủy Quyền của Hãng.
+
+- Sản phẩm lắp đặt, bảo trì, sử dụng không đúng theo hướng dẫn của Nhà sản xuất gây ra hư hỏng.
+
+- Sản phẩm lỗi do ngấm nước, chất lỏng và bụi bẩn. Quy định này áp dụng cho cả những thiết bị đạt chứng nhận kháng nước/kháng bụi cao nhất là IP68.
+
+- Sản phẩm bị biến dạng, nứt vỡ, cấn móp, trầy xước nặng do tác động nhiệt, tác động bên ngoài.
+
+- Sản phẩm có vết mốc, rỉ sét hoặc bị ăn mòn, oxy hóa bởi hóa chất.
+
+- Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh, côn trùng, động vật vào.
+
+- Sản phẩm trong tình trạng bị khóa tài khoản cá nhân như: Tài khoản khóa máy/màn hình, khóa tài khoản trực tuyến Xiaomi Cloud, Samsung Cloud, iCloud, Gmail...
+
+- Khách hàng sử dụng phần mềm, ứng dụng không chính hãng, không bản quyền.
+
+- Màn hình có bốn (04) điểm chết trở xuống.
+
+Lưu ý:
+
+- Chương trình bảo hành bắt đầu có hiệu lực từ thời điểm FPT Shop xuất hóa đơn cho Quý khách.
+
+- Với mỗi dòng sản phẩm khác nhau sẽ có chính sách bảo hành khác nhau tùy theo chính sách của Hãng/Nhà cung cấp.
+
+- Để tìm hiểu thông tin chi tiết về chính sách bảo hành cho sản phẩm cụ thể, xin liên hệ bộ phận Chăm sóc Khách hàng của FPT Shop 1800 6616.
+
+- Tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào Tại đây.
+
+- Trong quá trình thực hiện dịch vụ bảo hành, các nội dung lưu trữ trên sản phẩm của Quý khách sẽ bị xóa và định dạng lại. Do đó, Quý khách vui lòng tự sao lưu toàn bộ dữ liệu trong sản phẩm, đồng thời gỡ bỏ tất cả các thông tin cá nhân mà Quý khách muốn bảo mật. FPT Shop không chịu trách nhiệm đối với bất kỳ mất mát nào liên quan tới các chương trình phần mềm, dữ liệu hoặc thông tin nào khác lưu trữ trên sản phẩm bảo hành.
+
+- Vui lòng tắt tất cả các mật khẩu bảo vệ, FPT Shop sẽ từ chối tiếp nhận bảo hành nếu thiết bị của bạn bị khóa bởi bất cứ phương pháp nào.
+
+(*) Áp dụng với các sản phẩm bán mới hoặc còn hạn bảo hành mặc định nếu đã qua sử dụng.
+
+(**) Áp dụng với các sản phẩm thuộc diện đổi mới trong 30 ngày nếu có lỗi NSX được công bố trên website Chính sách đổi trả.
+
+(***) Trừ các sản phẩm có chính sách bảo hành tại nhà, sản phẩm thuộc diện cồng kềnh."
+15, Quy định hỗ trợ kỹ thuật và sao lưu dữ liệu,Hỗ trợ kỹ thuật và sao lưu dữ liệu,FPT Shop có quy định hỗ trợ kỹ thuật và sao lưu dữ liệu như thế nào?,"Đối tượng áp dụng: Khách hàng có nhu cầu hỗ trợ phần mềm bảo hành sửa chữa sản phẩm tại FPT Shop.
+
+Nhằm đảm bảo đầy đủ quyền lợi của khách hàng khi cài đặt, bảo hành sửa chữa sản phẩm, FPT Shop xin thông báo Quy định như sau:
+- Để bảo vệ dữ liệu cá nhân, Quý khách vui lòng sao lưu và XOÁ các dữ liệu cá nhân trước khi bàn giao sản phẩm cho nhân viên FPT Shop.
+- FPT Shop không chịu trách nhiệm về việc mất dữ liệu của Quý khách trong quá trình cài đặt, bảo hành sửa chữa.
+- Để đảm bảo Quyền lợi, Quý khách vui lòng ký xác nhận để thông tin bàn giao thiết bị của Quý khách được ghi nhận trên hệ thống FPT Shop.
+- FPT Shop không hỗ trợ cài đặt phần mềm không có bản quyền trên máy tính của Quý khách.
+- Quý khách vui lòng kiểm tra tài khoản iCloud/ Google và các tài khoản xã hội khác trên máy trước khi rời cửa hàng.
+- Tài khoản cài đặt trên máy phải là tài khoản cá nhân của Quý khách (chủ sở hữu máy).
+- Nếu chưa có tài khoản iCloud, Quý khách liên hệ NV Kỹ thuật để được hỗ trợ tạo Tài khoản iCloud (Apple ID)/ Google và các tài khoản khác miễn phí tại cửa hàng. Đồng thời yêu cầu nhân viên cung cấp thông tin, mật khẩu tài khoản vừa được tạo trước khi rời cửa hàng."
+16,Câu hỏi thường gặp,FAQ,Mua sản phẩm FPT Shop được bảo hành như thế nào?,Để đảm bảo quyền lợi của Quý khách hàng khi mua sản phẩm tại các cửa hàng thuộc hệ thống cửa hàng FPT Shop. Chúng tôi cam kết tất cả các sản phẩm được tuân theo các điều khoản bảo hành của sản phẩm tại thời điểm xuất hóa đơn cho Quý khách hàng. Các sản phẩm điện thoại sẽ có chính sách bảo hành khác nhau tùy thuộc vào hãng sản xuất. Khách hàng có thể bảo hành máy tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm.
+17,Câu hỏi thường gặp,FAQ,Mua sản phẩm tại FPT Shop có được đổi trả không? Nếu được thì phí đổi trả sẽ được tính như thế nào?,"Đối với các sản phẩm ĐTDĐ, MTB, MTXT, SMARTWATCH (Áp dụng bao gồm các sản phẩm Apple), sản phẩm cùng model, cùng màu, cùng dung lượng. Trong tình huống sản phẩm đổi hết hàng, khách hàng có thể đổi sang một sản phẩm khác tương đương hoặc cao hơn về giá trị so với sản phẩm lỗi. Trường hợp khách hàng muốn trả sản phẩm: FPTShop sẽ kiểm tra tình trạng máy và thông báo đến Khách hàng về giá trị thu lại sản phẩm ngay tại cửa hàng."
+18,Câu hỏi thường gặp,FAQ,FPT Shop có chính sách giao hàng tận nhà không? Nếu giao hàng tại nhà mà không ưng sản phẩm có được trả lại không?,"FPT Shop cam kết giao hàng toàn bộ 63 tỉnh thành, FPT Shop nhận giao đơn hàng có thời gian hẹn giao tại nhà trước 20h00. Miễn phí giao hàng với các đơn hàng trong bán kính 20km có đặt shop (Với đơn hàng có giá trị nhỏ hơn 100.000đ sẽ thu phí 10.000đ). Nếu Quý khách hàng không ưng ý với sản phẩm khi nhận hàng, Quý khách có thể từ chối mua hàng mà không mất bất cứ chi phí nào."
+19,Câu hỏi thường gặp,FAQ,Làm thế nào để được mua hàng theo chính sách F.Friends?,"Để được mua hàng và hưởng quyền lợi theo chính sách mua hàng F.Friends, Quý khách hàng phải là hội viên. Điều kiện tiếp theo là bạn đã ký hợp đồng chính thức với doanh nghiệp đã tham gia chương trình F.Friends hay chưa."
+20,Câu hỏi thường gặp,FAQ,Làm thế nào để kiểm tra được tình trạng máy đã gửi đi bảo hành tại FPT Shop?,"Để tra cứu thông tin máy gửi bảo hành, Quý khách hàng có thể truy cập Tại đây."
+21,Câu hỏi thường gặp,FAQ,Muốn kiểm tra sản phẩm đã mua từ FPT Shop có chính hãng của Apple thì xem như thế nào?,"Để tra cứu thông tin sản phẩm chính hãng của Apple, Quý khách hàng có thể truy cập Tại đây."
+22,Câu hỏi thường gặp,FAQ,Cần hướng dẫn cách sử dụng về sản phẩm thì liên hệ hoặc xem ở đâu được?,Quý khách có thể tham khảo sách hướng dẫn sử dụng kèm theo sản phẩm hoặc gọi vào tổng đài 1800.6601 nhánh số 2 để gặp điện thoại viên hướng dẫn thêm.
+23,Câu hỏi thường gặp,FAQ,Muốn xem giá thay thế linh kiện cho sản phẩm đã mua tại FPT Shop thì xem ở đâu?,Quý khách tham khảo bảng giá sửa chữa Tại đây.
+24,Câu hỏi thường gặp,FAQ,Đặt đơn hàng thành công và muốn theo dõi tiến độ đơn hàng đã được đi giao chưa thì xem ở đâu?,"Để tra cứu thông tin đơn hàng đã đặt thành công và tiến độ xử lý đơn hàng, Quý khách hàng có thể truy cập Tại đây."
+25,Câu hỏi thường gặp,FAQ,Sản phẩm mới mua về bị lỗi không sử dụng được thì liên hệ ai để xử lý nhanh mà không bị mất thời gian di chuyển nhiều lần?,Khách hàng có thể mang máy đến tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm nơi gần nhà khách hàng nhất.
+26,Câu hỏi thường gặp,FAQ,Làm thế nào để tra cứu về hóa đơn đã mua hàng tại FPT Shop?,Quý khách thực hiện tra cứu Tại đây.
+27,Câu hỏi thường gặp,FAQ,Cần hướng dẫn vấn đề điều chỉnh hoặc xuất lại hóa đơn do bị sai thông tin khách hàng?,Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ hoặc Quý khách tham khảo qua hướng dẫn Tại đây nếu liên quan đến hóa đơn công ty.
+28,Câu hỏi thường gặp,FAQ,Điện thoại mua tại FPT Shop bị lỗi và gửi đi bảo hành nhưng muốn mượn một máy khác để dùng trong thời gian chờ bảo hành thì có được không và liên hệ đến ai để hỗ trợ vấn đề này?,"FPT Shop sẽ hỗ trợ cho khách hàng mượn điện thoại khác sử dụng theo quy định của công ty, mời Quý khách liên hệ tại cửa hàng FPT Shop nơi khách hàng gửi máy đi bảo hành để được tư vấn hỗ trợ."
+29,Câu hỏi thường gặp,FAQ,Muốn thanh toán tiền thu hộ qua kênh online thì thực hiện bằng cách nào?,Quý khách thực hiện truy cập Tại đây vào đường dẫn sau để thực hiện thanh toán.
+30,Câu hỏi thường gặp,FAQ,Cần tra cứu điểm mua hàng tại FPT Shop đã tích điểm được bao nhiêu thì xem ở đâu?,Quý khách thực hiện tra cứu Tại đây và đăng nhập số điện thoại mua hàng của Quý khách.
+31,Câu hỏi thường gặp,FAQ,Muốn cập nhật máy Apple có thời gian bảo hành không đúng hoặc chưa kích hoạt bảo hành trên hệ thống Website của Apple thì làm thế nào?,Quý khách vui lòng chờ thêm và kiểm tra lại thông tin bảo hành sau 72h kể từ khi kích hoạt máy. Nếu sau thời gian này vẫn chưa cập nhật thời gian bảo hành thì Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp tổng đài viên hỗ trợ.
+32,Câu hỏi thường gặp,FAQ,Cách tra cứu về thông tin trúng thưởng của FPT Shop khi tham gia các chương trình mini game?,Quý khách thực hiện tra cứu Tại đây.
+33,Câu hỏi thường gặp,FAQ,Máy gửi đi sửa dịch vụ và đã nhận thông tin báo phí nhưng muốn thanh toán phí online thì thực hiện bằng cách nào?,Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ.
+34,Câu hỏi thường gặp,FAQ,Phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không?,"Đối với Phụ kiện nhập khẩu nếu Quý khách có nhu cầu gửi hãng để làm dịch vụ FPT Shop tiếp nhận sản phẩm gửi về TTBH kiểm tra, có chi phí báo lại Quý khách sau."
+35,Hướng dẫn mua hàng và thanh toán online,Hướng dẫn,Làm thế nào để mua hàng và thanh toán online tại FPT Shop?,"Bước 1: Tại giao diện trang chủ của FPT Shop (https://fptshop.com.vn/)
+Quý khách gõ vào thanh tìm kiếm tên sản phẩm mà mình quan tâm. Ví dụ Quý khách đang muốn mua sản phẩm iPhone, sau khi gõ hệ thống sẽ truy xuất ra các sản phẩm liên quan tới từ khóa mà Quý khách muốn tìm.
+
+Bước 2: Bây giờ Quý khách hãy click chọn sản phẩm mà mình muốn tham khảo. Ví dụ Quý khách chọn sản phẩm iPhone 15, sau khi click chọn sẽ hiển thị trang chi tiết sản phẩm. Quý khách có thể xem các thông số thuộc tính cũng như bài viết đánh giá về sản phẩm phía bên dưới trang web.
+
+Bước 3: Sau khi đã chọn được sản phẩm phù hợp, Quý khách vui lòng click vào nút 'MUA NGAY'. Sau đó Quý khách có thể thấy được giỏ hàng của mình đang gồm những sản phẩm đã chọn mua.
+
+Bước 4: Quý khách kiểm tra thông tin sản phẩm đã chọn, sau đó điền thông tin đặt hàng.
+Quý khách lựa chọn hình thức giao hàng mong muốn: Giao hàng tận nơi/Nhận tại cửa hàng và điền form thông tin khách hàng bao gồm: 'Anh/Chị', 'Họ và tên', 'Số điện thoại', 'Email'. Trường 'Email' Quý khách có thể bỏ qua nếu không muốn.
+- Đối với phương án giao hàng tận nơi: Quý khách điền thông tin địa chỉ nhận hàng và thời gian giao hàng.
+- Đối với phương án nhận tại cửa hàng: Quý khách chọn tỉnh, huyện mong muốn và chọn cửa hàng phù hợp trong danh sách kết quả.
+
+Bước 5: Thanh Toán.
+Quý khách có thể lựa chọn hình thức thanh toán bằng tiền mặt khi nhận hàng, trả góp qua nhà tài chính hoặc qua thẻ ATM và thẻ tín dụng hoặc theo chương trình bạn đồng hành F.Friends.
+Nếu Quý khách chọn hình thức thanh toán tiền mặt khi nhận hàng, vui lòng bấm nút 'Đặt hàng' để hoàn tất.
+
+Vậy là Quý khách đã hoàn tất việc đặt hàng và thanh toán, tư vấn viên của FPT Shop sẽ gọi điện để xác nhận đơn hàng trong thời gian sớm nhất, đồng thời giải đáp các thắc mắc liên quan nếu khách hàng có nhu cầu."

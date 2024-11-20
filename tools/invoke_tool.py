@@ -1,11 +1,13 @@
 from .faq import tool_json_schema as faq_tool_json_schema, invoke as invoke_faq_tool
 from openai.types.chat import ChatCompletionToolParam
+import chainlit as cl
 
 
 def get_tool_name(tool_json_schema: ChatCompletionToolParam) -> str:
     return tool_json_schema["function"]["name"]
 
 
+@cl.step(type="tool")
 def invoke(tool_name: str, args: dict, user_input: str | None = None) -> str:
     print("Invoking tool:", tool_name)
     print("Args:", args)

@@ -39,6 +39,7 @@ category_slug = "dien-thoai"
 file_path = "tasks/phone_data.jsonl"
 
 
+#Đọc dữ liệu từ file jsonl và import vào database bằng cách gọi  import_batch_data_to_database() 
 def import_jsonl_to_database(
     file_path: str = file_path,
     start_offset: int = 0,
@@ -62,11 +63,38 @@ def import_jsonl_to_database(
             import_batch_data_to_database(batch)
 
 
+# gửi dữ liệu lên db bằng cách gọi upsert_phone()
 def import_batch_data_to_database(batch: list[dict]):
     for phone in batch:
         id = phone.get("code")
+        name = phone.get("name")
+        #brand_code = phone.get("brand")["code"]
+        brand_code = phone.get("brand",{}).get("code",None)
+        #product_type_code = phone.get("productType")["code"]
+        product_type_code = phone.get("productType",{}).get("code",None)
+        description = phone.get("description")
+        promotions = phone.get("promotions")
+        skus = phone.get("skus")
+        for sku in skus:
+            variants = sku.get("variants")
+        key_selling_points = phone.get("keySellingPoints")
         if id is not None:
-            upsert_phone(CreatePhoneModel(id=id, data=phone))
+            print(f"Upserting phone: {id}, {name}, {brand_code}")
+            upsert_phone(CreatePhoneModel(
+                id=id,
+                name=name,
+                brand_code=brand_code,
+                product_type_code=product_type_code,
+                description=description,
+                promotions=promotions,
+                skus=skus,
+                variants=variants,
+                key_selling_points=key_selling_points,
+                data=phone
+            ))
+
+
+
 
 
 def extract_booking_location_data(
@@ -79,6 +107,7 @@ def extract_booking_location_data(
     start_time = time.time()
     print("Import is running...")
 
+    #Gui req API lấy ds sản phẩm trong danh mục điện thoại
     with httpx.Client() as client:
         imported_count = 0
 
@@ -96,7 +125,7 @@ def extract_booking_location_data(
             headers=header,
             timeout=20.0,
         )
-        response.raise_for_status()
+        response.raise_for_status() #check for error
         response_data = dict(response.json())
         total_count = response_data.get("totalCount")
         items = response_data.get("items")
@@ -104,9 +133,11 @@ def extract_booking_location_data(
         if total_count is None or total_count <= 0 or items is None:
             raise Exception(f"not found category ({category_slug})")
 
+        #Lấy mô tả của sản phẩm
         for item in items:
             item["description"] = get_description(item.get("slug"))
 
+        # Ghi dữ liệu vào file jsonl
         if len(items) > limit:
             write_to_jsonlines(items[0:limit], file_path)
             imported_count += len(items)
@@ -140,6 +171,7 @@ def extract_booking_location_data(
         print("--- %s seconds ---" % (time.time() - start_time))
 
 
+# Ghi dữ liệu vào file jsonl
 def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
     with jsonlines.open(file_path, "a") as writer:
         if type(data) is dict:
@@ -148,6 +180,7 @@ def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
             writer.write_all(data)
 
 
+# Lấy thông tin mô tả của sản phẩm
 def get_description(item_slug: str) -> str | None:
     url = f"{env.FPTSHOP_BASE_URL}/{item_slug}"
 

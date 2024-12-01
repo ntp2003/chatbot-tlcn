@@ -25,6 +25,7 @@ def create_phone(data: CreatePhoneModel) -> PhoneModel:
             price=data.price,
             score=data.score,
             data=data.data,
+            name_embedding=data.name_embedding,
         )
         session.add(phone)
         session.commit()

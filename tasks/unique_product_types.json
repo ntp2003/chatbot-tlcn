@@ -4,11 +4,11 @@
         "name": "Android"
     },
     {
-        "code": "01003",
-        "name": "Điện thoại phổ thông"
-    },
-    {
         "code": "01002",
         "name": "iPhone (IOS)"
+    },
+    {
+        "code": "01003",
+        "name": "Điện thoại phổ thông"
     }
 ]

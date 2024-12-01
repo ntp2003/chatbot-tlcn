@@ -2,7 +2,7 @@ from openai import OpenAI
 from env import env
 
 
-_client = OpenAI(api_key=env.OPENAI_API_KEY, base_url=env.OPENAI_BASE_URL)
+_client = OpenAI(api_key=env.OPENAI_API_KEY)
 _model = "text-embedding-3-small"
 
 

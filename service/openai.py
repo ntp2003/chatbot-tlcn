@@ -12,11 +12,14 @@ from tools.invoke_tool import invoke
 
 
 _model = "gpt-4o-mini"
-_client = OpenAI(api_key=env.OPENAI_API_KEY, base_url=env.OPENAI_BASE_URL)
+_client = OpenAI(
+    api_key=env.OPENAI_API_KEY,
+)
 
 
 def gen_answer(
     user_id: UUID,
+    thread_id: UUID,
     messages: list[ChatCompletionMessageParam],
     tools: Iterable[ChatCompletionToolParam],
     max_iterator: int = 5,
@@ -41,6 +44,7 @@ def gen_answer(
     if not tool_choices:
         if not response.content:
             raise Exception("No response content from the model")
+        print("Final response:", response.content)
         return response.content
 
     while tool_choices and counter < max_iterator:
@@ -56,9 +60,10 @@ def gen_answer(
             tool_response: ChatCompletionToolMessageParam = {
                 "role": "tool",
                 "tool_call_id": call_id,
-                "content": invoke(tool_name, args),
+                "content": invoke(user_id, thread_id, tool_name, args),
             }
             messages.append(tool_response)  # type: ignore
+            print("Tool response:", tool_response["content"])
         response = (
             _client.chat.completions.create(
                 messages=messages,
@@ -80,4 +85,5 @@ def gen_answer(
     if not response.content:
         raise Exception("No response content from the model")
 
+    print("Final response:", response.content)
     return response.content

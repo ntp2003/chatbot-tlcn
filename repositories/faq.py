@@ -55,7 +55,9 @@ def query_by_semantic(
         embedding = get_embedding(question)
         faqs = (
             session.execute(
-                select(FAQ).order_by(FAQ.embedding.op("<=>")(embedding)).limit(top_k)
+                select(FAQ)
+                .order_by(FAQ.embedding.cosine_distance(embedding))
+                .limit(top_k)
             )
             .scalars()
             .all()

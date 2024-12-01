@@ -2,25 +2,30 @@ from models.faq import FAQModel
 from repositories.faq import query_by_semantic
 from openai.types.chat import ChatCompletionToolParam
 
-
+# "Search the faq database for information regarding answers to frequently asked questions (FAQ) about the store's policies available in the database, "
+#             "including privacy policy, return and refund policy, warranty policy, and shipping policy.\n"
 tool_json_schema: ChatCompletionToolParam = {
     "type": "function",
     "function": {
-        "name": "search_faqs_tool",
-        "description": (
-            "Search for information regarding answers to frequently asked questions (FAQ) about the store's policies available in the database, "
-            "including privacy policy, return and refund policy, warranty policy, and shipping policy.\n"
-            "Return:\n"
-            "- The related set of questions and answers\n"
-            "- Instructions on how to give response to the user based on the information provided"
-        ),
+        "name": "search_faq_database_tool",
+        "description": """
+# ROLE
+Search the FAQ database.
+
+## RULES
+- Frequently asked questions (FAQs) are the questions that are commonly asked by users about the store's policies, including privacy policy, return and refund policy, warranty policy, and shipping policy.
+
+## RETURNS
+- The related set of questions and answers.
+- Instructions on how to give response to the user based on the information provided.
+""",
         "parameters": {
             "type": "object",
-            "required": ["question"],
+            "required": ["faq_question"],
             "properties": {
-                "question": {
+                "faq_question": {
                     "type": "string",
-                    "description": "The user's general question about TripHunter and its services",
+                    "description": "The frequently asked question (FAQ) about the store's policies that the user is asking for.",
                 }
             },
         },

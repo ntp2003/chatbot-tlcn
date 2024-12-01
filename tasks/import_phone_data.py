@@ -7,12 +7,13 @@ from bs4 import BeautifulSoup
 import os
 from models.phone import CreatePhoneModel
 from repositories.phone import upsert_phone
+from service.embedding import get_embedding
 
 """
 How to run:
 python
 from tasks.import_phone_data import *
-extract_booking_location_data()
+import_jsonl_to_database()
 """
 
 post_url = "https://papi.fptshop.com.vn/gw/v1/public/fulltext-search-service/category"
@@ -39,7 +40,7 @@ category_slug = "dien-thoai"
 file_path = "tasks/phone_data.jsonl"
 
 
-#Đọc dữ liệu từ file jsonl và import vào database bằng cách gọi  import_batch_data_to_database() 
+# Đọc dữ liệu từ file jsonl và import vào database bằng cách gọi  import_batch_data_to_database()
 def import_jsonl_to_database(
     file_path: str = file_path,
     start_offset: int = 0,
@@ -47,7 +48,7 @@ def import_jsonl_to_database(
     batch_size: int = 10,
 ):
     if not os.path.isfile(file_path):
-        extract_booking_location_data(file_path=file_path)
+        extract_fpt_phone_data(file_path=file_path)
 
     with jsonlines.open(file_path) as reader:
         current_offset = -1
@@ -67,37 +68,40 @@ def import_jsonl_to_database(
 def import_batch_data_to_database(batch: list[dict]):
     for phone in batch:
         id = phone.get("code")
-        name = phone.get("name")
-        #brand_code = phone.get("brand")["code"]
-        brand_code = phone.get("brand",{}).get("code",None)
-        #product_type_code = phone.get("productType")["code"]
-        product_type_code = phone.get("productType",{}).get("code",None)
-        description = phone.get("description")
-        promotions = phone.get("promotions")
-        skus = phone.get("skus")
-        for sku in skus:
-            variants = sku.get("variants")
-        key_selling_points = phone.get("keySellingPoints")
+        name = phone.get("name", "not known")
+        slug = phone.get("slug", "dien-thoai")
+        brand_code = phone.get("brand", {}).get("code")
+        product_type = phone.get("productType", {}).get("name")
+        description = phone.get("description", "not description")
+        promotions = phone.get("promotions", [])
+        skus = phone.get("skus", [])
+        key_selling_points = phone.get("keySellingPoints", [])
+        price = phone.get("price", -1)
+        score = phone.get("score", 0)
+        name_embedding = get_embedding(name)
         if id is not None:
             print(f"Upserting phone: {id}, {name}, {brand_code}")
-            upsert_phone(CreatePhoneModel(
-                id=id,
-                name=name,
-                brand_code=brand_code,
-                product_type_code=product_type_code,
-                description=description,
-                promotions=promotions,
-                skus=skus,
-                variants=variants,
-                key_selling_points=key_selling_points,
-                data=phone
-            ))
+
+            upsert_phone(
+                CreatePhoneModel(
+                    id=id,
+                    name=name,
+                    slug=slug,
+                    brand_code=brand_code,
+                    product_type=product_type,
+                    description=description,
+                    promotions=promotions,
+                    skus=skus,
+                    key_selling_points=key_selling_points,
+                    price=price,
+                    score=score,
+                    data=phone,
+                    name_embedding=name_embedding,
+                )
+            )
 
 
-
-
-
-def extract_booking_location_data(
+def extract_fpt_phone_data(
     skip_count: int = 0,
     batch_size: int = 16,
     sleep_after_batch: int | None = None,
@@ -107,7 +111,7 @@ def extract_booking_location_data(
     start_time = time.time()
     print("Import is running...")
 
-    #Gui req API lấy ds sản phẩm trong danh mục điện thoại
+    # Gui req API lấy ds sản phẩm trong danh mục điện thoại
     with httpx.Client() as client:
         imported_count = 0
 
@@ -125,7 +129,7 @@ def extract_booking_location_data(
             headers=header,
             timeout=20.0,
         )
-        response.raise_for_status() #check for error
+        response.raise_for_status()  # check for error
         response_data = dict(response.json())
         total_count = response_data.get("totalCount")
         items = response_data.get("items")
@@ -133,7 +137,7 @@ def extract_booking_location_data(
         if total_count is None or total_count <= 0 or items is None:
             raise Exception(f"not found category ({category_slug})")
 
-        #Lấy mô tả của sản phẩm
+        # Lấy mô tả của sản phẩm
         for item in items:
             item["description"] = get_description(item.get("slug"))
 
@@ -165,7 +169,9 @@ def extract_booking_location_data(
                 if items is None:
                     raise Exception(f"not found category ({category_slug})")
                 for item in items:
-                    item["description"] = get_description(item.get("slug"))
+                    description = get_description(item.get("slug"))
+                    if description:
+                        item["description"] = description
 
         print(f"Import successful {imported_count} {category_slug} items")
         print("--- %s seconds ---" % (time.time() - start_time))

@@ -56,6 +56,7 @@ def invoke(
     phone_name: str | None,
     user_needs_other_suggestions: bool,
 ) -> str:
+    phone_name = phone_name if phone_name != user_memory.product_name else None
     brand_code = convert_band_name_to_code(phone_brand)
     page = get_value(str(user_memory.thread_id))
     page = int(page) if page else 0  # type: ignore

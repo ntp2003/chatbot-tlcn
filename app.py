@@ -8,6 +8,8 @@ import subprocess
 
 client = LiteralClient(api_key=env.LITERAL_API_KEY)
 client.instrument_openai()
-command = ["rq", "worker", "--with-scheduler"]
-process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+rq_command = ["rq", "worker", "--with-scheduler"]
+rq_process = subprocess.Popen(
+    rq_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+)
 alembic.config.main(argv=["--raiseerr", "upgrade", "head"])

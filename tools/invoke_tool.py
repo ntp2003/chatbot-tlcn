@@ -23,6 +23,16 @@ def get_tool_name(tool_json_schema: ChatCompletionToolParam) -> str:
 
 
 @cl.step(type="tool")
+def invoke_with_chainlit(
+    user_id: UUID,
+    thread_id: UUID,
+    tool_name: str,
+    args: dict,
+    user_input: str | None = None,
+) -> str:
+    return invoke(user_id, thread_id, tool_name, args, user_input)
+
+
 def invoke(
     user_id: UUID,
     thread_id: UUID,

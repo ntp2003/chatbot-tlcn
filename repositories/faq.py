@@ -5,6 +5,7 @@ from db import Session
 from models.faq import CreateFAQModel, FAQ, FAQModel
 from sqlalchemy import select
 from service.embedding import get_embedding
+import chainlit as cl
 
 
 def create_faq(data: CreateFAQModel) -> FAQModel:

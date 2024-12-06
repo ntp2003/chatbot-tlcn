@@ -1,8 +1,10 @@
 from typing import Optional
 from uuid import UUID
 from tools.faq import tool_json_schema as faq_tool
-import chainlit as cl
-from .openai import gen_answer as gen_openai_answer
+from chainlit import Message as cl_Message
+from .openai import (
+    gen_answer as gen_openai_answer,
+)
 from openai.types.chat import ChatCompletionMessageParam
 from datetime import datetime
 from tools.collect_requirement import tool_json_schema as collect_requirement_tool
@@ -10,6 +12,7 @@ from tools.search_phone_database import tool_json_schema as search_phone_databas
 from tools.collect_user_contact_info import (
     tool_json_schema as collect_user_contact_info_tool,
 )
+from models.message import Message
 
 tools = [
     collect_requirement_tool,
@@ -83,9 +86,11 @@ As a/an <ROLE>, you are required to adhere to the <WORKFLOW> and follow the <CON
 def gen_answer(
     user_id: UUID,
     thread_id: UUID,
-    history: Optional[list[cl.Message]] = None,
+    history: Optional[list[Message]] = None,
     limit: int = 10,
-) -> cl.Message:
+    with_chainlit: bool = False,
+) -> Message:
+    temporary_memory = dict()
     formatted_messages = []
     formatted_messages.append({"role": "system", "content": role_prompt})
     formatted_messages.append({"role": "system", "content": knowledge_prompt})
@@ -110,13 +115,27 @@ def gen_answer(
     formatted_messages.append({"role": "system", "content": initialization_prompt})
 
     try:
-        response_text = gen_openai_answer(
+        response_text, temporary_memory = gen_openai_answer(
             user_id=user_id,
             thread_id=thread_id,
             messages=formatted_messages,
             tools=tools,
+            with_chainlit=with_chainlit,
         )
     except Exception as e:
         response_text = f"An error occurred: {e}"
+    respone_message = Message(
+        content=response_text, author="model", metadata=temporary_memory
+    )
+    return respone_message
 
-    return cl.Message(content=response_text, author="model")
+
+def gen_answer_with_chainlit(
+    user_id: UUID,
+    thread_id: UUID,
+    history: Optional[list[Message]] = None,
+    limit: int = 10,
+) -> cl_Message:
+    return gen_answer(
+        user_id, thread_id, history, limit, with_chainlit=True
+    ).to_chainlit_message()

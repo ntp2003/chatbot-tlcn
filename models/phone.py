@@ -137,9 +137,9 @@ class PhoneModel(BaseModel):
         result = f"Phone: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
 
         if self.is_on_sale():
-            result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()}\n"
+            result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
         else:
-            result += f"- Price: {self._get_current_price()}\n"
+            result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
 
         if inclue_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(

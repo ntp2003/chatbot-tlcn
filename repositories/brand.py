@@ -5,6 +5,7 @@ from db import Session
 from models.brand import CreateBrandModel, Brand, BrandModel
 from sqlalchemy import select
 from service.embedding import get_embedding
+import chainlit as cl
 
 
 def create_brand(data: CreateBrandModel) -> BrandModel:

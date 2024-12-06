@@ -90,8 +90,12 @@ def invoke(
 
     if user_memory.product_name:
         return (
-            _search_phone_by_name(user_memory.product_name)
-            + ASK_CONTACT_INFO_FOR_FURTHER_CONSULT_PROMPT
+            (
+                _search_phone_by_name(user_memory.product_name)
+                + ASK_CONTACT_INFO_FOR_FURTHER_CONSULT_PROMPT
+            )
+            if not user_memory.has_contact_info()
+            else _search_phone_by_name(user_memory.product_name)
         )
 
     phone_filter = PhoneFilter(
@@ -101,8 +105,12 @@ def invoke(
     )
 
     return (
-        _search_phone_by_filter(phone_filter, page)
-        + ASK_CONTACT_INFO_FOR_FURTHER_CONSULT_PROMPT
+        (
+            _search_phone_by_filter(phone_filter, page)
+            + ASK_CONTACT_INFO_FOR_FURTHER_CONSULT_PROMPT
+        )
+        if not user_memory.has_contact_info()
+        else _search_phone_by_filter(phone_filter, page)
     )
 
 
@@ -113,11 +121,16 @@ def _search_phone_by_name(
     phone = search_phone_by_phone_name(phone_name, 1, threshold_1)
     if len(phone) > 0:
         result_text = f"## Below is the information of the phone product that the user is interested in:\n"
-        return result_text + phone[0].to_text(
-            inclue_key_selling_points=True,
-            include_promotion=True,
-            include_sku_variants=True,
-            include_description=True,
+        return (
+            result_text
+            + phone[0].to_text(
+                inclue_key_selling_points=True,
+                include_promotion=True,
+                include_sku_variants=True,
+                include_description=True,
+            )
+            + "\n"
+            + "## If the user has any questions about the product, you can provide shortly the answer based on the information above."
         )
     else:
         phones = search_phone_by_phone_name(phone_name, 3, threshold_2)
@@ -133,7 +146,7 @@ def _search_phone_by_name(
 
 def _search_phone_by_filter(phone_filter: PhoneFilter, page: int = 0) -> str:
     result_text = None
-    phones = search_phone_by_filter(phone_filter, Phone.score.expression)
+    phones = search_phone_by_filter(phone_filter, Phone.score.expression, page=page)
     filter_json = phone_filter.model_dump(exclude_none=True)
     filter_remove_list = []
 
@@ -145,7 +158,7 @@ def _search_phone_by_filter(phone_filter: PhoneFilter, page: int = 0) -> str:
         pop_item = filter_json.popitem()
         filter_remove_list.append(f"{pop_item[0]} is {pop_item[1]}")
         phones = search_phone_by_filter(
-            PhoneFilter(**filter_json), Phone.score.expression
+            PhoneFilter(**filter_json), Phone.score.expression, page=page
         )
         if len(phones) > 0:
             result_text = (

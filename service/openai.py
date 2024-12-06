@@ -8,8 +8,8 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
     ChatCompletionToolParam,
 )
-from tools.invoke_tool import invoke
-
+from tools.invoke_tool import invoke, invoke_with_chainlit
+import chainlit as cl
 
 _model = "gpt-4o-mini"
 _client = OpenAI(
@@ -24,7 +24,9 @@ def gen_answer(
     tools: Iterable[ChatCompletionToolParam],
     max_iterator: int = 5,
     model: str = _model,
-) -> str:
+    temporary_memory: dict = {},
+    with_chainlit: bool = False,
+) -> tuple[str, dict[str, str]]:
     counter = 0
     response = (
         _client.chat.completions.create(
@@ -45,7 +47,7 @@ def gen_answer(
         if not response.content:
             raise Exception("No response content from the model")
         print("Final response:", response.content)
-        return response.content
+        return response.content, temporary_memory
 
     while tool_choices and counter < max_iterator:
         counter += 1
@@ -60,9 +62,14 @@ def gen_answer(
             tool_response: ChatCompletionToolMessageParam = {
                 "role": "tool",
                 "tool_call_id": call_id,
-                "content": invoke(user_id, thread_id, tool_name, args),
+                "content": (
+                    invoke_with_chainlit(user_id, thread_id, tool_name, args)
+                    if with_chainlit
+                    else invoke(user_id, thread_id, tool_name, args)
+                ),
             }
             messages.append(tool_response)  # type: ignore
+            temporary_memory[tool_name] = tool_response["content"]
             print("Tool response:", tool_response["content"])
         response = (
             _client.chat.completions.create(
@@ -86,4 +93,4 @@ def gen_answer(
         raise Exception("No response content from the model")
 
     print("Final response:", response.content)
-    return response.content
+    return response.content, temporary_memory

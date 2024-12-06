@@ -78,3 +78,6 @@ class UserMemoryModel(BaseModel):
     email: str | None
     created_at: datetime
     updated_at: datetime
+
+    def has_contact_info(self) -> bool:
+        return self.phone_number is not None

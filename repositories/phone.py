@@ -7,6 +7,7 @@ from tools.utils.search import PhoneFilter
 from sqlalchemy.sql.elements import ColumnElement
 from service.embedding import get_embedding
 import numpy as np
+import chainlit as cl
 
 
 # Tạo phone entity
@@ -74,7 +75,6 @@ def upsert_phone(data: CreatePhoneModel) -> PhoneModel:
         updated_phone = session.execute(
             select(Phone).where(Phone.id == id)
         ).scalar_one()
-
         return PhoneModel.model_validate(updated_phone)
 
 

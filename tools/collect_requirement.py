@@ -92,7 +92,7 @@ def invoke(
         return (
             "Collected and updated the user's requirement for a mobile phone.\n"
             "## NEXT ACTIONS\n"
-            "- You should search the phone database to find the matching phones for the user."
+            "- You must proceed to search the phone database."
         )
 
     return (

@@ -22,7 +22,7 @@ def get_tool_name(tool_json_schema: ChatCompletionToolParam) -> str:
     return tool_json_schema["function"]["name"]
 
 
-@cl.step(type="tool")
+# @cl.step(type="tool")
 def invoke_with_chainlit(
     user_id: UUID,
     thread_id: UUID,

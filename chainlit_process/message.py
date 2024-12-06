@@ -1,7 +1,7 @@
 from uuid import UUID
 import chainlit as cl
 from models.message import Message
-from service.store_chatbot import gen_answer_with_chainlit
+from service.store_chatbot import gen_answer
 
 
 @cl.on_message
@@ -15,7 +15,9 @@ async def main(message: cl.Message):
     ]
     print("User ID:", user_id)
     print("Thread ID:", thread_id)
-    return await gen_answer_with_chainlit(user_id, thread_id, conversation).send()
+    return (
+        await gen_answer(user_id, thread_id, conversation).to_chainlit_message().send()
+    )
 
 
 @cl.on_chat_resume

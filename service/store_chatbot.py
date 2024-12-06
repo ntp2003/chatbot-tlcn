@@ -88,7 +88,6 @@ def gen_answer(
     thread_id: UUID,
     history: Optional[list[Message]] = None,
     limit: int = 10,
-    with_chainlit: bool = False,
 ) -> Message:
     temporary_memory = dict()
     formatted_messages = []
@@ -120,7 +119,6 @@ def gen_answer(
             thread_id=thread_id,
             messages=formatted_messages,
             tools=tools,
-            with_chainlit=with_chainlit,
         )
     except Exception as e:
         response_text = f"An error occurred: {e}"
@@ -128,14 +126,3 @@ def gen_answer(
         content=response_text, author="model", metadata=temporary_memory
     )
     return respone_message
-
-
-def gen_answer_with_chainlit(
-    user_id: UUID,
-    thread_id: UUID,
-    history: Optional[list[Message]] = None,
-    limit: int = 10,
-) -> cl_Message:
-    return gen_answer(
-        user_id, thread_id, history, limit, with_chainlit=True
-    ).to_chainlit_message()

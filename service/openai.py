@@ -8,7 +8,7 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
     ChatCompletionToolParam,
 )
-from tools.invoke_tool import invoke, invoke_with_chainlit
+from tools.invoke_tool import invoke
 import chainlit as cl
 
 _model = "gpt-4o-mini"
@@ -25,7 +25,6 @@ def gen_answer(
     max_iterator: int = 5,
     model: str = _model,
     temporary_memory: dict = {},
-    with_chainlit: bool = False,
 ) -> tuple[str, dict[str, str]]:
     counter = 0
     response = (
@@ -62,11 +61,7 @@ def gen_answer(
             tool_response: ChatCompletionToolMessageParam = {
                 "role": "tool",
                 "tool_call_id": call_id,
-                "content": (
-                    invoke_with_chainlit(user_id, thread_id, tool_name, args)
-                    if with_chainlit
-                    else invoke(user_id, thread_id, tool_name, args)
-                ),
+                "content": invoke(user_id, thread_id, tool_name, args),
             }
             messages.append(tool_response)  # type: ignore
             temporary_memory[tool_name] = tool_response["content"]

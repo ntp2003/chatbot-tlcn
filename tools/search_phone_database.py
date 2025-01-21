@@ -20,6 +20,9 @@ Search the phone database.
 - Collected and updated the user's requirements and identified the user's demands accurately.
 - The user interested in purchasing or seeking consultation regarding information via phone.
 
+## RULES
+- If the user is interested in a specific phone product in the list of suggestions shown in the previous conversation (e.g., "điện thoại đầu tiên", "cái thứ <number>", ...), you should set the phone_name parameter to the name of that phone product.
+
 ## RETURNS
 - Information about the phone product that matches the user's requirements or the other suggestions if the exact match is not found.
 - Intructions to guide you respond to the user's queries effectively.
@@ -33,7 +36,8 @@ Search the phone database.
                 },
                 "phone_name": {
                     "type": "string",
-                    "description": "The name of the phone product the user is interested in.",
+                    "description": "The name of the phone product the user is interested in."
+                    " If the user is interested in a specific phone product in the list of suggestions shown in the previous conversation, you should set this parameter to the name of that phone product.",
                 },
                 "user_needs_other_suggestions": {
                     "type": "boolean",
@@ -129,7 +133,7 @@ def _search_phone_by_name(
                 include_description=True,
             )
             + "\n"
-            + "## If the user has any questions about the product, you can provide shortly the answer based on the information above."
+            + "## If the user has any questions about the product, you can provide shortly the answer based on the information above. You don't need to provide the information that not related to the user's question."
         )
     else:
         phones = search_phone_by_phone_name(phone_name, 3, threshold_2)

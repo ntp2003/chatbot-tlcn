@@ -1,0 +1,12 @@
+Đầu tiên khởi chạy app.py : $ chainlit run app.py -w
+Khởi tạo :
+    LiteralClient : Monitor OpenAI API calls , log các API calls vào hệ thống
+    Redis Worker: Khởi động  Redis queue worker với scheduler để xử lý các tác vụ bất đồng bộ và hàng đợi
+    Database Migration: Alembic chạy các migrations , đảm bảo schema database được cập nhật
+Các module cần thiết:
+chainlit_process.authentication: xử lý xác thực người dùng
+chainlit_process.message: xử lý tin nhắn chat 
+
+Khi user gửi message lên UI , Chainlit sẽ trigger decorator @cl.on_message trong chainlit_process.message.py :
+Hàm main() trong message.py được gọi -> gen_answer() trong service.store_chatbot.py được gọi để sinh response gửi đến UI qua send() ->
+-> gọi gen_answer() trong service.store_chatbot.py -> gen_openai_answer() hay gen_answer() trong service.openai.py được gọi sinh trả lời.

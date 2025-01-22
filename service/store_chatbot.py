@@ -90,12 +90,15 @@ def gen_answer(
     limit: int = 10,
 ) -> Message:
     temporary_memory = dict()
+    # init messages with system prompts
     formatted_messages = []
     formatted_messages.append({"role": "system", "content": role_prompt})
     formatted_messages.append({"role": "system", "content": knowledge_prompt})
+    
+    # format history messages
     if history:
         if len(history) > limit:
-            history = history[-limit:]
+            history = history[-limit:] #limit lại {limit=10} messages cuối trong history
         for message in history:
             if message.author == "user":
                 formatted_message: ChatCompletionMessageParam = {

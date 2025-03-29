@@ -129,3 +129,31 @@ def gen_answer(
         content=response_text, author="model", metadata=temporary_memory
     )
     return respone_message
+
+def gen_answer_for_messenger(
+    user_id: UUID,
+    thread_id: UUID,
+    messages: list[ChatCompletionMessageParam],
+) -> str:
+    formatted_messages = []
+    formatted_messages.append({"role": "system", "content": role_prompt})
+    formatted_messages.append({"role": "system", "content": knowledge_prompt})
+    
+    for message in messages:
+        formatted_messages.append(message)
+    
+    formatted_messages.append({"role": "system", "content": constraints_prompt})
+    formatted_messages.append({"role": "system", "content": workflow_prompt})
+    formatted_messages.append({"role": "system", "content": initialization_prompt})
+
+    try:
+        response_text,_ = gen_openai_answer(
+            user_id=user_id,
+            thread_id=thread_id,
+            messages=formatted_messages,
+            tools=tools,
+        )
+    except Exception as e:
+        response_text = f"Đã xảy ra lỗi: {e}"
+
+    return response_text

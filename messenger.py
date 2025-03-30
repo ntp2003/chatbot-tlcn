@@ -15,12 +15,13 @@ from openai.types.chat import ChatCompletionMessageParam
 # use ngrok to create public URL
 # ngrok http 8000
 
-load_dotenv()
+load_dotenv(".env")
 
 # get env variable
 VERIFY_TOKEN = os.getenv('FB_VERIFY_TOKEN')
 PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN')
 APP_SECRET = os.getenv('FB_APP_SECRET')
+print("verify_token:", VERIFY_TOKEN)
 
 # init FastAPI app
 app = FastAPI()
@@ -28,20 +29,31 @@ app = FastAPI()
 # conversation history for each user
 conversation_history = {}
 
-# xác thực webhook và xử lý tin nhắn từ Facebook
+# xác thực webhook 
+# endpoint 
+#@app.get('/messaging-webhook')
+
+#@app.get('/messaging-webhook')
 @app.get('/webhook')
 async def verify_webhook(request: Request):
-    # Facebook gửi verify token dưới dạng hub.verify_token
-    fb_token = request.query_params.get("hub.verify_token")
-    
-    # Kiểm tra token
-    if fb_token == VERIFY_TOKEN:
-        # Trả về hub.challenge để xác thực webhook
-        return Response(content=request.query_params["hub.challenge"])
-    
-    return 'Token xác thực không hợp lệ'
+    # Facebook gửi verify token dưới dạng hub.verify_token  
+    query_params = request.query_params
+    mode = query_params.get("hub.mode")
+    challenge = query_params.get("hub.challenge")
+    fb_verify_token = request.query_params.get("hub.verify_token")
+
+    print(f"[DEBUG] Expected Token: {VERIFY_TOKEN} \n Received Token: {fb_verify_token}")
+    #check if a token and mode is in the query string of the requets
+    if (mode and fb_verify_token):
+        # check the mode and token sent is correct
+        if (mode == "subscribe" and fb_verify_token == VERIFY_TOKEN):
+            print("WEBHOOK_VERIFIED")
+            # Trả về hub.challenge để xác thực webhook
+            return Response(content=challenge, status_code=200)
+    return Response(content="Token không hợp lệ", status_code=403)
 
 # handle facebook message
+# endpoint to receive webhook notification from Facebook Messenger
 @app.post('/webhook')
 async def process_webhook(request: Request, background_tasks: BackgroundTasks):
     # Lấy dữ liệu từ request
@@ -60,7 +72,7 @@ async def process_webhook(request: Request, background_tasks: BackgroundTasks):
         for entry in body.get("entry", []):
             for messaging_event in entry.get("messaging", []):
                 sender_id = messaging_event.get("sender", {}).get("id")
-                
+                '''
                 # handle text message
                 if "message" in messaging_event and "text" in messaging_event["message"]:
                     message_text = messaging_event["message"]["text"]
@@ -69,6 +81,14 @@ async def process_webhook(request: Request, background_tasks: BackgroundTasks):
                     background_tasks.add_task(
                         process_message, sender_id, message_text
                     )
+                '''
+                if "message" in messaging_event:
+                    message = messaging_event["message"]
+                    if message.get("is_echo"):
+                        continue  # bỏ qua tin nhắn echo
+                    if "text" in message:
+                        message_text = message["text"]
+                        background_tasks.add_task(process_message, sender_id, message_text)
     
     # Facebook yêu cầu phản hồi 200 OK
     return Response(content="EVENT_RECEIVED")
@@ -87,6 +107,7 @@ def verify_facebook_signature(payload: bytes, signature_header: str) -> bool:
     return hmac.compare_digest(signature_header, expected_signature)
 
 # xử lý tin nhắn và gửi phản hồi
+'''
 async def process_message(sender_id: str, message_text: str):
     # tạo ID người dùng và ID cuộc trò chuyện nếu chưa có
     if sender_id not in conversation_history:
@@ -143,6 +164,57 @@ async def send_message(recipient_id: str, message_text: str):
             response.raise_for_status()
         except Exception as e:
             print(f"Lỗi khi gửi tin nhắn: {e}")
+'''
+
+async def process_message(sender_id: str, message_text: str):
+    # Khởi tạo hoặc lấy thông tin cuộc trò chuyện
+    if sender_id not in conversation_history:
+        conversation_history[sender_id] = {
+            'messages': [],
+            'user_id': uuid4(),
+            'thread_id': uuid4()
+        }
+    user_info = conversation_history[sender_id]
+    messages_history = user_info['messages']
+    
+    # Thêm tin nhắn người dùng và giới hạn lịch sử
+    messages_history.append({"role": "user", "content": message_text})
+    if len(messages_history) > 10:
+        user_info['messages'] = messages_history[-10:]
+    
+    formatted_messages = [
+        {"role": msg["role"], "content": msg["content"]}
+        for msg in user_info['messages']
+    ]
+    
+    try:
+        # Tạo câu trả lời
+        '''
+        response_text = gen_answer_for_messenger(
+            user_id=user_info['user_id'],
+            thread_id=user_info['thread_id'],
+            messages=formatted_messages,
+        )
+        '''''
+        response_text = "xin chào"
+        # Thêm và giới hạn lịch sử
+        user_info['messages'].append({"role": "assistant", "content": response_text})
+        if len(user_info['messages']) > 10:
+            user_info['messages'] = user_info['messages'][-10:]
+        
+        await send_message(sender_id, response_text)
+    except Exception as e:
+        await send_message(sender_id, f"Lỗi: {str(e)}")
+
+# gửi tin nhắn đến người dùng qua Facebook Messenger API
+async def send_message(recipient_id: str, message_text: str):
+    url = f"https://graph.facebook.com/v18.0/me/messages?access_token={PAGE_ACCESS_TOKEN}"
+    payload = {
+        "recipient": {"id": recipient_id},
+        "message": {"text": message_text}
+    }
+    async with httpx.AsyncClient() as client:
+        await client.post(url, json=payload)
 
 # run app
 if __name__ == "__main__":

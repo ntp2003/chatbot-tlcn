@@ -28,4 +28,4 @@ class Env(BaseModel):
     REDIS_PASSWORD: str
 
 
-env = Env.model_validate(os.environ)
+env = Env.model_validate(os.environ) # read env variables and validate them using Pydantic

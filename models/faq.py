@@ -1,4 +1,4 @@
-from .base import Base
+from .base import Base, TimestampMixin, TableNameMixin
 from datetime import datetime, timezone
 from sqlalchemy.orm import mapped_column, Mapped
 from sqlalchemy import DateTime, Text, Integer
@@ -6,9 +6,9 @@ from sqlalchemy.dialects.postgresql import JSONB
 from pydantic import BaseModel, ConfigDict
 from pgvector.sqlalchemy import VECTOR
 
-
-class FAQ(Base):
-    __tablename__ = "faqs"
+# directly interact with the database (SQLAlchemy orm interact with db)
+class FAQ(Base, TimestampMixin, TableNameMixin):
+    #_tablename__ = "faqs"
 
     id: Mapped[int] = mapped_column(Integer(), primary_key=True)
     title: Mapped[str] = mapped_column(Text(), nullable=False)
@@ -16,6 +16,7 @@ class FAQ(Base):
     question: Mapped[str] = mapped_column(Text(), nullable=False)
     answer: Mapped[str] = mapped_column(Text(), nullable=False)
     embedding: Mapped[list[float]] = mapped_column(VECTOR(), nullable=False)
+    '''
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
@@ -24,8 +25,8 @@ class FAQ(Base):
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
-
-
+    '''
+# Pydantic model for create new FAQ entity
 class CreateFAQModel(BaseModel):
     id: int
     title: str
@@ -34,9 +35,12 @@ class CreateFAQModel(BaseModel):
     answer: str
     embedding: list[float]
 
-
+# validate n serialize the data
 class FAQModel(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+
+    # pydantic map the fields of model to the attribiutes of source object, even if the source object isnt a dictionary (SQLAlchemy ORM instance)
+    # Nêú không có config thì FAQModel.model_validate(faq_orm)  # Lỗi vì pydantic không đọc được ORM object
+    model_config = ConfigDict(from_attributes=True) ## allow converting sqlalchemy model to pydantic model (allow pydantic model to populate its fields from SQLAlchemy ORM model)
 
     id: int
     title: str

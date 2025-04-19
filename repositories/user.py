@@ -10,6 +10,7 @@ def create_user(data: CreateUserModel) -> UserModel:
         user = User(
             user_name=data.user_name,
             password=data.password,
+            fb_id=data.fb_id
         )
 
         session.add(user)
@@ -53,3 +54,20 @@ def update_user(data: UserModel) -> int:
         )
         session.commit()
         return update_count
+
+def get_user_by_fb_id(fb_id: str) -> Optional[UserModel]:
+    with Session() as session:
+
+        stmt = select(User).where(User.fb_id == fb_id)
+        '''
+        stmt = (
+            select(User)
+            .select_from(User)
+            .where(User.fb_id == fb_id)
+        )
+        '''
+        #user = session.execute(stmt).scalar()
+        user = session.execute(stmt).scalar_one_or_none()
+        if user is None:
+            return None
+        return UserModel.model_validate(user)

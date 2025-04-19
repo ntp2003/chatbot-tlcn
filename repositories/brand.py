@@ -13,7 +13,7 @@ def create_brand(data: CreateBrandModel) -> BrandModel:
         brand = Brand(
             id=data.id,
             name=data.name,
-            embedding=data.embedding,
+            embedding=data.embedding, # get_embedding("Brand: " + data.name)
         )
 
         session.add(brand)
@@ -47,7 +47,7 @@ def upsert_brand(data: CreateBrandModel) -> BrandModel:
 
         return BrandModel.model_validate(updated_Brand)
 
-
+# search brand based on input brand_name
 def query_by_semantic(
     brand_name: str, top_k: int = 4, threshold: Optional[float] = None
 ) -> list[BrandModel]:

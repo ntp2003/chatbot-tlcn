@@ -1,24 +1,28 @@
 services:
-  postgres:
+  postgres: # config for postgresql
+    # image pgvector - PostgreSQL với extension vector , version 0.7.2 w postgresql 16 support vector operation for embedding
     image: pgvector/pgvector:0.7.2-pg16
+    # environment variable from .env
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
-    volumes:
-      - postgres_chatbot_data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT}:${DB_PORT}"
-    command: -p ${DB_PORT}
-  redis:
-    image: redis:7.4.1
+    volumes: #    # volumes mounting - persist data khi container restart , map volume vào data dir of PostgreSQL , ensure data integrity 
+      - postgres_chatbot_data:/var/lib/postgresql/data # volume_name: volume_path in container
+    
+    ports: # port mapping from host to container 
+      - "${DB_PORT}:${DB_PORT}" #format host_port:container_port
+    
+    command: -p ${DB_PORT} # command when start container to set port for PostgreSQL
+  redis: # config for redis
+    image: redis:7.4.1 # redis version
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     ports:
-      - "${REDIS_PORT}:${REDIS_PORT}"
+      - "${REDIS_PORT}:${REDIS_PORT}" # port mapping
     volumes:
-      - redis_db_data:/var/lib/redis/data
+      - redis_db_data:/var/lib/redis/data #
     command: --port ${REDIS_PORT} --requirepass ${REDIS_PASSWORD}
-volumes:
+volumes: # declare named volume for docker management
   postgres_chatbot_data:
-  redis_db_data:
+  redis_db_data: 

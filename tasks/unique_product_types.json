@@ -1,5 +1,9 @@
 [
     {
+        "code": "01003",
+        "name": "Điện thoại phổ thông"
+    },
+    {
         "code": "01001",
         "name": "Android"
     },
@@ -8,7 +12,7 @@
         "name": "iPhone (IOS)"
     },
     {
-        "code": "01003",
-        "name": "Điện thoại phổ thông"
+        "code": "04001",
+        "name": "Laptop"
     }
 ]

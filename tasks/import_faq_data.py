@@ -28,9 +28,9 @@ def _preprocessing_data_in_batch(batch: pd.DataFrame):
 
 # how to run:
 # python
-# from tasks.import_faq_data import import_csv
-# import_csv()
-def import_csv(
+# from tasks.import_faq_data import import_faq_csv
+# import_faq_csv()
+def import_faq_csv(
     file_path: str = file_path,
     start_offset: int = 0,
     limit: int | None = None,

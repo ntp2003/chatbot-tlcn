@@ -61,7 +61,7 @@ def gen_answer(
             tool_response: ChatCompletionToolMessageParam = {
                 "role": "tool",
                 "tool_call_id": call_id,
-                "content": invoke(user_id, thread_id, tool_name, args),
+                "content": invoke(user_id, thread_id, tool_name, args),# exec tool
             }
             messages.append(tool_response)  # type: ignore
             temporary_memory[tool_name] = tool_response["content"]

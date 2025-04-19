@@ -1,15 +1,35 @@
 [
     {
-        "code": "93",
-        "name": "Samsung"
+        "code": "387",
+        "name": "Honor"
     },
     {
-        "code": "80",
-        "name": "Nokia"
+        "code": "43",
+        "name": "HP"
     },
     {
         "code": "336",
         "name": "Vivo"
+    },
+    {
+        "code": "10",
+        "name": "Asus"
+    },
+    {
+        "code": "900",
+        "name": "VAIO"
+    },
+    {
+        "code": "346",
+        "name": "Itel"
+    },
+    {
+        "code": "390",
+        "name": "Realme"
+    },
+    {
+        "code": "170",
+        "name": "Oppo"
     },
     {
         "code": "221",
@@ -20,24 +40,28 @@
         "name": "Tecno"
     },
     {
-        "code": "390",
-        "name": "Realme"
+        "code": "119",
+        "name": "Viettel"
     },
     {
-        "code": "129",
-        "name": "Mobell"
+        "code": "45",
+        "name": "Huawei"
     },
     {
-        "code": "1078",
-        "name": "Inoi"
+        "code": "26",
+        "name": "Dell"
     },
     {
-        "code": "346",
-        "name": "Itel"
+        "code": "755",
+        "name": "Gigabyte"
     },
     {
-        "code": "1104",
-        "name": "Benco"
+        "code": "80",
+        "name": "Nokia"
+    },
+    {
+        "code": "352",
+        "name": "Xiaomi"
     },
     {
         "code": "138",
@@ -48,23 +72,35 @@
         "name": "ZTE"
     },
     {
-        "code": "170",
-        "name": "Oppo"
+        "code": "131",
+        "name": "MSI"
     },
     {
-        "code": "119",
-        "name": "Viettel"
+        "code": "1078",
+        "name": "Inoi"
+    },
+    {
+        "code": "64",
+        "name": "Lenovo"
     },
     {
         "code": "9",
         "name": "Apple"
     },
     {
-        "code": "387",
-        "name": "Honor"
+        "code": "129",
+        "name": "Mobell"
     },
     {
-        "code": "352",
-        "name": "Xiaomi"
+        "code": "93",
+        "name": "Samsung"
+    },
+    {
+        "code": "2",
+        "name": "Acer"
+    },
+    {
+        "code": "1104",
+        "name": "Benco"
     }
 ]

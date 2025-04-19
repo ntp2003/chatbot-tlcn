@@ -131,7 +131,7 @@ def gen_answer(
     return respone_message
 
 def gen_answer_for_messenger(
-    user_id: UUID,
+    user_id: UUID,  # user.id từ database
     thread_id: UUID,
     messages: list[ChatCompletionMessageParam],
 ) -> str:
@@ -147,13 +147,12 @@ def gen_answer_for_messenger(
     formatted_messages.append({"role": "system", "content": initialization_prompt})
 
     try:
-        response_text,_ = gen_openai_answer(
-            user_id=user_id,
+        response_text, _ = gen_openai_answer(
+            user_id=user_id,  #user_id từ database
             thread_id=thread_id,
             messages=formatted_messages,
             tools=tools,
         )
     except Exception as e:
         response_text = f"Đã xảy ra lỗi: {e}"
-
     return response_text

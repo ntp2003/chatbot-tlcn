@@ -52,6 +52,7 @@ def update_phone(data: CreatePhoneModel) -> int:
     with Session() as session:
         update_info = data.model_dump()
         update_info.pop("id", None)  # loại bỏ id từ thông tin cập nhật
+        # update_info = data.model_dump(exclude={"id"})
         # Truy vấn lấy ra phone entity dựa trên id và cập nhật thông tin mới (update_info được truyền vào từ CreatePhoneModel)
         update_count = (
             session.query(Phone)
@@ -79,34 +80,36 @@ def upsert_phone(data: CreatePhoneModel) -> PhoneModel:
 
 
 def search_phone_by_filter(
-    filter: PhoneFilter,
-    order_by: ColumnElement,
-    is_desc: bool = True,
-    limit: int = 4,
-    page: int = 0,
+    filter: PhoneFilter, 
+    order_by: ColumnElement, # column sắp xếp kết quả
+    is_desc: bool = True, # true: sắp xếp giảm dần, false: sắp xếp tăng dần
+    limit: int = 4, # số lượng kết quả trả về tối đa
+    page: int = 0, # phân trang hiện tại
 ) -> List[PhoneModel]:
     with Session() as session:
         condition = filter.condition_expression()
-
+        # condition : Phone.brand_code = 'APPLE' AND Phone.price > 10000000 AND Phone.price < 30000000
+        # base query
         stmt = (
             select(Phone).filter(condition) if condition is not None else select(Phone)
         )
-
+        # thêm order , limit , offset
         stmt = (
             stmt.order_by(order_by.desc() if is_desc else order_by)
             .limit(limit)
             .offset(page * limit)
         )
-
+        # exec query
         phones = session.execute(stmt).scalars().all()
-        return [PhoneModel.model_validate(phone) for phone in phones]
+        return [PhoneModel.model_validate(phone) for phone in phones] # validate and return list of PhoneModel
 
 
 def search_phone_by_phone_name(
-    phone_name: str, top_k: int = 4, threshold: Optional[float] = None
+    phone_name: str, top_k: int = 4, threshold: Optional[float] = None # threshold similarity
 ) -> List[PhoneModel]:
     with Session() as session:
         embedding = get_embedding(phone_name)
+        # exec semantic search based on cosine distance
         phones = (
             session.execute(
                 select(Phone)
@@ -116,13 +119,13 @@ def search_phone_by_phone_name(
             .scalars()
             .all()
         )
-
+        # filter results based on threshold
         if threshold:
             results = []
             for phone in phones:
-                c = np.dot(embedding, phone.name_embedding)
-                print(phone.name, c)
-                if c > threshold:
+                similarity = np.dot(embedding, phone.name_embedding)
+                print(phone.name, similarity)
+                if similarity > threshold:
                     results.append(PhoneModel.model_validate(phone))
             return results
 

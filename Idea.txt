@@ -10,3 +10,17 @@ chainlit_process.message: xử lý tin nhắn chat
 Khi user gửi message lên UI , Chainlit sẽ trigger decorator @cl.on_message trong chainlit_process.message.py :
 Hàm main() trong message.py được gọi -> gen_answer() trong service.store_chatbot.py được gọi để sinh response gửi đến UI qua send() ->
 -> gọi gen_answer() trong service.store_chatbot.py -> gen_openai_answer() hay gen_answer() trong service.openai.py được gọi sinh trả lời.
+
+'''
+[DEBUG] Body: {'object': 'page', 'entry': [{'time': 1744021471078, 'id': '591093784088045', 'messaging': [{'sender': {'id': '9908280712517002'}, 'recipient': {'id': '591093784088045'}, 'timestamp': 1744021470391, 'message': {'mid': 'm_QHAiHG3WIWb4ThQ0twibOlFDTJJ6QGYUkRoqRWOwcwLxk-LEUPhEUfxfCplG-uFAlf2O4l5SFV8ykD8rx6CZLw', 'text': 'hellooo abc'}}]}]}
+INFO:     2a03:2880:20ff:71:::0 - "POST /webhook HTTP/1.1" 200 OK
+2025-04-07 10:24:31 - HTTP Request: GET https://graph.facebook.com/9908280712517002?fields=name&access_token=EAAI6l2XYrA0BOxVPZB9sVzC4BVdAELtm5nkMaYBbM7V0gY1ZCdxFteimPEkOqrqg0s8cDy3y2N0uTzyhgUfCKYPuLBmOBDdYnQA6G3yFDXx4iqznSOCZCduONNDyFjdrgWeEWF1BZAksrWuoBzRm7DLS10hQhj6KHHyIlqB24CfrUy6ZAwxZCbSVnQ1UJiCRzZCbgZDZD "HTTP/1.1 200 OK"
+[DEBUG] User Name: Huynh Nguyen Tuan Kiet
+User ID: 2ad74960-c832-4b0f-9e50-5849a8e62740
+Thread ID: 3934358c-5653-4341-b7eb-1bffc705390e
+2025-04-07 10:24:32 - HTTP Request: POST https://graph.facebook.com/v18.0/me/messages?access_token=EAAI6l2XYrA0BOxVPZB9sVzC4BVdAELtm5nkMaYBbM7V0gY1ZCdxFteimPEkOqrqg0s8cDy3y2N0uTzyhgUfCKYPuLBmOBDdYnQA6G3yFDXx4iqznSOCZCduONNDyFjdrgWeEWF1BZAksrWuoBzRm7DLS10hQhj6KHHyIlqB24CfrUy6ZAwxZCbSVnQ1UJiCRzZCbgZDZD "HTTP/1.1 200 OK"
+[DEBUG] Body: {'object': 'page', 'entry': [{'time': 1744021472596, 'id': '591093784088045', 'messaging': [{'sender': {'id': '591093784088045'}, 'recipient': {'id': '9908280712517002'}, 'timestamp': 1744021472474, 'message': {'mid': 'm_dAR_N3zGbyCEbuTfiNRiTlFDTJJ6QGYUkRoqRWOwcwLhkgFNX9GMCWYfWzltlJYfGGxKlz5uaRjCKn0FVYxLOg', 'is_echo': True, 'text': 'xin chào', 'app_id': 627371876592653}}]}]}
+INFO:     2a03:2880:20ff:45:::0 - "POST /webhook HTTP/1.1" 200 OK
+[DEBUG] Body: {'object': 'page', 'entry': [{'time': 1744021472960, 'id': '591093784088045', 'messaging': [{'sender': {'id': '9908280712517002'}, 'recipient': {'id': '591093784088045'}, 'timestamp': 1744021472862, 'delivery': {'mids': ['m_dAR_N3zGbyCEbuTfiNRiTlFDTJJ6QGYUkRoqRWOwcwLhkgFNX9GMCWYfWzltlJYfGGxKlz5uaRjCKn0FVYxLOg'], 'watermark': 1744021472474}}]}]}
+INFO:     2a03:2880:7ff:70:::0 - "POST /webhook HTTP/1.1" 200 OK
+'''

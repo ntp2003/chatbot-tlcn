@@ -1,23 +1,28 @@
 from datetime import datetime, timezone
 from typing import Optional
 from unittest import result
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import ARRAY, DateTime, Text, JSON
+from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy import ARRAY, DateTime, Text, JSON, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
 from pydantic import BaseModel, ConfigDict
-from .base import Base
+from .base import Base, TimestampMixin, TableNameMixin
 from env import env
 from pgvector.sqlalchemy import Vector
 
 
-class Phone(Base):
-    __tablename__: str = "phones"
+class Phone(Base, TimestampMixin, TableNameMixin):
+    #__tablename__: str = "phones"
 
     id: Mapped[str] = mapped_column(Text, primary_key=True)
     data: Mapped[dict] = mapped_column(JSONB, nullable=False, default={})
     name: Mapped[str] = mapped_column(Text, nullable=False)
     slug: Mapped[str] = mapped_column(Text, nullable=False)
-    brand_code: Mapped[str] = mapped_column(Text, nullable=False)
+    #brand_code: Mapped[str] = mapped_column(Text, nullable=False)
+    brand_code: Mapped[str] = mapped_column(
+        Text, 
+        ForeignKey("brands.id", ondelete="CASCADE"),  # Thêm ForeignKey
+        nullable=False
+    )
     product_type: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
@@ -26,6 +31,7 @@ class Phone(Base):
     price: Mapped[int] = mapped_column(Text, nullable=False)
     score: Mapped[float] = mapped_column(Text, nullable=False)
     name_embedding: Mapped[list[float]] = mapped_column(Vector, nullable=False)
+    '''
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
@@ -34,6 +40,9 @@ class Phone(Base):
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
+    '''
+    # Add relationship
+    brand: Mapped["Brand"] = relationship("Brand", back_populates="phones")
 
 
 class CreatePhoneModel(BaseModel):
@@ -94,6 +103,10 @@ class PhoneModel(BaseModel):
             if len(selling_point_texts) > 0
             else None
         )
+    '''
+    - Chip A18 Pro cực mạnh
+    - Viền màn hình siêu mỏng
+    '''
 
     def _get_promotion_text(
         self, prefix: str = "- ", separator: str = "\n"
@@ -105,6 +118,11 @@ class PhoneModel(BaseModel):
             promotion_texts.append(promotion_text)
 
         return separator.join(promotion_texts) if len(promotion_texts) > 0 else None
+
+    '''
+    - Nhập mã QRFPTIP16 giảm ngay 500,000đ
+    - Nhập mã ZLPIP500 giảm ngay 500,000đ
+    '''
 
     def _get_sku_variants_text(
         self, prefix: str = "", separator: str = ", "

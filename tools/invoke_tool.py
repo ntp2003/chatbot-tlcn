@@ -19,7 +19,7 @@ from models.user_memory import CreateUserMemoryModel
 
 
 def get_tool_name(tool_json_schema: ChatCompletionToolParam) -> str:
-    return tool_json_schema["function"]["name"]
+    return tool_json_schema["function"]["name"] 
 
 
 def invoke(

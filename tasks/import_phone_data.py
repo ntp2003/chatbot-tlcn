@@ -13,11 +13,11 @@ from service.embedding import get_embedding
 How to run:
 python
 from tasks.import_phone_data import *
-import_jsonl_to_database()
+import_phone_data_jsonl_to_database()
 """
-
+## vào trang danh sách điện thoại , f12 quan sat Network 
 post_url = "https://papi.fptshop.com.vn/gw/v1/public/fulltext-search-service/category"
-
+# copy từ phần headers trong network 
 header = {
     "accept": "application/json",
     "accept-language": "en-US,en;q=0.9,vi;q=0.8",
@@ -40,16 +40,18 @@ category_slug = "dien-thoai"
 file_path = "tasks/phone_data.jsonl"
 
 
-# Đọc dữ liệu từ file jsonl và import vào database bằng cách gọi  import_batch_data_to_database()
-def import_jsonl_to_database(
+# read data from jsonl file and import to database iterately using import_batch_data_to_database()
+def import_phone_data_jsonl_to_database(
     file_path: str = file_path,
     start_offset: int = 0,
     limit: int | float = math.inf,
     batch_size: int = 10,
 ):
     if not os.path.isfile(file_path):
+        # if not exis file data jsonl -> call extract func to crawl data to file jsonl path
         extract_fpt_phone_data(file_path=file_path)
 
+    #open in format jsonl , each line is a JSON object
     with jsonlines.open(file_path) as reader:
         current_offset = -1
         batch = []
@@ -59,12 +61,12 @@ def import_jsonl_to_database(
                 batch.append(phone)
                 if len(batch) // batch_size == 1:
                     import_batch_data_to_database(batch)
-                    batch = []
-        if len(batch) > 0:
+                    batch = []  # reset batch after imported 
+        if len(batch) > 0:  # process the final batch
             import_batch_data_to_database(batch)
 
 
-# gửi dữ liệu lên db bằng cách gọi upsert_phone()
+# send data in batch data to db using upsert_phone()
 def import_batch_data_to_database(batch: list[dict]):
     for phone in batch:
         id = phone.get("code")
@@ -100,7 +102,7 @@ def import_batch_data_to_database(batch: list[dict]):
                 )
             )
 
-
+# crawl data from fpt
 def extract_fpt_phone_data(
     skip_count: int = 0,
     batch_size: int = 16,
@@ -115,6 +117,7 @@ def extract_fpt_phone_data(
     with httpx.Client() as client:
         imported_count = 0
 
+        # init request , lấy trong phần request payload là cấu trúc body được sử dụng
         body = {
             "sortMethod": "noi-bat",
             "slug": category_slug,
@@ -149,13 +152,13 @@ def extract_fpt_phone_data(
             while len(items) > 0 and imported_count + len(items) <= limit:
                 write_to_jsonlines(items, file_path)
                 imported_count += len(items)
-                if len(items) < batch_size:
+                if len(items) < batch_size: # hết sản phẩm
                     break
                 if sleep_after_batch is not None:
                     time.sleep(sleep_after_batch)
 
-                body["skipCount"] = imported_count
-
+                body["skipCount"] = imported_count  # cập nhật skipCount để lấy batch tiếp theo (skipCount = 16 , lấy 16 items tiếp theo , skipCount = 32..)
+                # lặp lại cho đến khi lấy đủ dữ liệu
                 response = client.post(
                     post_url,
                     json=body,
@@ -165,7 +168,7 @@ def extract_fpt_phone_data(
 
                 response.raise_for_status()
                 response_data = dict(response.json())
-                items = response_data.get("items")
+                items = response_data.get("items") # get batch_size = 16 items đầu tiên
                 if items is None:
                     raise Exception(f"not found category ({category_slug})")
                 for item in items:
@@ -188,16 +191,19 @@ def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
 
 # Lấy thông tin mô tả của sản phẩm
 def get_description(item_slug: str) -> str | None:
+    # truy cập vào trang chi tiết của sản phẩm
     url = f"{env.FPTSHOP_BASE_URL}/{item_slug}"
 
     response = httpx.get(url, headers=header)
-    data = BeautifulSoup(response.content, "html.parser")
+    data = BeautifulSoup(response.content, "html.parser") # BS parse html
+    # tìm và trích xuất nội dung mô tả từ element có id ThongTinSanPham
     description_object = data.find("div", {"id": "ThongTinSanPham"})
     if description_object is None:
         return None
 
     description_object = description_object.select_one(  # type: ignore
-        "div.relative.w-full .description-container"
+        #"div.relative.w-full .description-container"
+        "div.ProductContent_description-container__miT3z"
     )
 
     if description_object is None:
@@ -206,3 +212,5 @@ def get_description(item_slug: str) -> str | None:
     contents = description_object.select("p, h2")
 
     return "\n".join([i.get_text() for i in contents])
+
+    

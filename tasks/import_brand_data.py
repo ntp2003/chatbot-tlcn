@@ -11,7 +11,7 @@ file_path = "tasks/unique_brands.json"
 # python
 # from tasks.import_brand_data import import_json
 # import_json()
-def import_json(file_path: str = file_path):
+def import_brand_json(file_path: str = file_path):
     start_time = time.time()
 
     print("Import is running...")

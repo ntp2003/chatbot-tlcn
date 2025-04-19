@@ -55,17 +55,20 @@ Collect and update the user's requirements and demands.
     },
 }
 
-
+# function calling for collect_and_update_user_requirements_tool with 3 parameters user_memory, user_demand, price_requirement
 def invoke(
-    user_memory: UserMemoryModel, user_demand: str | None, price_requirement: dict
+    user_memory: UserMemoryModel, #conversation context
+    user_demand: str | None, price_requirement: dict
 ) -> str:
     if user_demand:
         user_memory.user_demand = UserDemand(user_demand)
 
     if price_requirement:
+        # lưu filter cũ để so sánh
         old_filter = PhoneFilter(
             min_price=user_memory.min_price, max_price=user_memory.max_price
         )
+        # get approximate_price, min_price, max_price from price_requirement dict obj
         approximate_price = price_requirement.get("approximate_price")
         min_price = price_requirement.get("min_price")
         max_price = price_requirement.get("max_price")
@@ -79,7 +82,7 @@ def invoke(
         new_filter = PhoneFilter(
             min_price=user_memory.min_price, max_price=user_memory.max_price
         )
-        if not old_filter.__eq__(new_filter):
+        if not old_filter.__eq__(new_filter): # nếu filter thay đổi => reset product_name
             user_memory.product_name = None
             set_value(str(user_memory.thread_id), 0)
 

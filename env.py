@@ -14,7 +14,7 @@ class Env(BaseModel):
     DB_PORT: int
     OPENAI_API_KEY: str
     FPTSHOP_BASE_URL: str
-    LITERAL_API_KEY: str
+    LITERAL_KEY: str
     GEMINI_API_KEY: str
     CHAINLIT_AUTH_SECRET: str
     CHAINLIT_HOST: str

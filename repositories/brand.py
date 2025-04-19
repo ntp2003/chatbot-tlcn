@@ -10,11 +10,7 @@ import chainlit as cl
 
 def create_brand(data: CreateBrandModel) -> BrandModel:
     with Session() as session:
-        brand = Brand(
-            id=data.id,
-            name=data.name,
-            embedding=data.embedding,
-        )
+        brand = Brand(**data.model_dump())
 
         session.add(brand)
         session.commit()

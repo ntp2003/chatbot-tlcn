@@ -5,7 +5,7 @@ from models.user import CreateUserModel, User, UserModel
 from sqlalchemy import select, case
 
 
-def create_user(data: CreateUserModel) -> UserModel:
+def create(data: CreateUserModel) -> UserModel:
     with Session() as session:
         user = User(
             user_name=data.user_name,
@@ -33,16 +33,25 @@ def auth_user(user_name: str, password: str) -> Optional[UserModel]:
         return UserModel.model_validate(user)
 
 
-def get_user(user_id: UUID) -> Optional[UserModel]:
+def get(id: UUID) -> Optional[UserModel]:
     with Session() as session:
-        user = session.get(User, user_id)
+        user = session.get(User, id)
         if user is None:
             return None
 
         return UserModel.model_validate(user)
 
 
-def update_user(data: UserModel) -> int:
+def get_by_user_name(user_name: str) -> Optional[UserModel]:
+    with Session() as session:
+        user = session.query(User).filter(User.user_name == user_name).first()
+        if user is None:
+            return None
+
+        return UserModel.model_validate(user)
+
+
+def update(data: UserModel) -> int:
     with Session() as session:
         update_info = data.model_dump()
         update_info.pop("id", None)

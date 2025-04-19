@@ -71,7 +71,7 @@ def invoke(
     if phone_brand and not brand_code:
         return f'You should tell the user: "Our store does not carry {phone_brand} phones. You can check out other brands like Samsung, iPhone, etc."'
 
-    if brand_code and user_memory.brand not in [
+    if brand_code and user_memory.brand_code not in [
         None,
         BRAND_DEFAULT,
         brand_code,
@@ -80,14 +80,14 @@ def invoke(
         page = 0
 
     if brand_code:
-        user_memory.brand = brand_code
+        user_memory.brand_code = brand_code
     if phone_name:
         user_memory.product_name = phone_name
     update_user_memory(user_memory)
     set_value(str(user_memory.thread_id), page)
 
-    if not user_memory.brand and not user_memory.product_name:
-        user_memory.brand = BRAND_DEFAULT
+    if not user_memory.brand_code and not user_memory.product_name:
+        user_memory.brand_code = BRAND_DEFAULT
         update_user_memory(user_memory)
         return "You must ask the user for the brand of the phone they are interested in such as Samsung, iPhone, etc.\n"
 
@@ -102,7 +102,9 @@ def invoke(
         )
 
     phone_filter = PhoneFilter(
-        brand_code=user_memory.brand if user_memory.brand != BRAND_DEFAULT else None,
+        brand_code=(
+            user_memory.brand_code if user_memory.brand_code != BRAND_DEFAULT else None
+        ),
         max_price=user_memory.max_price,
         min_price=user_memory.min_price,
     )

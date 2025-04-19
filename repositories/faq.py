@@ -10,14 +10,7 @@ import chainlit as cl
 
 def create_faq(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
-        faq = FAQ(
-            id=data.id,
-            title=data.title,
-            category=data.category,
-            question=data.question,
-            answer=data.answer,
-            embedding=data.embedding,
-        )
+        faq = FAQ(**data.model_dump())
 
         session.add(faq)
         session.commit()

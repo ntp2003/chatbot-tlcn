@@ -43,7 +43,8 @@ class UserMemory(Base):
     thread_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     user_demand: Mapped[UserDemand | None] = mapped_column(Text, nullable=True)
     product_name: Mapped[str | None] = mapped_column(Text, nullable=True)
-    brand: Mapped[str | None] = mapped_column(Text, nullable=True)
+    brand_code: Mapped[str | None] = mapped_column(Text, nullable=True)
+    brand_name: Mapped[str | None] = mapped_column(Text, nullable=True)
     min_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
     max_price: Mapped[float | None] = mapped_column(Float, nullable=True)
     phone_number: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -71,7 +72,8 @@ class UserMemoryModel(BaseModel):
     thread_id: uuid.UUID
     user_demand: UserDemand | None
     product_name: str | None
-    brand: str | None
+    brand_code: str | None
+    brand_name: str | None
     min_price: int | None
     max_price: float | None
     phone_number: str | None

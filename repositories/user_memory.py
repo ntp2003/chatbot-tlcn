@@ -6,7 +6,7 @@ import uuid
 
 def create_user_memory(data: CreateUserMemoryModel) -> UserMemoryModel:
     with Session() as session:
-        user_memory = UserMemory(user_id=data.user_id, thread_id=data.thread_id)
+        user_memory = UserMemory(**data.model_dump())
 
         session.add(user_memory)
         session.commit()

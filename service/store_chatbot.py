@@ -12,7 +12,8 @@ from tools.search_phone_database import tool_json_schema as search_phone_databas
 from tools.collect_user_contact_info import (
     tool_json_schema as collect_user_contact_info_tool,
 )
-from models.message import Message
+from models.message import MessageModel, MessageType, CreateMessageModel
+from repositories.message import create as create_message
 
 tools = [
     collect_requirement_tool,
@@ -86,28 +87,32 @@ As a/an <ROLE>, you are required to adhere to the <WORKFLOW> and follow the <CON
 def gen_answer(
     user_id: UUID,
     thread_id: UUID,
-    history: Optional[list[Message]] = None,
+    history: Optional[list[ChatCompletionMessageParam]] = None,
     limit: int = 10,
-) -> Message:
+) -> str:
     temporary_memory = dict()
     formatted_messages = []
     formatted_messages.append({"role": "system", "content": role_prompt})
     formatted_messages.append({"role": "system", "content": knowledge_prompt})
+
     if history:
-        if len(history) > limit:
-            history = history[-limit:]
-        for message in history:
-            if message.author == "user":
-                formatted_message: ChatCompletionMessageParam = {
-                    "role": "user",
-                    "content": message.content,
-                }
-            else:
-                formatted_message: ChatCompletionMessageParam = {
-                    "role": "assistant",
-                    "content": message.content,
-                }
-            formatted_messages.append(formatted_message)
+        formatted_messages.extend(history[-limit:] if len(history) > limit else history)
+
+    # if history:
+    #     if len(history) > limit:
+    #         history = history[-limit:]
+    #     for message in history:
+    #         if message.type == MessageType.user:
+    #             formatted_message: ChatCompletionMessageParam = {
+    #                 "role": "user",
+    #                 "content": message.content,
+    #             }
+    #         else:
+    #             formatted_message: ChatCompletionMessageParam = {
+    #                 "role": "assistant",
+    #                 "content": message.content,
+    #             }
+    #         formatted_messages.append(formatted_message)
 
     formatted_messages.append({"role": "system", "content": constraints_prompt})
     formatted_messages.append({"role": "system", "content": workflow_prompt})
@@ -122,7 +127,5 @@ def gen_answer(
         )
     except Exception as e:
         response_text = f"An error occurred: {e}"
-    respone_message = Message(
-        content=response_text, author="model", metadata=temporary_memory
-    )
-    return respone_message
+
+    return response_text

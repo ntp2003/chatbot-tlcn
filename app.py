@@ -18,13 +18,8 @@ alembic.config.main(argv=["--raiseerr", "upgrade", "head"])
 
 
 def set_data_layer():
-    """Set the data layer to the custom implementation."""
-    print("Setting data layer to custom implementation.")
     if not cl_data._data_layer:
         cl_data._data_layer = DataLayer()
-    else:
-        print("Data layer is already set.")
-    print(f"Data layer: {cl_data._data_layer}")
 
 
 set_data_layer()

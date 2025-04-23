@@ -7,6 +7,11 @@ from pydantic import BaseModel
 from openai.types.chat_model import ChatModel
 
 
+class Instruction(BaseModel):
+    content: str
+    examples: list[str] = []
+
+
 class SystemPromptConfig(BaseModel):
     pass
 
@@ -37,7 +42,7 @@ class Agent:
         temporary_memory: AgentTemporaryMemory = AgentTemporaryMemory(),
     ):
         self.system_prompt_config = system_prompt_config
-        self.model = model
+        self.model: ChatModel = model
         self.temporary_memory = temporary_memory
 
     def run(self, *args: Any, **kwargs: Any) -> AgentResponseBase:

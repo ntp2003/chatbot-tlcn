@@ -16,7 +16,7 @@ class Tool(LangGPTTemplateTool):
         prerequisites: list[str] = [],
         rules: list[str] = [
             "Collect and update based on the latest user message.",
-            '- If the user is interested in a specific phone product in the list of suggestions shown in the previous conversation (e.g., "điện thoại đầu tiên", "cái thứ <number>", ...), you should set the phone_name parameter to the name of that phone product.',
+            'If the user is interested in a specific phone product in the list of suggestions shown in the previous conversation (e.g., "điện thoại đầu tiên", "cái thứ <number>", ...), you should set the phone_name parameter to the name of that phone product.',
         ],
         cases_used: list[str] = [
             "The user mentions the name of the specific phone product they are interested in.",

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 import uuid
 from pydantic import BaseModel, ConfigDict
@@ -5,12 +6,32 @@ from .base import Base
 from datetime import datetime, timezone
 from sqlalchemy.orm import mapped_column, Mapped
 from sqlalchemy import Float, Text, DateTime, Integer
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 
 
 class UserDemand(str, Enum):
     MOBILE_PHONE = "mobile phone"
     ANOTHER_PRODUCT = "another product"
+
+
+class ProductType(str, Enum):
+    MOBILE_PHONE = "mobile phone"
+    LAPTOP = "laptop"
+    UNDETERMINED = "undetermined"
+
+
+@dataclass
+class UserIntent:
+    is_user_needs_other_suggestions: bool = False
+    product_type: ProductType | None = None
+
+
+class ConsultationStatus(BaseModel):
+    is_recommending: bool = False
+
+
+class CurrentFilter(BaseModel):
+    product_name: str | None = None
 
 
 class PriceRequirement(BaseModel):
@@ -49,6 +70,15 @@ class UserMemory(Base):
     max_price: Mapped[float | None] = mapped_column(Float, nullable=True)
     phone_number: Mapped[str | None] = mapped_column(Text, nullable=True)
     email: Mapped[str | None] = mapped_column(Text, nullable=True)
+    intent: Mapped[UserIntent] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
+    current_filter: Mapped[CurrentFilter] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
+    consultation_status: Mapped[ConsultationStatus] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
@@ -62,6 +92,20 @@ class UserMemory(Base):
 class CreateUserMemoryModel(BaseModel):
     user_id: uuid.UUID
     thread_id: uuid.UUID
+
+
+class UpdateUserMemoryModel(BaseModel):
+    user_demand: UserDemand | None
+    product_name: str | None
+    brand_code: str | None
+    brand_name: str | None
+    min_price: int | None
+    max_price: float | None
+    phone_number: str | None
+    email: str | None
+    intent: UserIntent
+    current_filter: CurrentFilter
+    consultation_status: ConsultationStatus
 
 
 class UserMemoryModel(BaseModel):
@@ -78,6 +122,9 @@ class UserMemoryModel(BaseModel):
     max_price: float | None
     phone_number: str | None
     email: str | None
+    intent: UserIntent
+    current_filter: CurrentFilter
+    consultation_status: ConsultationStatus
     created_at: datetime
     updated_at: datetime
 

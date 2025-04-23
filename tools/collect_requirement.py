@@ -1,6 +1,6 @@
 from openai.types.chat import ChatCompletionToolParam
-from models.user_memory import UserMemoryModel, PriceRequirement
-from repositories.user_memory import update_user_memory
+from models.user_memory import UpdateUserMemoryModel, UserMemoryModel, PriceRequirement
+from repositories.user_memory import update as update_user_memory
 from models.user_memory import UserDemand
 from .utils.search import PhoneFilter
 from repositories.redis import set_value
@@ -83,7 +83,9 @@ def invoke(
             user_memory.product_name = None
             set_value(str(user_memory.thread_id), 0)
 
-    update_user_memory(user_memory)
+    update_user_memory(
+        user_memory.id, UpdateUserMemoryModel(**user_memory.model_dump())
+    )
 
     if user_memory.user_demand is None:
         return 'You should ask the user: "Which product are you interested in?"'

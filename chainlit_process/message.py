@@ -3,7 +3,7 @@ from uuid import UUID
 import uuid
 import chainlit as cl
 from models.message import MessageModel
-from service.store_chatbot import gen_answer
+from service.store_chatbot_v2 import gen_answer
 from repositories.thread import (
     get as get_thread,
     create as create_thread,
@@ -50,26 +50,25 @@ async def main(message: cl.Message):
     try:
         response_text = gen_answer(user_id, thread_id, conversation)
 
-        # Create a new message for the assistant
-        new_assistant_message_data = CreateMessageModel(
-            thread_id=thread.id,
-            type=MessageType.bot,
-            content=response_text,
-        )
-
-        new_assistant_message = create_message(new_assistant_message_data)
-
-        return await cl.Message(
-            content=response_text,
-            author="assistant_message",
-            metadata={"user_id": str(user_id)},
-            parent_id=message.id,
-            id=str(new_assistant_message.id),
-            created_at=new_assistant_message.created_at.isoformat(),
-        ).send()
-
     except Exception as e:
         print("Error:", e)
+        response_text = str(e)
+
+    # Create a new message for the assistant
+    new_assistant_message_data = CreateMessageModel(
+        thread_id=thread.id,
+        type=MessageType.bot,
+        content=response_text,
+    )
+    new_assistant_message = create_message(new_assistant_message_data)
+    return await cl.Message(
+        content=response_text,
+        author="assistant_message",
+        metadata={"user_id": str(user_id)},
+        parent_id=message.id,
+        id=str(new_assistant_message.id),
+        created_at=new_assistant_message.created_at.isoformat(),
+    ).send()
 
 
 @cl.on_chat_resume

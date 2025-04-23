@@ -60,7 +60,7 @@ class Tool(LangGPTTemplateTool):
         brand_code = convert_band_name_to_code(phone_brand)
         if not brand_code:
             return ToolResponse(
-                type="message",
+                type="error",
                 content=(
                     f'You should tell the user: "Our store does not carry {phone_brand} phones. '
                     'You can check out other brands like Samsung, iPhone, etc."'

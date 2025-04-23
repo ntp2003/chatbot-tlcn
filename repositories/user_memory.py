@@ -1,10 +1,15 @@
-from models.user_memory import UserMemory, CreateUserMemoryModel, UserMemoryModel
+from models.user_memory import (
+    UpdateUserMemoryModel,
+    UserMemory,
+    CreateUserMemoryModel,
+    UserMemoryModel,
+)
 from db import Session
-from sqlalchemy import select, update
+from sqlalchemy import select, update as sql_update
 import uuid
 
 
-def create_user_memory(data: CreateUserMemoryModel) -> UserMemoryModel:
+def create(data: CreateUserMemoryModel) -> UserMemoryModel:
     with Session() as session:
         user_memory = UserMemory(**data.model_dump())
 
@@ -14,7 +19,7 @@ def create_user_memory(data: CreateUserMemoryModel) -> UserMemoryModel:
         return UserMemoryModel.model_validate(user_memory)
 
 
-def get_user_memory_by_thread_id(thread_id: uuid.UUID) -> UserMemoryModel | None:
+def get_by_thread_id(thread_id: uuid.UUID) -> UserMemoryModel | None:
     with Session() as session:
         user_memory = session.execute(
             select(UserMemory).where(UserMemory.thread_id == thread_id)
@@ -23,13 +28,13 @@ def get_user_memory_by_thread_id(thread_id: uuid.UUID) -> UserMemoryModel | None
         return UserMemoryModel.model_validate(user_memory) if user_memory else None
 
 
-def update_user_memory(user_memory: UserMemoryModel) -> UserMemoryModel:
+def update(id: uuid.UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
     with Session() as session:
-        session.execute(
-            update(UserMemory)
-            .where(UserMemory.thread_id == user_memory.thread_id)
-            .values(**user_memory.model_dump())
+        stmt = (
+            sql_update(UserMemory)
+            .where(UserMemory.id == id)
+            .values(**data.model_dump())
+            .returning(UserMemory)
         )
-        session.commit()
-
-        return user_memory
+        updated_user_memory = session.execute(stmt).scalar_one()
+        return UserMemoryModel.model_validate(updated_user_memory)

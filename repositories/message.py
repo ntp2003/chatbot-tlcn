@@ -19,7 +19,7 @@ def update(id: UUID, data: UpdateMessageModel) -> MessageModel:
         stmt = (
             sql_update(Message)
             .where(Message.id == id)
-            .values(data.model_dump(exclude_unset=True))
+            .values(**data.model_dump(exclude_unset=True))
             .returning(Message)
         )
 

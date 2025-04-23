@@ -3,8 +3,8 @@ from service.converter import (
     convert_to_standard_email,
     convert_to_standard_phone_number,
 )
-from models.user_memory import UserMemoryModel
-from repositories.user_memory import update_user_memory
+from models.user_memory import UpdateUserMemoryModel, UserMemoryModel
+from repositories.user_memory import update as update_user_memory
 from rq import Queue
 from db import redis
 from service.email import send_message, create_message
@@ -59,7 +59,9 @@ def invoke(
     else:
         user_memory.email = standard_email or user_memory.email
 
-    update_user_memory(user_memory)
+    update_user_memory(
+        user_memory.id, UpdateUserMemoryModel(**user_memory.model_dump())
+    )
     phone_number_is_missing = not user_memory.phone_number
 
     if len(invalid_infos) > 0:

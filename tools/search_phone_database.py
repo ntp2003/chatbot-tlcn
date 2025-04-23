@@ -1,7 +1,7 @@
 from openai.types.chat import ChatCompletionToolParam
 from models.phone import Phone, PhoneModel
-from models.user_memory import UserMemoryModel
-from repositories.user_memory import update_user_memory
+from models.user_memory import UpdateUserMemoryModel, UserMemoryModel
+from repositories.user_memory import update as update_user_memory
 from repositories.phone import search_phone_by_filter, search_phone_by_phone_name
 from .utils.search import PhoneFilter
 from service.converter import convert_band_name_to_code
@@ -83,12 +83,16 @@ def invoke(
         user_memory.brand_code = brand_code
     if phone_name:
         user_memory.product_name = phone_name
-    update_user_memory(user_memory)
+    update_user_memory(
+        user_memory.id, UpdateUserMemoryModel(**user_memory.model_dump())
+    )
     set_value(str(user_memory.thread_id), page)
 
     if not user_memory.brand_code and not user_memory.product_name:
         user_memory.brand_code = BRAND_DEFAULT
-        update_user_memory(user_memory)
+        update_user_memory(
+            user_memory.id, UpdateUserMemoryModel(**user_memory.model_dump())
+        )
         return "You must ask the user for the brand of the phone they are interested in such as Samsung, iPhone, etc.\n"
 
     if user_memory.product_name:

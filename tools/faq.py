@@ -1,5 +1,5 @@
 from models.faq import FAQModel
-from repositories.faq import query_by_semantic
+from service.faq import search
 from openai.types.chat import ChatCompletionToolParam
 
 # "Search the faq database for information regarding answers to frequently asked questions (FAQ) about the store's policies available in the database, "
@@ -43,7 +43,7 @@ def _to_text(faq: FAQModel) -> str:
 
 def invoke(question: str) -> str:
     print(f"Câu hỏi: {question}")
-    faqs = query_by_semantic(question, threshold=0.3)
+    faqs = search(question, threshold=0.3)
     faq_texts = [_to_text(faq) for faq in faqs]
     if faq_texts:
         return (

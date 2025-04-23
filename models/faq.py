@@ -35,6 +35,14 @@ class CreateFAQModel(BaseModel):
     embedding: list[float]
 
 
+class UpdateFAQModel(BaseModel):
+    title: str
+    category: str
+    question: str
+    answer: str
+    embedding: list[float]
+
+
 class FAQModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

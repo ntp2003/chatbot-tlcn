@@ -1,14 +1,11 @@
 from typing import Optional
-
-import numpy as np
 from db import Session
-from models.faq import CreateFAQModel, FAQ, FAQModel
-from sqlalchemy import select
-from service.embedding import get_embedding
-import chainlit as cl
+from models.faq import CreateFAQModel, FAQ, FAQModel, UpdateFAQModel
+from sqlalchemy import select, update as sql_update
+from pgvector.sqlalchemy import Vector
 
 
-def create_faq(data: CreateFAQModel) -> FAQModel:
+def create(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
         faq = FAQ(**data.model_dump())
 
@@ -18,52 +15,47 @@ def create_faq(data: CreateFAQModel) -> FAQModel:
         return FAQModel.model_validate(faq)
 
 
-def update_faq(data: CreateFAQModel) -> int:
+def update(id: int, data: UpdateFAQModel) -> FAQModel | None:
     with Session() as session:
-        update_info = data.model_dump()
-        update_info.pop("id", None)
-        update_count = (
-            session.query(FAQ)
-            .filter(FAQ.id == data.id)
-            .update(update_info)  # type: ignore
+        stmt = (
+            sql_update(FAQ)
+            .where(FAQ.id == id)
+            .values(**data.model_dump())
+            .returning(FAQ)
         )
-        session.commit()
-        return update_count
+
+        updated_faq = session.execute(stmt).scalar_one_or_none()
+
+        return FAQModel.model_validate(updated_faq) if updated_faq else None
 
 
-def upsert_faq(data: CreateFAQModel) -> FAQModel:
+def upsert(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
-        if update_faq(data) == 0:
-            return create_faq(data)
-        id = data.id
+        updated_faq = update(data.id, UpdateFAQModel.model_validate(data))
 
-        updated_faq = session.execute(select(FAQ).where(FAQ.id == id)).scalar_one()
+        if updated_faq:
+            return updated_faq
 
-        return FAQModel.model_validate(updated_faq)
+        return create(data)
 
 
-def query_by_semantic(
-    question: str, top_k: int = 4, threshold: Optional[float] = None
+def search_by_semantic(
+    question_embedding: list[float], top_k: int = 4, threshold: Optional[float] = None
 ) -> list[FAQModel]:
     with Session() as session:
-        embedding = get_embedding(question)
-        faqs = (
-            session.execute(
-                select(FAQ)
-                .order_by(FAQ.embedding.cosine_distance(embedding))
-                .limit(top_k)
+        stmt = (
+            select(FAQ)
+            .order_by(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding).asc()
             )
-            .scalars()
-            .all()
+            .limit(top_k)
         )
-
         if threshold:
-            results = []
-            for faq in faqs:
-                c = np.dot(embedding, faq.embedding)
-                print(faq.question, c)
-                if c > threshold:
-                    results.append(FAQModel.model_validate(faq))
-            return results
+            stmt = stmt.where(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding)
+                < 1 - threshold
+            )
+
+        faqs = session.execute(stmt).scalars().all()
 
         return [FAQModel.model_validate(faq) for faq in faqs]

@@ -3,7 +3,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 from env import env
-from openai import NOT_GIVEN, NotGiven, OpenAI
+from openai import NotGiven, OpenAI
+from openai._types import NOT_GIVEN
 import json
 from openai.types.chat import (
     ChatCompletionMessageParam,
@@ -44,6 +45,13 @@ class OpenAIChatCompletionsRequest(BaseModel):
     timeout: int
 
     def create(self):
+        if not self.tools or self.tools == NOT_GIVEN:
+            return _client.chat.completions.create(
+                messages=self.messages,
+                model=self.model,
+                temperature=self.temperature,
+                timeout=self.timeout,
+            )
         return _client.chat.completions.create(
             messages=self.messages,
             model=self.model,

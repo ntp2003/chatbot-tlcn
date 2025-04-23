@@ -1,13 +1,14 @@
+from enum import Enum
 from pydantic import BaseModel, ConfigDict, field_validator
-from sqlalchemy import Select, select, true
+from sqlalchemy import Select, select, true, case, func, literal
 from models.phone import Phone, PhoneModel
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.operators import OperatorType, ge, le, eq
 from sqlalchemy.sql.elements import ColumnElement
-from sqlalchemy.sql._typing import ColumnExpressionArgument
 from typing import Any, Generic, TypeVar
 from repositories.phone import search as search_phone
 from service.embedding import get_embedding
+from pgvector.sqlalchemy import Vector
 
 _T = TypeVar("_T")
 
@@ -44,10 +45,18 @@ class FilterCondition(BaseModel):
         return condition
 
 
+class FilterType(str, Enum):
+    PRICE = "price"
+    BRAND = "brand"
+    NAME = "name"
+
+
 class Config(BaseModel):
     threshold: float = 0.75
     limit: int = 4
     offset: int = 0
+    is_recommending: bool = False
+    recommend_priority: list[FilterType] = [FilterType.BRAND, FilterType.PRICE]
 
 
 class PhoneFilter(BaseModel):
@@ -57,7 +66,7 @@ class PhoneFilter(BaseModel):
     min_price: int | None = None
     name: str | None = None
 
-    def condition_expression(self) -> ColumnElement[bool]:
+    def get_price_condition_expression(self) -> ColumnElement[bool]:
         filters = []
 
         if self.min_price:
@@ -76,24 +85,6 @@ class PhoneFilter(BaseModel):
                     value=self.max_price,  # type: ignore
                 )
             )
-        if self.brand_code:
-            filters.append(
-                FilterAttribute(
-                    column=Phone.brand_code.expression,
-                    operator=eq,
-                    value=self.brand_code,
-                )
-            )
-
-        if self.name:
-            embedding = get_embedding(self.name)
-            filters.append(
-                FilterAttribute(
-                    column=Phone.name.expression.cosine_distance(embedding),
-                    operator=le,
-                    value=1 - self.config.threshold,
-                )
-            )
 
         expression = FilterCondition(filters=filters).condition_expression()
 
@@ -101,17 +92,93 @@ class PhoneFilter(BaseModel):
             return true()
         return expression
 
-    def order_by_expressions(self) -> list[ColumnElement]:
-        order_by = []
+    def get_brand_condition_expression(self) -> ColumnElement[bool]:
+        if not self.brand_code:
+            return true()
 
-        order_by.append(Phone.score.expression.desc())
+        filter = FilterAttribute(
+            column=Phone.brand_code.expression,
+            operator=eq,
+            value=self.brand_code,
+        )
 
-        if self.name:
-            order_by.append(
-                Phone.name.expression.cosine_distance(get_embedding(self.name)).asc()
+        return filter.condition_expression()
+
+    def get_name_condition_expression(self) -> ColumnElement[bool]:
+        if not self.name:
+            return true()
+
+        embedding = get_embedding(self.name)
+        filters = FilterAttribute(
+            column=Phone.name_embedding.cast(Vector).cosine_distance(embedding),
+            operator=le,
+            value=1 - self.config.threshold,
+        )
+
+        return filters.condition_expression()
+
+    def condition_expression(self) -> ColumnElement[bool]:
+        if self.config.is_recommending:
+            return true()
+
+        return (
+            self.get_price_condition_expression()
+            & self.get_brand_condition_expression()
+            & self.get_name_condition_expression()
+        )
+
+    def score_by_priority(
+        self, filter_type: FilterType, priority: int
+    ) -> ColumnElement[int]:
+        if filter_type == FilterType.PRICE:
+            return case(
+                (self.get_price_condition_expression(), func.pow(10, priority)),
+                else_=0,
             )
 
-        return order_by
+        if filter_type == FilterType.BRAND:
+            return case(
+                (self.get_brand_condition_expression(), func.pow(10, priority)),
+                else_=0,
+            )
+
+        if filter_type == FilterType.NAME:
+            return case(
+                (self.get_name_condition_expression(), func.pow(10, priority)),
+                else_=0,
+            )
+
+        raise ValueError(f"Unknown filter type: {filter_type}")
+
+    def score_expression(
+        self,
+    ) -> ColumnElement[int]:
+        recommend_priority = self.config.recommend_priority
+        score = literal(0)
+        len_priority = len(recommend_priority)
+
+        for i, filter_type in enumerate(recommend_priority):
+            score += self.score_by_priority(filter_type, len_priority - i)
+
+        return score
+
+    def order_by_expressions(self) -> list[ColumnElement]:
+        is_recommending = self.config.is_recommending
+
+        if self.name:
+            return [
+                Phone.name_embedding.cast(Vector)
+                .cosine_distance(get_embedding(self.name))
+                .asc(),
+            ]
+
+        if is_recommending:
+            return [
+                self.score_expression().desc(),
+                Phone.score.expression.desc(),
+            ]
+
+        return [Phone.score.expression.desc()]
 
     def __eq__(self, value: object) -> bool:
         if not isinstance(value, PhoneFilter):

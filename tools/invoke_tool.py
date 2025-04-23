@@ -14,7 +14,7 @@ from .collect_user_contact_info import (
 )
 from openai.types.chat import ChatCompletionToolParam
 import chainlit as cl
-from repositories.user_memory import get_user_memory_by_thread_id, create_user_memory
+from repositories.user_memory import get_by_thread_id, create as create_user_memory
 from models.user_memory import CreateUserMemoryModel
 
 
@@ -29,7 +29,7 @@ def invoke(
     args: dict,
     user_input: str | None = None,
 ) -> str:
-    user_memory = get_user_memory_by_thread_id(thread_id)
+    user_memory = get_by_thread_id(thread_id)
     if user_memory is None:
         user_memory = create_user_memory(
             CreateUserMemoryModel(user_id=user_id, thread_id=thread_id)

@@ -338,6 +338,8 @@ class Agent(AgentBase):
             tool_response = selected_tool.invoke(
                 temporary_memory=self.temporary_memory, **kwargs
             )
+            print(f"Tool response for {tool_name}:")
+            print(kwargs, self.temporary_memory.model_dump())
             tool_responses.append(tool_response)
 
         return tool_responses

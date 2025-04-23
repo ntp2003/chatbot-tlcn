@@ -30,6 +30,13 @@ def get_by_thread_id(thread_id: uuid.UUID) -> UserMemoryModel | None:
 
 def update(id: uuid.UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
     with Session() as session:
+        print(
+            "Updating user memory with id:",
+            id,
+            "and data:",
+            data.model_dump(),
+        )
+
         stmt = (
             sql_update(UserMemory)
             .where(UserMemory.id == id)
@@ -37,4 +44,5 @@ def update(id: uuid.UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
             .returning(UserMemory)
         )
         updated_user_memory = session.execute(stmt).scalar_one()
+        session.commit()
         return UserMemoryModel.model_validate(updated_user_memory)

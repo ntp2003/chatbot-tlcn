@@ -2,6 +2,8 @@ from repositories.brand import query_by_semantic
 from email_validator import EmailNotValidError, validate_email
 import phonenumbers
 
+from service.openai import get_embedding
+
 
 def convert_band_name_to_code(
     brand_name: str | None, threshold: float = 0.7
@@ -9,7 +11,8 @@ def convert_band_name_to_code(
     if not brand_name:
         return None
 
-    brand = query_by_semantic(f"Brand: {brand_name}", 1, threshold)
+    embedding = get_embedding(f"Brand: {brand_name}")
+    brand = query_by_semantic(embedding, 1, threshold)
 
     if len(brand) == 0:
         return None

@@ -195,6 +195,8 @@ class Agent(AgentBase):
                 content="No information about the user's request found.",
             )
 
+        print("User request:", user_request.model_dump())
+
         if user_request.user_demand != ProductType.UNDETERMINED:
             user_memory.intent.product_type = user_request.user_demand
 

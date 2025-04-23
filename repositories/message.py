@@ -24,7 +24,7 @@ def update(id: UUID, data: UpdateMessageModel) -> MessageModel:
         )
 
         updated_message = session.execute(stmt).scalar_one()
-
+        session.commit()
         return MessageModel.model_validate(updated_message)
 
 

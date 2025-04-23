@@ -25,7 +25,7 @@ def update(id: int, data: UpdateFAQModel) -> FAQModel | None:
         )
 
         updated_faq = session.execute(stmt).scalar_one_or_none()
-
+        session.commit()
         return FAQModel.model_validate(updated_faq) if updated_faq else None
 
 

@@ -5,7 +5,7 @@ from redis import Redis
 
 db = engine.create_engine(
     f"postgresql://{env.DB_USER}:{env.DB_PASSWORD}@{env.DB_HOST}:{env.DB_PORT}/{env.DB_NAME}",
-    echo=True,
+    echo=False,
     pool_pre_ping=True,
 )
 

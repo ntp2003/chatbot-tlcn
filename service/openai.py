@@ -3,8 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 from env import env
-from openai import NotGiven, OpenAI
-from openai._types import NOT_GIVEN
+from openai import NotGiven, OpenAI, NOT_GIVEN
 import json
 from openai.types.chat import (
     ChatCompletionMessageParam,

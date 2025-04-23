@@ -1,11 +1,7 @@
-from ast import stmt
 from typing import Optional
-
-import numpy as np
 from db import Session
 from models.brand import CreateBrandModel, Brand, BrandModel
 from sqlalchemy import select
-from service.embedding import get_embedding
 from pgvector.sqlalchemy import Vector
 
 

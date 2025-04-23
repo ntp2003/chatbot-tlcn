@@ -1,7 +1,6 @@
 from repositories.brand import query_by_semantic
 from email_validator import EmailNotValidError, validate_email
 import phonenumbers
-
 from service.openai import get_embedding
 
 

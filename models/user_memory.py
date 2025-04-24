@@ -1,11 +1,12 @@
+from dataclasses import dataclass
 from enum import Enum
 import uuid
 from pydantic import BaseModel, ConfigDict
 from .base import Base
 from datetime import datetime, timezone
-from sqlalchemy.orm import mapped_column, Mapped, relationship
-from sqlalchemy import Float, Text, DateTime, Integer, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import mapped_column, Mapped
+from sqlalchemy import Float, Text, DateTime, Integer
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 
 
 class UserDemand(str, Enum): #Inherited from str n Enum, tạo ra 1 enum mà các giá trị vừa là chuỗi vừa là enum, ensure các giá trị trong enum là cố định không thay đổi
@@ -15,10 +16,27 @@ class UserDemand(str, Enum): #Inherited from str n Enum, tạo ra 1 enum mà cá
     ANOTHER_PRODUCT = "another product"
 
 
-class PriceRequirement(BaseModel): ##pydantic model để validate input data cho khoảng giá
-    # properties
+class ProductType(str, Enum):
+    MOBILE_PHONE = "mobile phone"
+    LAPTOP = "laptop"
+    UNDETERMINED = "undetermined"
 
-    #properties
+
+@dataclass
+class UserIntent:
+    is_user_needs_other_suggestions: bool = False
+    product_type: ProductType | None = None
+
+
+class ConsultationStatus(BaseModel):
+    is_recommending: bool = False
+
+
+class CurrentFilter(BaseModel):
+    product_name: str | None = None
+
+
+class PriceRequirement(BaseModel):
     min_price: int | None = None
     max_price: int | None = None
 
@@ -53,22 +71,25 @@ class UserMemory(Base):
         nullable=False, 
         default=uuid.uuid4 ## tự động tạo id mới dạng UUID like 123e4567-e89b-12d3-a456-426614174000
     )
-    #user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), 
-        ForeignKey("users.id", ondelete="CASCADE"),
-        nullable=False
-    )
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     thread_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     user_demand: Mapped[UserDemand | None] = mapped_column(Text, nullable=True)
     product_name: Mapped[str | None] = mapped_column(Text, nullable=True)
-    brand: Mapped[str | None] = mapped_column(Text, nullable=True)
+    brand_code: Mapped[str | None] = mapped_column(Text, nullable=True)
+    brand_name: Mapped[str | None] = mapped_column(Text, nullable=True)
     min_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
     max_price: Mapped[float | None] = mapped_column(Float, nullable=True)
     phone_number: Mapped[str | None] = mapped_column(Text, nullable=True)
     email: Mapped[str | None] = mapped_column(Text, nullable=True)
-    #product_type: Mapped[str | None] = mapped_column(Text, nullable=True) # Laptop, Mobile phone, etc
-
+    intent: Mapped[UserIntent] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
+    current_filter: Mapped[CurrentFilter] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
+    consultation_status: Mapped[ConsultationStatus] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
@@ -77,13 +98,25 @@ class UserMemory(Base):
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
-    # relationship with User
-    user: Mapped["User"] = relationship("User",back_populates="memories") # 1 user có thể có nhiều user_memory, nếu xóa user thì cũng xóa luôn user_memory của nó
 
 
 class CreateUserMemoryModel(BaseModel):
     user_id: uuid.UUID
     thread_id: uuid.UUID
+
+
+class UpdateUserMemoryModel(BaseModel):
+    user_demand: UserDemand | None
+    product_name: str | None
+    brand_code: str | None
+    brand_name: str | None
+    min_price: int | None
+    max_price: float | None
+    phone_number: str | None
+    email: str | None
+    intent: UserIntent
+    current_filter: CurrentFilter
+    consultation_status: ConsultationStatus
 
 
 class UserMemoryModel(BaseModel):
@@ -94,11 +127,15 @@ class UserMemoryModel(BaseModel):
     thread_id: uuid.UUID
     user_demand: UserDemand | None
     product_name: str | None
-    brand: str | None
+    brand_code: str | None
+    brand_name: str | None
     min_price: int | None
     max_price: float | None
     phone_number: str | None
     email: str | None
+    intent: UserIntent
+    current_filter: CurrentFilter
+    consultation_status: ConsultationStatus
     created_at: datetime
     updated_at: datetime
 

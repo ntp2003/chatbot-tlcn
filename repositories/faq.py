@@ -1,24 +1,13 @@
 from typing import Optional
-
-import numpy as np
 from db import Session
-from models.faq import CreateFAQModel, FAQ, FAQModel
-from sqlalchemy import select
-from service.embedding import get_embedding
-import chainlit as cl
+from models.faq import CreateFAQModel, FAQ, FAQModel, UpdateFAQModel
+from sqlalchemy import select, update as sql_update
+from pgvector.sqlalchemy import Vector
 
 
-def create_faq(data: CreateFAQModel) -> FAQModel:
+def create(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
-        # faq = FAQ(**data.model_dump())
-        faq = FAQ(
-            id=data.id,
-            title=data.title,
-            category=data.category,
-            question=data.question,
-            answer=data.answer,
-            embedding=data.embedding,
-        )
+        faq = FAQ(**data.model_dump())
 
         session.add(faq)
         session.commit()
@@ -26,55 +15,47 @@ def create_faq(data: CreateFAQModel) -> FAQModel:
         return FAQModel.model_validate(faq) ## validate faq and return it as pydantic (FAQModel) model
 
 
-def update_faq(data: CreateFAQModel) -> int:
+def update(id: int, data: UpdateFAQModel) -> FAQModel | None:
     with Session() as session:
-        # update_info = data.model_dump(exclude={"id"}) # gen a dictionary resprentation of data model , exclude id field
-        update_info = data.model_dump()
-        update_info.pop("id", None)
-        update_count = (
-            session.query(FAQ)
-            .filter(FAQ.id == data.id)
-            .update(update_info)  # type: ignore
+        stmt = (
+            sql_update(FAQ)
+            .where(FAQ.id == id)
+            .values(**data.model_dump())
+            .returning(FAQ)
         )
+
+        updated_faq = session.execute(stmt).scalar_one_or_none()
         session.commit()
-        return update_count ## trả về số lượng bản ghi được cập nhật , (0 nếu không có bản ghi nào được cập nhật)
+        return FAQModel.model_validate(updated_faq) if updated_faq else None
 
 
-def upsert_faq(data: CreateFAQModel) -> FAQModel:
+def upsert(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
-        if update_faq(data) == 0: # FAQ entity (data) chưa tồn tại trong db -> không có bản ghi được update
-            return create_faq(data)
-        id = data.id # lấy id của FAQ entity () đã được update
+        updated_faq = update(data.id, UpdateFAQModel.model_validate(data))
 
-        updated_faq = session.execute(select(FAQ).where(FAQ.id == id)).scalar_one() # # execute select và trả về bản ghi duy nhất dưới dạng scalar (giá trị đơn)
+        if updated_faq:
+            return updated_faq
 
-        return FAQModel.model_validate(updated_faq)
+        return create(data)
 
-# embedding user question search semantic base on cosine_distance of embedding vector, threshold : độ tương đồng tối thiểu
-def query_by_semantic(
-    question: str, top_k: int = 4, threshold: Optional[float] = None
+
+def search_by_semantic(
+    question_embedding: list[float], top_k: int = 4, threshold: Optional[float] = None
 ) -> list[FAQModel]:
     with Session() as session:
-        embedding = get_embedding(question) # tạo embedding vector cho câu hỏi user
-
-        # truy vấn trong postgresql dựa trên cosine distance của embedding vector
-        faqs = (
-            session.execute(
-                select(FAQ)
-                .order_by(FAQ.embedding.cosine_distance(embedding))
-                .limit(top_k) # limit top k kết quả phù hợp
+        stmt = (
+            select(FAQ)
+            .order_by(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding).asc()
             )
-            .scalars()
-            .all()
+            .limit(top_k)
         )
-        # filter kết quả theo threshold
         if threshold:
-            results = []
-            for faq in faqs:
-                similarity = np.dot(embedding, faq.embedding)
-                print(faq.question, similarity)
-                if similarity > threshold:
-                    results.append(FAQModel.model_validate(faq))
-            return results
+            stmt = stmt.where(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding)
+                < 1 - threshold
+            )
+
+        faqs = session.execute(stmt).scalars().all()
 
         return [FAQModel.model_validate(faq) for faq in faqs]

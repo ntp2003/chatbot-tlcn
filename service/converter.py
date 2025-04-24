@@ -1,6 +1,7 @@
 from repositories.brand import query_by_semantic
-from email_validator import EmailNotValidError, validate_email # validate and normalize email
-import phonenumbers # parse và validate phone number
+from email_validator import EmailNotValidError, validate_email
+import phonenumbers
+from service.openai import get_embedding
 
 # convert brand name to brand_code
 def convert_band_name_to_code(
@@ -14,7 +15,8 @@ def convert_band_name_to_code(
     if not brand_name:
         return None
 
-    brand = query_by_semantic(f"Brand: {brand_name}", 1, threshold) # lấy ra BrandModel gần nhất với brand_name
+    embedding = get_embedding(f"Brand: {brand_name}")
+    brand = query_by_semantic(embedding, 1, threshold)
 
     if len(brand) == 0:
         return None

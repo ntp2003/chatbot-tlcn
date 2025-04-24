@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from enum import Enum
 
 from pydantic import BaseModel, ConfigDict
 from .base import Base
@@ -8,22 +7,14 @@ import sqlalchemy as sa
 from uuid import UUID, uuid4
 
 
-class MessageType(str, Enum):
-    user = "user"
-    bot = "bot"
-
-
-class Message(Base):
-    __tablename__ = "messages"
+class Thread(Base):
+    __tablename__ = "threads"
 
     id: Mapped[UUID] = mapped_column(
         sa.UUID(as_uuid=True), primary_key=True, default=uuid4
     )
-    thread_id: Mapped[UUID] = mapped_column(sa.UUID(as_uuid=True), nullable=False)
-
-    content: Mapped[str] = mapped_column(sa.Text(), nullable=False)
-    type: Mapped[MessageType] = mapped_column(sa.Enum(MessageType), nullable=False)
-
+    user_id: Mapped[UUID] = mapped_column(sa.UUID(as_uuid=True), nullable=False)
+    name: Mapped[str] = mapped_column(sa.String(), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         sa.DateTime, default=(lambda: datetime.now(tz=timezone.utc))
     )
@@ -34,23 +25,17 @@ class Message(Base):
     )
 
 
-class MessageModel(BaseModel):
+class ThreadModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
-    thread_id: UUID
-    content: str
-    type: MessageType
+    user_id: UUID
+    name: str | None = None
     created_at: datetime
     updated_at: datetime
 
 
-class CreateMessageModel(BaseModel):
+class CreateThreadModel(BaseModel):
     id: UUID | None = None
-    thread_id: UUID
-    content: str
-    type: MessageType
-
-
-class UpdateMessageModel(BaseModel):
-    content: str | None = None
+    user_id: UUID
+    name: str | None = None

@@ -1,20 +1,13 @@
 from typing import Optional
-
-import numpy as np
 from db import Session
 from models.brand import CreateBrandModel, Brand, BrandModel
 from sqlalchemy import select
-from service.embedding import get_embedding
-import chainlit as cl
+from pgvector.sqlalchemy import Vector
 
 
 def create_brand(data: CreateBrandModel) -> BrandModel:
     with Session() as session:
-        brand = Brand(
-            id=data.id,
-            name=data.name,
-            embedding=data.embedding, # get_embedding("Brand: " + data.name)
-        )
+        brand = Brand(**data.model_dump())
 
         session.add(brand)
         session.commit()
@@ -49,27 +42,22 @@ def upsert_brand(data: CreateBrandModel) -> BrandModel:
 
 # search brand based on input brand_name
 def query_by_semantic(
-    brand_name: str, top_k: int = 4, threshold: Optional[float] = None
+    brand_embedding: list[float], top_k: int = 4, threshold: Optional[float] = None
 ) -> list[BrandModel]:
     with Session() as session:
-        embedding = get_embedding(brand_name)
-        brands = (
-            session.execute(
-                select(Brand)
-                .order_by(Brand.embedding.cosine_distance(embedding))
-                .limit(top_k)
+        stmt = (
+            select(Brand)
+            .order_by(
+                Brand.embedding.cast(Vector).cosine_distance(brand_embedding).asc()
             )
-            .scalars()
-            .all()
+            .limit(top_k)
         )
 
         if threshold:
-            results = []
-            for brand in brands:
-                c = np.dot(embedding, brand.embedding)
-                print(brand.name, c)
-                if c > threshold:
-                    results.append(BrandModel.model_validate(brand))
-            return results
+            stmt = stmt.where(
+                Brand.embedding.cast(Vector).cosine_distance(brand_embedding)
+                < 1 - threshold
+            )
 
+        brands = session.execute(stmt).scalars().all()
         return [BrandModel.model_validate(brand) for brand in brands]

@@ -2,32 +2,17 @@ from ast import stmt
 from db import Session
 from typing import Optional, List
 from models.phone import CreatePhoneModel, Phone, PhoneModel
-from sqlalchemy import select, case
+from sqlalchemy import Select, select, case
 from tools.utils.search import PhoneFilter
 from sqlalchemy.sql.elements import ColumnElement
 from service.embedding import get_embedding
 import numpy as np
-import chainlit as cl
 
 
 # Tạo phone entity
 def create_phone(data: CreatePhoneModel) -> PhoneModel:
     with Session() as session:
-        phone = Phone(
-            id=data.id,
-            name=data.name,
-            slug=data.slug,
-            brand_code=data.brand_code,
-            product_type=data.product_type,
-            description=data.description,
-            promotions=data.promotions,
-            skus=data.skus,
-            key_selling_points=data.key_selling_points,
-            price=data.price,
-            score=data.score,
-            data=data.data,
-            name_embedding=data.name_embedding,
-        )
+        phone = Phone(**data.model_dump())
         session.add(phone)
         session.commit()
 
@@ -115,18 +100,18 @@ def search_phone_by_phone_name(
                 select(Phone)
                 .order_by(Phone.name_embedding.cosine_distance(embedding))
                 .limit(top_k)
+                .where(
+                    (1 - Phone.name_embedding.cosine_distance(embedding)) < threshold
+                )
             )
             .scalars()
             .all()
         )
-        # filter results based on threshold
-        if threshold:
-            results = []
-            for phone in phones:
-                similarity = np.dot(embedding, phone.name_embedding)
-                print(phone.name, similarity)
-                if similarity > threshold:
-                    results.append(PhoneModel.model_validate(phone))
-            return results
 
+        return [PhoneModel.model_validate(phone) for phone in phones]
+
+
+def search(stmt: Select) -> List[PhoneModel]:
+    with Session() as session:
+        phones = session.execute(stmt).scalars().all()
         return [PhoneModel.model_validate(phone) for phone in phones]

@@ -35,7 +35,15 @@ class CreateFAQModel(BaseModel):
     answer: str
     embedding: list[float]
 
-# validate n serialize the data
+
+class UpdateFAQModel(BaseModel):
+    title: str
+    category: str
+    question: str
+    answer: str
+    embedding: list[float]
+
+
 class FAQModel(BaseModel):
 
     # pydantic map the fields of model to the attribiutes of source object, even if the source object isnt a dictionary (SQLAlchemy ORM instance)

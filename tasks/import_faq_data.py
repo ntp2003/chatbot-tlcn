@@ -1,4 +1,4 @@
-from repositories.faq import upsert_faq
+from repositories.faq import upsert as upsert_faq
 from models.faq import CreateFAQModel
 import time
 import pandas as pd

@@ -1007,6 +1007,20 @@ files = [
 devel = ["colorama", "json-spec", "jsonschema", "pylint", "pytest", "pytest-benchmark", "pytest-cache", "validictory"]
 
 [[package]]
+name = "fbmessenger"
+version = "6.0.0"
+description = "A python library to communicate with the Facebook Messenger API's"
+optional = false
+python-versions = "*"
+files = [
+    {file = "fbmessenger-6.0.0-py2.py3-none-any.whl", hash = "sha256:82cffd6e2fe02bfcf8ed083c59bdddcfdaa594dd0040f0c49eabbaf0e58d974c"},
+    {file = "fbmessenger-6.0.0.tar.gz", hash = "sha256:6e42c4588a4c942547be228886278bbc7a084e0b34799c7e6ebd786129f021e6"},
+]
+
+[package.dependencies]
+requests = ">=2.0"
+
+[[package]]
 name = "filelock"
 version = "3.18.0"
 description = "A platform independent file lock."
@@ -5838,4 +5852,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f391694f08310ddacf78bc3cf0e9fabdbb4539843772b57f3edba09fd9f77b8c"
+content-hash = "97acf6d3f44e87de44c79cd3aea658aa0e679c484db53c4a3cd7cd30e6ba1ebe"

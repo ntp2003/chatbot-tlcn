@@ -3,8 +3,8 @@ from uuid import UUID
 import chainlit as cl
 from chainlit.data.base import BaseDataLayer
 from models.thread import ThreadModel
-from models.user import CreateUserModel
-from repositories.user import get as get_user, create, get_by_user_name
+from models.user import CreateUserModel, UserRole
+from repositories.user import get as get_user, create, get_by_user_name_and_role
 from repositories.message import (
     create as create_message,
     get as get_message,
@@ -36,16 +36,16 @@ from chainlit.types import (
 )
 from chainlit.element import ElementDict, Element
 from chainlit.step import StepDict
+import chainlit.data as cl_data
 
 
 class DataLayer(BaseDataLayer):
     """Custom data layer for Chainlit."""
 
     async def get_user(self, identifier: str) -> Optional[cl.PersistedUser]:
-        user = get_by_user_name(identifier)
-
-        print(f"get_user: {user} - {identifier}")
-
+        user = get_by_user_name_and_role(
+            user_name=identifier, role=UserRole.chainlit_user
+        )
         if not user:
             return None
 
@@ -197,3 +197,11 @@ class DataLayer(BaseDataLayer):
 
     async def build_debug_url(self) -> str:
         return ""
+
+
+def set_data_layer():
+    if not cl_data._data_layer:
+        cl_data._data_layer = DataLayer()
+
+
+set_data_layer()

@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 from .base import Base
@@ -11,6 +12,7 @@ from uuid import UUID, uuid4
 class MessageType(str, Enum):
     user = "user"
     bot = "bot"
+    page_admin = "page_admin"
 
 
 class Message(Base):
@@ -23,7 +25,7 @@ class Message(Base):
 
     content: Mapped[str] = mapped_column(sa.Text(), nullable=False)
     type: Mapped[MessageType] = mapped_column(sa.Enum(MessageType), nullable=False)
-
+    fb_message_id: Mapped[Optional[str]] = mapped_column(sa.String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         sa.DateTime, default=(lambda: datetime.now(tz=timezone.utc))
     )
@@ -41,6 +43,7 @@ class MessageModel(BaseModel):
     thread_id: UUID
     content: str
     type: MessageType
+    fb_message_id: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 
@@ -50,6 +53,7 @@ class CreateMessageModel(BaseModel):
     thread_id: UUID
     content: str
     type: MessageType
+    fb_message_id: Optional[str] = None
 
 
 class UpdateMessageModel(BaseModel):

@@ -1,7 +1,7 @@
 from uuid import UUID
 from db import Session
 from models.message import CreateMessageModel, Message, MessageModel, UpdateMessageModel
-from sqlalchemy import update as sql_update
+from sqlalchemy import select, update as sql_update
 
 
 def create(data: CreateMessageModel) -> MessageModel:
@@ -31,6 +31,22 @@ def update(id: UUID, data: UpdateMessageModel) -> MessageModel:
 def get(id: UUID) -> MessageModel | None:
     with Session() as session:
         message = session.get(Message, id)
+        if message is None:
+            return None
+
+        return MessageModel.model_validate(message)
+
+
+def get_by_fb_message_id(fb_message_id: str) -> MessageModel | None:
+    with Session() as session:
+        stmt = (
+            select(Message)
+            .select_from(Message)
+            .where(Message.fb_message_id == fb_message_id)
+        )
+
+        message = session.execute(stmt).scalar()
+
         if message is None:
             return None
 

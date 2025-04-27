@@ -168,7 +168,7 @@ class PhoneFilter(BaseModel):
         if self.name:
             return [
                 Phone.name_embedding.cast(Vector)
-                .cosine_distance(get_embedding(self.name))
+                .cosine_distance(get_embedding(f"Phone name: {self.name}"))
                 .asc(),
             ]
 

@@ -26,6 +26,12 @@ class Env(BaseModel):
     REDIS_HOST: str
     REDIS_PORT: int
     REDIS_PASSWORD: str
+    FB_VERIFY_TOKEN: str
+    FB_PAGE_ACCESS_TOKEN: str
+    FB_API_VERSION: str
+    FB_API_URL: str
+    FB_PAGE_ID: str
+    FB_APP_ID: str
 
 
 env = Env.model_validate(os.environ)

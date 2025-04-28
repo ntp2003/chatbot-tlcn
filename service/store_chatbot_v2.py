@@ -42,7 +42,9 @@ def gen_answer(
     )
 
     detect_demand_response = detect_demand_agent.run(messages=conversation_messages)
-
+    detect_demand_response = detect_demand_agent.post_process(
+        detect_demand_response, user_memory
+    )
     print(
         "Detect demand response:",
         detect_demand_response,

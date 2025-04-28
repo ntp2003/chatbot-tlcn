@@ -22,7 +22,7 @@ alembic.config.main(argv=["--raiseerr", "upgrade", "head"])
 
 def set_data_layer():
     if not cl_data._data_layer:
-        cl_data._data_layer = DataLayer()
+        cl_data._data_layer = DataLayer() # set data layer for chainlit.data
 
 
 set_data_layer()

@@ -25,10 +25,11 @@ class Brand(Base, TimestampMixin, TableNameMixin):
     )
     '''
     # Add relationship
+    '''
     phones: Mapped[List["Phone"]] = relationship("Phone", back_populates="brand", cascade="all, delete-orphan")
     accessories: Mapped[List["Accessory"]] = relationship("Accessory", back_populates="brand", cascade="all, delete-orphan")
     laptops: Mapped[List["Laptop"]] = relationship("Laptop", back_populates="brand", cascade="all, delete-orphan")
-
+    ''' 
 ## Pydantic model for creating new entity
 class CreateBrandModel(BaseModel):
     id: str

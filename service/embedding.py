@@ -2,8 +2,8 @@ from openai import OpenAI
 from env import env
 import chainlit as cl
 
-#_client = OpenAI(api_key=env.OPENAI_API_KEY)
-_client = OpenAI(api_key=env.OP2_OPENAI_API_KEY, base_url=env.OP2_base_url)
+_client = OpenAI(api_key=env.OPENAI_API_KEY)
+#_client = OpenAI(api_key=env.OP2_OPENAI_API_KEY, base_url=env.OP2_base_url)
 _model = "text-embedding-3-small"
 
 # return vector embedding of text using model text-embedding-3-small

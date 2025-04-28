@@ -37,6 +37,17 @@ class Laptop(Base, TimestampMixin, TableNameMixin):
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
+
+    #Ko cao duoc data nay
+    cpu: Mapped[str] = mapped_column(Text, nullable=True)  # Ví dụ: "Intel Core i5-1235U"
+    ram: Mapped[int] = mapped_column(Integer, nullable=True)  # Đơn vị: GB
+    storage: Mapped[int] = mapped_column(Integer, nullable=True)  # Đơn vị: GB
+    storage_type: Mapped[str] = mapped_column(Text, nullable=True)  # SSD hoặc HDD
+    
+    # Có thể thêm các trường bổ sung khác
+    gpu: Mapped[str] = mapped_column(Text, nullable=True)  # Card đồ họa
+    screen_size: Mapped[float] = mapped_column(Text, nullable=True)  # Kích thước màn hình
+    screen_resolution: Mapped[str] = mapped_column(Text, nullable=True)  # Độ phân giải
     '''
     
     
@@ -55,6 +66,15 @@ class CreateLaptopModel(BaseModel):
     price: int
     score: float
     name_embedding: list[float]
+    '''
+    cpu: str | None = None
+    ram: int | None = None
+    storage: int | None = None
+    storage_type: str | None = None
+    gpu: str | None = None
+    screen_size: float | None = None
+    screen_resolution: str | None = None
+    '''
 
 class LaptopModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)  # allow pydantic model to populate its fields from SQLAlchemy ORM model
@@ -74,6 +94,15 @@ class LaptopModel(BaseModel):
     name_embedding: list[float]
     created_at: datetime
     updated_at: datetime
+    '''
+    cpu: str | None = None
+    ram: int | None = None
+    storage: int | None = None
+    storage_type: str | None = None
+    gpu: str | None = None
+    screen_size: float | None = None
+    screen_resolution: str | None = None
+    '''
 
 
     def _get_original_price(self) -> int:
@@ -169,3 +198,48 @@ class LaptopModel(BaseModel):
             result += f"- Description: [{self.description}]"
 
         return result
+
+    '''
+    def get_specifications(self) -> str:
+        specs = []
+        if self.cpu:
+            specs.append(f"CPU: {self.cpu}")
+        if self.ram:
+            specs.append(f"RAM: {self.ram}GB")
+        if self.storage:
+            storage_info = f"Storage: {self.storage}GB"
+            if self.storage_type:
+                storage_info += f" {self.storage_type}"
+            specs.append(storage_info)
+        if self.gpu:
+            specs.append(f"GPU: {self.gpu}")
+        if self.screen_size:
+            screen_info = f"Screen: {self.screen_size}\""
+            if self.screen_resolution:
+                screen_info += f" ({self.screen_resolution})"
+            specs.append(screen_info)
+        return "\n".join(specs)
+
+    def to_text(
+        self,
+        include_description: bool = False,
+        include_promotion: bool = False,
+        include_sku_variants: bool = False,
+        inclue_key_selling_points: bool = False,
+        include_specifications: bool = True,  # Thêm option mới
+    ) -> str:
+        result = super().to_text(
+            include_description,
+            include_promotion,
+            include_sku_variants,
+            inclue_key_selling_points
+        )
+        
+        # Thêm thông số kỹ thuật vào kết quả
+        if include_specifications:
+            specs = self.get_specifications()
+            if specs:
+                result += f"\nSpecifications:\n{specs}"
+        
+        return result
+    '''

@@ -28,7 +28,7 @@ from models.user_memory import UserMemory, UserMemoryModel, ProductType
 from datetime import datetime
 
 
-def instructions_to_string(instructions: list[Instruction]) -> str:
+def instructions_to_string(instructions: list[Instruction]) -> str: # turn list of instructions to formatted string
     if len(instructions) == 0:
         return ""
 
@@ -44,7 +44,15 @@ def instructions_to_string(instructions: list[Instruction]) -> str:
             text += "\n".join([f"   - {example}" for example in instruction.examples])
 
     return text
+    '''
+    0. Instruction content:
+    Example: example1
 
+    1. Another instruction:
+    Examples:
+    - example1
+    - example2
+    '''
 
 def generate_response_by_instructions(
     instructions: list[Instruction],
@@ -68,11 +76,11 @@ def generate_response_by_instructions(
                 "   - Customer service email: cskh@fptshop.com\n"
                 f"- Current date: {datetime.now().strftime('%A, %B %d, %Y')} ({datetime.now().strftime('%Y-%m-%d')})\n"
                 "\n".join([f"- {knowledge}" for knowledge in knowledge])
-            ),
+            ), # store chatbot base knowledge
         },
         {
             "role": "system",
-            "content": ("## INSTRUCTIONS\n" + instructions_to_string(instructions)),
+            "content": ("## INSTRUCTIONS\n" + instructions_to_string(instructions)), # formatted instructions
         },
         {
             "role": "system",
@@ -81,18 +89,18 @@ def generate_response_by_instructions(
                 "## NOTE\n"
                 "- Use only the Vietnamese language in your responses."
                 "- The response should be in the form of a conversation."
-                "- The response must be follow the <INSTRUCTIONS> and don't say anything else."
+                "- The response must be follow the <INSTRUCTIONS> and don't say anything else." # follow instructions
             ),
         },
-        *conversation_history,
+        *conversation_history, # toàn bộ conversation history
     ]
 
     openai_request = OpenAIChatCompletionsRequest(
         messages=messages,
         model=model,
-        temperature=0,
+        temperature=0, # đảm bảo tính nhất quán
         timeout=30,
-    )
+    ) # tạo request đến OpenAI API
 
     response = openai_request.create()
     return response.choices[0].message.content or ""

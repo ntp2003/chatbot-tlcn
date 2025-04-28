@@ -1,7 +1,8 @@
-from typing import Any
+from typing import Any, Optional
 from agents.base import AgentTemporaryMemory
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
+import re
 
 
 class Tool(LangGPTTemplateTool):
@@ -52,3 +53,73 @@ class Tool(LangGPTTemplateTool):
         return ToolResponse(
             type="finished", content="User requirements collected successfully."
         )
+
+'''
+def extract_laptop_name(text: str) -> Optional[str]:
+    """
+    Extract laptop name from text
+    Example:
+    - "Tôi muốn mua Macbook Pro M2" -> "MacBook Pro M2"
+    - "Cho tôi xem Dell XPS 13" -> "XPS 13"
+    """
+    # Common laptop brands and series
+    BRANDS = {
+        "macbook": ["air", "pro"],
+        "dell": ["xps", "inspiron", "latitude", "precision", "vostro"],
+        "hp": ["pavilion", "envy", "omen", "elitebook", "probook"],
+        "lenovo": ["thinkpad", "ideapad", "legion", "yoga"],
+        "asus": ["zenbook", "vivobook", "rog", "tuf"],
+        "acer": ["aspire", "nitro", "predator", "swift"],
+        "msi": ["modern", "prestige", "creator", "stealth", "raider"]
+    }
+    
+    text = text.lower()
+    
+    # Remove common Vietnamese words
+    common_words = ["tôi", "muốn", "mua", "xem", "cho", "cái", "chiếc", "laptop", "máy tính"]
+    for word in common_words:
+        text = text.replace(word, "")
+    
+    # Try to find brand and series
+    for brand, series_list in BRANDS.items():
+        if brand in text:
+            # Check for series
+            for series in series_list:
+                if series in text:
+                    # Extract everything after series
+                    match = re.search(f"{series}\\s+(.+)", text, re.IGNORECASE)
+                    if match:
+                        model = match.group(1).strip()
+                        return f"{series.capitalize()} {model.capitalize()}"
+                    return series.capitalize()
+            
+            # If no series found, try to extract model number
+            model_match = re.search(r'(\w+[\s-]?\d+[a-z0-9]*)', text)
+            if model_match:
+                return model_match.group(1).strip().capitalize()
+    
+    return None
+
+def clean_laptop_name(name: str) -> str:
+    """
+    Clean up laptop name
+    Example: "   macbook  PRO  m2   " -> "MacBook Pro M2"
+    """
+    if not name:
+        return ""
+        
+    # Remove extra spaces
+    name = re.sub(r'\s+', ' ', name.strip())
+    
+    # Special cases for common terms
+    name = name.replace("Macbook", "MacBook")
+    name = name.replace("Probook", "ProBook")
+    name = name.replace("Elitebook", "EliteBook")
+    name = name.replace("Ideapad", "IdeaPad")
+    name = name.replace("Thinkpad", "ThinkPad")
+    name = name.replace("Zenbook", "ZenBook")
+    name = name.replace("Vivobook", "VivoBook")
+    
+    # Capitalize remaining words
+    return " ".join(word.capitalize() for word in name.split())
+'''

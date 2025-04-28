@@ -1,18 +1,98 @@
 [
     {
+        "code": "01002",
+        "name": "iPhone (IOS)"
+    },
+    {
+        "code": "05014",
+        "name": "Sạc"
+    },
+    {
+        "code": "05015",
+        "name": "Sạc dự phòng"
+    },
+    {
+        "code": "05016",
+        "name": "Tai nghe"
+    },
+    {
+        "code": "05021",
+        "name": "USB"
+    },
+    {
         "code": "01003",
         "name": "Điện thoại phổ thông"
+    },
+    {
+        "code": "06009",
+        "name": "Phụ kiện điện máy"
+    },
+    {
+        "code": "05003",
+        "name": "Bàn phím"
+    },
+    {
+        "code": "05019",
+        "name": "Thiết bị mạng"
+    },
+    {
+        "code": "05005",
+        "name": "Bút cảm ứng"
+    },
+    {
+        "code": "05011",
+        "name": "MDMH"
+    },
+    {
+        "code": "05010",
+        "name": "Loa"
+    },
+    {
+        "code": "05001",
+        "name": "Balo - Túi xách"
+    },
+    {
+        "code": "04001",
+        "name": "Laptop"
     },
     {
         "code": "01001",
         "name": "Android"
     },
     {
-        "code": "01002",
-        "name": "iPhone (IOS)"
+        "code": "05012",
+        "name": "Ổ cứng"
     },
     {
-        "code": "04001",
-        "name": "Laptop"
+        "code": "05013",
+        "name": "Ốp lưng"
+    },
+    {
+        "code": "05007",
+        "name": "Chuột"
+    },
+    {
+        "code": "05017",
+        "name": "Thẻ nhớ"
+    },
+    {
+        "code": "05009",
+        "name": "Hình ảnh và thiết bị thu âm"
+    },
+    {
+        "code": "05004",
+        "name": "Bao da"
+    },
+    {
+        "code": "05006",
+        "name": "Cáp"
+    },
+    {
+        "code": "05008",
+        "name": "Phụ kiện tiện ích"
+    },
+    {
+        "code": "05018",
+        "name": "Thiết bị chơi game"
     }
 ]

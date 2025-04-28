@@ -7,42 +7,59 @@ from models.user_memory import (
 from db import Session
 from sqlalchemy import select, update as sql_update
 import uuid
+from uuid import UUID
+from database import get_db
+from schemas.user_memory import UserMemory
 
 
 def create(data: CreateUserMemoryModel) -> UserMemoryModel:
-    with Session() as session:
-        user_memory = UserMemory(**data.model_dump())
-
-        session.add(user_memory)
-        session.commit()
-
+    with get_db() as db:
+        user_memory = UserMemory(
+            user_id=data.user_id,
+            thread_id=data.thread_id,
+            gender=data.gender,
+            intent=data.intent,
+            context=data.context
+        )
+        db.add(user_memory)
+        db.commit()
+        db.refresh(user_memory)
         return UserMemoryModel.model_validate(user_memory)
 
 
-def get_by_thread_id(thread_id: uuid.UUID) -> UserMemoryModel | None:
-    with Session() as session:
-        user_memory = session.execute(
-            select(UserMemory).where(UserMemory.thread_id == thread_id)
-        ).scalar_one_or_none()
+def get_by_thread_id(thread_id: UUID) -> UserMemoryModel | None:
+    with get_db() as db:
+        stmt = select(UserMemory).where(UserMemory.thread_id == thread_id)
+        result = db.execute(stmt)
+        user_memory = result.scalar_one_or_none()
+        if user_memory is None:
+            return None
+        return UserMemoryModel.model_validate(user_memory)
 
-        return UserMemoryModel.model_validate(user_memory) if user_memory else None
+
+def get_by_messenger_id(messenger_id: str) -> UserMemoryModel | None:
+    """
+    Get user memory by Facebook Messenger ID
+    """
+    with get_db() as db:
+        stmt = select(UserMemory).where(UserMemory.messenger_id == messenger_id)
+        result = db.execute(stmt)
+        user_memory = result.scalar_one_or_none()
+        if user_memory is None:
+            return None
+        return UserMemoryModel.model_validate(user_memory)
 
 
-def update(id: uuid.UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
-    with Session() as session:
-        print(
-            "Updating user memory with id:",
-            id,
-            "and data:",
-            data.model_dump(),
-        )
-
+def update(id: UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
+    with get_db() as db:
+        update_data = data.model_dump(exclude_unset=True)
         stmt = (
-            sql_update(UserMemory)
+            update(UserMemory)
             .where(UserMemory.id == id)
-            .values(**data.model_dump())
+            .values(**update_data)
             .returning(UserMemory)
         )
-        updated_user_memory = session.execute(stmt).scalar_one()
-        session.commit()
-        return UserMemoryModel.model_validate(updated_user_memory)
+        result = db.execute(stmt)
+        db.commit()
+        user_memory = result.scalar_one()
+        return UserMemoryModel.model_validate(user_memory)

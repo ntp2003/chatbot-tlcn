@@ -8,6 +8,10 @@ from sqlalchemy.sql._typing import ColumnExpressionArgument
 from typing import Any, Generic, TypeVar
 from .config import BRAND_DEFAULT
 
+'''
+Create filter condition for phone, laptop, accessory
+'''
+
 _T = TypeVar("_T") # define Type Variable ,  đảm bảo tính nhất quán về data type giữa cột trong db và giá trị so sánh
 
 # use Generic[_T] ensure type safety
@@ -171,4 +175,63 @@ class LaptopFilter(BaseModel):
         )
 
 class AccessoryFilter(BaseModel):
-    
+    # Filter accessories by brand_code, price range, and product_type
+    brand_code: str | None = None
+    max_price: float | None = None
+    min_price: int | None = None
+    product_type: str | None = None
+
+    def condition_expression(self) -> ColumnElement[bool] | None:
+        from models.accessory import Accessory  # Import here to avoid circular imports
+        filters = []
+
+        # filter for min_price
+        if self.min_price:
+            filters.append(
+                FilterAtrribute(
+                    column=Accessory.price.expression,
+                    operator=ge,
+                    value=self.min_price,
+                )
+            )
+        # filter for max_price
+        if self.max_price:
+            filters.append(
+                FilterAtrribute(
+                    column=Accessory.price.expression,
+                    operator=le,
+                    value=self.max_price,  # type: ignore
+                )
+            )
+        # filter for brand_code
+        if self.brand_code:
+            filters.append(
+                FilterAtrribute(
+                    column=Accessory.brand_code.expression,
+                    operator=eq,
+                    value=self.brand_code,
+                )
+            )
+        # filter for product_type
+        if self.product_type:
+            filters.append(
+                FilterAtrribute(
+                    column=Accessory.product_type.expression,
+                    operator=eq,
+                    value=self.product_type,
+                )
+            )
+
+        # combine all filter conditions
+        return FilterCondition(filters=filters).condition_expression()
+
+    def __eq__(self, value: object) -> bool:
+        if not isinstance(value, AccessoryFilter):
+            return False
+
+        return (
+            self.min_price == value.min_price
+            and self.max_price == value.max_price
+            and self.brand_code == value.brand_code
+            and self.product_type == value.product_type
+        )

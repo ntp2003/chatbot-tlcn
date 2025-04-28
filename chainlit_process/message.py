@@ -60,6 +60,7 @@ async def main(message: cl.Message):
         type=MessageType.bot,
         content=response_text,
     )
+    
     new_assistant_message = create_message(new_assistant_message_data) # create new assistant message in db
     return await cl.Message(
         content=response_text,

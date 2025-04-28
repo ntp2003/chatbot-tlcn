@@ -84,8 +84,8 @@ def search_phone_by_filter(
             .limit(limit)
             .offset(page * limit)
         )
-        # exec query
-        phones = session.execute(stmt).scalars().all()
+        
+        phones = session.execute(stmt).scalars().all() # exec query
         return [PhoneModel.model_validate(phone) for phone in phones] # validate and return list of PhoneModel
 
 

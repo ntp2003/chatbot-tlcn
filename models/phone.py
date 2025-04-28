@@ -17,12 +17,14 @@ class Phone(Base, TimestampMixin, TableNameMixin):
     data: Mapped[dict] = mapped_column(JSONB, nullable=False, default={})
     name: Mapped[str] = mapped_column(Text, nullable=False)
     slug: Mapped[str] = mapped_column(Text, nullable=False)
-    #brand_code: Mapped[str] = mapped_column(Text, nullable=False)
+    brand_code: Mapped[str] = mapped_column(Text, nullable=False)
+    '''
     brand_code: Mapped[str] = mapped_column(
         Text, 
         ForeignKey("brands.id", ondelete="CASCADE"),  # Thêm ForeignKey
         nullable=False
     )
+    '''
     product_type: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
@@ -42,7 +44,7 @@ class Phone(Base, TimestampMixin, TableNameMixin):
     )
     '''
     # Add relationship
-    brand: Mapped["Brand"] = relationship("Brand", back_populates="phones")
+    #brand: Mapped["Brand"] = relationship("Brand", back_populates="phones")
 
 
 class CreatePhoneModel(BaseModel):
@@ -151,7 +153,7 @@ class PhoneModel(BaseModel):
         include_promotion: bool = False,
         include_sku_variants: bool = False,
         inclue_key_selling_points: bool = False,
-    ) -> str:
+    ) -> str: # convert phone model to text for model to understand and response to user
         result = f"Phone: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
 
         if self.is_on_sale():
@@ -182,3 +184,14 @@ class PhoneModel(BaseModel):
             result += f"- Description: [{self.description}]"
 
         return result
+    '''
+    Example: 
+    Phone: [iPhone 15 Pro Max](https://fptshop.com.vn/dien-thoai/iphone-15-pro-max)
+    - Price: ~~10000000~~ 9000000 (Sale)
+    - Key selling points: - Chip A18 Pro cực mạnh, - Viền màn hình siêu mỏng
+    - Promotions:
+    - Nhập mã QRFPTIP16 giảm ngay 500,000đ
+    - Nhập mã ZLPIP500 giảm ngay 500,000đ
+    - Variants: 128GB - 16GB RAM, 256GB - 16GB RAM, 512GB - 16GB RAM
+    - Description: [iPhone 15 Pro Max là một chiếc điện thoại siêu mạnh mẽ với chip A18 Pro cực mạnh, viền màn hình siêu mỏng và nhiều tính năng nổi bật khác.]
+    '''

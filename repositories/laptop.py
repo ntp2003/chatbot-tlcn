@@ -1,31 +1,26 @@
+from ast import stmt
 from db import Session
+from typing import Optional, List
 from models.laptop import CreateLaptopModel, Laptop, LaptopModel
-from sqlalchemy import select
-from typing import List, Optional
-from sqlalchemy.sql.elements import ColumnElement
+from sqlalchemy import Select, select, case, update as sql_update
 from tools.utils.search import LaptopFilter
+from sqlalchemy.sql.elements import ColumnElement
 from service.embedding import get_embedding
 import numpy as np
 
+
 def create_laptop(data: CreateLaptopModel) -> LaptopModel:
     with Session() as session:
-        laptop = Laptop(
-            id=data.id,
-            name=data.name,
-            slug=data.slug,
-            brand_code=data.brand_code,
-            product_type=data.product_type,
-            description=data.description,
-            promotions=data.promotions,
-            skus=data.skus,
-            key_selling_points=data.key_selling_points,
-            price=data.price,
-            score=data.score,
-            data=data.data,
-            name_embedding=data.name_embedding,
-        )
+        laptop = Laptop(**data.model_dump())
         session.add(laptop)
         session.commit()
+        return LaptopModel.model_validate(laptop)
+
+def get_laptop(laptop_id: str) -> Optional[LaptopModel]:
+    with Session() as session:
+        laptop = session.get(Laptop, laptop_id)
+        if laptop is None:
+            return None
         return LaptopModel.model_validate(laptop)
 
 def update_laptop(data: CreateLaptopModel) -> int:
@@ -40,6 +35,7 @@ def update_laptop(data: CreateLaptopModel) -> int:
         session.commit()
         return update_count
 
+
 def upsert_laptop(data: CreateLaptopModel) -> LaptopModel:
     with Session() as session:
         if update_laptop(data) == 0:
@@ -50,6 +46,12 @@ def upsert_laptop(data: CreateLaptopModel) -> LaptopModel:
         ).scalar_one()
         return LaptopModel.model_validate(updated_laptop)
 
+def search(stmt: Select) -> List[LaptopModel]:
+    with Session() as session:
+        laptops = session.execute(stmt).scalars().all()
+        return [LaptopModel.model_validate(laptop) for laptop in laptops]
+    
+'''
 def search_laptop_by_filter(
     filter: LaptopFilter,
     order_by: ColumnElement,
@@ -59,19 +61,39 @@ def search_laptop_by_filter(
 ) -> List[LaptopModel]:
     with Session() as session:
         condition = filter.condition_expression()
-
         stmt = (
             select(Laptop).filter(condition) if condition is not None else select(Laptop)
         )
-
         stmt = (
             stmt.order_by(order_by.desc() if is_desc else order_by)
             .limit(limit)
             .offset(page * limit)
         )
-
         laptops = session.execute(stmt).scalars().all()
         return [LaptopModel.model_validate(laptop) for laptop in laptops]
+
+def search_laptop_by_name(
+    laptop_name: str,
+    top_k: int = 4,
+    threshold: Optional[float] = None
+) -> List[LaptopModel]:
+    with Session() as session:
+        embedding = get_embedding(laptop_name)
+        laptops = (
+            session.execute(
+                select(Laptop)
+                .order_by(Laptop.name_embedding.cosine_distance(embedding))
+                .limit(top_k)
+                .where(
+                    (1 - Laptop.name_embedding.cosine_distance(embedding)) < threshold
+                ) if threshold else None
+            )
+            .scalars()
+            .all()
+        )
+        return [LaptopModel.model_validate(laptop) for laptop in laptops]
+'''
+
 
 '''
 # Tìm laptop Dell từ 15-30 triệu
@@ -90,33 +112,6 @@ laptops = search_laptop_by_filter(
     page=0
 )
 '''
-def search_laptop_by_name(
-    laptop_name: str, 
-    top_k: int = 4, 
-    threshold: Optional[float] = None
-) -> List[LaptopModel]:
-    with Session() as session:
-        embedding = get_embedding(laptop_name)
-        laptops = (
-            session.execute(
-                select(Laptop)
-                .order_by(Laptop.name_embedding.cosine_distance(embedding))
-                .limit(top_k)
-            )
-            .scalars()
-            .all()
-        )
-
-        if threshold:
-            results = []
-            for laptop in laptops:
-                c = np.dot(embedding, laptop.name_embedding)
-                print(laptop.name, c)
-                if c > threshold:
-                    results.append(LaptopModel.model_validate(laptop))
-            return results
-
-        return [LaptopModel.model_validate(laptop) for laptop in laptops]
 '''
 similar_laptops = search_laptop_by_name(
     laptop_name="Macbook Pro M2",

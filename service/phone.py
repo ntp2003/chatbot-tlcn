@@ -12,39 +12,6 @@ from pgvector.sqlalchemy import Vector
 
 _T = TypeVar("_T")
 
-
-class FilterAttribute(BaseModel, Generic[_T]):
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-
-    column: ColumnElement[_T]
-    operator: Any
-    value: _T
-
-    @field_validator("operator")
-    def validate_operator(cls, v):
-        if not callable(v):
-            raise ValueError(
-                f"Operator {v} is not callable. It must be a valid SQLAlchemy operator like `ge`, `le`, or `eq`."
-            )
-        return v
-
-    def condition_expression(self) -> ColumnElement[bool]:
-        return self.operator(self.column, self.value)
-
-
-class FilterCondition(BaseModel):
-    filters: list[FilterAttribute]
-
-    def condition_expression(self) -> ColumnElement[bool] | None:
-        if not self.filters or len(self.filters) == 0:
-            return None
-
-        condition = self.filters[0].condition_expression()
-        for filter in self.filters[1:]:
-            condition = and_(condition, filter.condition_expression())
-        return condition
-
-
 class FilterType(str, Enum):
     PRICE = "price"
     BRAND = "brand"
@@ -52,11 +19,63 @@ class FilterType(str, Enum):
 
 
 class Config(BaseModel):
-    threshold: float = 0.75
-    limit: int = 4
-    offset: int = 0
-    is_recommending: bool = False
-    recommend_priority: list[FilterType] = [FilterType.BRAND, FilterType.PRICE]
+    threshold: float = 0.75 # threshold for cosine similarity
+    limit: int = 4 # limit the number of results
+    offset: int = 0 # offset the results
+    is_recommending: bool = False # whether to recommend products
+    recommend_priority: list[FilterType] = [FilterType.BRAND, FilterType.PRICE] # priority of filters
+
+# use Generic[_T] ensure type safety
+class FilterAttribute(BaseModel, Generic[_T]): # điều kiện lọc đơn lẻ
+    model_config = ConfigDict(arbitrary_types_allowed=True) # allow arbitrary types
+
+    column: ColumnElement[_T] # column in db to filter , could be any type
+    operator: Any # operator to filter (ge, le, eq, etc.)
+    value: _T # value to filter , same type as column
+
+    '''
+    price_filter = FilterAttribute(
+    column=Phone.price,
+    operator=ge, 
+    value=5000000 )
+    '''
+
+    @field_validator("operator")
+    def validate_operator(cls, v): # ensure operator is callable function like ge, le, eq, etc.
+        if not callable(v):
+            raise ValueError(
+                f"Operator {v} is not callable. It must be a valid SQLAlchemy operator like `ge`, `le`, or `eq`."
+            )
+        return v
+
+    def condition_expression(self) -> ColumnElement[bool]: # return the condition expression
+        return self.operator(self.column, self.value) # ex : Phone.price >= 5000000
+
+
+class FilterCondition(BaseModel):
+    filters: list[FilterAttribute]
+
+    # combine all filters into a single condition expression
+    def condition_expression(self) -> ColumnElement[bool] | None:
+        if not self.filters or len(self.filters) == 0:
+            return None
+
+        # combine conditions by AND expression
+        condition = self.filters[0].condition_expression()
+        for filter in self.filters[1:]:
+            condition = and_(condition, filter.condition_expression())
+        return condition
+    '''
+    # Lọc điện thoại Samsung giá từ 10-20 triệu
+    filters = FilterCondition(filters=[
+        FilterAtrribute(Phone.brand_code, eq, "SAMSUNG"),
+        FilterAtrribute(Phone.price, ge, 10000000),
+        FilterAtrribute(Phone.price, le, 20000000)
+    ])
+
+    print(filters.condition_expression())
+    # Output: phones.brand_code = 'SAMSUNG' AND phones.price >= 10000000 AND phones.price <= 20000000
+    '''
 
 
 class PhoneFilter(BaseModel):
@@ -91,6 +110,10 @@ class PhoneFilter(BaseModel):
         if expression is None:
             return true()
         return expression
+    '''
+    filter = PhoneFilter(min_price=5000000, max_price=10000000)
+    # Tạo điều kiện: Phone.price >= 5000000 AND Phone.price <= 10000000
+    '''
 
     def get_brand_condition_expression(self) -> ColumnElement[bool]:
         if not self.brand_code:
@@ -103,6 +126,10 @@ class PhoneFilter(BaseModel):
         )
 
         return filter.condition_expression()
+    
+    '''
+    filter = PhoneFilter(brand_code="APPLE") => Phone.brand_code = 'APPLE'
+    '''
 
     def get_name_condition_expression(self) -> ColumnElement[bool]:
         if not self.name:
@@ -116,6 +143,9 @@ class PhoneFilter(BaseModel):
         )
 
         return filters.condition_expression()
+    '''
+    filter = PhoneFilter(name="iPhone 14") => tạo semantic seach dựa trên vector embedding name
+    '''
 
     def condition_expression(self) -> ColumnElement[bool]:
         if self.config.is_recommending:
@@ -147,7 +177,13 @@ class PhoneFilter(BaseModel):
                 (self.get_name_condition_expression(), func.pow(10, priority)),
                 else_=0,
             )
-
+        '''
+        # NAME is the only remaining case
+        return case(
+            (self.get_name_condition_expression(), func.pow(10, priority)),
+            else_=0,
+        )
+        '''
         raise ValueError(f"Unknown filter type: {filter_type}")
 
     def score_expression(
@@ -170,15 +206,15 @@ class PhoneFilter(BaseModel):
                 Phone.name_embedding.cast(Vector)
                 .cosine_distance(get_embedding(self.name))
                 .asc(),
-            ]
+            ] # khi cung cấp name , search phone tương tự dựa trên consine distance
 
-        if is_recommending:
+        if is_recommending: # chế độ đề xuất
             return [
                 self.score_expression().desc(),
                 Phone.score.expression.desc(),
-            ]
+            ] # bỏ qua các điều kiện lọc thông thường , dùng expression score để tính điểm ưu tiên dựa trên recommend_priority
 
-        return [Phone.score.expression.desc()]
+        return [Phone.score.expression.desc()] # chỉ lọc theo điểm score
 
     def __eq__(self, value: object) -> bool:
         if not isinstance(value, PhoneFilter):

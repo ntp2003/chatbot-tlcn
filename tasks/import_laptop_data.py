@@ -186,6 +186,8 @@ def extract_fpt_laptop_data(
 
 def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
     with jsonlines.open(file_path, "a") as writer:
+    #with jsonlines.open(file_path, "w") as writer: 
+    # Cach nay co van de , vi qa moi batch data lai dong mo file 1 lan => Dan den batch moi se ghi de len data batch cu
         if type(data) is dict:
             writer.write(data)
         else:
@@ -208,6 +210,7 @@ def get_description(item_slug: str) -> str | None:
 
     description_object = description_object.select_one(
         #"div.relative.w-full .description-container"
+        #"div.ProductContent_description-container__miT3z"
         "div.ProductContent_description-container__miT3z"
     )
 

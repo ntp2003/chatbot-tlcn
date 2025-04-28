@@ -181,17 +181,19 @@ class Agent(AgentBase):
         self.temporary_memory.chat_completions_messages = (
             self.system_prompt_config.get_openai_messages(messages)
         )
+
         agent_response = None
         openai_request = self._get_openai_request()
         response = openai_request.create().choices[0].message
-        tool_choices = response.tool_calls
+        tool_choices = response.tool_calls # tool_calls corresponding to the tools used by the model with instructions prompt
+        
         if not tool_choices and not response.content:
             raise Exception("No response content from the model")
         if not tool_choices:
             print("Final response:", response.content)
             agent_response = AgentResponse(type="finished", content=response.content)
         else:
-            tool_responses = self._invoke_tools(tool_choices)
+            tool_responses = self._invoke_tools(tool_choices) # exec tool
             agent_response = self._tool_responses_post_process(tool_responses)
 
         if not agent_response:
@@ -241,7 +243,7 @@ class Agent(AgentBase):
         phones = []
         config = Config(limit=self.limit)
         config.offset = offset
-        filter = self._get_filter_from_user_memory(config=config)
+        filter = self._get_phone_filter_from_user_memory(config=config)
         if not user_memory.consultation_status.is_recommending:
             phones = self.retrieval(filter=filter)
 
@@ -254,7 +256,7 @@ class Agent(AgentBase):
                 phones[0].name if len(phones) == 1 else None
             )
             return (
-                self._phones_to_response(phones)
+                self._phones_to_responses(phones)
                 if len(phones) > 1
                 else self._specific_phone_to_response(phones[0])
             )
@@ -310,7 +312,7 @@ class Agent(AgentBase):
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
 
         config = Config(limit=1)
-        filter = self._get_filter_from_user_memory(config=config)
+        filter = self._get_phone_filter_from_user_memory(config=config)
         phones = self.retrieval(
             filter=filter,
             is_recommending=user_memory.consultation_status.is_recommending,
@@ -331,10 +333,10 @@ class Agent(AgentBase):
     ) -> list[ToolResponse]:
         tool_responses = []
 
-        for tool_choice in tool_choices:
+        for tool_choice in tool_choices: 
             tool_name = tool_choice.function.name
             kwargs = {} or json.loads(tool_choice.function.arguments)
-            selected_tool = next(tool for tool in self.tools if tool.name == tool_name)
+            selected_tool = next(tool for tool in self.tools if tool.name == tool_name) # get tool in list tools which name is tool_name
             tool_response = selected_tool.invoke(
                 temporary_memory=self.temporary_memory, **kwargs
             )
@@ -417,7 +419,7 @@ class Agent(AgentBase):
             "Tool responses post process not implemented for this case"
         )
 
-    def _get_filter_from_user_memory(self, config: Config | None = None) -> PhoneFilter:
+    def _get_phone_filter_from_user_memory(self, config: Config | None = None) -> PhoneFilter:
         if not self.temporary_memory.user_memory:
             raise Exception("User memory is not available.")
 
@@ -446,7 +448,7 @@ class Agent(AgentBase):
         """
 
         if not filter:
-            filter = self._get_filter_from_user_memory()
+            filter = self._get_phone_filter_from_user_memory()
 
         phones = search(filter)
 
@@ -454,7 +456,7 @@ class Agent(AgentBase):
 
     def _phones_to_response(self, phones: list[PhoneModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
-        knowledge = [phone.to_text(inclue_key_selling_points=True) for phone in phones]
+        knowledge = [phone.to_text(inclue_key_selling_points=True) for phone in phones] # turn PhoneModel to string
 
         instructions = []
 
@@ -520,7 +522,7 @@ class Agent(AgentBase):
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,
-                )
+                ) # turn PhoneModel to string
             ],
             instructions=instructions,
         )

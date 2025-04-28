@@ -1,6 +1,7 @@
 from typing import Any
 from agents.base import AgentTemporaryMemory
-from service.converter import convert_band_name_to_code
+from service.converter import convert_band_name_to_code # convert brand name input to brand code
+
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
 
@@ -12,17 +13,17 @@ class Tool(LangGPTTemplateTool):
 
     def __init__(
         self,
-        name: str = "collect_and_update_phone_brand_and_version_requirements",
-        role: str = "Collect and update the user's requirements about the brand and version of a phone product for consultation or search.",
-        prerequisites: list[str] = [],
+        name: str = "collect_and_update_phone_brand_and_version_requirements", # tool name
+        role: str = "Collect and update the user's requirements about the brand and version of a phone product for consultation or search.", # tool role
+        prerequisites: list[str] = [], 
         rules: list[str] = [
             "Collect and update based on the latest user message.",
             "The brand refer to the name of the company or label that manufactures the phone product.",
             "The version refer to the specific model or variant of the phone product.",
-        ],
+        ], # tool rules
         cases_used: list[str] = [
             "The user mentions the information about the brand or version of a phone product they want to consult or purchase.",
-        ],
+        ], # cases used
         returns: list[str] = [],
         params: dict[str, Any] = {
             "phone_brand": {
@@ -57,7 +58,7 @@ class Tool(LangGPTTemplateTool):
                 type="finished", content="User requirements collected successfully."
             )
 
-        brand_code = convert_band_name_to_code(phone_brand)
+        brand_code = convert_band_name_to_code(phone_brand) # convert brand name to brand code
         if not brand_code:
             return ToolResponse(
                 type="error",

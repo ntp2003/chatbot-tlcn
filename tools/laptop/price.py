@@ -1,8 +1,9 @@
-from typing import Any
+from typing import Any, Optional, Tuple
 from models.user_memory import PriceRequirement
 from agents.base import AgentTemporaryMemory
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
+import re
 
 
 class Tool(LangGPTTemplateTool):
@@ -65,3 +66,65 @@ class Tool(LangGPTTemplateTool):
         return ToolResponse(
             type="finished", content="Price requirement collected successfully."
         )
+
+'''
+def extract_price_range(text: str) -> Tuple[Optional[int], Optional[int]]:
+    """
+    Extract price range from text
+    Example:
+    - "Laptop dưới 20 triệu" -> (None, 20000000)
+    - "Macbook từ 30 đến 50 triệu" -> (30000000, 50000000)
+    - "Dell XPS giá 40 triệu" -> (40000000, 40000000)
+    """
+    # Convert price indicators to standard format
+    text = text.lower().replace(',', '')
+    text = re.sub(r'(\d+)\s*tr(iệu)?', r'\1000000', text, flags=re.IGNORECASE)
+    text = re.sub(r'(\d+)\s*m', r'\1000000', text, flags=re.IGNORECASE)
+    
+    # Extract numbers from text
+    numbers = [int(num) for num in re.findall(r'\d+', text)]
+    
+    # Convert small numbers to millions
+    numbers = [num * 1000000 if num < 1000 else num for num in numbers]
+    
+    # No numbers found
+    if not numbers:
+        return None, None
+        
+    # Check for price range patterns
+    if 'từ' in text and 'đến' in text and len(numbers) >= 2:
+        return numbers[0], numbers[1]
+        
+    if 'dưới' in text and numbers:
+        return None, numbers[0]
+        
+    if 'trên' in text and numbers:
+        return numbers[0], None
+        
+    # Single price
+    if len(numbers) == 1:
+        return numbers[0], numbers[0]
+        
+    # Default: take first two numbers as range
+    if len(numbers) >= 2:
+        return numbers[0], numbers[1]
+        
+    return None, None
+
+def normalize_price(price: Optional[int]) -> Optional[int]:
+    """
+    Normalize price to standard format (VND)
+    Example: 20 -> 20000000 (20 triệu)
+    """
+    if price is None:
+        return None
+        
+    # Convert to string to count digits
+    price_str = str(price)
+    
+    # If price has less than 7 digits, assume it's in millions
+    if len(price_str) < 7:
+        return price * 1000000
+        
+    return price
+'''

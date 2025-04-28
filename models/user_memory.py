@@ -5,20 +5,22 @@ from pydantic import BaseModel, ConfigDict
 from .base import Base
 from datetime import datetime, timezone
 from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import Float, Text, DateTime, Integer
+from sqlalchemy import Float, Text, DateTime, Integer, String
 from sqlalchemy.dialects.postgresql import UUID, JSONB
+from typing import Optional
 
 
 class UserDemand(str, Enum): #Inherited from str n Enum, tạo ra 1 enum mà các giá trị vừa là chuỗi vừa là enum, ensure các giá trị trong enum là cố định không thay đổi
     MOBILE_PHONE = "mobile phone"
-    LAPTOP = "laptop" # Thêm một giá trị mới vào enum
-
+    LAPTOP = "laptop" 
+    ACCESSORY = "accessory"
     ANOTHER_PRODUCT = "another product"
 
 
 class ProductType(str, Enum):
     MOBILE_PHONE = "mobile phone"
     LAPTOP = "laptop"
+    ACCESSORY = "accessory"
     UNDETERMINED = "undetermined"
 
 
@@ -69,16 +71,23 @@ class UserMemory(Base):
         UUID(as_uuid=True),  # SQLAlchemy tự động chuyển đổi UUID value từ db thành 1 uuid.UUID object , nếu as_uuid=False sẽ chuyển thành 1 chuỗi
         primary_key=True, 
         nullable=False, 
-        default=uuid.uuid4 ## tự động tạo id mới dạng UUID like 123e4567-e89b-12d3-a456-426614174000
+        default=uuid.uuid4 #tự động tạo id mới dạng UUID like 123e4567-e89b-12d3-a456-426614174000
     )
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     thread_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
+
+    # New field for messenger integration
+    #messenger_id: Mapped[str | None] = mapped_column(Text, nullable=True)
+    
+    gender: Mapped[str] = mapped_column(String(50), nullable=False, server_default="unknown")
+    
     user_demand: Mapped[UserDemand | None] = mapped_column(Text, nullable=True)
     product_name: Mapped[str | None] = mapped_column(Text, nullable=True)
     brand_code: Mapped[str | None] = mapped_column(Text, nullable=True)
     brand_name: Mapped[str | None] = mapped_column(Text, nullable=True)
     min_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
     max_price: Mapped[float | None] = mapped_column(Float, nullable=True)
+    
     phone_number: Mapped[str | None] = mapped_column(Text, nullable=True)
     email: Mapped[str | None] = mapped_column(Text, nullable=True)
     intent: Mapped[UserIntent] = mapped_column(
@@ -92,7 +101,7 @@ class UserMemory(Base):
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
-    )
+    ) # datetime được tạo ngay khi khởi tạo model (eager evaluation)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
         default=datetime.now(timezone.utc),
@@ -103,9 +112,18 @@ class UserMemory(Base):
 class CreateUserMemoryModel(BaseModel):
     user_id: uuid.UUID
     thread_id: uuid.UUID
+    gender: str = "unknown"
+    #messenger_id: Optional[str] = None
+    #intent: Optional[dict] = None
 
 
 class UpdateUserMemoryModel(BaseModel):
+    user_id: Optional[uuid.UUID] = None
+    thread_id: Optional[uuid.UUID] = None
+
+    gender: Optional[str] = None
+    #messenger_id: Optional[str] = None
+
     user_demand: UserDemand | None
     product_name: str | None
     brand_code: str | None
@@ -125,6 +143,10 @@ class UserMemoryModel(BaseModel):
     id: uuid.UUID
     user_id: uuid.UUID
     thread_id: uuid.UUID
+
+    gender: str = "unknown"
+    #messenger_id: Optional[str] = None
+
     user_demand: UserDemand | None
     product_name: str | None
     brand_code: str | None

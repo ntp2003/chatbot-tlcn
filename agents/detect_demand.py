@@ -28,7 +28,7 @@ from agents.base import (
 from models.user_memory import UserMemory, UserMemoryModel, ProductType
 
 
-class UserContactInfo(BaseModel):
+class UserContactInfo(BaseModel): # thông tin liên hệ của người dùng
     """
     The information about the user's contact information.
     """
@@ -42,12 +42,12 @@ class UserContactInfo(BaseModel):
     )
 
 
-class UserRequest(BaseModel):
+class UserRequest(BaseModel): # response format cho OpenAI, phân tích yêu cầu người dùng
     """
     Contains the analysis of the user's request about the user's specific request type and their contact details.
     """
 
-    user_demand: Literal[ProductType.MOBILE_PHONE, ProductType.UNDETERMINED] = Field(
+    user_demand: Literal[ProductType.MOBILE_PHONE, ProductType.LAPTOP, ProductType.ACCESSORY, ProductType.UNDETERMINED] = Field(
         description="The type of demand the user is making. That is determined by the latest demand.",
     )
 
@@ -56,7 +56,7 @@ class UserRequest(BaseModel):
     )
 
 
-class SystemPromptConfig(SystemPromptConfigBase):
+class SystemPromptConfig(SystemPromptConfigBase): # cấu hình system prompt cho openai
     role: str = "Agent analyzes the information in the user request."
     task: str = (
         "Your task is to analyze the user's request and collect the information about the user demand and the user's contact information."
@@ -96,19 +96,19 @@ class SystemPromptConfig(SystemPromptConfigBase):
     def get_openai_messages(
         self,
         conversation_messages: list[ChatCompletionMessageParam],
-    ) -> list[ChatCompletionMessageParam]:
+    ) -> list[ChatCompletionMessageParam]: # return list of conversation messages and system prompt for openai
 
         role_task_skill_message: ChatCompletionMessageParam = {
             "role": "system",
             "content": f"""# ROLE
-{self.role}
+        {self.role}
 
-## PROFILE:
-- Languages: Vietnamese and English.
-- Description: {self.task}
+        ## PROFILE:
+        - Languages: Vietnamese and English.
+        - Description: {self.task}
 
-## SKILLS:
-{self.skills_to_string()}""",
+        ## SKILLS:
+        {self.skills_to_string()}""",
         }
         rules_message: ChatCompletionMessageParam = {
             "role": "system",
@@ -145,7 +145,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
         return messages
 
 
-class AgentTemporaryMemory(AgentTemporaryMemoryBase):
+class AgentTemporaryMemory(AgentTemporaryMemoryBase): # temporary memory cho agent
     pass
 
 
@@ -169,7 +169,7 @@ class Agent(AgentBase):
     ) -> AgentResponse:
         user_memory = self.temporary_memory.user_memory
 
-        if not user_memory:
+        if not user_memory: # kiểm tra user_memory
             return AgentResponse(
                 type="error",
                 content="User memory not found.",
@@ -177,17 +177,17 @@ class Agent(AgentBase):
 
         self.temporary_memory.chat_completions_messages = (
             self.system_prompt_config.get_openai_messages(messages)
-        )
+        ) # chuẩn bị messages cho openai
 
         response = _client.beta.chat.completions.parse(
             model=self.model,
             messages=self.temporary_memory.chat_completions_messages,
             temperature=0,
             timeout=30,
-            response_format=UserRequest,
-        )
+            response_format=UserRequest, # trả về dạng UserRequest
+        ) # gọi openai để phân tích yêu cầu người dùng và parse response
 
-        user_request = response.choices[0].message.parsed
+        user_request = response.choices[0].message.parsed # lấy kết quả phân tích (parse response)
 
         if not user_request:
             return AgentResponse(
@@ -200,12 +200,15 @@ class Agent(AgentBase):
         if user_request.user_demand != ProductType.UNDETERMINED:
             user_memory.intent.product_type = user_request.user_demand
 
+        # xử lý thông tin liên hệ
         phone_number = user_request.user_info.phone_number
         email = user_request.user_info.email
 
         invalid_infos = []
         has_phone_number_before = user_memory.phone_number is not None
         updated_phone_number = False
+        
+        # chuẩn hóa số điện thoại và email
         standard_phone_number = convert_to_standard_phone_number(phone_number)
         standard_email = convert_to_standard_email(email)
 

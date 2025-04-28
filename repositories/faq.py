@@ -46,7 +46,7 @@ def search_by_semantic(
         stmt = (
             select(FAQ)
             .order_by(
-                FAQ.embedding.cast(Vector).cosine_distance(question_embedding).asc()
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding).asc() # càng giống thì cosine_distance càng nhỏ
             )
             .limit(top_k)
         )

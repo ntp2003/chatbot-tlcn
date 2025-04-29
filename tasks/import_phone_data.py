@@ -2,10 +2,11 @@ import math
 import time
 import httpx
 import jsonlines
+from db import Session
 from env import env
 from bs4 import BeautifulSoup
 import os
-from models.phone import CreatePhoneModel
+from models.phone import CreatePhoneModel, Phone
 from repositories.phone import upsert_phone
 from service.embedding import get_embedding
 
@@ -213,4 +214,20 @@ def get_description(item_slug: str) -> str | None:
 
     return "\n".join([i.get_text() for i in contents])
 
-    
+
+"""
+How to run:
+python
+from tasks.import_phone_data import *
+update_embedding()
+"""
+
+
+def update_embedding():
+    with Session() as session:
+        phones = session.query(Phone).all()
+        for phone in phones:
+            phone.name_embedding = get_embedding(f"Phone Name: {phone.name}")
+            session.add(phone)
+
+        session.commit()

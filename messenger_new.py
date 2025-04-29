@@ -7,8 +7,10 @@ import traceback
 from typing import Optional, Dict, Any, List
 from fastapi import FastAPI, Request, Response, HTTPException, Depends, Header, BackgroundTasks
 from pydantic import BaseModel, Field
+
 import hmac
 import hashlib
+
 from service.store_chatbot_v2 import gen_answer_for_messenger
 from models.user_memory import UserMemoryModel, CreateUserMemoryModel
 from repositories.user_memory import get_by_messenger_id, create as create_user_memory
@@ -280,29 +282,30 @@ async def process_webhook(request: WebhookRequest, background_tasks: BackgroundT
     """
     Process incoming messages from Facebook Messenger
     """
+    '''
     body_bytes = await request.body()
     body_str = body_bytes.decode()
     body = json.loads(body_str)
     logger.info(f"Received webhook: {json.dumps(body, indent=2)}")
-
+    
     # Verify Facebook signature
     if APP_SECRET:
         signature = request.headers.get("X-Hub-Signature-256", "")
         if not verify_facebook_signature(body_bytes, signature):
             raise HTTPException(status_code=403, detail="Invalid signature")
-        
+    '''
     # Check if this is a page subscription
     if request.object != "page":
         logger.warning(f"Received non-page object: {request.object}")
         return {"status": "not page"}
     
-    try:
+    try: 
         # Iterate over each entry (there may be multiple entries if batched)
-        for entry in request.entry:
+        for entry in request.entry: #request.entry là mảng các object, mỗi object là một entry
             # Iterate over each messaging event
-            for messaging_event in entry.messaging:
+            for messaging_event in entry.messaging: #messaging là mảng các object, mỗi object là một messaging event
                 # Extract sender and message info
-                sender_id = messaging_event.sender.id
+                sender_id = messaging_event.sender.id 
                 
                 # Check if this is a message with text
                 if messaging_event.message and messaging_event.message.text:

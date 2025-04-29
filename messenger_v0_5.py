@@ -111,6 +111,8 @@ def verify_facebook_signature(payload: bytes, signature_header: str) -> bool:
     return hmac.compare_digest(signature_header, expected_signature)
 
 async def process_message(sender_id: str, message_text: str):
+    """Process user message and generate response"""
+
     logger.info(f"Processing message from {sender_id}: {message_text}")
     
     try:

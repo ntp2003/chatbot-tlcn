@@ -15,6 +15,9 @@ class Thread(Base):
     )
     user_id: Mapped[UUID] = mapped_column(sa.UUID(as_uuid=True), nullable=False)
     name: Mapped[str] = mapped_column(sa.String(), nullable=True)
+    is_active: Mapped[bool] = mapped_column(
+        sa.Boolean(), nullable=False, server_default=sa.text("true")
+    )
     created_at: Mapped[datetime] = mapped_column(
         sa.DateTime, default=(lambda: datetime.now(tz=timezone.utc)) # dattime được tạo mới khi cần (lazy evaluation) , tránh timestamp bị đóng băng từ thời điểm khởi tạo model
     )
@@ -31,6 +34,8 @@ class ThreadModel(BaseModel):
     id: UUID
     user_id: UUID
     name: str | None = None
+    is_active: bool
+
     created_at: datetime
     updated_at: datetime
 

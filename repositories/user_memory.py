@@ -36,7 +36,7 @@ def get_by_thread_id(thread_id: UUID) -> UserMemoryModel | None:
             return None
         return UserMemoryModel.model_validate(user_memory)
 
-
+'''
 def get_by_messenger_id(messenger_id: str) -> UserMemoryModel | None:
     """
     Get user memory by Facebook Messenger ID
@@ -48,7 +48,7 @@ def get_by_messenger_id(messenger_id: str) -> UserMemoryModel | None:
         if user_memory is None:
             return None
         return UserMemoryModel.model_validate(user_memory)
-
+'''
 
 def update(id: UUID, data: UpdateUserMemoryModel) -> UserMemoryModel:
     with get_db() as db:

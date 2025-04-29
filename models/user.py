@@ -1,10 +1,18 @@
 from datetime import datetime, timezone
-from typing import Optional, List
+from enum import Enum
+from typing import Optional
 from .base import Base
 from sqlalchemy import String, UUID, DateTime,Text
 import uuid
 from sqlalchemy.orm import mapped_column, Mapped,relationship
 from pydantic import BaseModel, ConfigDict
+import sqlalchemy as sa
+
+
+class UserRole(str, Enum):
+    admin = "admin"
+    chainlit_user = "chainlit_user"
+    fb_user = "fb_user"
 
 
 # Define ORM model cho entity User
@@ -14,16 +22,15 @@ class User(Base):
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, nullable=False
     )  # primary key table users, UUID type, default value is uuid.uuid4
-    #user_name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
-    user_name: Mapped[str] = mapped_column(Text, nullable=False)
-
-    #password: Mapped[str] = mapped_column(String(50), nullable=False)
+    user_name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     password: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-    #fb_id : Mapped[Optional[str]] = mapped_column(Text)
-    fb_id : Mapped[Optional[str]] = mapped_column(Text, unique=True, nullable=True) # them fb_id de tich hop chatbot tren messenger
-    
-    gender: Mapped[str] = mapped_column(String(50), nullable=False, default="unknown")
-
+    role: Mapped[UserRole] = mapped_column(
+        sa.Enum(UserRole, name="userrole"),
+        nullable=False,
+        server_default=UserRole.chainlit_user,
+    )
+    fb_user_id: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    gender: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
@@ -37,10 +44,10 @@ class User(Base):
 # Pydantic model để tạo mới user
 class CreateUserModel(BaseModel):
     user_name: str
-    password: str = None
-    fb_id: str = None   
-
-    gender: str = None
+    password: Optional[str] = None
+    role: UserRole = UserRole.chainlit_user
+    fb_user_id: Optional[str] = None
+    gender: Optional[str] = None
 
 
 class UserModel(BaseModel):
@@ -48,10 +55,10 @@ class UserModel(BaseModel):
 
     id: uuid.UUID
     user_name: str
-    password: str | None
-    fb_id: str | None
-    
-    gender: str | None
+    password: Optional[str] = None
+    role: UserRole
+    fb_user_id: Optional[str] = None
+    gender: Optional[str] = None
 
     created_at: datetime
     updated_at: datetime

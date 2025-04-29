@@ -238,6 +238,7 @@ class Agent(AgentBase):
         return agent_response
 
     def _consult_phones(self) -> AgentResponse:
+        print("\n\nSearching phones...\n\n")
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
         offset = self.temporary_memory.offset
         phones = []
@@ -309,6 +310,8 @@ class Agent(AgentBase):
         )
 
     def _consult_specific_phone(self) -> AgentResponse:
+        print("\n\nSearching specific phone...\n\n")
+
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
 
         config = Config(limit=1)
@@ -341,7 +344,14 @@ class Agent(AgentBase):
                 temporary_memory=self.temporary_memory, **kwargs
             )
             print(f"Tool response for {tool_name}:")
-            print(kwargs, self.temporary_memory.model_dump())
+            print(
+                kwargs,
+                (
+                    self.temporary_memory.user_memory.model_dump()
+                    if self.temporary_memory.user_memory
+                    else None
+                ),
+            )
             tool_responses.append(tool_response)
 
         return tool_responses

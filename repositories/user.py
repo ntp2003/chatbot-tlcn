@@ -1,18 +1,18 @@
 from uuid import UUID
 from db import Session
 from typing import Optional, List
-from models.user import CreateUserModel, User, UserModel
+from models.user import CreateUserModel, User, UserModel, UserRole
 from sqlalchemy import select, case
 
 
 def create(data: CreateUserModel) -> UserModel:
     with Session() as session:
-        user = User(
-            user_name=data.user_name,
-            password=data.password,
-            fb_id=data.fb_id
-        )
+        if data.role != UserRole.fb_user and get_by_user_name(data.user_name):
+            raise ValueError("User name already exists")
 
+        user = User(
+            **data.model_dump(),
+        )
         session.add(user)
         session.commit()
 
@@ -43,12 +43,43 @@ def get(id: UUID) -> Optional[UserModel]:
         return UserModel.model_validate(user)
 
 
+def get_by_fb_user_id(fb_user_id: str) -> Optional[UserModel]:
+    with Session() as session:
+        stmt = (
+            select(User)
+            .select_from(User)
+            .where((User.fb_user_id == fb_user_id) & (User.role == UserRole.fb_user))
+        )
+
+        user = session.execute(stmt).scalar()
+
+        if user is None:
+            return None
+
+        return UserModel.model_validate(user)
+
+
 def get_by_user_name(user_name: str) -> Optional[UserModel]:
     with Session() as session:
         user = session.query(User).filter(User.user_name == user_name).first()
         if user is None:
             return None
 
+        return UserModel.model_validate(user)
+
+
+def get_by_user_name_and_role(user_name: str, role: UserRole) -> Optional[UserModel]:
+    with Session() as session:
+        stmt = (
+            select(User)
+            .select_from(User)
+            .where((User.user_name == user_name) & (User.role == role))
+        )
+
+        user = session.execute(stmt).scalar()
+
+        if user is None:
+            return None
         return UserModel.model_validate(user)
 
 

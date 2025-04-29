@@ -50,17 +50,10 @@ def gen_answer(
         temporary_memory=detect_demand_memory,
     ) # init agent detect demand
 
-    detect_demand_response = detect_demand_agent.run(messages=conversation_messages) # run agent detect demand
-    '''
-    detect_demand_response = detect_demand_agent.run(messages=[
-    {"role": "user", "content": "Tôi muốn mua iPhone 14 Pro Max"}
-    ])
-
-    # Agent xác định:
-    # - Product type: "MOBILE PHONE"
-    # - Brand: "Apple"
-    # - Name: "iPhone 14 Pro Max"
-    '''
+    detect_demand_response = detect_demand_agent.run(messages=conversation_messages)
+    detect_demand_response = detect_demand_agent.post_process(
+        detect_demand_response, user_memory
+    )
     print(
         "Detect demand response:",
         detect_demand_response,

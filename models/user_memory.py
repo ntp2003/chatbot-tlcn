@@ -11,12 +11,15 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 
 class UserDemand(str, Enum):
     MOBILE_PHONE = "mobile phone"
+    LAPTOP = "laptop"
+    ACCESSORY = "accessory"
     ANOTHER_PRODUCT = "another product"
 
 
 class ProductType(str, Enum):
     MOBILE_PHONE = "mobile phone"
     LAPTOP = "laptop"
+    ACCESSORY = "accessory"
     UNDETERMINED = "undetermined"
 
 

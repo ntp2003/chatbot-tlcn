@@ -1,70 +1,450 @@
 [
     {
-        "code": "93",
-        "name": "Samsung"
-    },
-    {
-        "code": "80",
-        "name": "Nokia"
-    },
-    {
-        "code": "336",
-        "name": "Vivo"
-    },
-    {
-        "code": "221",
-        "name": "Masstel"
-    },
-    {
-        "code": "347",
-        "name": "Tecno"
-    },
-    {
-        "code": "390",
-        "name": "Realme"
-    },
-    {
-        "code": "129",
-        "name": "Mobell"
-    },
-    {
-        "code": "1078",
-        "name": "Inoi"
-    },
-    {
-        "code": "346",
-        "name": "Itel"
-    },
-    {
-        "code": "1104",
-        "name": "Benco"
-    },
-    {
-        "code": "138",
-        "name": "TCL"
-    },
-    {
-        "code": "256",
-        "name": "ZTE"
-    },
-    {
-        "code": "170",
-        "name": "Oppo"
+        "code": "381",
+        "name": "YVS"
     },
     {
         "code": "119",
         "name": "Viettel"
     },
     {
+        "code": "111",
+        "name": "TP-Link"
+    },
+    {
+        "code": "985",
+        "name": "Soundcore"
+    },
+    {
+        "code": "88",
+        "name": "Prolink"
+    },
+    {
+        "code": "170",
+        "name": "Oppo"
+    },
+    {
+        "code": "391",
+        "name": "Tomtoc"
+    },
+    {
+        "code": "870",
+        "name": "Brand Araree"
+    },
+    {
+        "code": "1124",
+        "name": "Acari"
+    },
+    {
+        "code": "867",
+        "name": "Maxcell"
+    },
+    {
+        "code": "1031",
+        "name": "Likgus"
+    },
+    {
+        "code": "168",
+        "name": "Edifier"
+    },
+    {
+        "code": "116",
+        "name": "UNIQ"
+    },
+    {
+        "code": "836",
+        "name": "Pack&Go"
+    },
+    {
         "code": "9",
         "name": "Apple"
+    },
+    {
+        "code": "900",
+        "name": "VAIO"
+    },
+    {
+        "code": "1078",
+        "name": "Inoi"
+    },
+    {
+        "code": "398",
+        "name": "Anker"
+    },
+    {
+        "code": "10",
+        "name": "Asus"
+    },
+    {
+        "code": "1043",
+        "name": "Glass"
+    },
+    {
+        "code": "244",
+        "name": "Fashion"
+    },
+    {
+        "code": "388",
+        "name": "Meetu"
+    },
+    {
+        "code": "685",
+        "name": "Innostyle"
+    },
+    {
+        "code": "169",
+        "name": "SanDisk"
+    },
+    {
+        "code": "1063",
+        "name": "ACEFAST"
+    },
+    {
+        "code": "390",
+        "name": "Realme"
+    },
+    {
+        "code": "405",
+        "name": "Lexar"
+    },
+    {
+        "code": "1094",
+        "name": "URR"
+    },
+    {
+        "code": "386",
+        "name": "Rapoo"
+    },
+    {
+        "code": "221",
+        "name": "Masstel"
+    },
+    {
+        "code": "85",
+        "name": "Philips"
+    },
+    {
+        "code": "37",
+        "name": "Genius"
+    },
+    {
+        "code": "101",
+        "name": "Sony"
+    },
+    {
+        "code": "437",
+        "name": "UmeTravel"
+    },
+    {
+        "code": "1039",
+        "name": "Alpha Works"
+    },
+    {
+        "code": "967",
+        "name": "Tempered"
+    },
+    {
+        "code": "920",
+        "name": "Araree"
+    },
+    {
+        "code": "266",
+        "name": "Aukey"
+    },
+    {
+        "code": "131",
+        "name": "MSI"
+    },
+    {
+        "code": "1073",
+        "name": "Trusmi"
+    },
+    {
+        "code": "80",
+        "name": "Nokia"
+    },
+    {
+        "code": "849",
+        "name": "Marshall"
+    },
+    {
+        "code": "51",
+        "name": "JBL"
+    },
+    {
+        "code": "791",
+        "name": "SEINE SCENE"
+    },
+    {
+        "code": "347",
+        "name": "Tecno"
+    },
+    {
+        "code": "34",
+        "name": "FPT"
+    },
+    {
+        "code": "837",
+        "name": "LAUT"
+    },
+    {
+        "code": "2",
+        "name": "Acer"
+    },
+    {
+        "code": "993",
+        "name": "Wekome"
+    },
+    {
+        "code": "128",
+        "name": "Yoobao"
+    },
+    {
+        "code": "1104",
+        "name": "Benco"
+    },
+    {
+        "code": "382",
+        "name": "Pro One"
+    },
+    {
+        "code": "242",
+        "name": "Spigen"
+    },
+    {
+        "code": "969",
+        "name": "Golf"
+    },
+    {
+        "code": "680",
+        "name": "HYPERX"
+    },
+    {
+        "code": "72",
+        "name": "Microsoft"
+    },
+    {
+        "code": "103",
+        "name": "Soundmax"
+    },
+    {
+        "code": "93",
+        "name": "Samsung"
+    },
+    {
+        "code": "71",
+        "name": "Microlab"
+    },
+    {
+        "code": "389",
+        "name": "iValue"
+    },
+    {
+        "code": "695",
+        "name": "SoundPeats"
+    },
+    {
+        "code": "352",
+        "name": "Xiaomi"
+    },
+    {
+        "code": "943",
+        "name": "X&M"
+    },
+    {
+        "code": "64",
+        "name": "Lenovo"
+    },
+    {
+        "code": "810",
+        "name": "Switcheasy"
+    },
+    {
+        "code": "1",
+        "name": "A4Tech"
+    },
+    {
+        "code": "177",
+        "name": "Harman Kardon"
+    },
+    {
+        "code": "348",
+        "name": "Zadez"
+    },
+    {
+        "code": "755",
+        "name": "Gigabyte"
+    },
+    {
+        "code": "1056",
+        "name": "KZ"
+    },
+    {
+        "code": "748",
+        "name": "Ugreen"
+    },
+    {
+        "code": "91",
+        "name": "Remax"
+    },
+    {
+        "code": "336",
+        "name": "Vivo"
+    },
+    {
+        "code": "227",
+        "name": "Devia"
+    },
+    {
+        "code": "57",
+        "name": "Khác"
+    },
+    {
+        "code": "45",
+        "name": "Huawei"
+    },
+    {
+        "code": "1083",
+        "name": "HyperWork"
+    },
+    {
+        "code": "256",
+        "name": "ZTE"
     },
     {
         "code": "387",
         "name": "Honor"
     },
     {
-        "code": "352",
-        "name": "Xiaomi"
+        "code": "1115",
+        "name": "ACNOS"
+    },
+    {
+        "code": "385",
+        "name": "Mipow"
+    },
+    {
+        "code": "392",
+        "name": "Hyper"
+    },
+    {
+        "code": "977",
+        "name": "EDRA"
+    },
+    {
+        "code": "26",
+        "name": "Dell"
+    },
+    {
+        "code": "14",
+        "name": "Belkin"
+    },
+    {
+        "code": "899",
+        "name": "Halo"
+    },
+    {
+        "code": "824",
+        "name": "BAGITECH"
+    },
+    {
+        "code": "175",
+        "name": "Icore"
+    },
+    {
+        "code": "1117",
+        "name": "Microtek"
+    },
+    {
+        "code": "395",
+        "name": "ESR"
+    },
+    {
+        "code": "67",
+        "name": "Logitech"
+    },
+    {
+        "code": "107",
+        "name": "Targus"
+    },
+    {
+        "code": "1051",
+        "name": "Classic"
+    },
+    {
+        "code": "1072",
+        "name": "Momax"
+    },
+    {
+        "code": "138",
+        "name": "TCL"
+    },
+    {
+        "code": "11",
+        "name": "Baseus"
+    },
+    {
+        "code": "115",
+        "name": "Tucano"
+    },
+    {
+        "code": "912",
+        "name": "DJI"
+    },
+    {
+        "code": "129",
+        "name": "Mobell"
+    },
+    {
+        "code": "1041",
+        "name": "Bookcover"
+    },
+    {
+        "code": "1125",
+        "name": "Satechi"
+    },
+    {
+        "code": "1042",
+        "name": "Canvs"
+    },
+    {
+        "code": "92",
+        "name": "Rock"
+    },
+    {
+        "code": "3",
+        "name": "Adata"
+    },
+    {
+        "code": "31",
+        "name": "Elecom"
+    },
+    {
+        "code": "866",
+        "name": "Havit"
+    },
+    {
+        "code": "904",
+        "name": "Cảnh Phong"
+    },
+    {
+        "code": "346",
+        "name": "Itel"
+    },
+    {
+        "code": "43",
+        "name": "HP"
+    },
+    {
+        "code": "1076",
+        "name": "Nubia"
+    },
+    {
+        "code": "1120",
+        "name": "Coteci"
+    },
+    {
+        "code": "52",
+        "name": "JCPAL"
     }
 ]

@@ -11,7 +11,9 @@ from openai.types.chat import (
     ChatCompletionToolParam,
 )
 
-_chat_model = "gpt-4o-mini"
+
+# _chat_model = "gpt-4o-mini"
+_chat_model = "gpt-4o-mini-2024-07-18"
 _client = OpenAI(
     api_key=env.OPENAI_API_KEY,
 )

@@ -32,7 +32,7 @@ from tools.accessory.brand_and_version import Tool as BrandAndVersionTool
 from tools.accessory.price import Tool as PriceTool
 from tools.accessory.user_intent import Tool as UserIntentTool
 from tools.accessory.name import Tool as NameTool
-
+import weave
 
 class SystemPromptConfig(SystemPromptConfigBase):
     role: str = "You are an information collector."
@@ -52,7 +52,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
         "You must collect and update the user's requirements by calling appropriate functions concurrently, ensuring that all parameters are correctly assigned.",
         "When a user refers to an accessory without including any price details, do not attempt to collect or update the price information.",
         "If a user asks about the price of an accessory but does not specify a particular price value, there is no need to collect or update any price information.",
-        "Do not procedure invalid content.",
+        "Do not produce invalid content.",
     ]
     working_steps: list[str] = [
         (
@@ -184,7 +184,15 @@ class Agent(AgentBase):
 
         agent_response = None
         openai_request = self._get_openai_request()
-        response = openai_request.create().choices[0].message
+        #response = openai_request.create().choices[0].message
+        try:
+            response = openai_request.create().choices[0].message
+        except InternalServerError as e:
+            print("Internal server error:", e)
+            return AgentResponse(
+                type="error",
+                content="Internal server error.",
+            )
         tool_choices = response.tool_calls
 
         if not tool_choices and not response.content:
@@ -226,7 +234,9 @@ class Agent(AgentBase):
 
         if user_memory.intent.is_user_needs_other_suggestions:
             user_memory.product_name = None
+            user_memory.current_filter.product_name = None
             offset += self.limit
+            user_memory.intent.is_user_needs_other_suggestions = False
 
         self.temporary_memory.offset = offset
 
@@ -484,6 +494,12 @@ class Agent(AgentBase):
                     content="The information about accessory products in <ACCESSORY KNOWLEDGE> is based on the user's requirements.",
                 )
             )
+            instructions.append(
+                Instruction(
+                    content="If user has any question about accessory in <ACCESSORY KNOWLEDGE>, you should provide concise answer based on <ACCESSORY KNOWLEDGE>.",
+                ),
+            )
+            
 
         if not user_memory.has_contact_info():
             instructions.append(

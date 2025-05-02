@@ -27,7 +27,9 @@ def main():
     #extract_fpt_phone_data()
     #extract_fpt_accessories_data()
     #extract_fpt_laptop_data()
-    import_brand_json()
+    #import_brand_json()
+    #import_phone_data_jsonl_to_database()
+    import_laptop_data_jsonl_to_database()
     
 if __name__ == "__main__":
     main()

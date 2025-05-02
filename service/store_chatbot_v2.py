@@ -1,6 +1,13 @@
 from typing import Optional
 import agents.phone.collect_and_retrieval as phone_collect_and_retrieval
 import agents.phone.generate_response as phone_generate_response
+
+import agents.laptop.collect_and_retrieval as laptop_collect_and_retrieval
+import agents.laptop.generate_response as laptop_generate_response
+
+import agents.accessory.collect_and_retrieval as accessories_collect_and_retrieval
+import agents.accessory.generate_response as accessories_generate_response
+
 import agents.undetermined.generate_response as undetermined_generate_response
 import agents.detect_demand as detect_demand
 
@@ -11,7 +18,7 @@ from openai.types.chat import (
     ChatCompletionMessageToolCall,
     ChatCompletionToolMessageParam,
 )
-from models.user_memory import CreateUserMemoryModel, UpdateUserMemoryModel
+from models.user_memory import UserMemoryModel,ProductType,CreateUserMemoryModel, UpdateUserMemoryModel
 from repositories.redis import set_value
 from repositories.user_memory import (
     get_by_thread_id,
@@ -58,66 +65,160 @@ def gen_answer(
     if detect_demand_response.type == "message":
         return detect_demand_response.content or ""
 
+    detect_demand_agent_temp_memory_user_memory = detect_demand_agent.temporary_memory.user_memory
+    product_type = detect_demand_agent_temp_memory_user_memory.get("intent", {}).get("product_type")
+
     if (
-        detect_demand_agent.temporary_memory.user_memory
-        and detect_demand_agent.temporary_memory.user_memory.intent.product_type
-        == "mobile phone"
-    ):
-        phone_collect_and_retrieval_memory = (
-            phone_collect_and_retrieval.AgentTemporaryMemory(
-                user_memory=detect_demand_agent.temporary_memory.user_memory,
-            )
-        )
+        detect_demand_agent_temp_memory_user_memory
+        and product_type == ProductType.MOBILE_PHONE
+    ): # user demand is mobile phone
+        return handle_phone_request(user_memory, conversation_messages)
+    elif (
+        detect_demand_agent_temp_memory_user_memory
+        and product_type == ProductType.LAPTOP
+    ):  # user demand is laptop
+        return handle_laptop_request(user_memory, conversation_messages)
+    elif (
+        detect_demand_agent_temp_memory_user_memory
+        and product_type == ProductType.ACCESSORY
+    ): # user demand is accessory 
+        return handle_accessories_request(user_memory, conversation_messages)
+    else: # user demand is undetermined, faqs 
+        return handle_undetermined_request(user_memory, conversation_messages)
 
-        phone_collect_and_retrieval_agent = phone_collect_and_retrieval.Agent(
-            temporary_memory=phone_collect_and_retrieval_memory
-        )
+    
+def handle_phone_request(
+    user_memory: UserMemoryModel,
+    conversation_messages: list[ChatCompletionMessageParam],
+) -> str:
+    
+   # 1. collect and retrieval phone
+    collect_and_retrieval_memory = phone_collect_and_retrieval.AgentTemporaryMemory(
+        user_memory=user_memory,
+    )  # init temporary memory collect and retrieval phone
 
-        phone_collect_and_retrieval_response = phone_collect_and_retrieval_agent.run(
-            messages=conversation_messages
-        )
-        print(
-            "Phone collect and retrieval response:",
-            phone_collect_and_retrieval_response,
-        )
-        update_user_memory(
-            id=user_memory.id,
-            data=UpdateUserMemoryModel.model_validate(
-                user_memory, from_attributes=True
-            ),
-        )
-        set_value(
-            f"offset:{user_memory.thread_id}", phone_collect_and_retrieval_memory.offset
-        )
-
-        phone_generate_response_memory = phone_generate_response.AgentTemporaryMemory(
-            user_memory=user_memory
-        )
-        phone_generate_response_agent = phone_generate_response.Agent(
-            temporary_memory=phone_generate_response_memory
-        )
-        phone_generate_response_response = phone_generate_response_agent.run(
-            conversation_messages=conversation_messages,
-            instructions=phone_collect_and_retrieval_response.instructions,
-            phone_knowledge=phone_collect_and_retrieval_response.knowledge,
-        )
-        print("Phone generate response:", phone_generate_response_response)
-        return phone_generate_response_response.content or "Not content produced"
-
-    undetermined_generate_response_memory = (
-        undetermined_generate_response.AgentTemporaryMemory(user_memory=user_memory)
+    collect_and_retrieval_agent = phone_collect_and_retrieval.Agent(
+        temporary_memory=collect_and_retrieval_memory
+    ) #init agent collect and retrieval phone
+    
+    # run agent collect and retrieval phone to get instructions and knowledge
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages) 
+    
+    print("Phone collect and retrieval response:", collect_and_retrieval_response)
+    
+    update_user_memory(
+        id=user_memory.id,
+        data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
     )
-    undetermined_generate_response_agent = undetermined_generate_response.Agent(
-        temporary_memory=undetermined_generate_response_memory
+    set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset) # lưu offset vào redis
+
+    # 2. generate response phone
+    generate_memory = phone_generate_response.AgentTemporaryMemory(
+        user_memory=user_memory
     )
-    undetermined_generate_response_response = undetermined_generate_response_agent.run(
+    generate_agent = phone_generate_response.Agent(
+        temporary_memory=generate_memory
+    ) # init agent generate response phone
+    generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
+        instructions=collect_and_retrieval_response.instructions,
+        phone_knowledge=collect_and_retrieval_response.knowledge,
+    ) # run agent generate response about phone
+    print("Phone generate response:", generate_response)
+
+    return generate_response.content or "Not content produced"
+
+def handle_laptop_request(
+    user_memory: UserMemoryModel,
+    conversation_messages: list[ChatCompletionMessageParam],
+) -> str:
+    collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
+        user_memory=user_memory,
     )
-    print("Undetermined generate response:", undetermined_generate_response_response)
+    collect_and_retrieval_agent = laptop_collect_and_retrieval.Agent(
+        temporary_memory=collect_and_retrieval_memory
+    )
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages)
+    
+    print(
+        "Laptop collect and retrieval response:",
+        collect_and_retrieval_response,
+    )
 
     update_user_memory(
         id=user_memory.id,
         data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
     )
+    set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset)
 
-    return undetermined_generate_response_response.content or "Not content produced"
+    generate_memory = laptop_generate_response.AgentTemporaryMemory(
+        user_memory=user_memory
+    )
+    generate_agent = laptop_generate_response.Agent(
+        temporary_memory=generate_memory
+    )
+    generate_response = generate_agent.run(
+        conversation_messages=conversation_messages,
+        instructions=collect_and_retrieval_response.instructions,
+        laptop_knowledge=collect_and_retrieval_response.knowledge,
+    ) # run agent generate response about laptop
+    print("Laptop generate response:", generate_response)
+    return generate_response.content or "Not content produced"
+
+def handle_accessories_request(
+    user_memory: UserMemoryModel,
+    conversation_messages: list[ChatCompletionMessageParam],
+) -> str:
+    collect_and_retrieval_memory = accessories_collect_and_retrieval.AgentTemporaryMemory(
+        user_memory=user_memory,
+    )
+    collect_and_retrieval_agent = accessories_collect_and_retrieval.Agent(
+        temporary_memory=collect_and_retrieval_memory
+    )
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages)
+    
+    print(
+        "Accessories collect and retrieval response:",
+        collect_and_retrieval_response,
+    )
+
+    update_user_memory(
+        id=user_memory.id,
+        data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
+    )
+    set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset)
+
+    generate_memory = accessories_generate_response.AgentTemporaryMemory(
+        user_memory=user_memory
+    )
+    generate_agent = accessories_generate_response.Agent(
+        temporary_memory=generate_memory
+    )
+    generate_response = generate_agent.run(
+        conversation_messages=conversation_messages,
+        instructions=collect_and_retrieval_response.instructions,
+        accessory_knowledge=collect_and_retrieval_response.knowledge,
+    )
+    print("Accessories generate response:", generate_response)
+    return generate_response.content or "Not content produced"
+
+def handle_undetermined_request(
+    user_memory: UserMemoryModel,
+    conversation_messages: list[ChatCompletionMessageParam],
+) -> str:
+    generate_memory = undetermined_generate_response.AgentTemporaryMemory(
+        user_memory=user_memory
+    )
+    generate_agent = undetermined_generate_response.Agent(
+        temporary_memory=generate_memory
+    )
+    generate_response = generate_agent.run(
+        conversation_messages=conversation_messages,
+    )
+
+    update_user_memory(
+        id=user_memory.id,
+        data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
+    )
+    print("Undetermined generate response:", generate_response)
+    return generate_response.content or "Not content produced"

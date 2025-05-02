@@ -79,7 +79,8 @@ def import_batch_data_to_database(batch: list[dict]):
         key_selling_points = phone.get("keySellingPoints", [])
         price = phone.get("price", -1)
         score = phone.get("score", 0)
-        name_embedding = get_embedding(name)
+        #name_embedding = get_embedding(name)
+        name_embedding = get_embedding(f"Phone Name: {name}")
         if id is not None:
             print(f"Upserting phone: {id}, {name}, {brand_code}")
 
@@ -198,13 +199,16 @@ def get_description(item_slug: str) -> str | None:
         return None
 
     description_object = description_object.select_one(  # type: ignore
-        "div.relative.w-full .description-container"
+        #"div.relative.w-full .description-container"
+        "div.ProductContent_description-container__miT3z"
+
     )
 
     if description_object is None:
         return None
 
-    contents = description_object.select("p, h2")
+    #contents = description_object.select("p,h2")
+    contents = description_object.select("p,h2,h3")
 
     return "\n".join([i.get_text() for i in contents])
 

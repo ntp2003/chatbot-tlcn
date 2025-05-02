@@ -2,8 +2,12 @@ from repositories.brand import query_by_semantic
 from email_validator import EmailNotValidError, validate_email
 import phonenumbers
 from service.openai import get_embedding
+import weave
 
 
+@weave.op(
+    name="convert_brand_name_to_code",
+)
 def convert_band_name_to_code(
     brand_name: str | None, threshold: float = 0.7
 ) -> str | None:

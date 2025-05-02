@@ -10,7 +10,7 @@ import agents.accessory.generate_response as accessories_generate_response
 
 import agents.undetermined.generate_response as undetermined_generate_response
 import agents.detect_demand as detect_demand
-
+from service.wandb import client as wandb_client
 from uuid import UUID
 from openai.types.chat import (
     ChatCompletionMessageParam,
@@ -18,7 +18,12 @@ from openai.types.chat import (
     ChatCompletionMessageToolCall,
     ChatCompletionToolMessageParam,
 )
-from models.user_memory import UserMemoryModel,ProductType,CreateUserMemoryModel, UpdateUserMemoryModel
+from models.user_memory import (
+    UserMemoryModel,
+    ProductType,
+    CreateUserMemoryModel,
+    UpdateUserMemoryModel,
+)
 from repositories.redis import set_value
 from repositories.user_memory import (
     get_by_thread_id,
@@ -33,6 +38,10 @@ def gen_answer(
     history: list[ChatCompletionMessageParam],
     limit: int = 10,
 ) -> str:
+    gen_answer_call = wandb_client.create_call(
+        op="gen_answer",
+        inputs=locals(),
+    )
     conversation_messages = history[-limit:] if len(history) > limit else history
     user_memory = get_by_thread_id(thread_id)
     if user_memory is None:
@@ -44,6 +53,13 @@ def gen_answer(
         user_memory=user_memory,
     )
 
+    detect_demand_call = wandb_client.create_call(
+        op="detect_demand",
+        inputs={
+            "temporary_memory": detect_demand_memory,
+            "messages": conversation_messages,
+        },
+    )
     detect_demand_agent = detect_demand.Agent(
         temporary_memory=detect_demand_memory,
     )
@@ -61,72 +77,111 @@ def gen_answer(
             else None
         ),
     )
-
+    wandb_client.finish_call(detect_demand_call, output=detect_demand_response)
     if detect_demand_response.type == "message":
         return detect_demand_response.content or ""
 
-    detect_demand_agent_temp_memory_user_memory = detect_demand_agent.temporary_memory.user_memory
-    product_type = detect_demand_agent_temp_memory_user_memory.get("intent", {}).get("product_type")
+    detect_demand_agent_temp_memory_user_memory = (
+        detect_demand_agent.temporary_memory.user_memory
+    )
+    product_type = detect_demand_agent_temp_memory_user_memory.intent.product_type  # type: ignore
 
-    if (
-        detect_demand_agent_temp_memory_user_memory
-        and product_type == ProductType.MOBILE_PHONE
-    ): # user demand is mobile phone
-        return handle_phone_request(user_memory, conversation_messages)
-    elif (
-        detect_demand_agent_temp_memory_user_memory
-        and product_type == ProductType.LAPTOP
-    ):  # user demand is laptop
-        return handle_laptop_request(user_memory, conversation_messages)
-    elif (
-        detect_demand_agent_temp_memory_user_memory
-        and product_type == ProductType.ACCESSORY
-    ): # user demand is accessory 
-        return handle_accessories_request(user_memory, conversation_messages)
-    else: # user demand is undetermined, faqs 
-        return handle_undetermined_request(user_memory, conversation_messages)
+    match product_type:
+        case ProductType.MOBILE_PHONE:
+            handler = handle_phone_request
+        case ProductType.LAPTOP:
+            handler = handle_laptop_request
+        case ProductType.ACCESSORY:
+            handler = handle_accessories_request
+        case _:
+            handler = handle_undetermined_request
 
-    
+    response = handler(
+        user_memory=detect_demand_agent_temp_memory_user_memory,  # type: ignore
+        conversation_messages=conversation_messages,
+    )
+
+    wandb_client.finish_call(gen_answer_call, output=response)
+    return response
+
+
 def handle_phone_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
 ) -> str:
-    
-   # 1. collect and retrieval phone
+
+    # 1. collect and retrieval phone
     collect_and_retrieval_memory = phone_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
     )  # init temporary memory collect and retrieval phone
 
+    collect_and_retrieval_call = wandb_client.create_call(
+        op="collect_and_retrieval_phone",
+        inputs={
+            "temporary_memory": collect_and_retrieval_memory,
+            "messages": conversation_messages,
+        },
+    )  # create call collect and retrieval phone
+
     collect_and_retrieval_agent = phone_collect_and_retrieval.Agent(
         temporary_memory=collect_and_retrieval_memory
-    ) #init agent collect and retrieval phone
-    
+    )  # init agent collect and retrieval phone
+
     # run agent collect and retrieval phone to get instructions and knowledge
-    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages) 
-    
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(
+        messages=conversation_messages
+    )
+
     print("Phone collect and retrieval response:", collect_and_retrieval_response)
-    
+
     update_user_memory(
         id=user_memory.id,
         data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
     )
-    set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset) # lưu offset vào redis
+    set_value(
+        f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset
+    )  # lưu offset vào redis
+
+    wandb_client.finish_call(
+        collect_and_retrieval_call,
+        output={
+            "response": collect_and_retrieval_response,
+            "temporary_memory": collect_and_retrieval_memory,
+        },
+    )
 
     # 2. generate response phone
     generate_memory = phone_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
+
+    generate_agent_call = wandb_client.create_call(
+        op="generate_response_phone",
+        inputs={
+            "temporary_memory": generate_memory,
+            "conversation_messages": conversation_messages,
+            "instructions": collect_and_retrieval_response.instructions,
+            "phone_knowledge": collect_and_retrieval_response.knowledge,
+        },
+    )  # create call generate response phone
     generate_agent = phone_generate_response.Agent(
         temporary_memory=generate_memory
-    ) # init agent generate response phone
+    )  # init agent generate response phone
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
         instructions=collect_and_retrieval_response.instructions,
         phone_knowledge=collect_and_retrieval_response.knowledge,
-    ) # run agent generate response about phone
+    )  # run agent generate response about phone
     print("Phone generate response:", generate_response)
-
+    wandb_client.finish_call(
+        generate_agent_call,
+        output={
+            "response": generate_response,
+            "temporary_memory": generate_memory,
+        },
+    )
     return generate_response.content or "Not content produced"
+
 
 def handle_laptop_request(
     user_memory: UserMemoryModel,
@@ -138,8 +193,10 @@ def handle_laptop_request(
     collect_and_retrieval_agent = laptop_collect_and_retrieval.Agent(
         temporary_memory=collect_and_retrieval_memory
     )
-    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages)
-    
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(
+        messages=conversation_messages
+    )
+
     print(
         "Laptop collect and retrieval response:",
         collect_and_retrieval_response,
@@ -154,29 +211,32 @@ def handle_laptop_request(
     generate_memory = laptop_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
-    generate_agent = laptop_generate_response.Agent(
-        temporary_memory=generate_memory
-    )
+    generate_agent = laptop_generate_response.Agent(temporary_memory=generate_memory)
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
         instructions=collect_and_retrieval_response.instructions,
         laptop_knowledge=collect_and_retrieval_response.knowledge,
-    ) # run agent generate response about laptop
+    )  # run agent generate response about laptop
     print("Laptop generate response:", generate_response)
     return generate_response.content or "Not content produced"
+
 
 def handle_accessories_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
 ) -> str:
-    collect_and_retrieval_memory = accessories_collect_and_retrieval.AgentTemporaryMemory(
-        user_memory=user_memory,
+    collect_and_retrieval_memory = (
+        accessories_collect_and_retrieval.AgentTemporaryMemory(
+            user_memory=user_memory,
+        )
     )
     collect_and_retrieval_agent = accessories_collect_and_retrieval.Agent(
         temporary_memory=collect_and_retrieval_memory
     )
-    collect_and_retrieval_response = collect_and_retrieval_agent.run(messages=conversation_messages)
-    
+    collect_and_retrieval_response = collect_and_retrieval_agent.run(
+        messages=conversation_messages
+    )
+
     print(
         "Accessories collect and retrieval response:",
         collect_and_retrieval_response,
@@ -202,10 +262,19 @@ def handle_accessories_request(
     print("Accessories generate response:", generate_response)
     return generate_response.content or "Not content produced"
 
+
 def handle_undetermined_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
 ) -> str:
+
+    generate_agent_call = wandb_client.create_call(
+        op="generate_response_undetermined",
+        inputs={
+            "temporary_memory": user_memory,
+            "conversation_messages": conversation_messages,
+        },
+    )
     generate_memory = undetermined_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
@@ -221,4 +290,12 @@ def handle_undetermined_request(
         data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
     )
     print("Undetermined generate response:", generate_response)
+
+    wandb_client.finish_call(
+        generate_agent_call,
+        output={
+            "response": generate_response,
+            "temporary_memory": generate_memory,
+        },
+    )
     return generate_response.content or "Not content produced"

@@ -3,6 +3,7 @@ from models.user_memory import PriceRequirement
 from agents.base import AgentTemporaryMemory
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
+from service.wandb import client as wandb_client
 
 
 class Tool(LangGPTTemplateTool):
@@ -51,6 +52,10 @@ class Tool(LangGPTTemplateTool):
         if not temporary_memory or not temporary_memory.user_memory:
             return ToolResponse(type="error", content="User memory is not available.")
 
+        call = wandb_client.create_call(
+            op=self.name,
+            inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
+        )
         approximate_price = kwargs.get("approximate_price")
         min_price = kwargs.get("min_price")
         max_price = kwargs.get("max_price")
@@ -62,6 +67,7 @@ class Tool(LangGPTTemplateTool):
         temporary_memory.user_memory.min_price = price_requirement_obj.min_price
         temporary_memory.user_memory.max_price = price_requirement_obj.max_price
 
+        wandb_client.finish_call(call, output=temporary_memory.user_memory)
         return ToolResponse(
             type="finished", content="Price requirement collected successfully."
         )

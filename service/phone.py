@@ -9,6 +9,7 @@ from typing import Any, Generic, TypeVar
 from repositories.phone import search as search_phone
 from service.embedding import get_embedding
 from pgvector.sqlalchemy import Vector
+import weave
 
 _T = TypeVar("_T")
 
@@ -202,6 +203,7 @@ class PhoneFilter(BaseModel):
         return stmt
 
 
+@weave.op(name="search_phone")
 def search(filter: PhoneFilter) -> list[PhoneModel]:
     stmt = filter.to_statement()
     return search_phone(stmt)

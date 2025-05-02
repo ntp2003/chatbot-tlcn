@@ -8,6 +8,7 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
 )
 from rq import Queue
+import weave
 from agents.utils import generate_response_by_instructions
 from env import env
 from db import redis
@@ -47,7 +48,12 @@ class UserRequest(BaseModel):
     Contains the analysis of the user's request about the user's specific request type and their contact details.
     """
 
-    user_demand: Literal[ProductType.MOBILE_PHONE,ProductType.LAPTOP,ProductType.ACCESSORY,ProductType.UNDETERMINED] = Field(
+    user_demand: Literal[
+        ProductType.MOBILE_PHONE,
+        ProductType.LAPTOP,
+        ProductType.ACCESSORY,
+        ProductType.UNDETERMINED,
+    ] = Field(
         description="The type of demand the user is making. That is determined by the latest demand.",
     )
 
@@ -274,6 +280,7 @@ class Agent(AgentBase):
         queue = Queue(connection=redis)
         queue.enqueue(send_message, email)
 
+    @weave.op(name="detect_demand_agent.post_process")
     def post_process(
         self,
         response: AgentResponse,

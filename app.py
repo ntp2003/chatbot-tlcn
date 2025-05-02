@@ -1,5 +1,6 @@
 import alembic.config
-from literalai import LiteralClient
+
+# from literalai import LiteralClient
 from env import env
 import subprocess
 from fastapi import FastAPI, Request
@@ -9,9 +10,8 @@ import logging
 import time
 from controllers.home import router as home_router
 from controllers.fb_webhook import router as fb_webhook_router
+from service.wandb import *
 
-client = LiteralClient(api_key=env.LITERAL_KEY)
-client.instrument_openai()
 rq_command = ["rq", "worker", "--with-scheduler"]
 rq_process = subprocess.Popen(
     rq_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE

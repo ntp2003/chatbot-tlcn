@@ -32,6 +32,7 @@ from tools.phone.brand_and_version import Tool as BrandAndVersionTool
 from tools.phone.price import Tool as PriceTool
 from tools.phone.user_intent import Tool as UserIntentTool
 from tools.phone.name import Tool as NameTool
+import weave
 
 
 class SystemPromptConfig(SystemPromptConfigBase):
@@ -52,7 +53,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
         "You must collect and update the user's requirements by calling appropriate functions concurrently, ensuring that all parameters are correctly assigned.",
         "When a user refers to a service or product without including any price details, do not attempt to collect or update the price information.",
         "If a user asks about the price of a service or product but does not specify a particular price value, there is no need to collect or update any price information.",
-        "Do not procedure invalid content.",
+        "Do not produce invalid content.",
     ]
     working_steps: list[str] = [
         (
@@ -183,7 +184,14 @@ class Agent(AgentBase):
         )
         agent_response = None
         openai_request = self._get_openai_request()
-        response = openai_request.create().choices[0].message
+        try:
+            response = openai_request.create().choices[0].message
+        except InternalServerError as e:
+            print("Internal server error:", e)
+            return AgentResponse(
+                type="error",
+                content="Internal server error.",
+            )
         tool_choices = response.tool_calls
         if not tool_choices and not response.content:
             raise Exception("No response content from the model")
@@ -224,7 +232,9 @@ class Agent(AgentBase):
 
         if user_memory.intent.is_user_needs_other_suggestions:
             user_memory.product_name = None
+            user_memory.current_filter.product_name = None
             offset += self.limit
+            user_memory.intent.is_user_needs_other_suggestions = False
 
         self.temporary_memory.offset = offset
 
@@ -481,6 +491,11 @@ class Agent(AgentBase):
             instructions.append(
                 Instruction(
                     content="The information about phone products in <PHONE KNOWLEDGE> is based on the user's requirements.",
+                )
+            )
+            instructions.append(
+                Instruction(
+                    content="If user has any question about phone in <PHONE KNOWLEDGE>, you should provide concise answer based on <PHONE KNOWLEDGE>. Otherwise, you should provide the general information about the phone in <PHONE KNOWLEDGE> and suggest the user to visit the website for more details.",
                 )
             )
 

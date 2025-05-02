@@ -3,6 +3,7 @@ from agents.base import AgentTemporaryMemory
 from service.converter import convert_band_name_to_code
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
+from service.wandb import client as wandb_client
 
 
 class Tool(LangGPTTemplateTool):
@@ -28,6 +29,16 @@ class Tool(LangGPTTemplateTool):
             "phone_brand": {
                 "type": "string",
                 "description": "The brand of the phone product the user wants to consult or purchase.",
+                "examples": [
+                    {
+                        "input": "cần tư vấn về điện thoại iphone 14 pro max",
+                        "output": "Apple",
+                    },
+                    {
+                        "input": "tôi muốn mua điện thoại khác",
+                        "output": None,
+                    },
+                ],
             },
             "phone_version": {
                 "type": "string",
@@ -47,18 +58,26 @@ class Tool(LangGPTTemplateTool):
         if not (temporary_memory and temporary_memory.user_memory):
             return ToolResponse(type="error", content="User memory is not available.")
 
+        call = wandb_client.create_call(
+            op=self.name,
+            inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
+        )
         phone_brand = kwargs.get("phone_brand")
         phone_version = kwargs.get("phone_version")
 
         user_memory = temporary_memory.user_memory
 
         if phone_brand == user_memory.brand_name:
+            wandb_client.finish_call(call, output="No changes made to user memory.")
             return ToolResponse(
                 type="finished", content="User requirements collected successfully."
             )
 
         brand_code = convert_band_name_to_code(phone_brand)
         if not brand_code:
+            wandb_client.finish_call(
+                call, output=f"{phone_brand} is not a valid phone brand."
+            )
             return ToolResponse(
                 type="error",
                 content=(
@@ -69,7 +88,7 @@ class Tool(LangGPTTemplateTool):
 
         user_memory.brand_code = brand_code
         user_memory.brand_name = phone_brand
-
+        wandb_client.finish_call(call, output=temporary_memory.user_memory)
         return ToolResponse(
             type="finished", content="User requirements collected successfully."
         )

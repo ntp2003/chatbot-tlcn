@@ -32,6 +32,9 @@ class Env(BaseModel):
     FB_API_URL: str
     FB_PAGE_ID: str
     FB_APP_ID: str
+    WANDB_API_KEY: str
+    PROJECT_NAME: str
+    WEAVE_DISABLED: bool
 
 
 env = Env.model_validate(os.environ)

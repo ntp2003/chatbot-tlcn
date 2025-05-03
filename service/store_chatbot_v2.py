@@ -208,6 +208,14 @@ def handle_laptop_request(
         laptop_collect_and_retrieval.SystemPromptConfig()
     )
 
+    collect_and_retrieval_call = wandb_client.create_call(
+        op="collect_and_retrieval_laptop",
+        inputs={
+            "temporary_memory": collect_and_retrieval_memory,
+            "messages": conversation_messages,
+        },
+    )  # create call collect and retrieval laptop
+
     collect_and_retrieval_agent = laptop_collect_and_retrieval.Agent(
         temporary_memory=collect_and_retrieval_memory,
         system_prompt_config=collect_and_retrieval_system_prompt_config,
@@ -227,22 +235,50 @@ def handle_laptop_request(
     )
     set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset)
 
+    wandb_client.finish_call(
+        collect_and_retrieval_call,
+        output={
+            "response": collect_and_retrieval_response,
+            "temporary_memory": collect_and_retrieval_memory,
+        },
+    )
+
     generate_memory = laptop_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
+
     generate_response_system_prompt_config = (
         laptop_generate_response.SystemPromptConfig()
     )
+    generate_agent_call = wandb_client.create_call(
+        op="generate_response_laptop",
+        inputs={
+            "temporary_memory": generate_memory,
+            "conversation_messages": conversation_messages,
+            "instructions": collect_and_retrieval_response.instructions,
+            "laptop_knowledge": collect_and_retrieval_response.knowledge,
+        },
+    )  # create call generate response laptop
+
     generate_agent = laptop_generate_response.Agent(
         temporary_memory=generate_memory,
         system_prompt_config=generate_response_system_prompt_config,
-    )
+    )  # init agent generate response laptop
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
         instructions=collect_and_retrieval_response.instructions,
         laptop_knowledge=collect_and_retrieval_response.knowledge,
     )  # run agent generate response about laptop
     print("Laptop generate response:", generate_response)
+
+    wandb_client.finish_call(
+        generate_agent_call,
+        output={
+            "response": generate_response,
+            "temporary_memory": generate_memory,
+        },
+    )
+
     return generate_response.content or "Not content produced"
 
 
@@ -255,6 +291,15 @@ def handle_accessories_request(
             user_memory=user_memory,
         )
     )
+
+    collect_and_retrieval_call = wandb_client.create_call(
+        op="collect_and_retrieval_accessory",
+        inputs={
+            "temporary_memory": collect_and_retrieval_memory,
+            "messages": conversation_messages,
+        },
+    )  # create call collect and retrieval accessory
+
     collect_and_retrieval_system_prompt_config = (
         accessories_collect_and_retrieval.SystemPromptConfig()
     )
@@ -276,11 +321,33 @@ def handle_accessories_request(
         id=user_memory.id,
         data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
     )
-    set_value(f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset)
+    set_value(
+        f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset
+    )  # lưu offset vào redis
 
+    wandb_client.finish_call(
+        collect_and_retrieval_call,
+        output={
+            "response": collect_and_retrieval_response,
+            "temporary_memory": collect_and_retrieval_memory,
+        },
+    )
+
+    # 2. generate response accessory
     generate_memory = accessories_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
+
+    generate_agent_call = wandb_client.create_call(
+        op="generate_response_accessory",
+        inputs={
+            "temporary_memory": generate_memory,
+            "conversation_messages": conversation_messages,
+            "instructions": collect_and_retrieval_response.instructions,
+            "accessory_knowledge": collect_and_retrieval_response.knowledge,
+        },
+    )  # create call generate response accessory
+
     generate_response_system_prompt_config = (
         accessories_generate_response.SystemPromptConfig()
     )
@@ -294,6 +361,15 @@ def handle_accessories_request(
         accessory_knowledge=collect_and_retrieval_response.knowledge,
     )
     print("Accessories generate response:", generate_response)
+
+    wandb_client.finish_call(
+        generate_agent_call,
+        output={
+            "response": generate_response,
+            "temporary_memory": generate_memory,
+        },
+    )
+
     return generate_response.content or "Not content produced"
 
 

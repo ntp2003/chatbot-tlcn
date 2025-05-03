@@ -9,6 +9,7 @@ from typing import Any, Generic, TypeVar
 from repositories.laptop import search as search_laptop  
 from service.embedding import get_embedding
 from pgvector.sqlalchemy import Vector
+import weave
 
 _T = TypeVar("_T")
 
@@ -214,7 +215,7 @@ class LaptopFilter(BaseModel):
             .offset(self.config.offset)
         )
         return stmt
-
+@weave.op(name="search_laptop")
 def search(filter: LaptopFilter) -> list[LaptopModel]:
     stmt = filter.to_statement()
     return search_laptop(stmt)

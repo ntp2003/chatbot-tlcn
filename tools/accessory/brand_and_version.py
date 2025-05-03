@@ -4,7 +4,7 @@ from service.converter import convert_band_name_to_code
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
 import re
-
+from service.wandb import client as wandb_client
 
 class Tool(LangGPTTemplateTool):
     """
@@ -29,6 +29,16 @@ class Tool(LangGPTTemplateTool):
             "accessory_brand": {
                 "type": "string",
                 "description": "The brand of the accessory product the user wants to consult or purchase.",
+                "examples": [
+                    {
+                        "input": "cần tư vấn về loa bluetooth JBL Go 4",
+                        "output": "JBL",
+                    },
+                    {
+                        "input": "tôi muốn mua loa bluetooth khác", 
+                        "output": None,
+                    }
+                ]
             },
             "accessory_version": {
                 "type": "string",
@@ -48,18 +58,30 @@ class Tool(LangGPTTemplateTool):
         if not (temporary_memory and temporary_memory.user_memory):
             return ToolResponse(type="error", content="User memory is not available.")
 
+        call = wandb_client.create_call(
+            op=self.name,
+            inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
+        )
+
         accessory_brand = kwargs.get("accessory_brand")
         accessory_version = kwargs.get("accessory_version")
 
         user_memory = temporary_memory.user_memory
 
         if accessory_brand == user_memory.brand_name:
+            wandb_client.finish_call(
+                call,
+                output="No changes made to user memory.",
+            )
             return ToolResponse(
                 type="finished", content="User requirements collected successfully."
             )
 
         brand_code = convert_band_name_to_code(accessory_brand)
         if not brand_code:
+            wandb_client.finish_call(
+                call, output=f"{accessory_brand} is not a valid accessory brand."
+            )
             return ToolResponse(
                 type="message",
                 content=(
@@ -70,6 +92,11 @@ class Tool(LangGPTTemplateTool):
 
         user_memory.brand_code = brand_code
         user_memory.brand_name = accessory_brand
+
+        wandb_client.finish_call(
+            call,
+            output= temporary_memory.user_memory,
+        )
 
         return ToolResponse(
             type="finished", content="User requirements collected successfully."

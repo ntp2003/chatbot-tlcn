@@ -33,6 +33,8 @@ from tools.laptop.price import Tool as PriceTool
 from tools.laptop.user_intent import Tool as UserIntentTool
 from tools.laptop.name import Tool as NameTool
 
+import weave
+
 
 class SystemPromptConfig(SystemPromptConfigBase):
     role: str = "You are an information collector."
@@ -53,7 +55,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
         "You must collect and update the user's requirements by calling appropriate functions concurrently, ensuring that all parameters are correctly assigned.",
         "When a user refers to a laptop without including any price details, do not attempt to collect or update the price information.",
         "If a user asks about the price of a laptop but does not specify a particular price value, there is no need to collect or update any price information.",
-        "Do not procedure invalid content.",
+        "Do not produce invalid content.",
     ]
     working_steps: list[str] = [
         (
@@ -194,7 +196,6 @@ class Agent(AgentBase):
                 content="Internal server error.",
             )
         tool_choices = response.tool_calls
-
         if not tool_choices and not response.content:
             raise Exception("No response content from the model")
         if not tool_choices:
@@ -234,7 +235,9 @@ class Agent(AgentBase):
 
         if user_memory.intent.is_user_needs_other_suggestions:
             user_memory.product_name = None
+            user_memory.current_filter.product_name = None
             offset += self.limit
+            user_memory.intent.is_user_needs_other_suggestions = False
 
         self.temporary_memory.offset = offset
 
@@ -492,6 +495,11 @@ class Agent(AgentBase):
             instructions.append(
                 Instruction(
                     content="The information about laptop products in <LAPTOP KNOWLEDGE> is based on the user's requirements.",
+                )
+            )
+            instructions.append(
+                Instruction(
+                    content="If user has any question about laptop in <LAPTOP KNOWLEDGE>, you should provide concise answer based on <LAPTOP KNOWLEDGE>. Otherwise, you should provide the general information about the laptop in <LAPTOP KNOWLEDGE> and suggest the user to visit the website for more details.",
                 )
             )
 

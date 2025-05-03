@@ -14,7 +14,4 @@ def search(
         question_embedding=question_embedding, top_k=top_k, threshold=threshold
     )
 
-    for faq in faqs:
-        print(f"FAQ: {faq.question}")
-
     return faqs

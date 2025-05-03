@@ -248,14 +248,16 @@ class Agent(AgentBase):
         if faqs:
             self.system_prompt_config.base_knowledge.append(
                 f"Some frequently asked questions (FAQs) in the store:\n"
-                "\n".join(
-                    [
-                        (
-                            f"   - Question {i + 1}: {faq.question}\n"
-                            f"Answer: {faq.answer}"
-                        )
-                        for i, faq in enumerate(faqs)
-                    ]
+                + (
+                    "\n".join(
+                        [
+                            (
+                                f"   - Question {i + 1}: {faq.question}\n"
+                                f"Answer: {faq.answer}"
+                            )
+                            for i, faq in enumerate(faqs)
+                        ]
+                    )
                 )
             )
             self.system_prompt_config.rules.append(
@@ -289,7 +291,7 @@ class Agent(AgentBase):
             messages=self.temporary_memory.chat_completions_messages,
             model=self.model,
             temperature=0,
-            timeout=30,
+            timeout=60,
         )
 
     def retrieval_faq(self, question: str) -> list[FAQModel]:

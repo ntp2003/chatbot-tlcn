@@ -37,9 +37,8 @@ from tools.laptop.name import Tool as NameTool
 class SystemPromptConfig(SystemPromptConfigBase):
     role: str = "You are an information collector."
     task: str = (
-        #"Your task is to collect and update the user's requirements about laptops based on the user's latest message."
+        # "Your task is to collect and update the user's requirements about laptops based on the user's latest message."
         "Your task is to collect and update the user's requirements about the service or product based on the user's latest message."
-
     )
     skills: list[str] = [
         "Demonstrates robust natural language processing skills that are clear and easy to understand, especially in the field of laptop consulting.",
@@ -186,7 +185,14 @@ class Agent(AgentBase):
 
         agent_response = None
         openai_request = self._get_openai_request()
-        response = openai_request.create().choices[0].message
+        try:
+            response = openai_request.create().choices[0].message
+        except InternalServerError as e:
+            print("Internal server error:", e)
+            return AgentResponse(
+                type="error",
+                content="Internal server error.",
+            )
         tool_choices = response.tool_calls
 
         if not tool_choices and not response.content:
@@ -240,7 +246,7 @@ class Agent(AgentBase):
         return agent_response
 
     def _consult_laptops(self) -> AgentResponse:
-        user_memory: UserMemoryModel = self.temporary_memory.user_memory # type: ignore
+        user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
         offset = self.temporary_memory.offset
         laptops = []
         config = Config(limit=self.limit)
@@ -258,7 +264,7 @@ class Agent(AgentBase):
                 laptops[0].name if len(laptops) == 1 else None
             )
             return (
-                self._laptops_to_responses(laptops)
+                self._laptops_to_response(laptops)
                 if len(laptops) > 1
                 else self._specific_laptop_to_response(laptops[0])
             )
@@ -311,7 +317,7 @@ class Agent(AgentBase):
         )
 
     def _consult_specific_laptop(self) -> AgentResponse:
-        user_memory: UserMemoryModel = self.temporary_memory.user_memory # type: ignore
+        user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
 
         config = Config(limit=1)
         filter = self._get_laptop_filter_from_user_memory(config=config)
@@ -344,13 +350,13 @@ class Agent(AgentBase):
             )
             print(f"Tool response for {tool_name}:")
             print(
-                 kwargs,
-                 (
-                     self.temporary_memory.user_memory.model_dump()
-                     if self.temporary_memory.user_memory
-                     else None
-                 ),
-             )
+                kwargs,
+                (
+                    self.temporary_memory.user_memory.model_dump()
+                    if self.temporary_memory.user_memory
+                    else None
+                ),
+            )
             tool_responses.append(tool_response)
 
         return tool_responses
@@ -370,7 +376,7 @@ class Agent(AgentBase):
                     else NOT_GIVEN
                 ),
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
         if not before_tool_response:
             return OpenAIChatCompletionsRequest(
@@ -387,7 +393,7 @@ class Agent(AgentBase):
                 model=self.model,
                 tools=NOT_GIVEN,
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
 
         raise NotImplementedError()
@@ -428,11 +434,13 @@ class Agent(AgentBase):
             "Tool responses post process not implemented for this case"
         )
 
-    def _get_laptop_filter_from_user_memory(self, config: Config | None = None) -> LaptopFilter:
+    def _get_laptop_filter_from_user_memory(
+        self, config: Config | None = None
+    ) -> LaptopFilter:
         if not self.temporary_memory.user_memory:
             raise Exception("User memory is not available.")
 
-        user_memory: UserMemoryModel = self.temporary_memory.user_memory # type: ignore
+        user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
         config = config or Config()
 
         filter = LaptopFilter(
@@ -465,7 +473,9 @@ class Agent(AgentBase):
 
     def _laptops_to_response(self, laptops: list[LaptopModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
-        knowledge = [laptop.to_text(inclue_key_selling_points=True) for laptop in laptops]
+        knowledge = [
+            laptop.to_text(inclue_key_selling_points=True) for laptop in laptops
+        ]
 
         instructions = []
 

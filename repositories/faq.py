@@ -59,3 +59,11 @@ def search_by_semantic(
         faqs = session.execute(stmt).scalars().all()
 
         return [FAQModel.model_validate(faq) for faq in faqs]
+
+
+def get_all() -> list[FAQModel]:
+    with Session() as session:
+        stmt = select(FAQ)
+        faqs = session.execute(stmt).scalars().all()
+
+        return [FAQModel.model_validate(faq) for faq in faqs]

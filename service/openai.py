@@ -1,9 +1,11 @@
+from time import sleep
 from typing import Iterable, Optional
 from uuid import UUID
 
+import openai
 from pydantic import BaseModel, ConfigDict
 from env import env
-from openai import NotGiven, OpenAI, NOT_GIVEN
+from openai import NotGiven, OpenAI, NOT_GIVEN, RateLimitError, APITimeoutError
 import json
 from openai.types.chat import (
     ChatCompletionMessageParam,
@@ -43,18 +45,61 @@ class OpenAIChatCompletionsRequest(BaseModel):
     temperature: float
     timeout: int
 
-    def create(self):
-        if not self.tools or self.tools == NOT_GIVEN:
-            return _client.chat.completions.create(
-                messages=self.messages,
-                model=self.model,
-                temperature=self.temperature,
-                timeout=self.timeout,
-            )
-        return _client.chat.completions.create(
-            messages=self.messages,
-            model=self.model,
-            tools=self.tools,
-            temperature=self.temperature,
-            timeout=self.timeout,
-        )
+    def create(self, max_retries=5, backoff_factor=3):
+        retries = 0
+        while retries < max_retries:
+            try:
+                if not self.tools or self.tools == NOT_GIVEN:
+                    return _client.chat.completions.create(
+                        messages=self.messages,
+                        model=self.model,
+                        temperature=self.temperature,
+                        timeout=self.timeout,
+                    )
+                return _client.chat.completions.create(
+                    messages=self.messages,
+                    model=self.model,
+                    tools=self.tools,
+                    temperature=self.temperature,
+                    timeout=self.timeout,
+                )
+            except (RateLimitError, APITimeoutError) as e:
+                retries += 1
+                wait_time = backoff_factor**retries
+                print(f"Rate limit hit. Retry {retries}/{max_retries} in {wait_time}s.")
+                sleep(wait_time)
+            except openai.OpenAIError as e:
+                print(f"OpenAI API error: {e}")
+                raise
+        raise Exception(f"Failed after {max_retries} retries due to rate limit.")
+
+
+class OpenAIChatCompletionsParse(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    model: str
+    messages: list[ChatCompletionMessageParam]
+    temperature: int = 0
+    timeout: int = 60
+    response_format: type
+
+    def parse(self, max_retries=5, backoff_factor=3):
+        retries = 0
+        while retries < max_retries:
+            try:
+                return _client.beta.chat.completions.parse(
+                    messages=self.messages,
+                    model=self.model,
+                    response_format=self.response_format,
+                    temperature=self.temperature,
+                    timeout=self.timeout,
+                )
+            except (RateLimitError, APITimeoutError) as e:
+                retries += 1
+                wait_time = backoff_factor**retries
+                print(f"Rate limit hit. Retry {retries}/{max_retries} in {wait_time}s.")
+                sleep(wait_time)
+            except openai.OpenAIError as e:
+                print(f"OpenAI API error: {e}")
+                raise
+        raise Exception(f"Failed after {max_retries} retries due to rate limit.")

@@ -17,7 +17,7 @@ from service.converter import (
     convert_to_standard_phone_number,
 )
 from service.email import create_message, send_message
-from service.openai import _client, _chat_model
+from service.openai import OpenAIChatCompletionsParse, _client, _chat_model
 from openai.types.chat_model import ChatModel
 from agents.base import (
     Agent as AgentBase,
@@ -185,13 +185,13 @@ class Agent(AgentBase):
             self.system_prompt_config.get_openai_messages(messages)
         )
 
-        response = _client.beta.chat.completions.parse(
+        response = OpenAIChatCompletionsParse(
             model=self.model,
             messages=self.temporary_memory.chat_completions_messages,
             temperature=0,
-            timeout=30,
+            timeout=60,
             response_format=UserRequest,
-        )
+        ).parse()
 
         user_request = response.choices[0].message.parsed
 

@@ -91,7 +91,7 @@ def generate_response_by_instructions(
         messages=messages,
         model=model,
         temperature=0,
-        timeout=30,
+        timeout=60,
     )
 
     response = openai_request.create()

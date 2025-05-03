@@ -379,7 +379,7 @@ class Agent(AgentBase):
                     else NOT_GIVEN
                 ),
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
         if not before_tool_response:
             return OpenAIChatCompletionsRequest(
@@ -396,7 +396,7 @@ class Agent(AgentBase):
                 model=self.model,
                 tools=NOT_GIVEN,
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
 
         raise NotImplementedError()

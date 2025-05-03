@@ -23,7 +23,9 @@ from service.faq import search as search_faq
 
 
 class SystemPromptConfig(SystemPromptConfigBase):
-    role: str = "You are professional sales consultant staff for a phone store."
+    role: str = (
+        "You are professional sales consultant staff for a online store (that provides technology products) in Vietnam."
+    )
 
     task: str = (
         "Your task is to assist users in selecting suitable products and providing guidance on purchasing procedures."
@@ -36,7 +38,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
     ]
     base_knowledge: list[str] = [
         (
-            "Information about your phone store:\n"
+            "Information about your store:\n"
             "   - Name: FPTShop\n"
             "   - Location: https://fptshop.com.vn/cua-hang\n"
             "   - Hotline: 1800.6601\n"
@@ -179,14 +181,16 @@ class Agent(AgentBase):
         if faqs:
             self.system_prompt_config.base_knowledge.append(
                 f"Some frequently asked questions (FAQs) in the store:\n"
-                "\n".join(
-                    [
-                        (
-                            f"   - Question {i + 1}: {faq.question}\n"
-                            f"Answer: {faq.answer}"
-                        )
-                        for i, faq in enumerate(faqs)
-                    ]
+                + (
+                    "\n".join(
+                        [
+                            (
+                                f"   - Question {i + 1}: {faq.question}\n"
+                                f"Answer: {faq.answer}"
+                            )
+                            for i, faq in enumerate(faqs)
+                        ]
+                    )
                 )
             )
             self.system_prompt_config.rules.append(
@@ -220,7 +224,7 @@ class Agent(AgentBase):
             messages=self.temporary_memory.chat_completions_messages,
             model=self.model,
             temperature=0,
-            timeout=30,
+            timeout=60,
         )
 
     def retrieval_faq(self, question: str) -> list[FAQModel]:

@@ -184,7 +184,14 @@ class Agent(AgentBase):
 
         agent_response = None
         openai_request = self._get_openai_request()
-        response = openai_request.create().choices[0].message
+        try:
+            response = openai_request.create().choices[0].message
+        except InternalServerError as e:
+            print("Internal server error:", e)
+            return AgentResponse(
+                type="error",
+                content="Internal server error.",
+            )
         tool_choices = response.tool_calls
 
         if not tool_choices and not response.content:
@@ -251,13 +258,15 @@ class Agent(AgentBase):
         if len(accessories) > 0:
             user_memory.consultation_status.is_recommending = False
             user_memory.product_name = (
-                accessories[0].name if len(accessories) == 1 else user_memory.product_name
+                accessories[0].name
+                if len(accessories) == 1
+                else user_memory.product_name
             )
             user_memory.current_filter.product_name = (
                 accessories[0].name if len(accessories) == 1 else None
             )
             return (
-                self._accessories_to_responses(accessories)
+                self._accessories_to_response(accessories)
                 if len(accessories) > 1
                 else self._specific_accessory_to_response(accessories[0])
             )
@@ -276,7 +285,9 @@ class Agent(AgentBase):
         if len(accessories) > 0:
             user_memory.consultation_status.is_recommending = True
             user_memory.product_name = (
-                accessories[0].name if len(accessories) == 1 else user_memory.product_name
+                accessories[0].name
+                if len(accessories) == 1
+                else user_memory.product_name
             )
             user_memory.current_filter.product_name = (
                 accessories[0].name if len(accessories) == 1 else None
@@ -344,13 +355,13 @@ class Agent(AgentBase):
             )
             print(f"Tool response for {tool_name}:")
             print(
-                 kwargs,
-                 (
-                     self.temporary_memory.user_memory.model_dump()
-                     if self.temporary_memory.user_memory
-                     else None
-                 ),
-             )
+                kwargs,
+                (
+                    self.temporary_memory.user_memory.model_dump()
+                    if self.temporary_memory.user_memory
+                    else None
+                ),
+            )
             tool_responses.append(tool_response)
 
         return tool_responses
@@ -370,7 +381,7 @@ class Agent(AgentBase):
                     else NOT_GIVEN
                 ),
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
         if not before_tool_response:
             return OpenAIChatCompletionsRequest(
@@ -387,7 +398,7 @@ class Agent(AgentBase):
                 model=self.model,
                 tools=NOT_GIVEN,
                 temperature=0,
-                timeout=30,
+                timeout=60,
             )
 
         raise NotImplementedError()
@@ -428,7 +439,9 @@ class Agent(AgentBase):
             "Tool responses post process not implemented for this case"
         )
 
-    def _get_accessory_filter_from_user_memory(self, config: Config | None = None) -> AccessoryFilter:
+    def _get_accessory_filter_from_user_memory(
+        self, config: Config | None = None
+    ) -> AccessoryFilter:
         if not self.temporary_memory.user_memory:
             raise Exception("User memory is not available.")
 
@@ -463,9 +476,14 @@ class Agent(AgentBase):
 
         return accessories
 
-    def _accessories_to_response(self, accessories: list[AccessoryModel]) -> AgentResponse:
+    def _accessories_to_response(
+        self, accessories: list[AccessoryModel]
+    ) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
-        knowledge = [accessory.to_text(inclue_key_selling_points=True) for accessory in accessories]
+        knowledge = [
+            accessory.to_text(inclue_key_selling_points=True)
+            for accessory in accessories
+        ]
 
         instructions = []
 
@@ -501,7 +519,9 @@ class Agent(AgentBase):
             instructions=instructions,
         )
 
-    def _specific_accessory_to_response(self, accessory: AccessoryModel) -> AgentResponse:
+    def _specific_accessory_to_response(
+        self, accessory: AccessoryModel
+    ) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
 
         instructions = [

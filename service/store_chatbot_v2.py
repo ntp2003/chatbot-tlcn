@@ -60,8 +60,10 @@ def gen_answer(
             "messages": conversation_messages,
         },
     )
+    detect_demand_system_prompt_config = detect_demand.SystemPromptConfig()
     detect_demand_agent = detect_demand.Agent(
         temporary_memory=detect_demand_memory,
+        system_prompt_config=detect_demand_system_prompt_config,
     )
 
     detect_demand_response = detect_demand_agent.run(messages=conversation_messages)
@@ -123,8 +125,13 @@ def handle_phone_request(
         },
     )  # create call collect and retrieval phone
 
+    collect_and_retrieval_system_prompt_config = (
+        phone_collect_and_retrieval.SystemPromptConfig()
+    )
+
     collect_and_retrieval_agent = phone_collect_and_retrieval.Agent(
-        temporary_memory=collect_and_retrieval_memory
+        temporary_memory=collect_and_retrieval_memory,
+        system_prompt_config=collect_and_retrieval_system_prompt_config,
     )  # init agent collect and retrieval phone
 
     # run agent collect and retrieval phone to get instructions and knowledge
@@ -164,8 +171,14 @@ def handle_phone_request(
             "phone_knowledge": collect_and_retrieval_response.knowledge,
         },
     )  # create call generate response phone
+
+    generate_response_system_prompt_config = (
+        phone_generate_response.SystemPromptConfig()
+    )
+
     generate_agent = phone_generate_response.Agent(
-        temporary_memory=generate_memory
+        temporary_memory=generate_memory,
+        system_prompt_config=generate_response_system_prompt_config,
     )  # init agent generate response phone
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
@@ -190,8 +203,14 @@ def handle_laptop_request(
     collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
     )
+
+    collect_and_retrieval_system_prompt_config = (
+        laptop_collect_and_retrieval.SystemPromptConfig()
+    )
+
     collect_and_retrieval_agent = laptop_collect_and_retrieval.Agent(
-        temporary_memory=collect_and_retrieval_memory
+        temporary_memory=collect_and_retrieval_memory,
+        system_prompt_config=collect_and_retrieval_system_prompt_config,
     )
     collect_and_retrieval_response = collect_and_retrieval_agent.run(
         messages=conversation_messages
@@ -211,7 +230,13 @@ def handle_laptop_request(
     generate_memory = laptop_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
-    generate_agent = laptop_generate_response.Agent(temporary_memory=generate_memory)
+    generate_response_system_prompt_config = (
+        laptop_generate_response.SystemPromptConfig()
+    )
+    generate_agent = laptop_generate_response.Agent(
+        temporary_memory=generate_memory,
+        system_prompt_config=generate_response_system_prompt_config,
+    )
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
         instructions=collect_and_retrieval_response.instructions,
@@ -230,8 +255,13 @@ def handle_accessories_request(
             user_memory=user_memory,
         )
     )
+    collect_and_retrieval_system_prompt_config = (
+        accessories_collect_and_retrieval.SystemPromptConfig()
+    )
+
     collect_and_retrieval_agent = accessories_collect_and_retrieval.Agent(
-        temporary_memory=collect_and_retrieval_memory
+        temporary_memory=collect_and_retrieval_memory,
+        system_prompt_config=collect_and_retrieval_system_prompt_config,
     )
     collect_and_retrieval_response = collect_and_retrieval_agent.run(
         messages=conversation_messages
@@ -251,8 +281,12 @@ def handle_accessories_request(
     generate_memory = accessories_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
+    generate_response_system_prompt_config = (
+        accessories_generate_response.SystemPromptConfig()
+    )
     generate_agent = accessories_generate_response.Agent(
-        temporary_memory=generate_memory
+        temporary_memory=generate_memory,
+        system_prompt_config=generate_response_system_prompt_config,
     )
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
@@ -278,8 +312,12 @@ def handle_undetermined_request(
     generate_memory = undetermined_generate_response.AgentTemporaryMemory(
         user_memory=user_memory
     )
+    generate_response_system_prompt_config = (
+        undetermined_generate_response.SystemPromptConfig()
+    )
     generate_agent = undetermined_generate_response.Agent(
-        temporary_memory=generate_memory
+        temporary_memory=generate_memory,
+        system_prompt_config=generate_response_system_prompt_config,
     )
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,

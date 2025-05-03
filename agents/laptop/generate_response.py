@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from typing import Literal, Optional
 from overrides import override
@@ -225,10 +224,7 @@ class Agent(AgentBase):
         Run the agent to generate a response based on the conversation messages.
         """
         user_memory = self.temporary_memory.user_memory
-        if (
-            not user_memory
-            or user_memory.intent.product_type != ProductType.LAPTOP
-        ):
+        if not user_memory or user_memory.intent.product_type != ProductType.LAPTOP:
             return AgentResponse(
                 type="message", content="User memory is not valid for this agent."
             )
@@ -250,26 +246,27 @@ class Agent(AgentBase):
         if faqs:
             self.system_prompt_config.base_knowledge.append(
                 f"Some frequently asked questions (FAQs) in the store:\n"
-                "\n".join(
-                    [
-                        (
-                            f"   - Question {i + 1}: {faq.question}\n"
-                            f"Answer: {faq.answer}"
-                        )
-                        for i, faq in enumerate(faqs)
-                    ]
+                + (
+                    "\n".join(
+                        [
+                            (
+                                f"   - Question {i + 1}: {faq.question}\n"
+                                f"Answer: {faq.answer}"
+                            )
+                            for i, faq in enumerate(faqs)
+                        ]
+                    )
                 )
             )
             self.system_prompt_config.rules.append(
                 "If the latest user message is a question related to the FAQs, you should answer it based on the FAQs. Else, you should answer it based on the other BASE KNOWLEDGE and don't use the FAQs."
             )
-        
+
         self.temporary_memory.chat_completions_messages = (
             self.system_prompt_config.get_openai_messages(
                 conversation_messages=conversation_messages
             )
         )
-        
 
         openai_request = self._get_openai_request()
         response = openai_request.create()
@@ -292,7 +289,7 @@ class Agent(AgentBase):
             messages=self.temporary_memory.chat_completions_messages,
             model=self.model,
             temperature=0,
-            timeout=30,
+            timeout=60,
         )
 
     def retrieval_faq(self, question: str) -> list[FAQModel]:

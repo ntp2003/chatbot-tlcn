@@ -224,10 +224,7 @@ class Agent(AgentBase):
         Run the agent to generate a response based on the conversation messages.
         """
         user_memory = self.temporary_memory.user_memory
-        if (
-            not user_memory
-            or user_memory.intent.product_type != ProductType.ACCESSORY
-        ):
+        if not user_memory or user_memory.intent.product_type != ProductType.ACCESSORY:
             return AgentResponse(
                 type="message", content="User memory is not valid for this agent."
             )
@@ -242,21 +239,23 @@ class Agent(AgentBase):
 
         if not latest_user_message or not latest_user_message["content"]:
             return AgentResponse(type="message", content="No valid user message found.")
-        
+
         # tra loi faq lien quan den phu kien
         faqs = self.retrieval_faq(str(latest_user_message["content"]))
 
         if faqs:
             self.system_prompt_config.base_knowledge.append(
                 f"Some frequently asked questions (FAQs) in the store:\n"
-                "\n".join(
-                    [
-                        (
-                            f"   - Question {i + 1}: {faq.question}\n"
-                            f"Answer: {faq.answer}"
-                        )
-                        for i, faq in enumerate(faqs)
-                    ]
+                + (
+                    "\n".join(
+                        [
+                            (
+                                f"   - Question {i + 1}: {faq.question}\n"
+                                f"Answer: {faq.answer}"
+                            )
+                            for i, faq in enumerate(faqs)
+                        ]
+                    )
                 )
             )
             self.system_prompt_config.rules.append(
@@ -290,7 +289,7 @@ class Agent(AgentBase):
             messages=self.temporary_memory.chat_completions_messages,
             model=self.model,
             temperature=0,
-            timeout=30,
+            timeout=60,
         )
 
     def retrieval_faq(self, question: str) -> list[FAQModel]:

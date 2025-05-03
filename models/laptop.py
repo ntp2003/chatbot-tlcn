@@ -171,7 +171,8 @@ class LaptopModel(BaseModel):
         result = f"Laptop: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
 
         if self.is_on_sale():
-            result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
+            #result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
+            result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
         else:
             result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
 

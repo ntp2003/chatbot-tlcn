@@ -2,7 +2,7 @@ from typing import Any, Optional
 from agents.base import AgentTemporaryMemory
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
-import re
+from service.wandb import client as wandb_client
 
 
 class Tool(LangGPTTemplateTool):
@@ -44,10 +44,20 @@ class Tool(LangGPTTemplateTool):
         if not temporary_memory or not temporary_memory.user_memory:
             return ToolResponse(type="error", content="User memory is not available.")
 
+        call = wandb_client.create_call(
+            op=self.name,
+            inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
+        )
+
         laptop_name = kwargs.get("laptop_name")
 
         temporary_memory.user_memory.product_name = (
             laptop_name if laptop_name else temporary_memory.user_memory.product_name
+        )
+
+        wandb_client.finish_call(
+            call,
+            output= temporary_memory.user_memory,
         )
 
         return ToolResponse(

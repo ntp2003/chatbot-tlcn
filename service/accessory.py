@@ -9,7 +9,7 @@ from typing import Any, Generic, TypeVar
 from repositories.accessory import search as search_accessory  
 from service.embedding import get_embedding
 from pgvector.sqlalchemy import Vector
-
+import weave
 _T = TypeVar("_T")
 
 class FilterAttribute(BaseModel, Generic[_T]):
@@ -208,6 +208,7 @@ class AccessoryFilter(BaseModel):
 
         return stmt
 
+@weave.op(name="search_accessory")
 def search(filter: AccessoryFilter) -> list[AccessoryModel]:
     stmt = filter.to_statement()
     return search_accessory(stmt)

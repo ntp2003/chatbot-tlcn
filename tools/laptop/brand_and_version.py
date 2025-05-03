@@ -3,8 +3,7 @@ from agents.base import AgentTemporaryMemory
 from service.converter import convert_band_name_to_code
 from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
-import re
-
+from service.wandb import client as wandb_client
 
 class Tool(LangGPTTemplateTool):
     """
@@ -29,10 +28,21 @@ class Tool(LangGPTTemplateTool):
             "laptop_brand": {
                 "type": "string",
                 "description": "The brand of the laptop product the user wants to consult or purchase.",
+                "examples": [
+                    {
+                        "input": "cần tư vấn về macbook air 13 M4 2025",
+                        "output": "Apple",
+                    },
+                    {
+                        "input": "tôi muốn mua laptop khác",
+                        "output": None,
+                    }
+                ]
             },
             "laptop_version": {
                 "type": "string",
                 "description": "The version of the laptop product the user wants to consult or purchase.",
+                
             },
         },
     ):
@@ -48,18 +58,30 @@ class Tool(LangGPTTemplateTool):
         if not (temporary_memory and temporary_memory.user_memory):
             return ToolResponse(type="error", content="User memory is not available.")
 
+        call = wandb_client.create_call(
+            op=self.name,
+            inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
+        )
+
         laptop_brand = kwargs.get("laptop_brand")
         laptop_version = kwargs.get("laptop_version")
 
         user_memory = temporary_memory.user_memory
 
         if laptop_brand == user_memory.brand_name:
+            wandb_client.finish_call(
+                call,
+                output="No changes made to user memory.",
+            )
             return ToolResponse(
                 type="finished", content="User requirements collected successfully."
             )
 
         brand_code = convert_band_name_to_code(laptop_brand)
         if not brand_code:
+            wandb_client.finish_call(
+                call, output=f"{laptop_brand} is not a valid laptop brand."
+            )
             return ToolResponse(
                 type="message",
                 content=(
@@ -71,6 +93,10 @@ class Tool(LangGPTTemplateTool):
         user_memory.brand_code = brand_code
         user_memory.brand_name = laptop_brand
 
+        wandb_client.finish_call(
+            call,
+            output= temporary_memory.user_memory,
+        )
         return ToolResponse(
             type="finished", content="User requirements collected successfully."
         )

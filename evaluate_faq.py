@@ -63,9 +63,6 @@ def evaluate_faq(input, output: LLMTestCase) -> dict:
         ContextualPrecisionMetric(
             model=gpt_4o_mini, include_reason=False, async_mode=False
         ),
-        ContextualRecallMetric(
-            model=gpt_4o_mini, include_reason=False, async_mode=False
-        ),
         AnswerRelevancyMetric(
             model=gpt_4o_mini, include_reason=False, async_mode=False
         ),

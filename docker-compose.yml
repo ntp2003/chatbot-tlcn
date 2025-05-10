@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    image: ${DOCKER_USERNAME}/chatbot-tlcn:latest
+    image: registry.digitalocean.com/chatbot-tlcn/api:latest
     restart: always
     env_file:
       - /root/secrets/.env

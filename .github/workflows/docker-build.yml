@@ -1,39 +1,48 @@
-name: Deploy to Production
+name: Deploy API
+
 on:
   push:
-    branches:
-      - dev
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ dev ]
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Out Repo 
-        uses: actions/checkout@v2
-      - name: Install DigitalOcean Controller
-        uses: digitalocean/action-doctl@v2
+      - uses: actions/checkout@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to DigitalOcean Container Registry
+        uses: docker/login-action@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Set up Docker Builder
-        uses: docker/setup-buildx-action@v1
-      - name: Authenticate with DigitalOcean Container Registry
-        run: doctl registry login
-      - name: Build and Push to DigitalOcean Container Registry
-        uses: docker/build-push-action@v2
+          registry: registry.digitalocean.com
+          username: ntp2003
+          password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: |
+          tags: 
             registry.digitalocean.com/chatbot-tlcn/api:latest
             registry.digitalocean.com/chatbot-tlcn/api:sha-${{ github.sha }}
+          cache-from: type=registry,ref=registry.digitalocean.com/chatbot-tlcn/api:buildcache
+          cache-to: type=registry,ref=registry.digitalocean.com/chatbot-tlcn/api:buildcache,mode=max
+      
+      # Using environment files instead of set-output
+      - name: Set build info
+        run: |
+          echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          echo "BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
 
   deploy-api:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # Droplets already have docker, doctl + auth, and curl installed
-      - name: Deploy api to DigitalOcean Droplet
+      - name: Deploy API to DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.DO_API1_HOST }}
@@ -41,26 +50,50 @@ jobs:
           key: ${{ secrets.DO_API_KEY }}
           port: 22
           script: |
-            doctl registry login --expiry-seconds 180
-            docker pull registry.digitalocean.com/<REGISTRY_NAME>/api:latest
-
-            echo "calling shutdown endpoint..."
-            curl --silent http://localhost/shutdown || true
-
-            echo "giving healthcheck time to fail..."
+            # Login to DO registry
+            doctl registry login
+            
+            # Pull the latest image
+            docker pull registry.digitalocean.com/chatbot-tlcn/api:latest
+            
+            # Gracefully shut down the existing service
+            echo "Initiating graceful shutdown..."
+            if curl --silent --max-time 10 http://localhost/shutdown; then
+              echo "Shutdown request sent successfully"
+            else
+              echo "Shutdown endpoint not reachable, continuing with deployment"
+            fi
+            
+            # Wait for the health check to fail (shows service is stopping)
+            echo "Waiting for service to stop..."
             sleep 30 # ((unhealthy + 1) * interval)
-
-            docker stop api || true
-            docker rm api || true
-
-            echo "starting server instance..."
+            
+            # Stop and remove the old container
+            docker stop api || echo "No container named api to stop"
+            docker rm api || echo "No container named api to remove"
+            
+            # Start the new container
+            echo "Starting new API container..."
             docker run -d \
               --restart always \
               -p 0.0.0.0:80:8000 \
               --name api \
-              registry.digitalocean.com/<REGISTRY_NAME>/api:latest
-
-            echo "giving healthcheck time to recover..."
+              --health-cmd="curl --silent --fail http://localhost:8000/health || exit 1" \
+              --health-interval=5s \
+              --health-timeout=3s \
+              --health-retries=3 \
+              registry.digitalocean.com/chatbot-tlcn/api:latest
+            
+            # Wait for the health check to pass
+            echo "Waiting for API to be healthy..."
             sleep 40 # ((healthy + 1) * interval)
-
-            curl --silent --fail http://localhost/health
+            
+            # Verify the API is running and healthy
+            if curl --silent --fail http://localhost/health; then
+              echo "API deployment successful!"
+              exit 0
+            else
+              echo "API health check failed after deployment"
+              docker logs api
+              exit 1
+            fi

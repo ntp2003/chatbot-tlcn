@@ -33,4 +33,6 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 EXPOSE 8000
 
+RUN [ "poetry", "shell"]
+
 CMD ["python", "app.py"]

@@ -81,6 +81,12 @@ def gen_answer(
     )
     wandb_client.finish_call(detect_demand_call, output=detect_demand_response)
     if detect_demand_response.type == "message":
+        update_user_memory(
+            id=user_id,
+            data=UpdateUserMemoryModel.model_validate(
+                detect_demand_memory.user_memory, from_attributes=True
+            ),
+        )
         return detect_demand_response.content or ""
 
     detect_demand_agent_temp_memory_user_memory = (

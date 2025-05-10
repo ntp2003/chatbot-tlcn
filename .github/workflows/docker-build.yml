@@ -42,13 +42,24 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # Debug SSH key format before attempting connection
+      - name: Debug SSH key
+        run: |
+          # Create a temporary key file
+          echo "${{ secrets.DO_API_KEY }}" > deploy_key.pem
+          # Make it read-only for current user (required by OpenSSH)
+          chmod 600 deploy_key.pem
+          # Check if the key is in a valid format (will not print the key)
+          ssh-keygen -l -f deploy_key.pem || echo "Invalid key format"
+          
       - name: Deploy API to DigitalOcean Droplet
-        uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@v0.1.8  # Updated to newer version
         with:
           host: ${{ secrets.DO_API1_HOST }}
           username: root
-          key: ${{ secrets.DO_API_KEY }}
+          key_path: ./deploy_key.pem  # Use the debug file path instead of inline key
           port: 22
+          script_stop: true  # Stop script execution if any command fails
           script: |
             # Login to DO registry
             doctl registry login
@@ -97,3 +108,8 @@ jobs:
               docker logs api
               exit 1
             fi
+      
+      # Clean up the key file
+      - name: Clean up
+        if: always()
+        run: rm -f deploy_key.pem

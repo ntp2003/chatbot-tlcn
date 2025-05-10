@@ -31,6 +31,10 @@ def get_phone(phone_id: int) -> Optional[PhoneModel]:
 
         return PhoneModel.model_validate(phone)
 
+def get_all() -> List[PhoneModel]:
+    with Session() as session:
+        phones = session.execute(select(Phone)).scalars().all()
+        return [PhoneModel.model_validate(phone) for phone in phones]
 
 # Cập nhật phone entity trong database
 def update_phone(data: CreatePhoneModel) -> int:

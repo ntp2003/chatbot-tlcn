@@ -53,7 +53,7 @@ class FilterType(str, Enum):
 
 
 class Config(BaseModel):
-    threshold: float = 0.75
+    threshold: float = 0.5
     limit: int = 4
     offset: int = 0
     is_recommending: bool = False

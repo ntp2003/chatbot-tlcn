@@ -52,123 +52,30 @@ jobs:
           # Check if the key is in a valid format (will not print the key)
           ssh-keygen -l -f deploy_key.pem || echo "Invalid key format"
           
-      - name: Deploy API to DigitalOcean Droplet
-        uses: appleboy/ssh-action@v0.1.8  # Updated to newer version
+      - name: Clean up Docker on Droplet (optional)
+        uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.DO_API1_HOST }}
           username: root
-          key_path: ./deploy_key.pem  # Use the debug file path instead of inline key
+          port: 22
+          script_stop: true
+          script: |
+            # Remove stopped containers
+            docker container prune -f
+            # Remove dangling images (images không còn dùng)
+            docker image prune -f
+            # Remove unused volumes (nếu cần)
+            docker volume prune -f
+          
+      - name: Deploy API to DigitalOcean Droplet
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.DO_API1_HOST }}
+          username: root
           port: 22
           script_stop: true  # Stop script execution if any command fails
           script: |
-            # Verify Docker is running
-            echo "Checking Docker status..."
-            if ! systemctl is-active --quiet docker; then
-              echo "Docker service is not running, starting it..."
-              systemctl start docker
-              
-              # Wait for Docker to start
-              for i in {1..10}; do
-                if systemctl is-active --quiet docker; then
-                  echo "Docker service started successfully"
-                  break
-                fi
-                echo "Waiting for Docker service to start... ($i/10)"
-                sleep 2
-                if [ $i -eq 10 ]; then
-                  echo "Docker failed to start after waiting"
-                  systemctl status docker
-                  exit 1
-                fi
-              done
-            else
-              echo "Docker service is already running"
-            fi
-            
-            # Check Docker functionality
-            echo "Verifying Docker functionality..."
-            if ! docker info &>/dev/null; then
-              echo "Docker daemon is not responding properly"
-              exit 1
-            fi
-            
-            # Login to DO registry
-            echo "Logging into DigitalOcean Registry..."
-            doctl registry login || {
-              echo "Failed to login to DigitalOcean registry"
-              exit 1
-            }
-            
-            # Pull the latest image
-            echo "Pulling latest image..."
-            docker pull registry.digitalocean.com/chatbot-tlcn/api:latest || {
-              echo "Failed to pull image"
-              exit 1
-            }
-            
-            # Check if API is already running and shut it down gracefully
-            echo "Checking if API is already running..."
-            if docker ps --format '{{.Names}}' | grep -q '^api$'; then
-              echo "API container is running, initiating graceful shutdown..."
-              if curl --silent --max-time 10 http://localhost/shutdown; then
-                echo "Shutdown request sent successfully"
-              else
-                echo "Shutdown endpoint not reachable, force stopping container"
-              fi
-              sleep 5
-            else
-              echo "No running API container found"
-            fi
-            
-            # Stop and remove the container if it exists
-            echo "Stopping and removing old container..."
-            docker stop api &>/dev/null || echo "No container named api to stop"
-            docker rm api &>/dev/null || echo "No container named api to remove"
-            
-            # Start the new container
-            echo "Starting new API container..."
-            docker run -d \
-              --restart always \
-              -p 0.0.0.0:80:8000 \
-              --name api \
-              --health-cmd="curl --silent --fail http://localhost:8000/health || exit 1" \
-              --health-interval=5s \
-              --health-timeout=3s \
-              --health-retries=3 \
-              registry.digitalocean.com/chatbot-tlcn/api:latest || {
-                echo "Failed to start container"
-                exit 1
-              }
-            
-            # Wait for container to initialize
-            echo "Waiting for API container to initialize..."
-            sleep 10
-            
-            # Check container status
-            echo "Checking container status..."
-            if ! docker ps | grep -q api; then
-              echo "Container is not running after start"
-              docker logs api
-              exit 1
-            fi
-            
-            # Wait for API health check
-            echo "Waiting for API to be fully healthy..."
-            for i in {1..15}; do
-              if curl --silent --fail http://localhost/health &>/dev/null; then
-                echo "API is healthy!"
-                break
-              fi
-              echo "Waiting for API health check... ($i/15)"
-              sleep 5
-              if [ $i -eq 15 ]; then
-                echo "API health check failed after multiple attempts"
-                docker logs api
-                exit 1
-              fi
-            done
-            
-            echo "Deployment completed successfully!"
+            bash /opt/webhooks/scripts/deploy.sh
       
       - name: Clean up
         if: always()

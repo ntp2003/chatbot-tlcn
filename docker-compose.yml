@@ -1,16 +1,4 @@
 services:
-  app:
-    build: .
-    image: registry.digitalocean.com/chatbot-tlcn/api:latest
-    restart: always
-    env_file:
-      - /root/secrets/.env
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "80:8000"
-
   postgres:
     image: pgvector/pgvector:0.7.2-pg16
     environment:

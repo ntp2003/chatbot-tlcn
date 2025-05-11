@@ -58,6 +58,7 @@ jobs:
           host: ${{ secrets.DO_API1_HOST }}
           username: root
           port: 22
+          key: ${{ secrets.DO_API_KEY }}
           script_stop: true
           script: |
             # Remove stopped containers
@@ -72,6 +73,7 @@ jobs:
         with:
           host: ${{ secrets.DO_API1_HOST }}
           username: root
+          key: ${{ secrets.DO_API_KEY }}
           port: 22
           script_stop: true  # Stop script execution if any command fails
           script: |

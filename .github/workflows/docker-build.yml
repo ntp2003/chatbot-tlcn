@@ -78,7 +78,7 @@ jobs:
           script_stop: true  # Stop script execution if any command fails
           script: |
             bash /opt/webhooks/scripts/deploy.sh
-            bash 
+            bash /opt/webhooks/scripts/get_ngrok_url.sh
       
       - name: Clean up
         if: always()

@@ -78,6 +78,7 @@ jobs:
           script_stop: true  # Stop script execution if any command fails
           script: |
             bash /opt/webhooks/scripts/deploy.sh
+            bash 
       
       - name: Clean up
         if: always()

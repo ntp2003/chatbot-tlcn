@@ -51,22 +51,7 @@ jobs:
           chmod 600 deploy_key.pem
           # Check if the key is in a valid format (will not print the key)
           ssh-keygen -l -f deploy_key.pem || echo "Invalid key format"
-          
-      - name: Clean up Docker on Droplet (optional)
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: ${{ secrets.DO_API1_HOST }}
-          username: root
-          port: 22
-          key: ${{ secrets.DO_API_KEY }}
-          script_stop: true
-          script: |
-            # Remove stopped containers
-            docker container prune -f
-            # Remove dangling images (images không còn dùng)
-            docker image prune -f
-            # Remove unused volumes (nếu cần)
-            docker volume prune -f
+
           
       - name: Deploy API to DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.8

@@ -29,6 +29,23 @@ class Tool(LangGPTTemplateTool):
                 "type": "string",
                 "description": "The name of the phone product the user is interested in."
                 " If the user is interested in a specific phone product in the list of suggestions shown in the previous conversation, you should set this parameter to the name of that phone product.",
+                "examples": [
+                    {
+                        "the suggested list of phones": "1. Phone A\n2. Phone B\n3. Phone C",
+                        "input": "I am interested in the first phone.",
+                        "output": "Phone A",
+                    },
+                    {
+                        "the suggested list of phones": "1. Phone A v1\n2. Phone B v2\n3. Phone C v3",
+                        "input": "phone B",
+                        "output": "Phone B v2",
+                    },
+                    {
+                        "the suggested list of phones": "1. Phone brand A series 1\n2. Phone brand B series 2\n3. Phone brand C series 3",
+                        "input": "I want to buy the phone series 1.",
+                        "output": "Phone brand A series 1",
+                    },
+                ],
             }
         },
     ):

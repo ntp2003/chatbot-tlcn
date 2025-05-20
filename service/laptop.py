@@ -216,7 +216,7 @@ class LaptopFilter(BaseModel):
         if self.name:
             return [
                 Laptop.name_embedding.cast(Vector)
-                .cosine_distance(get_embedding(self.name))
+                .cosine_distance(get_embedding(f"Laptop Name: {self.name}"))
                 .asc(),
             ]
         if is_recommending:

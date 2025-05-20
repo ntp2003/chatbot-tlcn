@@ -35,7 +35,7 @@ rq-dashboard = "^0.8.2.2"
 ragas = "^0.2.6"
 rapidfuzz = "^3.10.1"
 fbmessenger = "^6.0.0"
-weave = "^0.51.44"
+weave = "^0.51.47"
 deepeval = "*"
 
 [tool.poetry.group.dev.dependencies]

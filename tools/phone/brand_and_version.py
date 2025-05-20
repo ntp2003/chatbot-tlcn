@@ -74,7 +74,7 @@ class Tool(LangGPTTemplateTool):
             )
 
         brand_code = convert_band_name_to_code(phone_brand)
-        if not brand_code:
+        if not brand_code and phone_brand:
             wandb_client.finish_call(
                 call, output=f"{phone_brand} is not a valid phone brand."
             )
@@ -86,8 +86,8 @@ class Tool(LangGPTTemplateTool):
                 ),
             )
 
-        user_memory.brand_code = brand_code
-        user_memory.brand_name = phone_brand
+        user_memory.brand_code = brand_code if brand_code else None
+        user_memory.brand_name = phone_brand if phone_brand else None
         wandb_client.finish_call(call, output=temporary_memory.user_memory)
         return ToolResponse(
             type="finished", content="User requirements collected successfully."

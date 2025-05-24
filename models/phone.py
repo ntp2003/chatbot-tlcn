@@ -132,16 +132,21 @@ class PhoneModel(BaseModel):
         include_description: bool = False,
         include_promotion: bool = False,
         include_sku_variants: bool = False,
-        inclue_key_selling_points: bool = False,
+        include_key_selling_points: bool = False,
+        is_markdown: bool = True,
     ) -> str:
-        result = f"Phone: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
+        result = (
+            f"Phone: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
+            if is_markdown
+            else f"Phone: {self.name}\n"
+        )
 
         if self.is_on_sale():
             result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
         else:
             result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
 
-        if inclue_key_selling_points:
+        if include_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(
                 prefix=" ", separator=","
             )
@@ -162,5 +167,6 @@ class PhoneModel(BaseModel):
 
         if include_description:
             result += f"- Description: [{self.description}]"
-
+        if not is_markdown:
+            result += "\nReference Link: " + env.FPTSHOP_BASE_URL + "/" + self.slug
         return result

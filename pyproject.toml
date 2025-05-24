@@ -37,6 +37,7 @@ rapidfuzz = "^3.10.1"
 fbmessenger = "^6.0.0"
 weave = "^0.51.47"
 deepeval = "*"
+markdownify = "^1.1.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"

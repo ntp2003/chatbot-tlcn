@@ -2,6 +2,7 @@ import math
 import time
 import httpx
 import jsonlines
+from sqlalchemy import table
 from db import Session
 from env import env
 from bs4 import BeautifulSoup
@@ -79,7 +80,7 @@ def import_batch_data_to_database(batch: list[dict]):
         key_selling_points = phone.get("keySellingPoints", [])
         price = phone.get("price", -1)
         score = phone.get("score", 0)
-        #name_embedding = get_embedding(name)
+        # name_embedding = get_embedding(name)
         name_embedding = get_embedding(f"Phone Name: {name}")
         if id is not None:
             print(f"Upserting phone: {id}, {name}, {brand_code}")
@@ -188,29 +189,46 @@ def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
             writer.write_all(data)
 
 
+from markdownify import MarkdownConverter
+
+
+class IgnoreImageConverter(MarkdownConverter):
+    """
+    Create a custom MarkdownConverter that adds two newlines after an image
+    """
+
+    def convert_img(self, el, text, parent_tags):
+        return ""
+
+
+# Create shorthand method for conversion
+def md(html, **options):
+    return IgnoreImageConverter(**options).convert(html)
+
+
 # Lấy thông tin mô tả của sản phẩm
 def get_description(item_slug: str) -> str | None:
     url = f"{env.FPTSHOP_BASE_URL}/{item_slug}"
 
     response = httpx.get(url, headers=header)
     data = BeautifulSoup(response.content, "html.parser")
-    description_object = data.find("div", {"id": "ThongTinSanPham"})
+    description_object = data.find("div", {"id": "MoTaSanPham"})
     if description_object is None:
         return None
 
     description_object = description_object.select_one(  # type: ignore
-        #"div.relative.w-full .description-container"
+        # "div.relative.w-full .description-container"
         "div.ProductContent_description-container__miT3z"
-
     )
 
     if description_object is None:
         return None
 
-    #contents = description_object.select("p,h2")
-    contents = description_object.select("p,h2,h3")
+    i_tag = description_object.find("i")
+    if i_tag is not None:
+        i_tag.decompose()
 
-    return "\n".join([i.get_text() for i in contents])
+    return md(str(description_object)).replace("\n\n", "\n")
 
 
 """

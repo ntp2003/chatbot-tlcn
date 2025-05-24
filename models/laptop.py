@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from pgvector.sqlalchemy import Vector
 from env import env
 
+
 class Laptop(Base):
     __tablename__: str = "laptops"
 
@@ -15,13 +16,13 @@ class Laptop(Base):
     name: Mapped[str] = mapped_column(Text, nullable=False)
     slug: Mapped[str] = mapped_column(Text, nullable=False)
     brand_code: Mapped[str] = mapped_column(Text, nullable=False)
-    '''
+    """
     brand_code: Mapped[str] = mapped_column(
         Text, 
         ForeignKey("brands.id", ondelete="CASCADE"),  # Thêm ForeignKey
         nullable=False
     )
-    '''
+    """
     product_type: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
@@ -30,14 +31,16 @@ class Laptop(Base):
     price: Mapped[int] = mapped_column(Text, nullable=False)
     score: Mapped[float] = mapped_column(Text, nullable=False)
     name_embedding: Mapped[list[float]] = mapped_column(Vector, nullable=False)
-    
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now(timezone.utc))
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.now(timezone.utc)
+    )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
-    '''
+    """
     #Ko cao duoc data nay
     cpu: Mapped[str] = mapped_column(Text, nullable=True)  # Ví dụ: "Intel Core i5-1235U"
     ram: Mapped[int] = mapped_column(Integer, nullable=True)  # Đơn vị: GB
@@ -48,9 +51,8 @@ class Laptop(Base):
     gpu: Mapped[str] = mapped_column(Text, nullable=True)  # Card đồ họa
     screen_size: Mapped[float] = mapped_column(Text, nullable=True)  # Kích thước màn hình
     screen_resolution: Mapped[str] = mapped_column(Text, nullable=True)  # Độ phân giải
-    '''
-    
-    
+    """
+
 
 class CreateLaptopModel(BaseModel):
     id: str
@@ -66,7 +68,7 @@ class CreateLaptopModel(BaseModel):
     price: int
     score: float
     name_embedding: list[float]
-    '''
+    """
     cpu: str | None = None
     ram: int | None = None
     storage: int | None = None
@@ -74,10 +76,13 @@ class CreateLaptopModel(BaseModel):
     gpu: str | None = None
     screen_size: float | None = None
     screen_resolution: str | None = None
-    '''
+    """
+
 
 class LaptopModel(BaseModel):
-    model_config = ConfigDict(from_attributes=True)  # allow pydantic model to populate its fields from SQLAlchemy ORM model
+    model_config = ConfigDict(
+        from_attributes=True
+    )  # allow pydantic model to populate its fields from SQLAlchemy ORM model
 
     id: str
     data: dict = {}
@@ -94,7 +99,7 @@ class LaptopModel(BaseModel):
     name_embedding: list[float]
     created_at: datetime
     updated_at: datetime
-    '''
+    """
     cpu: str | None = None
     ram: int | None = None
     storage: int | None = None
@@ -102,8 +107,7 @@ class LaptopModel(BaseModel):
     gpu: str | None = None
     screen_size: float | None = None
     screen_resolution: str | None = None
-    '''
-
+    """
 
     def _get_original_price(self) -> int:
         return self.data.get("originalPrice", 0)
@@ -166,17 +170,17 @@ class LaptopModel(BaseModel):
         include_description: bool = False,
         include_promotion: bool = False,
         include_sku_variants: bool = False,
-        inclue_key_selling_points: bool = False,
+        include_key_selling_points: bool = False,
     ) -> str:
         result = f"Laptop: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
 
         if self.is_on_sale():
-            #result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
+            # result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
             result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
         else:
             result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
 
-        if inclue_key_selling_points:
+        if include_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(
                 prefix=" ", separator=","
             )
@@ -200,7 +204,7 @@ class LaptopModel(BaseModel):
 
         return result
 
-    '''
+    """
     def get_specifications(self) -> str:
         specs = []
         if self.cpu:
@@ -226,14 +230,14 @@ class LaptopModel(BaseModel):
         include_description: bool = False,
         include_promotion: bool = False,
         include_sku_variants: bool = False,
-        inclue_key_selling_points: bool = False,
+        include_key_selling_points: bool = False,
         include_specifications: bool = True,  # Thêm option mới
     ) -> str:
         result = super().to_text(
             include_description,
             include_promotion,
             include_sku_variants,
-            inclue_key_selling_points
+            include_key_selling_points
         )
         
         # Thêm thông số kỹ thuật vào kết quả
@@ -243,4 +247,4 @@ class LaptopModel(BaseModel):
                 result += f"\nSpecifications:\n{specs}"
         
         return result
-    '''
+    """

@@ -477,7 +477,7 @@ class Agent(AgentBase):
     def _laptops_to_response(self, laptops: list[LaptopModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
         knowledge = [
-            laptop.to_text(inclue_key_selling_points=True) for laptop in laptops
+            laptop.to_text(include_key_selling_points=True) for laptop in laptops
         ]
 
         instructions = []
@@ -545,7 +545,7 @@ class Agent(AgentBase):
             type="finished",
             knowledge=[
                 laptop.to_text(
-                    inclue_key_selling_points=True,
+                    include_key_selling_points=True,
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,

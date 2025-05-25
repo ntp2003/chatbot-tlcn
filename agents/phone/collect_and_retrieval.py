@@ -474,7 +474,7 @@ class Agent(AgentBase):
 
     def _phones_to_response(self, phones: list[PhoneModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
-        knowledge = [phone.to_text(inclue_key_selling_points=True) for phone in phones]
+        knowledge = [phone.to_text(include_key_selling_points=True) for phone in phones]
 
         instructions = []
 
@@ -495,7 +495,12 @@ class Agent(AgentBase):
             )
             instructions.append(
                 Instruction(
-                    content="If user has any question about phone in <PHONE KNOWLEDGE>, you should provide concise answer based on <PHONE KNOWLEDGE>. Otherwise, you should provide the general information about the phone in <PHONE KNOWLEDGE> and suggest the user to visit the website for more details.",
+                    content="If user has any question about phone in <PHONE KNOWLEDGE>, you should provide concise answer based on <PHONE KNOWLEDGE>. Otherwise, you should provide the general information about the phones in <PHONE KNOWLEDGE> and suggest the user to visit the website for more details.",
+                )
+            )
+            instructions.append(
+                Instruction(
+                    content="If the product is on sale, you need to show both the original price and the discounted price.",
                 )
             )
 
@@ -541,7 +546,7 @@ class Agent(AgentBase):
             type="finished",
             knowledge=[
                 phone.to_text(
-                    inclue_key_selling_points=True,
+                    include_key_selling_points=True,
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,

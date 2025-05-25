@@ -13,7 +13,6 @@ from deepeval.metrics import (
     ContextualRecallMetric,
     BaseMetric,
 )
-from deepeval import evaluate
 from service.wandb import *
 from weave.flow.eval import Evaluation
 import asyncio
@@ -21,7 +20,7 @@ import deepeval.models as deepeval_models
 
 faq_dataset = weave.ref("20250502_210525").get()
 context_format = "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: {question}\nCâu trả lời: {answer}\n"
-gpt_4o_mini = deepeval_models.GPTModel(
+gpt_41_mini = deepeval_models.GPTModel(
     model="gpt-4.1-mini",
     timeout=60,
 )
@@ -61,12 +60,12 @@ def get_test_case(input: str, expected_output: str, context: list[str]) -> LLMTe
 def evaluate_faq(input, output: LLMTestCase) -> dict:
     metrics: list[BaseMetric] = [
         ContextualPrecisionMetric(
-            model=gpt_4o_mini, include_reason=False, async_mode=False
+            model=gpt_41_mini, include_reason=False, async_mode=False
         ),
         AnswerRelevancyMetric(
-            model=gpt_4o_mini, include_reason=False, async_mode=False
+            model=gpt_41_mini, include_reason=False, async_mode=False
         ),
-        FaithfulnessMetric(model=gpt_4o_mini, include_reason=False, async_mode=False),
+        FaithfulnessMetric(model=gpt_41_mini, include_reason=False, async_mode=False),
     ]
 
     results_dict = {}

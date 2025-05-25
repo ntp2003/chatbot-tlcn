@@ -1,12 +1,13 @@
 from datetime import datetime, timezone
 from sqlalchemy.orm import mapped_column, Mapped, relationship
-from sqlalchemy import Text, DateTime, JSON, ForeignKey,String
+from sqlalchemy import Text, DateTime, JSON, ForeignKey, String
 from sqlalchemy.dialects.postgresql import JSONB, ARRAY
 from pydantic import BaseModel, ConfigDict
 from pgvector.sqlalchemy import Vector
 from .base import Base
 from env import env
 from typing import List
+
 
 class Accessory(Base):
     __tablename__: str = "accessories"
@@ -15,13 +16,13 @@ class Accessory(Base):
     name: Mapped[str] = mapped_column(Text, nullable=False)
     slug: Mapped[str] = mapped_column(Text, nullable=False)
     brand_code: Mapped[str] = mapped_column(Text, nullable=False)
-    '''
+    """
     brand_code: Mapped[str] = mapped_column(
         Text, 
         ForeignKey("brands.id", ondelete="CASCADE"),
         nullable=False
     )
-    '''
+    """
     product_type: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
@@ -40,8 +41,9 @@ class Accessory(Base):
     )
 
     # Add relationship with Brand
-    #brand: Mapped["Brand"] = relationship("Brand", back_populates="accessories")
-    
+    # brand: Mapped["Brand"] = relationship("Brand", back_populates="accessories")
+
+
 class CreateAccessoryModel(BaseModel):
     id: str
     data: dict = {}
@@ -56,6 +58,7 @@ class CreateAccessoryModel(BaseModel):
     price: int
     score: float
     name_embedding: list[float]
+
 
 class AccessoryModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
@@ -137,17 +140,17 @@ class AccessoryModel(BaseModel):
         include_description: bool = False,
         include_promotion: bool = False,
         include_sku_variants: bool = False,
-        inclue_key_selling_points: bool = False,
+        include_key_selling_points: bool = False,
     ) -> str:
         result = f"Accessory: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
 
         if self.is_on_sale():
-            #result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
+            # result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
             result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
         else:
             result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
 
-        if inclue_key_selling_points:
+        if include_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(
                 prefix=" ", separator=","
             )

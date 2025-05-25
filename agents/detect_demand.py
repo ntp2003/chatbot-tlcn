@@ -306,6 +306,7 @@ class Agent(AgentBase):
             return AgentResponse(
                 type="message",
                 content=finished_response,
+                instructions=response.instructions,
             )
 
         return response

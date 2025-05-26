@@ -1,11 +1,13 @@
 from enum import Enum
 import json
+from typing import Optional
 from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.chat import ChatCompletionMessageParam
 from pydantic import BaseModel
 from models.phone import PhoneModel
 from uuid import uuid4
-from models.user import UserRole
+from models.thread import ThreadModel
+from models.user import UserModel, UserRole
 from repositories.user import create as create_user, CreateUserModel
 from repositories.thread import create as create_thread, CreateThreadModel
 from service.store_chatbot_v2 import gen_answer
@@ -44,11 +46,32 @@ class Step(str, Enum):
 
 
 class VietnameseUserSimulator(BaseModel):
-    def __init__(self, phone: PhoneModel):
+    phone: PhoneModel
+    name: str = "Nguyen Van A"  # Default name, will be overwritten
+    age: int = 30  # Default age, will be overwritten
+    gender: str = "male"  # Default
+    phone_number: str = "0912345678"  # Default phone number, will be overwritten
+    email: str = "ntp@gmail.com"  # Default email, will be overwritten
+
+    min_budget: int = 0
+    max_budget: int = (
+        100000000  # Default budget range, will be calculated based on phone price
+    )
+
+    basic_phone_info: str = ""
+    full_phone_info: str = ""
+
+    response_format: Optional[ResponseFormat] = None  # Will be set in init method
+    step_history: list[Step] = []
+    conversation_history: list[ChatCompletionMessageParam] = []
+    user: Optional[UserModel] = None  # Will be created in init method
+    thread: Optional[ThreadModel] = None  # Will be created in init method
+    llm_test_cases: list[LLMTestCase] = []
+
+    def init(self):
         user_info = self.generate_user_info()
 
         print(f"Generated user info: {user_info}")
-        self.phone = phone
         self.name = user_info["name"]
         self.age = user_info["age"]
         self.gender = user_info["gender"]
@@ -56,24 +79,24 @@ class VietnameseUserSimulator(BaseModel):
         self.email = user_info["email"]
 
         # Calculate raw budget values
-        raw_min_budget = min(phone.price * 0.9, phone.price - 1000000)
+        raw_min_budget = min(self.phone.price * 0.9, self.phone.price - 1000000)
         if raw_min_budget < 0:
             raw_min_budget = 0
-        raw_max_budget = max(phone.price * 1.1, 0, phone.price + 1000000)
+        raw_max_budget = max(self.phone.price * 1.1, 0, self.phone.price + 1000000)
 
         # Round to millions
         self.min_budget = math.floor(raw_min_budget / 1000000) * 1000000
         self.max_budget = math.ceil(raw_max_budget / 1000000) * 1000000
 
-        print(f"Original price: {phone.price:,} VND")
+        print(f"Original price: {self.phone.price:,} VND")
         print(f"Rounded budget range: {self.min_budget:,} - {self.max_budget:,} VND")
 
         self.basic_phone_info = (
-            phone.to_text(include_key_selling_points=True)
-            + f"- Brand: {phone._get_brand_name()}"
+            self.phone.to_text(include_key_selling_points=True)
+            + f"- Brand: {self.phone._get_brand_name()}"
         )
-        self.full_phone_info = phone.to_text(True, True, True, True)
-        self.response_format: ResponseFormat = {
+        self.full_phone_info = self.phone.to_text(True, True, True, True)
+        self.response_format = {
             "type": "json_schema",
             "json_schema": {
                 "name": "Response",
@@ -108,7 +131,6 @@ class VietnameseUserSimulator(BaseModel):
             CreateThreadModel(id=uuid4(), user_id=self.user.id, name=self.name)
         )
         self.llm_test_cases: list[LLMTestCase] = []
-        super().__init__()
 
     def generate_user_info(self) -> dict:
         """Generate diverse and random Vietnamese user information"""
@@ -823,7 +845,8 @@ class VietnameseUserSimulator(BaseModel):
 @weave.op(name="get_simulated_user")
 def get_simulated_user(phone: PhoneModel) -> str:
     """Get a simulated Vietnamese user for the given phone"""
-    simulate_user = VietnameseUserSimulator(phone)
+    simulate_user = VietnameseUserSimulator(phone=phone)
+    simulate_user.init()
     simulate_user.simulate_conversation()
     print(f"Simulated user for {phone.name} has finished the conversation.")
     return simulate_user.model_dump_json()

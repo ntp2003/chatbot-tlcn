@@ -2,6 +2,7 @@ from enum import Enum
 import json
 from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.chat import ChatCompletionMessageParam
+from pydantic import BaseModel
 from models.phone import PhoneModel
 from uuid import uuid4
 from models.user import UserRole
@@ -11,14 +12,15 @@ from service.store_chatbot_v2 import gen_answer
 from service.openai import _client
 import random
 import math
-from deepeval.test_case import LLMTestCase, ConversationalTestCase
+from deepeval.test_case.llm_test_case import LLMTestCase
+from deepeval.test_case.conversational_test_case import ConversationalTestCase
 from repositories.phone import get_all
 from utils import EvaluateContext
 from service.wandb import *
-import deepeval.models as deepeval_models
+import deepeval.models.llms.openai_model as deepeval_models
 import weave
-from deepeval.metrics import RoleAdherenceMetric
-from deepeval.metrics import FaithfulnessMetric
+from deepeval.metrics.role_adherence.role_adherence import RoleAdherenceMetric
+from deepeval.metrics.faithfulness.faithfulness import FaithfulnessMetric
 from weave.flow.eval import Evaluation
 from weave.flow.dataset import Dataset
 import asyncio
@@ -41,7 +43,7 @@ class Step(str, Enum):
     PROVIDE_EMAIL = "provide email"
 
 
-class VietnameseUserSimulator:
+class VietnameseUserSimulator(BaseModel):
     def __init__(self, phone: PhoneModel):
         user_info = self.generate_user_info()
 
@@ -106,6 +108,7 @@ class VietnameseUserSimulator:
             CreateThreadModel(id=uuid4(), user_id=self.user.id, name=self.name)
         )
         self.llm_test_cases: list[LLMTestCase] = []
+        super().__init__()
 
     def generate_user_info(self) -> dict:
         """Generate diverse and random Vietnamese user information"""
@@ -818,13 +821,12 @@ class VietnameseUserSimulator:
 
 
 @weave.op(name="get_simulated_user")
-def get_simulated_user(phone: dict) -> VietnameseUserSimulator:
+def get_simulated_user(phone: PhoneModel) -> str:
     """Get a simulated Vietnamese user for the given phone"""
-    phone_model = PhoneModel.model_validate(phone)
-    simulate_user = VietnameseUserSimulator(phone_model)
+    simulate_user = VietnameseUserSimulator(phone)
     simulate_user.simulate_conversation()
-    print(f"Simulated user for {phone_model.name} has finished the conversation.")
-    return simulate_user
+    print(f"Simulated user for {phone.name} has finished the conversation.")
+    return simulate_user.model_dump_json()
 
 
 @weave.op(name=f"evaluate_conversation")
@@ -892,20 +894,50 @@ def evaluate_conversation(
     }
 
 
-phones = get_all()
-phones = [phone.model_dump() for phone in phones]
+@weave.op(name="create_phone_dataset")
+def create_dataset(limit: int = 5) -> Dataset:
+    """Create a dataset of simulated Vietnamese users for phone evaluation"""
+    phones = get_all()[:limit]
+    phones = [phone.model_dump() for phone in phones]
 
-dataset = Dataset(
-    name="Phone Evaluation Dataset",
-    rows=weave.Table([{"phone": phone} for phone in phones]),
-    description="Dataset of simulated Vietnamese users for phone evaluation",
-)
+    dataset = Dataset(
+        name="Phone Evaluation Dataset",
+        rows=weave.Table(
+            [
+                {
+                    "phone": phone,
+                    "simulated_user": get_simulated_user(phone),
+                }
+                for phone in phones
+            ]
+        ),
+        description="Dataset of simulated Vietnamese users for phone evaluation",
+    )
+    weave.publish(dataset)
+    return dataset
 
-evaluation = Evaluation(
-    name="Phone Evaluation",
-    dataset=dataset,
-    scorers=[evaluate_conversation],
-    evaluation_name="phone_evaluation",
-)
 
-asyncio.run(evaluation.evaluate(get_simulated_user))
+if __name__ == "__main__":
+    try:
+        dataset = weave.ref("Phone Evaluation Dataset").get()
+    except:
+        print("Dataset not found, creating a new one...")
+        dataset = create_dataset(limit=10)
+
+    evaluation = Evaluation(
+        name="Phone Evaluation",
+        dataset=dataset,
+        scorers=[evaluate_conversation],
+        evaluation_name="phone_evaluation",
+    )
+    print("Starting phone evaluation...")
+    print(f"Dataset: {dataset.name}")
+    print(f"Number of phones: {len(dataset.rows)}")
+    print("Evaluating...")
+    asyncio.run(
+        evaluation.evaluate(
+            lambda x: VietnameseUserSimulator.model_validate_json(
+                x.get("simulated_user")
+            )
+        )
+    )

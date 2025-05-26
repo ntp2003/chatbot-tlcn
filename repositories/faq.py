@@ -31,7 +31,10 @@ def update(id: int, data: UpdateFAQModel) -> FAQModel | None:
 
 def upsert(data: CreateFAQModel) -> FAQModel:
     with Session() as session:
-        updated_faq = update(data.id, UpdateFAQModel.model_validate(data))
+        updated_faq = update(
+            data.id,
+            UpdateFAQModel.model_validate(data.model_dump(exclude={"id"})),
+        )
 
         if updated_faq:
             return updated_faq

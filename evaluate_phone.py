@@ -921,7 +921,6 @@ def evaluate_conversation(
 def create_dataset(limit: int = 5) -> Dataset:
     """Create a dataset of simulated Vietnamese users for phone evaluation"""
     phones = get_all()[:limit]
-    phones = [phone.model_dump() for phone in phones]
 
     dataset = Dataset(
         name="Phone Evaluation Dataset",

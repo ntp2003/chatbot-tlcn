@@ -939,6 +939,16 @@ def create_dataset(limit: int = 5) -> Dataset:
     return dataset
 
 
+@weave.op(name="get_simulated_user_from_record")
+def get_simulated_user_from_record(record) -> VietnameseUserSimulator:
+    """Get a simulated user from a dataset record"""
+    user_data = record.get("simulated_user")
+    if user_data:
+        return VietnameseUserSimulator.model_validate_json(user_data)
+    else:
+        raise ValueError("No simulated user data found in the record.")
+
+
 if __name__ == "__main__":
     try:
         dataset = weave.ref("Phone Evaluation Dataset").get()
@@ -956,10 +966,4 @@ if __name__ == "__main__":
     print(f"Dataset: {dataset.name}")
     print(f"Number of phones: {len(dataset.rows)}")
     print("Evaluating...")
-    asyncio.run(
-        evaluation.evaluate(
-            lambda x: VietnameseUserSimulator.model_validate_json(
-                x.get("simulated_user")
-            )
-        )
-    )
+    asyncio.run(evaluation.evaluate(get_simulated_user_from_record))

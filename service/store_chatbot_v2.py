@@ -94,6 +94,7 @@ def gen_answer(
                 detect_demand_memory.user_memory, from_attributes=True
             ),
         )
+        wandb_client.finish_call(gen_answer_call, output=detect_demand_response)
         return detect_demand_response.content or ""
 
     detect_demand_agent_temp_memory_user_memory = (

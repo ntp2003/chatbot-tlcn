@@ -923,7 +923,7 @@ def create_dataset(limit: int = 5) -> Dataset:
     phones = get_all()[:limit]
 
     dataset = Dataset(
-        name="Phone Evaluation Dataset",
+        name="Phone-Evaluation-Dataset",
         rows=weave.Table(
             [
                 {
@@ -940,18 +940,15 @@ def create_dataset(limit: int = 5) -> Dataset:
 
 
 @weave.op(name="get_simulated_user_from_record")
-def get_simulated_user_from_record(record) -> VietnameseUserSimulator:
+def get_simulated_user_from_record(simulated_user) -> VietnameseUserSimulator:
     """Get a simulated user from a dataset record"""
-    user_data = record.get("simulated_user")
-    if user_data:
-        return VietnameseUserSimulator.model_validate_json(user_data)
-    else:
-        raise ValueError("No simulated user data found in the record.")
+
+    return VietnameseUserSimulator.model_validate_json(simulated_user)
 
 
 if __name__ == "__main__":
     try:
-        dataset = weave.ref("Phone Evaluation Dataset").get()
+        dataset = weave.ref("Phone-Evaluation-Dataset").get()
     except:
         print("Dataset not found, creating a new one...")
         dataset = create_dataset(limit=10)

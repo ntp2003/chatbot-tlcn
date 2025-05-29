@@ -10,6 +10,8 @@ import os
 from models.phone import CreatePhoneModel, Phone
 from repositories.phone import upsert_phone
 from service.embedding import get_embedding
+import httpx
+
 
 """
 How to run:

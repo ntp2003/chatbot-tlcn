@@ -5,6 +5,7 @@ from tools.base import ToolResponse
 from tools.langgpt_template import LangGPTTemplateTool
 from service.wandb import client as wandb_client
 
+
 class Tool(LangGPTTemplateTool):
     """
     Tool for collecting and updating the requirements about the brand and version of a laptop product.
@@ -36,13 +37,12 @@ class Tool(LangGPTTemplateTool):
                     {
                         "input": "tôi muốn mua laptop khác",
                         "output": None,
-                    }
-                ]
+                    },
+                ],
             },
             "laptop_version": {
                 "type": "string",
                 "description": "The version of the laptop product the user wants to consult or purchase.",
-                
             },
         },
     ):
@@ -78,7 +78,7 @@ class Tool(LangGPTTemplateTool):
             )
 
         brand_code = convert_band_name_to_code(laptop_brand)
-        if not brand_code:
+        if not brand_code and laptop_brand:
             wandb_client.finish_call(
                 call, output=f"{laptop_brand} is not a valid laptop brand."
             )
@@ -90,16 +90,18 @@ class Tool(LangGPTTemplateTool):
                 ),
             )
 
-        user_memory.brand_code = brand_code
-        user_memory.brand_name = laptop_brand
+        user_memory.brand_code = brand_code if brand_code else None
+        user_memory.brand_name = laptop_brand if laptop_brand else None
 
         wandb_client.finish_call(
             call,
-            output= temporary_memory.user_memory,
+            output=temporary_memory.user_memory,
         )
         return ToolResponse(
             type="finished", content="User requirements collected successfully."
         )
+
+
 '''
 def extract_brand_and_version(text: str) -> Tuple[Optional[str], Optional[str]]:
     """

@@ -109,7 +109,7 @@ class PhoneFilter(BaseModel):
         if not self.name:
             return true()
 
-        embedding = get_embedding(self.name)
+        embedding = get_embedding(f"Phone Name: {self.name}")
         filters = FilterAttribute(
             column=Phone.name_embedding.cast(Vector).cosine_distance(embedding),
             operator=le,

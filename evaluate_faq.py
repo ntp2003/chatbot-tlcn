@@ -5,23 +5,22 @@ from repositories.thread import create as create_thread, CreateThreadModel
 from service.store_chatbot_v2 import gen_answer
 import weave
 from service.faq import search as search_faq
-from deepeval.test_case import LLMTestCase
-from deepeval.metrics import (
-    AnswerRelevancyMetric,
-    FaithfulnessMetric,
+from deepeval.test_case.llm_test_case import LLMTestCase
+from deepeval.metrics.answer_relevancy.answer_relevancy import AnswerRelevancyMetric
+from deepeval.metrics.contextual_precision.contextual_precision import (
     ContextualPrecisionMetric,
-    ContextualRecallMetric,
-    BaseMetric,
 )
-from deepeval import evaluate
+from deepeval.metrics.faithfulness.faithfulness import FaithfulnessMetric
+from deepeval.metrics.contextual_recall.contextual_recall import ContextualRecallMetric
+from deepeval.metrics.base_metric import BaseMetric
 from service.wandb import *
 from weave.flow.eval import Evaluation
 import asyncio
-import deepeval.models as deepeval_models
+import deepeval.models.llms.openai_model as deepeval_models
 
 faq_dataset = weave.ref("20250502_210525").get()
 context_format = "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: {question}\nCâu trả lời: {answer}\n"
-gpt_4o_mini = deepeval_models.GPTModel(
+gpt_41_mini = deepeval_models.GPTModel(
     model="gpt-4.1-mini",
     timeout=60,
 )
@@ -61,12 +60,12 @@ def get_test_case(input: str, expected_output: str, context: list[str]) -> LLMTe
 def evaluate_faq(input, output: LLMTestCase) -> dict:
     metrics: list[BaseMetric] = [
         ContextualPrecisionMetric(
-            model=gpt_4o_mini, include_reason=False, async_mode=False
+            model=gpt_41_mini, include_reason=False, async_mode=False
         ),
         AnswerRelevancyMetric(
-            model=gpt_4o_mini, include_reason=False, async_mode=False
+            model=gpt_41_mini, include_reason=False, async_mode=False
         ),
-        FaithfulnessMetric(model=gpt_4o_mini, include_reason=False, async_mode=False),
+        FaithfulnessMetric(model=gpt_41_mini, include_reason=False, async_mode=False),
     ]
 
     results_dict = {}

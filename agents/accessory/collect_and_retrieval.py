@@ -484,7 +484,7 @@ class Agent(AgentBase):
     ) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
         knowledge = [
-            accessory.to_text(inclue_key_selling_points=True)
+            accessory.to_text(include_key_selling_points=True)
             for accessory in accessories
         ]
 
@@ -555,7 +555,7 @@ class Agent(AgentBase):
             type="finished",
             knowledge=[
                 accessory.to_text(
-                    inclue_key_selling_points=True,
+                    include_key_selling_points=True,
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,

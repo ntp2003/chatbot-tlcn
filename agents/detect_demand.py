@@ -51,7 +51,6 @@ class UserRequest(BaseModel):
     user_demand: Literal[
         ProductType.MOBILE_PHONE,
         ProductType.LAPTOP,
-        ProductType.ACCESSORY,
         ProductType.UNDETERMINED,
     ] = Field(
         description="The type of demand the user is making. That is determined by the latest demand.",
@@ -307,6 +306,7 @@ class Agent(AgentBase):
             return AgentResponse(
                 type="message",
                 content=finished_response,
+                instructions=response.instructions,
             )
 
         return response

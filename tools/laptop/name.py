@@ -29,6 +29,18 @@ class Tool(LangGPTTemplateTool):
                 "type": "string",
                 "description": "The name of the laptop product the user is interested in."
                 " If the user is interested in a specific laptop product in the list of suggestions shown in the previous conversation, you should set this parameter to the name of that laptop product.",
+                "examples": [
+                    {
+                        "the suggested list of laptops": "1. Laptop A\n2. Laptop B\n3. Laptop C",
+                        "input": "Tôi quan tâm đến chiếc laptop đầu tiên.",
+                        "output": "Laptop A",
+                    },
+                    {
+                        "the suggested list of laptops": "1. Laptop A v1\n2. Laptop B v2\n3. Laptop C v3",
+                        "input": "laptop B",
+                        "output": "Laptop B v2",
+                    },
+                ],
             }
         },
     ):
@@ -57,12 +69,13 @@ class Tool(LangGPTTemplateTool):
 
         wandb_client.finish_call(
             call,
-            output= temporary_memory.user_memory,
+            output=temporary_memory.user_memory,
         )
 
         return ToolResponse(
             type="finished", content="User requirements collected successfully."
         )
+
 
 '''
 def extract_laptop_name(text: str) -> Optional[str]:

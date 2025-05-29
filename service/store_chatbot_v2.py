@@ -10,6 +10,7 @@ import agents.accessory.generate_response as accessories_generate_response
 
 import agents.undetermined.generate_response as undetermined_generate_response
 import agents.detect_demand as detect_demand
+from agents.utils import instructions_to_string
 from service.wandb import client as wandb_client
 from uuid import UUID
 from openai.types.chat import (
@@ -31,12 +32,15 @@ from repositories.user_memory import (
     update as update_user_memory,
 )
 
+from utils import EvaluateContext
+
 
 def gen_answer(
     user_id: UUID,
     thread_id: UUID,
     history: list[ChatCompletionMessageParam],
     limit: int = 10,
+    evaluate_context: EvaluateContext = EvaluateContext(),
 ) -> str:
     gen_answer_call = wandb_client.create_call(
         op="gen_answer",
@@ -81,6 +85,16 @@ def gen_answer(
     )
     wandb_client.finish_call(detect_demand_call, output=detect_demand_response)
     if detect_demand_response.type == "message":
+        evaluate_context.instruction = instructions_to_string(
+            detect_demand_response.instructions
+        )
+        update_user_memory(
+            id=user_memory.id,
+            data=UpdateUserMemoryModel.model_validate(
+                detect_demand_memory.user_memory, from_attributes=True
+            ),
+        )
+        wandb_client.finish_call(gen_answer_call, output=detect_demand_response)
         return detect_demand_response.content or ""
 
     detect_demand_agent_temp_memory_user_memory = (
@@ -101,6 +115,7 @@ def gen_answer(
     response = handler(
         user_memory=detect_demand_agent_temp_memory_user_memory,  # type: ignore
         conversation_messages=conversation_messages,
+        evaluate_context=evaluate_context,
     )
 
     wandb_client.finish_call(gen_answer_call, output=response)
@@ -110,6 +125,7 @@ def gen_answer(
 def handle_phone_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
+    evaluate_context: EvaluateContext,
 ) -> str:
 
     # 1. collect and retrieval phone
@@ -185,6 +201,17 @@ def handle_phone_request(
         instructions=collect_and_retrieval_response.instructions,
         phone_knowledge=collect_and_retrieval_response.knowledge,
     )  # run agent generate response about phone
+
+    if generate_agent.system_prompt_config.phone_knowledge:
+        evaluate_context.knowledge.append(
+            f"""## PHONE KNOWLEDGE:\n{generate_agent.system_prompt_config.phone_knowledge_to_string()}"""
+        )
+
+    evaluate_context.knowledge.append(
+        generate_agent.system_prompt_config.base_knowledge_to_string()
+    )
+    evaluate_context.instruction = f"""## INSTRUCTIONS:\n{generate_agent.system_prompt_config.instructions_to_string()}"""
+
     print("Phone generate response:", generate_response)
     wandb_client.finish_call(
         generate_agent_call,
@@ -199,6 +226,7 @@ def handle_phone_request(
 def handle_laptop_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
+    evaluate_context: EvaluateContext,
 ) -> str:
     collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
@@ -285,6 +313,7 @@ def handle_laptop_request(
 def handle_accessories_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
+    evaluate_context: EvaluateContext,
 ) -> str:
     collect_and_retrieval_memory = (
         accessories_collect_and_retrieval.AgentTemporaryMemory(
@@ -376,6 +405,7 @@ def handle_accessories_request(
 def handle_undetermined_request(
     user_memory: UserMemoryModel,
     conversation_messages: list[ChatCompletionMessageParam],
+    evaluate_context: EvaluateContext,
 ) -> str:
 
     generate_agent_call = wandb_client.create_call(
@@ -398,7 +428,10 @@ def handle_undetermined_request(
     generate_response = generate_agent.run(
         conversation_messages=conversation_messages,
     )
-
+    evaluate_context.knowledge = [
+        f"""## BASE KNOWLEDGE:\n{generate_agent.system_prompt_config.base_knowledge_to_string()}"""
+    ]
+    evaluate_context.instruction = f"""## INSTRUCTION:\n{generate_agent.system_prompt_config.working_steps_to_string()}"""
     update_user_memory(
         id=user_memory.id,
         data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),

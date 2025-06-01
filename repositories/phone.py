@@ -118,3 +118,9 @@ def get_all() -> list[PhoneModel]:
     with Session() as session:
         phones = session.execute(select(Phone)).scalars().all()
         return [PhoneModel.model_validate(phone) for phone in phones]
+
+
+def delete_all():
+    with Session() as session:
+        session.query(Phone).delete()
+        session.commit()

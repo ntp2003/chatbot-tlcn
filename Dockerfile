@@ -43,4 +43,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 EXPOSE 8000
 
+RUN playwright install
+RUN playwright install-deps
+
 CMD ["python", "app.py"]

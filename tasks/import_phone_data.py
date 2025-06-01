@@ -259,9 +259,9 @@ def format_value(value):
         formatted_items = set()
         for item in value:
             if isinstance(item, dict) and "displayValue" in item:
-                formatted_items.update(item["displayValue"])
+                formatted_items.add(item["displayValue"])
             else:
-                formatted_items.update(str(item))
+                formatted_items.add(str(item))
         return ", ".join(formatted_items)
     elif isinstance(value, dict):
         # Nếu là dict, lấy displayValue nếu có

@@ -79,16 +79,17 @@ class VietnameseUserSimulator(BaseModel):
         self.email = user_info["email"]
 
         # Calculate raw budget values
-        raw_min_budget = min(self.phone.price * 0.9, self.phone.price - 1000000)
+        raw_min_budget = min(self.phone.min_price * 0.9, self.phone.min_price - 1000000)
         if raw_min_budget < 0:
             raw_min_budget = 0
-        raw_max_budget = max(self.phone.price * 1.1, 0, self.phone.price + 1000000)
+        raw_max_budget = max(
+            self.phone.max_price * 1.1, 0, self.phone.max_price + 1000000
+        )
 
         # Round to millions
         self.min_budget = math.floor(raw_min_budget / 1000000) * 1000000
         self.max_budget = math.ceil(raw_max_budget / 1000000) * 1000000
 
-        print(f"Original price: {self.phone.price:,} VND")
         print(f"Rounded budget range: {self.min_budget:,} - {self.max_budget:,} VND")
 
         self.basic_phone_info = (

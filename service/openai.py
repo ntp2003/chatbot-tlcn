@@ -16,6 +16,8 @@ from openai.types.chat import (
 
 # _chat_model = "gpt-4o-mini"
 _chat_model = "gpt-4o-mini-2024-07-18"
+#_fine_tuning_model = "ft:gpt-4o-mini-2024-07-18:personal::Bd6tFkDq"
+_fine_tuning_model = "ft:gpt-4o-mini-2024-07-18:personal::Bdao7Wp2"
 _client = OpenAI(
     api_key=env.OPENAI_API_KEY,
 )

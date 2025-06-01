@@ -60,8 +60,34 @@ def search_by_semantic(
             )
 
         faqs = session.execute(stmt).scalars().all()
+        # tránh out of range
+        if len(faqs) > 0:
+            for faq in faqs:
+                print(f"faq id : {faq.id}")
 
+        
         return [FAQModel.model_validate(faq) for faq in faqs]
+    
+def search_by_semantic_with_id(
+    question_embedding: list[float], top_k: int = 4, threshold: Optional[float] = None
+) -> tuple[list[FAQModel], list[int]]:
+    with Session() as session:
+        stmt = (
+            select(FAQ)
+            .order_by(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding).asc()
+            )
+            .limit(top_k)
+        )
+        if threshold:
+            stmt = stmt.where(
+                FAQ.embedding.cast(Vector).cosine_distance(question_embedding)
+                < 1 - threshold
+            )
+
+        faqs = session.execute(stmt).scalars().all()
+        print(f"faqs id : {faqs[0].id}")
+        return [FAQModel.model_validate(faq) for faq in faqs], [faq.id for faq in faqs]
 
 
 def get_all() -> list[FAQModel]:

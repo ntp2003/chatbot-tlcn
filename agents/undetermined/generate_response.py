@@ -9,7 +9,7 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
 )
 from models.faq import FAQModel
-from service.openai import OpenAIChatCompletionsRequest, _client, _chat_model
+from service.openai import OpenAIChatCompletionsRequest, _client, _chat_model, _fine_tuning_model
 from openai.types.chat_model import ChatModel
 from agents.base import (
     Agent as AgentBase,
@@ -49,7 +49,8 @@ class SystemPromptConfig(SystemPromptConfigBase):
     ]
     rules: list[str] = [
         "Don't talk nonsense and make up facts.",
-        "Use only the Vietnamese language in your responses.",
+        #"Use only the Vietnamese language in your responses.",
+        "Use only the Vietnamese language in your response. Always refer to yourself using 'em' pronoun. Address the user based on how they refer to themselves . If their preferred address term cannot be determined from their self-reference, then base it on their provided <User gender>: use 'anh' for male, 'chị' for female. If the gender is unknown or not provided, use the polite neutral term 'anh/chị'."
     ]
     working_steps: list[str] = [
         (
@@ -64,6 +65,11 @@ class SystemPromptConfig(SystemPromptConfigBase):
     initialization: str = (
         "As a/an <ROLE>, you are required to adhere to the <WORKFLOW> and follow the <RULES> strictly, using your expertise in <SKILLS> to do your task effectively."
     )
+    '''
+    conversation_tone: str = (
+        "Always refer to yourself using 'em' pronoun. Address the user based on how they refer to themselves . If their preferred address term cannot be determined from their self-reference, then base it on their provided <User gender>: use 'anh' for male, 'chị' for female. If the gender is unknown or not provided, use the polite neutral term 'anh/chị'."
+    )
+    '''
 
     def skills_to_string(self) -> str:
         return "\n".join([f"- {skill}" for skill in self.skills])
@@ -156,7 +162,7 @@ class Agent(AgentBase):
 
     @override
     def run(
-        self, conversation_messages: list[ChatCompletionMessageParam], *args, **kwargs
+        self, conversation_messages: list[ChatCompletionMessageParam], gen_answer_model: ChatModel = _chat_model, *args, **kwargs
     ) -> AgentResponseBase:
         """
         Run the agent to generate a response based on the conversation messages.
@@ -203,7 +209,7 @@ class Agent(AgentBase):
             )
         )
 
-        openai_request = self._get_openai_request()
+        openai_request = self._get_openai_request(gen_answer_model)
         response = openai_request.create()
         response_message = response.choices[0].message
 
@@ -222,7 +228,8 @@ class Agent(AgentBase):
     ) -> OpenAIChatCompletionsRequest:
         return OpenAIChatCompletionsRequest(
             messages=self.temporary_memory.chat_completions_messages,
-            model=self.model,
+            #model=self.model,
+            model=_fine_tuning_model,
             temperature=0,
             timeout=60,
         )

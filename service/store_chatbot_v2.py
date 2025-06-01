@@ -31,6 +31,8 @@ from repositories.user_memory import (
     create as create_user_memory,
     update as update_user_memory,
 )
+from openai.types.chat_model import ChatModel
+from service.openai import _chat_model
 
 from utils import EvaluateContext
 

@@ -28,11 +28,12 @@ from service.phone import Config, search, PhoneFilter
 from agents.config import BRAND_DEFAULT
 from repositories.user_memory import update as update_user_memory
 from models.user_memory import UpdateUserMemoryModel
-from tools.phone.brand_and_version import Tool as BrandAndVersionTool
+from tools.phone.brand import Tool as BrandTool
 from tools.phone.price import Tool as PriceTool
 from tools.phone.user_intent import Tool as UserIntentTool
 from tools.phone.name import Tool as NameTool
 import weave
+from tools.phone.configuration import Tool as PhoneConfigurationTool
 
 
 class SystemPromptConfig(SystemPromptConfigBase):
@@ -156,8 +157,9 @@ class Agent(AgentBase):
         tools: list[ToolBase] = [
             UserIntentTool(),
             NameTool(),
-            BrandAndVersionTool(),
+            BrandTool(),
             PriceTool(),
+            PhoneConfigurationTool(),
         ],
         system_prompt_config: SystemPromptConfig = SystemPromptConfig(),
         model: ChatModel = _chat_model,
@@ -450,6 +452,8 @@ class Agent(AgentBase):
             max_price=user_memory.max_price,
             min_price=user_memory.min_price,
             name=user_memory.current_filter.product_name or user_memory.product_name,
+            rom=user_memory.rom,
+            color=user_memory.color,
         )
 
         return filter
@@ -474,7 +478,10 @@ class Agent(AgentBase):
 
     def _phones_to_response(self, phones: list[PhoneModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
-        knowledge = [phone.to_text(include_key_selling_points=True) for phone in phones]
+        knowledge = [
+            phone.to_text(include_key_selling_points=True, include_sku_variants=True)
+            for phone in phones
+        ]
 
         instructions = []
 

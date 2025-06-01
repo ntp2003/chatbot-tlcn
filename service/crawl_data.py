@@ -25,20 +25,23 @@ def md(html, **options):
 
 
 header = {
-    "accept": "application/json",
-    # "accept-language": "en-US,en;q=0.9,vi;q=0.8",
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9,vi;q=0.8",
+    "accept-encoding": "gzip, deflate, br",
+    "cache-control": "no-cache",
     "content-type": "application/json",
     "order-channel": "1",
     "origin": "https://fptshop.com.vn",
-    # "priority": "u=1, i",
-    # "referer": "https://fptshop.com.vn/",
-    # "sec-ch-ua": '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
-    # "sec-ch-ua-mobile": "?0",
-    # "sec-ch-ua-platform": "Windows",
-    # "sec-fetch-dest": "empty",
-    # "sec-fetch-mode": "cors",
-    # "sec-fetch-site": "same-site",
+    "pragma": "no-cache",
+    "referer": "https://fptshop.com.vn/",
+    "sec-ch-ua": '"Google Chrome";v="136", "Chromium";v="136", "Not.A/Brand";v="99"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "x-requested-with": "XMLHttpRequest",
 }
 
 

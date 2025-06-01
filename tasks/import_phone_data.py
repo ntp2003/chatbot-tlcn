@@ -121,7 +121,7 @@ def import_batch_data_to_database(batch: list[dict]):
                     create_phone_variant(
                         CreatePhoneVariantModel(
                             phone_id=id,
-                            attributes=get_attributes(sku_id),
+                            attributes=sku.get("attributes", []),
                             slug=sku.get("slug", ""),
                             sku=sku_id,
                             name=sku.get("name", "not known"),
@@ -178,6 +178,11 @@ def extract_fpt_phone_data(
         # Lấy mô tả của sản phẩm
         for item in items:
             item["description"] = get_description(item.get("slug"), True)
+            skus = []
+            for sku in item.get("skus", []):
+                sku["attributes"] = get_attributes(sku.get("sku", ""))
+                skus.append(sku)
+            item["skus"] = skus
 
         # Ghi dữ liệu vào file jsonl
         if len(items) > limit:
@@ -210,6 +215,11 @@ def extract_fpt_phone_data(
                     description = get_description(item.get("slug"), True)
                     if description:
                         item["description"] = description
+                    skus = []
+                    for sku in item.get("skus", []):
+                        sku["attributes"] = get_attributes(sku.get("sku", ""))
+                        skus.append(sku)
+                    item["skus"] = skus
 
         print(f"Import successful {imported_count} {category_slug} items")
         print("--- %s seconds ---" % (time.time() - start_time))

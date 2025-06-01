@@ -77,29 +77,19 @@ def get_price_information(sku: str) -> dict:
         return data.get("data", {})
 
 
-from playwright.sync_api import sync_playwright
-
-
-from playwright.sync_api import sync_playwright
-import json
-
-
 def get_attributes(sku: str) -> list[dict]:
     """
     Get product attributes using Playwright's request context to bypass 403.
     """
     url = f"https://papi.fptshop.com.vn/gw/v1/public/bff-before-order/product/attribute?sku={sku}"
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        context = browser.new_context()
-        request_context = context.request
-
-        response = request_context.get(url)
-        if response.status != 200:
-            raise Exception(f"Failed to fetch: {response.status}")
-
-        result = response.json()
-        browser.close()
-
-        return result.get("data", {}).get("attributeItem", [])
+    with httpx.Client() as client:
+        response = client.get(url, headers=header, timeout=60)
+        try:
+            response.raise_for_status()
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                return []
+            raise e
+        data = response.json()
+        return data.get("data", {}).get("attributeItem", [])

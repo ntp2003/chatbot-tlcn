@@ -25,23 +25,19 @@ def md(html, **options):
 
 
 header = {
-    "accept": "application/json, text/plain, */*",
+    "accept": "application/json",
     "accept-language": "en-US,en;q=0.9,vi;q=0.8",
-    "accept-encoding": "gzip, deflate, br",
-    "cache-control": "no-cache",
     "content-type": "application/json",
     "order-channel": "1",
     "origin": "https://fptshop.com.vn",
-    "pragma": "no-cache",
     "referer": "https://fptshop.com.vn/",
-    "sec-ch-ua": '"Google Chrome";v="136", "Chromium";v="136", "Not.A/Brand";v="99"',
+    "sec-ch-ua": '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": '"Windows"',
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-site",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "x-requested-with": "XMLHttpRequest",
 }
 
 
@@ -84,7 +80,7 @@ def get_attributes(sku: str) -> list[dict]:
     """
     url = f"https://papi.fptshop.com.vn/gw/v1/public/bff-before-order/product/attribute?sku={sku}"
 
-    with httpx.Client() as client:
+    with httpx.Client(http2=True) as client:
         response = client.get(url, headers=header, timeout=60)
         response.raise_for_status()
         data = response.json()

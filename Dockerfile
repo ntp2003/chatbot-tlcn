@@ -12,21 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-    libnss3-dev \
-    libatk-bridge2.0-dev \
-    libdrm-dev \
-    libxkbcommon-dev \
-    libxcomposite-dev \
-    libxdamage-dev \
-    libxrandr-dev \
-    libgbm-dev \
-    libxss-dev \
-    libasound2-dev \
-    libatspi2.0-dev \
-    libgtk-3-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 # Cài poetry
 RUN pip install poetry==1.8.2
 
@@ -57,8 +42,5 @@ COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/pytho
 COPY --from=builder /usr/local/bin /usr/local/bin
 
 EXPOSE 8000
-
-RUN playwright install
-RUN playwright install-deps
 
 CMD ["python", "app.py"]

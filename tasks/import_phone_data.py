@@ -10,6 +10,14 @@ import os
 from models.phone import CreatePhoneModel, Phone
 from repositories.phone import upsert_phone
 from service.embedding import get_embedding
+import httpx
+from repositories.phone_variant import (
+    delete_by_phone_id as delete_phone_variant_by_phone_id,
+    create as create_phone_variant,
+    CreatePhoneVariantModel,
+)
+from models.phone_variant import PhoneVariantModel, Variant
+from service.crawl_data import get_attributes, get_description, get_price_information
 
 """
 How to run:
@@ -78,14 +86,14 @@ def import_batch_data_to_database(batch: list[dict]):
         promotions = phone.get("promotions", [])
         skus = phone.get("skus", [])
         key_selling_points = phone.get("keySellingPoints", [])
-        price = phone.get("price", -1)
+        price = phone.get("currentPrice", -1)
         score = phone.get("score", 0)
         # name_embedding = get_embedding(name)
         name_embedding = get_embedding(f"Phone Name: {name}")
-        if id is not None:
+        if id is not None and brand_code is not None and product_type is not None:
             print(f"Upserting phone: {id}, {name}, {brand_code}")
 
-            upsert_phone(
+            phone_model = upsert_phone(
                 CreatePhoneModel(
                     id=id,
                     name=name,
@@ -96,12 +104,39 @@ def import_batch_data_to_database(batch: list[dict]):
                     promotions=promotions,
                     skus=skus,
                     key_selling_points=key_selling_points,
-                    price=price,
+                    min_price=min([sku.get("currentPrice", 0) for sku in skus]),
+                    max_price=max([sku.get("currentPrice", 0) for sku in skus]),
                     score=score,
                     data=phone,
                     name_embedding=name_embedding,
+                    variants_table_text=variants_to_markdown(skus),
                 )
             )
+
+            delete_phone_variant_by_phone_id(id)
+            phone_variants: list[PhoneVariantModel] = []
+            for sku in skus:
+                sku_id = sku.get("sku", "")
+                phone_variants.append(
+                    create_phone_variant(
+                        CreatePhoneVariantModel(
+                            phone_id=id,
+                            attributes=get_attributes(sku_id),
+                            slug=sku.get("slug", ""),
+                            sku=sku_id,
+                            name=sku.get("name", "not known"),
+                            data=sku,
+                            variants=[
+                                Variant(**variant)
+                                for variant in sku.get("variants", [])
+                            ],
+                        )
+                    )
+                )
+            phone_model.attributes_table_text = convert_json_list_to_markdown_table(
+                [phone_variant.attributes for phone_variant in phone_variants]
+            )
+            upsert_phone(CreatePhoneModel(**phone_model.model_dump()))
 
 
 def extract_fpt_phone_data(
@@ -142,7 +177,7 @@ def extract_fpt_phone_data(
 
         # Lấy mô tả của sản phẩm
         for item in items:
-            item["description"] = get_description(item.get("slug"))
+            item["description"] = get_description(item.get("slug"), True)
 
         # Ghi dữ liệu vào file jsonl
         if len(items) > limit:
@@ -172,7 +207,7 @@ def extract_fpt_phone_data(
                 if items is None:
                     raise Exception(f"not found category ({category_slug})")
                 for item in items:
-                    description = get_description(item.get("slug"))
+                    description = get_description(item.get("slug"), True)
                     if description:
                         item["description"] = description
 
@@ -187,48 +222,6 @@ def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
             writer.write(data)
         else:
             writer.write_all(data)
-
-
-from markdownify import MarkdownConverter
-
-
-class IgnoreImageConverter(MarkdownConverter):
-    """
-    Create a custom MarkdownConverter that adds two newlines after an image
-    """
-
-    def convert_img(self, el, text, parent_tags):
-        return ""
-
-
-# Create shorthand method for conversion
-def md(html, **options):
-    return IgnoreImageConverter(**options).convert(html)
-
-
-# Lấy thông tin mô tả của sản phẩm
-def get_description(item_slug: str) -> str | None:
-    url = f"{env.FPTSHOP_BASE_URL}/{item_slug}"
-
-    response = httpx.get(url, headers=header)
-    data = BeautifulSoup(response.content, "html.parser")
-    description_object = data.find("div", {"id": "MoTaSanPham"})
-    if description_object is None:
-        return None
-
-    description_object = description_object.select_one(  # type: ignore
-        # "div.relative.w-full .description-container"
-        "div.ProductContent_description-container__miT3z"
-    )
-
-    if description_object is None:
-        return None
-
-    i_tag = description_object.find("i")
-    if i_tag is not None:
-        i_tag.decompose()
-
-    return md(str(description_object)).replace("\n\n", "\n")
 
 
 """
@@ -247,3 +240,141 @@ def update_embedding():
             session.add(phone)
 
         session.commit()
+
+
+import json
+from collections import defaultdict
+
+
+def format_value(value):
+    """Format giá trị thành string phù hợp"""
+    if value is None:
+        return ""
+    elif isinstance(value, str):
+        return value.strip()
+    elif isinstance(value, list):
+        if len(value) == 0:
+            return ""
+        # Xử lý list có object với displayValue
+        formatted_items = set()
+        for item in value:
+            if isinstance(item, dict) and "displayValue" in item:
+                formatted_items.update(item["displayValue"])
+            else:
+                formatted_items.update(str(item))
+        return ", ".join(formatted_items)
+    elif isinstance(value, dict):
+        # Nếu là dict, lấy displayValue nếu có
+        if "displayValue" in value:
+            return value["displayValue"]
+        else:
+            return str(value)
+    else:
+        return str(value)
+
+
+def convert_json_list_to_markdown_table(json_data_list):
+    """
+    Chuyển đổi danh sách JSON data thành bảng markdown
+    """
+    # Dictionary để lưu trữ tất cả attributes theo propertyName
+    all_attributes = defaultdict(lambda: defaultdict(list))
+
+    # Thu thập tất cả attributes từ tất cả JSON objects
+    for json_idx, json_data in enumerate(json_data_list):
+        for group in json_data:
+            group_name = group["groupName"]
+            for attr in group["attributes"]:
+                property_name = attr["propertyName"]
+                display_name = attr["displayName"]
+                unit = attr.get("unit", "")
+                value = attr.get("value")
+
+                # Lưu thông tin attribute
+                all_attributes[property_name]["display_name"] = display_name
+                all_attributes[property_name]["unit"] = unit
+                all_attributes[property_name]["group_name"] = group_name
+                all_attributes[property_name]["values"].append(format_value(value))
+
+    # Tạo bảng markdown
+    markdown_lines = []
+
+    # Header
+    headers = ["Nhóm", "Thuộc tính", "Giá trị"]
+    markdown_lines.append("| " + " | ".join(headers) + " |")
+    markdown_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+    # Data rows
+    for property_name, attr_info in all_attributes.items():
+        group_name = attr_info["group_name"]
+        display_name = attr_info["display_name"]
+        unit = attr_info["unit"] or ""
+
+        # Gộp tất cả values thành một string, loại bỏ duplicates và empty values
+        unique_values = []
+        for val in attr_info["values"]:
+            if val and val not in unique_values:
+                unique_values.append(val)
+
+        formatted_values = ", ".join(unique_values) if unique_values else ""
+        # Nếu không có giá trị nào, bỏ qua dòng này
+        if not formatted_values or not formatted_values.strip():
+            continue
+
+        # Gộp unit và formatted_values
+        if unit and formatted_values:
+            combined_value = f"{formatted_values} ({unit})"
+        elif formatted_values:
+            combined_value = formatted_values
+        elif unit:
+            combined_value = f"({unit})"
+        else:
+            combined_value = ""
+
+        row = [group_name, display_name, combined_value]
+        markdown_lines.append("| " + " | ".join(row) + " |")
+
+    return "\n".join(markdown_lines)
+
+
+def variants_to_markdown(products: list[dict]) -> str:
+    if not products:
+        return "Không có sản phẩm nào."
+
+    # Xác định tất cả các loại variant để tạo cột động
+    variant_keys = set()
+    for product in products:
+        for variant in product.get("variants", []):
+            variant_keys.add(variant.get("propertyName"))
+    variant_keys = sorted(variant_keys)
+
+    # Tạo header bảng Markdown
+    headers = (
+        ["Tên sản phẩm"]
+        + [key.capitalize() for key in variant_keys]
+        + ["Giá gốc", "Giá hiện tại"]
+    )
+    header_row = "| " + " | ".join(headers) + " |"
+    separator_row = "| " + " | ".join(["---"] * len(headers)) + " |"
+
+    # Tạo từng dòng cho bảng
+    rows = []
+    for product in products:
+        name = f"{product['displayName']}"
+        original_price = f"{product['originalPrice']:,}₫"
+        current_price = f"{product['currentPrice']:,}₫"
+
+        # Chuẩn bị variant theo đúng cột
+        variant_map = {
+            v["propertyName"]: v["displayValue"] for v in product.get("variants", [])
+        }
+        variant_values = [variant_map.get(key, "") for key in variant_keys]
+
+        row = (
+            "| "
+            + " | ".join([name] + variant_values + [original_price, current_price])
+            + " |"
+        )
+        rows.append(row)
+
+    return "\n".join([header_row, separator_row] + rows)

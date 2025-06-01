@@ -1,17 +1,45 @@
 from enum import Enum
 from pydantic import BaseModel, ConfigDict, field_validator
-from sqlalchemy import Select, select, true, case, func, literal
+from sqlalchemy import Select, any_, select, text, true, case, func, literal, alias
+from sqlalchemy.orm import noload, contains_eager
 from models.phone import Phone, PhoneModel
+from models.user_memory import NumericConfiguration
+from models.phone_variant import PhoneVariant
 from sqlalchemy.sql.expression import and_
-from sqlalchemy.sql.operators import OperatorType, ge, le, eq
+from sqlalchemy.sql.operators import OperatorType, ge, le, eq, Operators
 from sqlalchemy.sql.elements import ColumnElement
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, TypeVar, Union
 from repositories.phone import search as search_phone
 from service.embedding import get_embedding
 from pgvector.sqlalchemy import Vector
 import weave
 
 _T = TypeVar("_T")
+
+
+def filter_by_variant_property(
+    column: ColumnElement,
+    property_name: str,
+    operator: str,
+    value: Union[str, int, float],
+):
+    if isinstance(value, str):
+        condition = f"variant_json->>'value' {operator} :value"
+        params = {"property_name": property_name, "value": value}
+    else:
+        condition = f"(variant_json->>'value')::numeric {operator} :value"
+        params = {"property_name": property_name, "value": value}
+
+    return text(
+        f"""
+            EXISTS (
+                SELECT 1 
+                FROM unnest({column}) AS variant_json
+                WHERE variant_json->>'propertyName' = :property_name 
+                AND {condition}
+            )
+        """
+    ).params(**params)
 
 
 class FilterAttribute(BaseModel, Generic[_T]):
@@ -50,6 +78,8 @@ class FilterType(str, Enum):
     PRICE = "price"
     BRAND = "brand"
     NAME = "name"
+    COLOR = "color"
+    ROM = "rom"
 
 
 class Config(BaseModel):
@@ -57,7 +87,12 @@ class Config(BaseModel):
     limit: int = 4
     offset: int = 0
     is_recommending: bool = False
-    recommend_priority: list[FilterType] = [FilterType.BRAND, FilterType.PRICE]
+    recommend_priority: list[FilterType] = [
+        FilterType.BRAND,
+        FilterType.PRICE,
+        FilterType.ROM,
+        FilterType.COLOR,
+    ]
 
 
 class PhoneFilter(BaseModel):
@@ -65,6 +100,8 @@ class PhoneFilter(BaseModel):
     brand_code: str | None = None
     max_price: float | None = None
     min_price: int | None = None
+    rom: NumericConfiguration | None = None
+    color: str | None = None
     name: str | None = None
 
     def get_price_condition_expression(self) -> ColumnElement[bool]:
@@ -73,7 +110,7 @@ class PhoneFilter(BaseModel):
         if self.min_price:
             filters.append(
                 FilterAttribute(
-                    column=Phone.price.expression,
+                    column=Phone.max_price.expression,
                     operator=ge,
                     value=self.min_price,
                 )
@@ -81,7 +118,7 @@ class PhoneFilter(BaseModel):
         if self.max_price:
             filters.append(
                 FilterAttribute(
-                    column=Phone.price.expression,
+                    column=Phone.min_price.expression,
                     operator=le,
                     value=self.max_price,  # type: ignore
                 )
@@ -91,6 +128,51 @@ class PhoneFilter(BaseModel):
 
         if expression is None:
             return true()
+        return expression
+
+    def get_color_condition_expression(self) -> ColumnElement[bool]:
+        if not self.color:
+            return true()
+
+        filter = FilterAttribute(
+            column=PhoneVariant.color_tsv.expression,
+            operator=lambda x, y: x.op("@@")(y),
+            value=func.phraseto_tsquery(
+                "vietnamese_simple_unaccent", literal(self.color.lower())
+            ),  # type: ignore
+        )
+
+        return filter.condition_expression()
+
+    def get_rom_condition_expression(self) -> ColumnElement[bool]:
+        if not self.rom:
+            return true()
+
+        filters = []
+
+        if self.rom.min_value is not None:
+            filters.append(
+                FilterAttribute(
+                    column=PhoneVariant.variants.expression,
+                    operator=lambda x, y: filter_by_variant_property(x, "rom", ">=", y),
+                    value=self.rom.min_value,  # type: ignore
+                )
+            )
+
+        if self.rom.max_value is not None:
+            filters.append(
+                FilterAttribute(
+                    column=PhoneVariant.variants.expression,
+                    operator=lambda x, y: filter_by_variant_property(x, "rom", "<=", y),
+                    value=self.rom.max_value,  # type: ignore
+                )
+            )
+
+        expression = FilterCondition(filters=filters).condition_expression()
+
+        if expression is None:
+            return true()
+
         return expression
 
     def get_brand_condition_expression(self) -> ColumnElement[bool]:
@@ -126,6 +208,8 @@ class PhoneFilter(BaseModel):
             self.get_price_condition_expression()
             & self.get_brand_condition_expression()
             & self.get_name_condition_expression()
+            & self.get_rom_condition_expression()
+            & self.get_color_condition_expression()
         )
 
     def score_by_priority(
@@ -146,6 +230,18 @@ class PhoneFilter(BaseModel):
         if filter_type == FilterType.NAME:
             return case(
                 (self.get_name_condition_expression(), func.pow(10, priority)),
+                else_=0,
+            )
+
+        if filter_type == FilterType.COLOR:
+            return case(
+                (self.get_color_condition_expression(), func.pow(10, priority)),
+                else_=0,
+            )
+
+        if filter_type == FilterType.ROM:
+            return case(
+                (self.get_rom_condition_expression(), func.pow(10, priority)),
                 else_=0,
             )
 
@@ -194,6 +290,10 @@ class PhoneFilter(BaseModel):
     def to_statement(self) -> Select:
         stmt = (
             select(Phone)
+            .join(
+                Phone.phone_variants,
+            )
+            .options(contains_eager(Phone.phone_variants))
             .where(self.condition_expression())
             .order_by(*self.order_by_expressions())
             .limit(self.config.limit)

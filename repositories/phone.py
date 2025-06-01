@@ -57,9 +57,9 @@ def upsert_phone(data: CreatePhoneModel) -> PhoneModel:
         # Nếu có ít nhất 1 bản ghi được cập nhật => id đã tồn tại trong db => cập nhật thông tin phone entity
         id = data.id
         # Truy vấn lấy ra phone entity dã cập nhật từ db dựa trên id
-        updated_phone = session.execute(
-            select(Phone).where(Phone.id == id)
-        ).scalar_one()
+        updated_phone = (
+            session.execute(select(Phone).where(Phone.id == id)).unique().scalar_one()
+        )
         return PhoneModel.model_validate(updated_phone)
 
 
@@ -110,7 +110,7 @@ def search_phone_by_phone_name(
 
 def search(stmt: Select) -> List[PhoneModel]:
     with Session() as session:
-        phones = session.execute(stmt).scalars().all()
+        phones = session.execute(stmt).scalars().unique().all()
         return [PhoneModel.model_validate(phone) for phone in phones]
 
 
@@ -118,3 +118,9 @@ def get_all() -> list[PhoneModel]:
     with Session() as session:
         phones = session.execute(select(Phone)).scalars().all()
         return [PhoneModel.model_validate(phone) for phone in phones]
+
+
+def delete_all():
+    with Session() as session:
+        session.query(Phone).delete()
+        session.commit()

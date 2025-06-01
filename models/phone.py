@@ -1,13 +1,17 @@
 from datetime import datetime, timezone
 from typing import Optional
 from unittest import result
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import ARRAY, DateTime, Text, JSON
+from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy import ARRAY, DateTime, Integer, Text, JSON
 from sqlalchemy.dialects.postgresql import JSONB
 from pydantic import BaseModel, ConfigDict
 from .base import Base
 from env import env
 from pgvector.sqlalchemy import Vector
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from models.phone_variant import PhoneVariant, PhoneVariantModel
 
 
 class Phone(Base):
@@ -22,8 +26,22 @@ class Phone(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
     skus: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
+    phone_variants: Mapped[list["PhoneVariant"]] = relationship(
+        "PhoneVariant",
+        foreign_keys="PhoneVariant.phone_id",
+        back_populates="phone",
+        uselist=True,
+        lazy="joined",
+    )
+
+    attributes_table_text: Mapped[str] = mapped_column(
+        Text, nullable=True, default=None
+    )
+    variants_table_text: Mapped[str] = mapped_column(Text, nullable=True, default=None)
+
     key_selling_points: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
-    price: Mapped[int] = mapped_column(Text, nullable=False)
+    min_price: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    max_price: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     score: Mapped[float] = mapped_column(Text, nullable=False)
     name_embedding: Mapped[list[float]] = mapped_column(Vector, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
@@ -47,9 +65,12 @@ class CreatePhoneModel(BaseModel):
     promotions: list[dict]
     skus: list[dict]
     key_selling_points: list[dict]
-    price: int
+    min_price: int
+    max_price: int
     score: float
     name_embedding: list[float]
+    attributes_table_text: Optional[str] = None
+    variants_table_text: Optional[str] = None
 
 
 class PhoneModel(BaseModel):
@@ -64,10 +85,14 @@ class PhoneModel(BaseModel):
     description: str
     promotions: list[dict]
     skus: list[dict]
+    phone_variants: list["PhoneVariantModel"] = []
     key_selling_points: list[dict]
-    price: int
+    min_price: int
+    max_price: int
     score: float
     name_embedding: list[float]
+    attributes_table_text: Optional[str] = None
+    variants_table_text: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 
@@ -141,10 +166,7 @@ class PhoneModel(BaseModel):
             else f"Phone: {self.name}\n"
         )
 
-        if self.is_on_sale():
-            result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
-        else:
-            result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
+        result += f"- Prices starting from: {self.min_price} VND\n"
 
         if include_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(
@@ -162,8 +184,11 @@ class PhoneModel(BaseModel):
             result += f"- Promotions:\n{promotion_text}\n" if promotion_text else ""
 
         if include_sku_variants:
-            sku_variants_text = self._get_sku_variants_text()
-            result += f"- Variants: {sku_variants_text}\n" if sku_variants_text else ""
+            result += (
+                f"- Variants:\n{self.variants_table_text}\n"
+                if self.variants_table_text
+                else "\n"
+            )
 
         if include_description:
             result += f"- Description: [{self.description}]"

@@ -1,10 +1,9 @@
-from ast import stmt
 from db import Session
 from typing import Optional, List
 from models.laptop import CreateLaptopModel, Laptop, LaptopModel
 from sqlalchemy import Select, select, case, update as sql_update
 
-#from tools.utils.search import LaptopFilter
+# from tools.utils.search import LaptopFilter
 
 from sqlalchemy.sql.elements import ColumnElement
 from service.embedding import get_embedding
@@ -18,6 +17,7 @@ def create_laptop(data: CreateLaptopModel) -> LaptopModel:
         session.commit()
         return LaptopModel.model_validate(laptop)
 
+
 def get_laptop(laptop_id: str) -> Optional[LaptopModel]:
     with Session() as session:
         laptop = session.get(Laptop, laptop_id)
@@ -29,9 +29,7 @@ def update_laptop(data: CreateLaptopModel) -> int:
         update_info = data.model_dump()
         update_info.pop("id", None)
         update_count = (
-            session.query(Laptop)
-            .filter(Laptop.id == data.id)
-            .update(update_info)
+            session.query(Laptop).filter(Laptop.id == data.id).update(**update_info)
         )
         session.commit()
         return update_count
@@ -47,12 +45,14 @@ def upsert_laptop(data: CreateLaptopModel) -> LaptopModel:
         ).scalar_one()
         return LaptopModel.model_validate(updated_laptop)
 
+
 def search(stmt: Select) -> List[LaptopModel]:
     with Session() as session:
         laptops = session.execute(stmt).scalars().all()
         return [LaptopModel.model_validate(laptop) for laptop in laptops]
-    
-'''
+
+
+"""
 def search_laptop_by_filter(
     filter: LaptopFilter,
     order_by: ColumnElement,
@@ -93,10 +93,10 @@ def search_laptop_by_name(
             .all()
         )
         return [LaptopModel.model_validate(laptop) for laptop in laptops]
-'''
+"""
 
 
-'''
+"""
 # Tìm laptop Dell từ 15-30 triệu
 filter = LaptopFilter(
     brand_code="DELL",
@@ -112,11 +112,11 @@ laptops = search_laptop_by_filter(
     limit=4,
     page=0
 )
-'''
-'''
+"""
+"""
 similar_laptops = search_laptop_by_name(
     laptop_name="Macbook Pro M2",
     top_k=4,
     threshold=0.8
 )
-'''
+"""

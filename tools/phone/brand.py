@@ -8,21 +8,20 @@ from service.wandb import client as wandb_client
 
 class Tool(LangGPTTemplateTool):
     """
-    Tool for collecting and updating the requirements about the brand and version of a phone product.
+    Tool for collecting and updating the requirements about the brand of a phone product.
     """
 
     def __init__(
         self,
-        name: str = "collect_and_update_phone_brand_and_version_requirements",
-        role: str = "Collect and update the user's requirements about the brand and version of a phone product for consultation or search.",
+        name: str = "collect_and_update_phone_brand",
+        role: str = "Collect and update the user's requirements about the brand of a phone product for consultation or search.",
         prerequisites: list[str] = [],
         rules: list[str] = [
             "Collect and update based on the latest user message.",
             "The brand refer to the name of the company or label that manufactures the phone product.",
-            "The version refer to the specific model or variant of the phone product.",
         ],
         cases_used: list[str] = [
-            "The user mentions the information about the brand or version of a phone product they want to consult or purchase.",
+            "The user mentions the information about the brand of a phone product they want to consult or purchase.",
         ],
         returns: list[str] = [],
         params: dict[str, Any] = {
@@ -39,10 +38,6 @@ class Tool(LangGPTTemplateTool):
                         "output": None,
                     },
                 ],
-            },
-            "phone_version": {
-                "type": "string",
-                "description": "The version of the phone product the user wants to consult or purchase.",
             },
         },
     ):
@@ -63,7 +58,6 @@ class Tool(LangGPTTemplateTool):
             inputs={"kwargs": kwargs, "user_memory": temporary_memory.user_memory},
         )
         phone_brand = kwargs.get("phone_brand")
-        phone_version = kwargs.get("phone_version")
 
         user_memory = temporary_memory.user_memory
 

@@ -23,6 +23,11 @@ class ProductType(str, Enum):
     UNDETERMINED = "undetermined"
 
 
+class NumericConfiguration(BaseModel):
+    min_value: float | int | None = None
+    max_value: float | int | None = None
+
+
 @dataclass
 class UserIntent:
     is_user_needs_other_suggestions: bool = False
@@ -79,6 +84,10 @@ class UserMemory(Base):
     current_filter: Mapped[CurrentFilter] = mapped_column(
         JSONB, nullable=False, server_default="{}"
     )
+    color: Mapped[str | None] = mapped_column(Text, nullable=True)
+    rom: Mapped[NumericConfiguration] = mapped_column(
+        JSONB, nullable=False, server_default="{}"
+    )
     consultation_status: Mapped[ConsultationStatus] = mapped_column(
         JSONB, nullable=False, server_default="{}"
     )
@@ -109,6 +118,8 @@ class UpdateUserMemoryModel(BaseModel):
     intent: UserIntent
     current_filter: CurrentFilter
     consultation_status: ConsultationStatus
+    color: str | None = None
+    rom: NumericConfiguration | None = None
 
 
 class UserMemoryModel(BaseModel):
@@ -128,6 +139,9 @@ class UserMemoryModel(BaseModel):
     intent: UserIntent
     current_filter: CurrentFilter
     consultation_status: ConsultationStatus
+    color: str | None = None
+    rom: NumericConfiguration | None = None
+
     created_at: datetime
     updated_at: datetime
 

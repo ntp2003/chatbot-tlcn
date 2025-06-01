@@ -80,28 +80,26 @@ def get_price_information(sku: str) -> dict:
 from playwright.sync_api import sync_playwright
 
 
+from playwright.sync_api import sync_playwright
+import json
+
+
 def get_attributes(sku: str) -> list[dict]:
     """
-    Get the attributes of a product by its SKU using Playwright to bypass 403.
-    Returns a list of attributes.
+    Get product attributes using Playwright's request context to bypass 403.
     """
     url = f"https://papi.fptshop.com.vn/gw/v1/public/bff-before-order/product/attribute?sku={sku}"
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context()
-        page = context.new_page()
+        request_context = context.request
 
-        # Thực hiện fetch qua JS trên trang để lấy dữ liệu JSON
-        js_script = f"""
-            async () => {{
-                const response = await fetch("{url}");
-                const data = await response.json();
-                return data;
-            }}
-        """
+        response = request_context.get(url)
+        if response.status != 200:
+            raise Exception(f"Failed to fetch: {response.status}")
 
-        result = page.evaluate(js_script)
+        result = response.json()
         browser.close()
 
         return result.get("data", {}).get("attributeItem", [])

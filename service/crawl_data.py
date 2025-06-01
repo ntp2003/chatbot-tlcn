@@ -83,6 +83,11 @@ def get_attributes(sku: str) -> list[dict]:
 
     with httpx.Client() as client:
         response = client.get(url, headers=header, timeout=60)
-        response.raise_for_status()
+        try:
+            response.raise_for_status()
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                return []
+            raise e
         data = response.json()
         return data.get("data", {}).get("attributeItem", [])

@@ -191,7 +191,12 @@ class PhoneModel(BaseModel):
             )
 
         if include_description:
-            result += f"- Description: [{self.description}]"
+            result += (
+                f"\n- Phone configuration: {self.attributes_table_text}\n"
+                if self.attributes_table_text
+                else ""
+            )
+            result += f"\n- Description: [{self.description}]"
         if not is_markdown:
             result += "\nReference Link: " + env.FPTSHOP_BASE_URL + "/" + self.slug
         return result

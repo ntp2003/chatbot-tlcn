@@ -4,7 +4,7 @@ from typing import Optional
 from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.chat import ChatCompletionMessageParam
 from pydantic import BaseModel
-from models.phone import PhoneModel
+from models.laptop import LaptopModel
 from uuid import uuid4
 from models.thread import ThreadModel
 from models.user import UserModel, UserRole
@@ -16,7 +16,7 @@ import random
 import math
 from deepeval.test_case.llm_test_case import LLMTestCase
 from deepeval.test_case.conversational_test_case import ConversationalTestCase
-from repositories.phone import get_all
+from repositories.laptop import get_all
 from utils import EvaluateContext
 from service.wandb import *
 import deepeval.models.llms.openai_model as deepeval_models
@@ -34,32 +34,34 @@ gpt_41_mini = deepeval_models.GPTModel(
 
 
 class Step(str, Enum):
-    GREETING_AND_PROVIDE_NEED = "greeting and provide needs about the phone"
-    SEARCH_PHONE_BASE_ON_THE_BRAND = "search phone base on the brand"
-    SEARCH_PHONE_BASE_ON_THE_PRICE = "search phone base on the price"
-    SELECT_ONE_PHONE_FROM_THE_LIST = "select one phone from the list"
-    ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE = (
-        "ask for the details of the selected phone"
+    GREETING_AND_PROVIDE_NEED = "greeting and provide needs about the laptop"
+    SEARCH_LAPTOP_BASE_ON_THE_BRAND = "search laptop base on the brand"
+    SEARCH_LAPTOP_BASE_ON_THE_PRICE = "search laptop base on the price"
+    SEARCH_LAPTOP_BASE_ON_THE_PURPOSE = "search laptop base on the purpose"
+    SELECT_ONE_LAPTOP_FROM_THE_LIST = "select one laptop from the list"
+    ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP = (
+        "ask for the details of the selected laptop"
     )
     PROVIDE_PHONE_NUMBER = "provide phone number"
     PROVIDE_EMAIL = "provide email"
 
 
-class VietnameseUserSimulator(BaseModel):
-    phone: PhoneModel
+class VietnameseLaptopUserSimulator(BaseModel):
+    laptop: LaptopModel
     name: str = "Nguyen Van A"  # Default name, will be overwritten
     age: int = 30  # Default age, will be overwritten
     gender: str = "male"  # Default
     phone_number: str = "0912345678"  # Default phone number, will be overwritten
     email: str = "ntp@gmail.com"  # Default email, will be overwritten
+    purpose: str = "work"  # Default purpose for laptop
 
     min_budget: int = 0
     max_budget: int = (
-        100000000  # Default budget range, will be calculated based on phone price
+        100000000  # Default budget range, will be calculated based on laptop price
     )
 
-    basic_phone_info: str = ""
-    full_phone_info: str = ""
+    basic_laptop_info: str = ""
+    full_laptop_info: str = ""
 
     response_format: Optional[ResponseFormat] = None  # Will be set in init method
     step_history: list[Step] = []
@@ -77,14 +79,13 @@ class VietnameseUserSimulator(BaseModel):
         self.gender = user_info["gender"]
         self.phone_number = user_info["phone_number"]
         self.email = user_info["email"]
+        self.purpose = user_info["purpose"]
 
         # Calculate raw budget values
-        raw_min_budget = min(self.phone.min_price * 0.9, self.phone.min_price - 1000000)
+        raw_min_budget = min(self.laptop.price * 0.9, self.laptop.price - 2000000)
         if raw_min_budget < 0:
             raw_min_budget = 0
-        raw_max_budget = max(
-            self.phone.max_price * 1.1, 0, self.phone.max_price + 1000000
-        )
+        raw_max_budget = max(self.laptop.price * 1.1, 0, self.laptop.price + 2000000)
 
         # Round to millions
         self.min_budget = math.floor(raw_min_budget / 1000000) * 1000000
@@ -92,11 +93,11 @@ class VietnameseUserSimulator(BaseModel):
 
         print(f"Rounded budget range: {self.min_budget:,} - {self.max_budget:,} VND")
 
-        self.basic_phone_info = (
-            self.phone.to_text(include_key_selling_points=True)
-            + f"- Brand: {self.phone._get_brand_name()}"
+        self.basic_laptop_info = (
+            self.laptop.to_text(include_key_selling_points=True)
+            + f"- Brand: {self.laptop._get_brand_name()}"
         )
-        self.full_phone_info = self.phone.to_text(True, True, True, True)
+        self.full_laptop_info = self.laptop.to_text(True, True, True, True)
         self.response_format = {
             "type": "json_schema",
             "json_schema": {
@@ -134,8 +135,40 @@ class VietnameseUserSimulator(BaseModel):
         self.llm_test_cases: list[LLMTestCase] = []
 
     def generate_user_info(self) -> dict:
-        """Generate diverse and random Vietnamese user information"""
+        """Generate diverse and random Vietnamese user information with laptop purposes"""
+        # ...existing code for name generation (same as phone)...
 
+        # Laptop-specific purposes
+        purposes = [
+            "work",
+            "gaming",
+            "study",
+            "design",
+            "programming",
+            "office work",
+            "video editing",
+            "general use",
+            "business",
+        ]
+
+        # Generate purpose based on age
+        if self.age < 25:
+            purpose_weights = [0.2, 0.3, 0.4, 0.05, 0.05]  # More gaming and study
+        elif self.age < 40:
+            purpose_weights = [0.4, 0.2, 0.1, 0.15, 0.15]  # More work and design
+        else:
+            purpose_weights = [0.5, 0.1, 0.05, 0.1, 0.25]  # More work and office
+
+        purpose = random.choices(purposes[:5], weights=purpose_weights)[0]
+
+        # Use existing phone generation logic for basic info
+        user_info = self._generate_basic_user_info()
+        user_info["purpose"] = purpose
+
+        return user_info
+
+    def _generate_basic_user_info(self) -> dict:
+        """Generate basic user info (reuse from phone simulator)"""
         # Vietnamese surnames (họ)
         surnames = [
             "Nguyễn",
@@ -448,6 +481,7 @@ class VietnameseUserSimulator(BaseModel):
             "ỷ": "y",
             "ỹ": "y",
             "đ": "d",
+            # Uppercase versions
             "À": "A",
             "Á": "A",
             "Ạ": "A",
@@ -522,104 +556,6 @@ class VietnameseUserSimulator(BaseModel):
             result += accent_map.get(char, char)
         return result
 
-    def get_system_prompt(self) -> list[ChatCompletionMessageParam]:
-        role = (
-            "# ROLE\n"
-            "You are a Vietnamese virtual user playing the role of a customer searching for a new phone. You are chatting with an online customer service agent.\n"
-        )
-        profile = (
-            f"## PROFILE\n"
-            f"- Name: {self.name}\n"
-            f"- Age: {self.age}\n"
-            f"- Gender: {self.gender}\n"
-            f"- Phone number: {self.phone_number}\n"
-            f"- Email: {self.email}\n"
-            f"- Min budget: {self.min_budget}\n"
-            f"- Max budget: {self.max_budget}\n"
-        )
-
-        latest_step_in_past = self.step_history[-1] if self.step_history else None
-
-        phone_looking_for = (
-            (f"## INFORMATION ABOUT PHONE LOOKING FOR\n" f"{self.basic_phone_info}\n")
-            if latest_step_in_past
-            in [
-                Step.GREETING_AND_PROVIDE_NEED,
-                Step.SEARCH_PHONE_BASE_ON_THE_BRAND,
-                Step.SEARCH_PHONE_BASE_ON_THE_PRICE,
-                Step.SELECT_ONE_PHONE_FROM_THE_LIST,
-            ]
-            else (
-                f"## INFORMATION ABOUT PHONE LOOKING FOR\n" f"{self.full_phone_info}\n"
-            )
-        )
-
-        step_descriptions = (
-            "## STEP DESCRIPTIONS\n"
-            f"1. **{Step.GREETING_AND_PROVIDE_NEED.value}**: Greet the customer support agent and provide your needs about the phone. Example: 'Mình cần tư vấn điện thoại', 'Hello', 'Mình cần mua điện thoại tầm {self.min_budget} đến {self.max_budget} VNĐ', 'Xin chào', 'Tôi cần một chiếc điện thoại mới'.\n"
-            f"2. **{Step.SEARCH_PHONE_BASE_ON_THE_BRAND.value}**: Search for a phone based on the brand. Example: 'Tìm điện thoại {self.phone._get_brand_name()}', 'Tìm điện thoại thương hiệu {self.phone._get_brand_name()}', '{self.phone._get_brand_name()}', 'hãng {self.phone._get_brand_name()}'.\n"
-            f"3. **{Step.SEARCH_PHONE_BASE_ON_THE_PRICE.value}**: Search for a phone based on the price. Example: 'Tìm điện thoại dưới {self.min_budget} VNĐ', 'Tìm điện thoại trên {self.max_budget} VNĐ', 'Tìm điện thoại giá {self.min_budget} đến {self.max_budget} VNĐ'.\n"
-            f"4. **{Step.SELECT_ONE_PHONE_FROM_THE_LIST.value}**: Select one phone from the suggested list in past. Example: 'Chọn điện thoại {self.phone.name} trong danh sách', 'Chọn điện thoại {self.phone.name}', 'cái đầu', 'mẫu số 2'.\n"
-            f"5. **{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE.value}**: Ask for the details of the selected phone by analyzing the information in the <INFORMATION ABOUT PHONE LOOKING FOR> section. Extract key specifications, features, and selling points from this section, and formulate natural, relevant questions about these aspects. Generate diverse questions that someone would genuinely ask when considering purchasing this specific phone model. Vary your questions between technical specifications, features, promotions, colors, accessories, user experience, and purchase conditions.\n"
-            f"6. **{Step.PROVIDE_PHONE_NUMBER.value}**: Provide your phone number when you need further consultation or are ready to purchase. Example: 'Số điện thoại của mình là {self.phone_number}'.\n"
-            f"7. **{Step.PROVIDE_EMAIL.value}**: Provide your email. Example: 'Email của mình là {self.email}'.\n"
-        )
-
-        if latest_step_in_past:
-            count = 0
-            for step in reversed(self.step_history):
-                if step == latest_step_in_past:
-                    count += 1
-                else:
-                    break
-
-            # Add special guidance for Step 5 to help generate diverse questions
-            if latest_step_in_past == Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE:
-                asked_topics = self.extract_asked_topics()
-                if asked_topics:
-                    suggested_topics = self.suggest_new_topics(asked_topics)
-                    step_descriptions += (
-                        "\n## QUESTION HISTORY AND SUGGESTIONS\n"
-                        f"You have already asked about: {', '.join(asked_topics)}.\n"
-                        f"Consider asking about new topics such as: {', '.join(suggested_topics)}.\n"
-                    )
-
-            step_descriptions += (
-                "\n## LATEST STEP IN PAST\n"
-                f"Latest step in past: {latest_step_in_past.value}\n"
-                f"Stay at step {latest_step_in_past.value} for {count} turns.\n"
-            )
-
-        task = (
-            "## TASK\n"
-            "Generate a response message for the latest user message based on the current step of the conversation. It's like talking to a real customer service agent."
-        )
-
-        guidelines = (
-            "## GUIDELINES\n"
-            "1. The response message should be in Vietnamese.\n"
-            "2. When starting the conversation, greet the customer support agent and provide your needs about the phone. (Step 1)\n"
-            "3. If the user asks for the type of product that you are looking for, provide the type of product that you are looking for is a phone.\n"
-            f"4. If the user asks for the brand of the phone that you are looking for, provide the brand of the phone that you are looking for is {self.phone._get_brand_name()} (Step 2).\n"
-            f"5. If the user asks for the price of the phone that you are looking for, provide the price of the phone that you are looking for is between {self.min_budget} and {self.max_budget} (Step 3).\n"
-            f"6. If the user provides a list of phones and has a phone that you are looking for ({self.phone.name}), select that phone from the list (Step 4).\n"
-            "7. If the user provides the details of the selected phone and asks your contact information, ask for the details of the selected phone (Step 5).\n"
-            "8. If the user provides the details of the selected phone and the latest step in past is Step 5, provide your phone number or email (Step 6 or Step 7).\n"
-            "\n## NOTE:\n"
-            "- Imagine you are a real customer who has just interacted with a business. Your response should sound natural and authentic.\n"
-            "- You need to stay at the Step 5 minimum 2 turns and maximum 4 turns before moving to Step 6 or Step 7.\n"
-            f"- If you can't find the phone ({self.phone.name}) in the list of phones suggested by the customer service agent, you can ask for other phones (e.g., 'Có mẫu nào khác không?'). "
-            "If still unavailable, then provide your contact information (Step 6 or Step 7).\n"
-        )
-
-        return [
-            {"role": "system", "content": role + "\n" + profile},
-            {"role": "system", "content": phone_looking_for},
-            {"role": "system", "content": step_descriptions},
-            {"role": "system", "content": task},
-            {"role": "system", "content": guidelines},
-        ]
-
     def extract_asked_topics(self) -> list[str]:
         """Extract topics that the user has already asked about using OpenAI API"""
         # If no conversation yet, return empty list
@@ -659,11 +595,11 @@ class VietnameseUserSimulator(BaseModel):
         messages = [
             {
                 "role": "system",
-                "content": "You are an assistant that analyzes conversation history to identify what topics a customer has already asked about regarding a phone. Extract key topics the customer has asked about such as battery life, camera quality, screen size, price, etc.",
+                "content": "You are an assistant that analyzes conversation history to identify what topics a customer has already asked about regarding a laptop. Extract key topics the customer has asked about such as performance, graphics, battery life, price, specs, etc.",
             },
             {
                 "role": "user",
-                "content": f"Here is a conversation between a customer and a phone store assistant. Identify what specific topics about the phone the customer has already asked about in these messages:\n\n"
+                "content": f"Here is a conversation between a customer and a laptop store assistant. Identify what specific topics about the laptop the customer has already asked about in these messages:\n\n"
                 + "\n".join(
                     [
                         f"{'Customer' if msg['role'] == 'assistant' else 'Assistant'}: {msg.get('content', '')}"
@@ -688,7 +624,7 @@ class VietnameseUserSimulator(BaseModel):
         except Exception as e:
             print(f"Error extracting topics: {e}")
             # Fallback to basic topic extraction
-            return ["general phone information"]
+            return ["general laptop information"]
 
     def suggest_new_topics(self, asked_topics: list[str]) -> list[str]:
         """Suggest topics that haven't been asked about yet using OpenAI API"""
@@ -697,7 +633,7 @@ class VietnameseUserSimulator(BaseModel):
             "type": "json_schema",
             "json_schema": {
                 "name": "SuggestedTopics",
-                "description": "Topics that could be asked about the phone",
+                "description": "Topics that could be asked about the laptop",
                 "strict": True,
                 "schema": {
                     "type": "object",
@@ -705,7 +641,7 @@ class VietnameseUserSimulator(BaseModel):
                         "suggested_topics": {
                             "type": "array",
                             "items": {"type": "string"},
-                            "description": "List of suggested topics about the phone that haven't been asked yet",
+                            "description": "List of suggested topics about the laptop that haven't been asked yet",
                         }
                     },
                     "additionalProperties": False,
@@ -718,11 +654,11 @@ class VietnameseUserSimulator(BaseModel):
         messages = [
             {
                 "role": "system",
-                "content": "You are an assistant that suggests relevant topics a customer could ask about a phone. Given the phone details and topics already asked, suggest new topics that would be helpful for making a purchase decision.",
+                "content": "You are an assistant that suggests relevant topics a customer could ask about a laptop. Given the laptop details and topics already asked, suggest new topics that would be helpful for making a purchase decision.",
             },
             {
                 "role": "user",
-                "content": f"Phone information:\n{self.full_phone_info}\n\nTopics already asked about:\n{', '.join(asked_topics)}\n\nSuggest 5 other relevant topics the customer could ask about this phone that haven't been covered yet.",
+                "content": f"Laptop information:\n{self.full_laptop_info}\n\nTopics already asked about:\n{', '.join(asked_topics)}\n\nSuggest 5 other relevant topics the customer could ask about this laptop that haven't been covered yet.",
             },
         ]
 
@@ -742,7 +678,7 @@ class VietnameseUserSimulator(BaseModel):
             print(f"Error suggesting topics: {e}")
             # Fallback to some generic topics
             return [
-                "special features",
+                "performance specs",
                 "warranty policy",
                 "accessories",
                 "user experience",
@@ -750,6 +686,13 @@ class VietnameseUserSimulator(BaseModel):
             ]
 
     def get_next_user_message(self) -> str:
+        latest_step_in_past = self.step_history[-1] if self.step_history else None
+
+        # Add special guidance for Step 6 to help generate diverse questions
+        if latest_step_in_past == Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP:
+            asked_topics = self.extract_asked_topics()
+            if asked_topics:
+                suggested_topics = self.suggest_new_topics(asked_topics)
 
         messages: list[ChatCompletionMessageParam] = [
             *self.get_system_prompt(),
@@ -822,6 +765,7 @@ class VietnameseUserSimulator(BaseModel):
         return reversed_history
 
     def simulate_conversation(self, max_turns: int = 20):
+        """Simulate laptop purchasing conversation"""
         if not self.conversation_history:
             self.conversation_history.append(
                 {
@@ -842,26 +786,130 @@ class VietnameseUserSimulator(BaseModel):
         for step in self.step_history:
             print(f"Step: {step.value}")
 
+    def get_system_prompt(self) -> list[ChatCompletionMessageParam]:
+        role = (
+            "# ROLE\n"
+            "You are a Vietnamese virtual user playing the role of a customer searching for a new laptop. You are chatting with an online customer service agent.\n"
+        )
+        profile = (
+            f"## PROFILE\n"
+            f"- Name: {self.name}\n"
+            f"- Age: {self.age}\n"
+            f"- Gender: {self.gender}\n"
+            f"- Phone number: {self.phone_number}\n"
+            f"- Email: {self.email}\n"
+            f"- Purpose: {self.purpose}\n"
+            f"- Min budget: {self.min_budget}\n"
+            f"- Max budget: {self.max_budget}\n"
+        )
 
-@weave.op(name="get_simulated_user")
-def get_simulated_user(phone: PhoneModel) -> str:
-    """Get a simulated Vietnamese user for the given phone"""
-    simulate_user = VietnameseUserSimulator(phone=phone)
+        latest_step_in_past = self.step_history[-1] if self.step_history else None
+
+        laptop_looking_for = (
+            (f"## INFORMATION ABOUT LAPTOP LOOKING FOR\n" f"{self.basic_laptop_info}\n")
+            if latest_step_in_past
+            in [
+                Step.GREETING_AND_PROVIDE_NEED,
+                Step.SEARCH_LAPTOP_BASE_ON_THE_BRAND,
+                Step.SEARCH_LAPTOP_BASE_ON_THE_PRICE,
+                Step.SEARCH_LAPTOP_BASE_ON_THE_PURPOSE,
+                Step.SELECT_ONE_LAPTOP_FROM_THE_LIST,
+            ]
+            else (
+                f"## INFORMATION ABOUT LAPTOP LOOKING FOR\n"
+                f"{self.full_laptop_info}\n"
+            )
+        )
+
+        step_descriptions = (
+            "## STEP DESCRIPTIONS\n"
+            f"1. **{Step.GREETING_AND_PROVIDE_NEED.value}**: Greet the customer support agent and provide your needs about the laptop. Example: 'Mình cần tư vấn laptop', 'Hello', 'Mình cần mua laptop tầm {self.min_budget} đến {self.max_budget} VNĐ', 'Xin chào', 'Tôi cần một chiếc laptop mới cho {self.purpose}'.\n"
+            f"2. **{Step.SEARCH_LAPTOP_BASE_ON_THE_BRAND.value}**: Search for a laptop based on the brand. Example: 'Tìm laptop {self.laptop._get_brand_name()}', 'Tìm laptop thương hiệu {self.laptop._get_brand_name()}', '{self.laptop._get_brand_name()}', 'hãng {self.laptop._get_brand_name()}'.\n"
+            f"3. **{Step.SEARCH_LAPTOP_BASE_ON_THE_PRICE.value}**: Search for a laptop based on the price. Example: 'Tìm laptop dưới {self.max_budget} VNĐ', 'Tìm laptop giá {self.min_budget} đến {self.max_budget} VNĐ'.\n"
+            f"4. **{Step.SEARCH_LAPTOP_BASE_ON_THE_PURPOSE.value}**: Search for a laptop based on the purpose. Example: 'Tìm laptop cho {self.purpose}', 'laptop dành cho {self.purpose}', 'laptop {self.purpose}'.\n"
+            f"5. **{Step.SELECT_ONE_LAPTOP_FROM_THE_LIST.value}**: Select one laptop from the suggested list in past. Example: 'Chọn laptop {self.laptop.name} trong danh sách', 'Chọn laptop {self.laptop.name}', 'cái đầu', 'mẫu số 2'.\n"
+            f"6. **{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP.value}**: Ask for the details of the selected laptop by analyzing the information in the <INFORMATION ABOUT LAPTOP LOOKING FOR> section. Extract key specifications, features, and selling points from this section, and formulate natural, relevant questions about these aspects. Generate diverse questions that someone would genuinely ask when considering purchasing this specific laptop model. Vary your questions between technical specifications, features, promotions, colors, accessories, user experience, and purchase conditions.\n"
+            f"7. **{Step.PROVIDE_PHONE_NUMBER.value}**: Provide your phone number when you need further consultation or are ready to purchase. Example: 'Số điện thoại của mình là {self.phone_number}'.\n"
+            f"8. **{Step.PROVIDE_EMAIL.value}**: Provide your email. Example: 'Email của mình là {self.email}'.\n"
+        )
+
+        if latest_step_in_past:
+            count = 0
+            for step in reversed(self.step_history):
+                if step == latest_step_in_past:
+                    count += 1
+                else:
+                    break
+
+            # Add special guidance for Step 6 to help generate diverse questions
+            if latest_step_in_past == Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP:
+                asked_topics = self.extract_asked_topics()
+                if asked_topics:
+                    suggested_topics = self.suggest_new_topics(asked_topics)
+                    step_descriptions += (
+                        "\n## QUESTION HISTORY AND SUGGESTIONS\n"
+                        f"You have already asked about: {', '.join(asked_topics)}.\n"
+                        f"Consider asking about new topics such as: {', '.join(suggested_topics)}.\n"
+                    )
+
+            step_descriptions += (
+                "\n## LATEST STEP IN PAST\n"
+                f"Latest step in past: {latest_step_in_past.value}\n"
+                f"Stay at step {latest_step_in_past.value} for {count} turns.\n"
+            )
+
+        task = (
+            "## TASK\n"
+            "Generate a response message for the latest user message based on the current step of the conversation. It's like talking to a real customer service agent."
+        )
+
+        guidelines = (
+            "## GUIDELINES\n"
+            "1. The response message should be in Vietnamese.\n"
+            "2. When starting the conversation, greet the customer support agent and provide your needs about the laptop. (Step 1)\n"
+            "3. If the user asks for the type of product that you are looking for, provide the type of product that you are looking for is a laptop.\n"
+            f"4. If the user asks for the brand of the laptop that you are looking for, provide the brand of the laptop that you are looking for is {self.laptop._get_brand_name()} (Step 2).\n"
+            f"5. If the user asks for the price of the laptop that you are looking for, provide the price of the laptop that you are looking for is between {self.min_budget} and {self.max_budget} (Step 3).\n"
+            f"6. If the user asks for the purpose of the laptop, provide the purpose is {self.purpose} (Step 4).\n"
+            f"7. If the user provides a list of laptops and has a laptop that you are looking for ({self.laptop.name}), select that laptop from the list (Step 5).\n"
+            "8. If the user provides the details of the selected laptop and asks your contact information, ask for the details of the selected laptop (Step 6).\n"
+            "9. If the user provides the details of the selected laptop and the latest step in past is Step 6, provide your phone number or email (Step 7 or Step 8).\n"
+            "\n## NOTE:\n"
+            "- Imagine you are a real customer who has just interacted with a business. Your response should sound natural and authentic.\n"
+            "- You need to stay at the Step 6 minimum 2 turns and maximum 4 turns before moving to Step 7 or Step 8.\n"
+            f"- If you can't find the laptop ({self.laptop.name}) in the list of laptops suggested by the customer service agent, you can ask for other laptops (e.g., 'Có mẫu nào khác không?'). "
+            "If still unavailable, then provide your contact information (Step 7 or Step 8).\n"
+        )
+
+        return [
+            {"role": "system", "content": role + "\n" + profile},
+            {"role": "system", "content": laptop_looking_for},
+            {"role": "system", "content": step_descriptions},
+            {"role": "system", "content": task},
+            {"role": "system", "content": guidelines},
+        ]
+
+
+@weave.op(name="get_simulated_laptop_user")
+def get_simulated_laptop_user(laptop: LaptopModel) -> str:
+    """Get a simulated Vietnamese user for the given laptop"""
+    simulate_user = VietnameseLaptopUserSimulator(laptop=laptop)
     simulate_user.init()
     simulate_user.simulate_conversation()
-    print(f"Simulated user for {phone.name} has finished the conversation.")
+    print(f"Simulated user for {laptop.name} has finished the conversation.")
     return simulate_user.model_dump_json()
 
 
-@weave.op(name=f"evaluate_conversation")
-def evaluate_conversation(
-    output: VietnameseUserSimulator,
+@weave.op(name=f"evaluate_laptop_conversation")
+def evaluate_laptop_conversation(
+    output: VietnameseLaptopUserSimulator,
 ) -> dict:
-    """Evaluate the conversation of the simulated user"""
+    """Evaluate the laptop conversation of the simulated user"""
     faithfulness_metric = FaithfulnessMetric(threshold=0.5, model=gpt_41_mini)
     role_adherence_metric = RoleAdherenceMetric(threshold=0.5, model=gpt_41_mini)
     faithfulness_scrores = []
     role_adherence_scores = []
+
     for llm_test_case in output.llm_test_cases:
         retrieval_context = (
             "\n\n".join(llm_test_case.retrieval_context)
@@ -904,6 +952,7 @@ def evaluate_conversation(
         faithfulness_metric.measure(faiithfullness_test_case)
         role_adherence_scores.append(role_adherence_metric.score)
         faithfulness_scrores.append(faithfulness_metric.score)
+
     return {
         "faithfulness_score": (
             sum(faithfulness_scrores) / len(faithfulness_scrores)
@@ -918,50 +967,51 @@ def evaluate_conversation(
     }
 
 
-@weave.op(name="create_phone_dataset")
-def create_dataset(limit: int = 5) -> Dataset:
-    """Create a dataset of simulated Vietnamese users for phone evaluation"""
-    phones = get_all()[:limit]
+@weave.op(name="create_laptop_dataset")
+def create_laptop_dataset(limit: int = 5) -> Dataset:
+    """Create a dataset of simulated Vietnamese users for laptop evaluation"""
+    laptops = get_all()[:limit]
 
     dataset = Dataset(
-        name="Phone-Evaluation-Dataset",
+        name="Laptop-Evaluation-Dataset",
         rows=weave.Table(
             [
                 {
-                    "phone": phone,
-                    "simulated_user": get_simulated_user(phone),
+                    "laptop": laptop,
+                    "simulated_user": get_simulated_laptop_user(laptop),
                 }
-                for phone in phones
+                for laptop in laptops
             ]
         ),
-        description="Dataset of simulated Vietnamese users for phone evaluation",
+        description="Dataset of simulated Vietnamese users for laptop evaluation",
     )
     weave.publish(dataset)
     return dataset
 
 
-@weave.op(name="get_simulated_user_from_record")
-def get_simulated_user_from_record(simulated_user) -> VietnameseUserSimulator:
-    """Get a simulated user from a dataset record"""
-
-    return VietnameseUserSimulator.model_validate_json(simulated_user)
+@weave.op(name="get_simulated_laptop_user_from_record")
+def get_simulated_laptop_user_from_record(
+    simulated_user,
+) -> VietnameseLaptopUserSimulator:
+    """Get a simulated laptop user from a dataset record"""
+    return VietnameseLaptopUserSimulator.model_validate_json(simulated_user)
 
 
 if __name__ == "__main__":
     try:
-        dataset = weave.ref("Phone-Evaluation-Dataset").get()
+        dataset = weave.ref("Laptop-Evaluation-Dataset").get()
     except:
         print("Dataset not found, creating a new one...")
-        dataset = create_dataset(limit=10)
+        dataset = create_laptop_dataset(limit=10)
 
     evaluation = Evaluation(
-        name="Phone Evaluation",
+        name="Laptop Evaluation",
         dataset=dataset,
-        scorers=[evaluate_conversation],
-        evaluation_name="phone_evaluation",
+        scorers=[evaluate_laptop_conversation],
+        evaluation_name="laptop_evaluation",
     )
-    print("Starting phone evaluation...")
+    print("Starting laptop evaluation...")
     print(f"Dataset: {dataset.name}")
-    print(f"Number of phones: {len(dataset.rows)}")
+    print(f"Number of laptops: {len(dataset.rows)}")
     print("Evaluating...")
-    asyncio.run(evaluation.evaluate(get_simulated_user_from_record))
+    asyncio.run(evaluation.evaluate(get_simulated_laptop_user_from_record))

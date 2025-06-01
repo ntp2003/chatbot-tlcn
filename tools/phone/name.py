@@ -45,6 +45,11 @@ class Tool(LangGPTTemplateTool):
                         "input": "I want to buy the phone series 1.",
                         "output": "Phone brand A series 1",
                     },
+                    {
+                        "The one suggested phone in the consultation process": "Phone X",
+                        "input": "details about it",
+                        "output": "Phone X",
+                    },
                 ],
             }
         },

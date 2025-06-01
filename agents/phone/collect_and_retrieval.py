@@ -291,7 +291,11 @@ class Agent(AgentBase):
             user_memory.current_filter.product_name = (
                 phones[0].name if len(phones) == 1 else None
             )
-            return self._phones_to_response(phones)
+            return (
+                self._phones_to_response(phones)
+                if len(phones) > 1
+                else self._specific_phone_to_response(phones[0])
+            )
 
         self.temporary_memory.offset = 0
         user_memory.consultation_status.is_recommending = False

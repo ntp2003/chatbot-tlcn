@@ -3,6 +3,7 @@ from db import Session
 from typing import Optional, List
 from models.phone import CreatePhoneModel, Phone, PhoneModel
 from sqlalchemy import Select, select, case
+from sqlalchemy.orm import contains_eager
 from tools.utils.search import PhoneFilter
 from sqlalchemy.sql.elements import ColumnElement
 from service.embedding import get_embedding
@@ -118,11 +119,14 @@ def get_all() -> list[PhoneModel]:
     with Session() as session:
         phones = (
             session.execute(
-                select(Phone).join(
+                select(Phone)
+                .join(
                     Phone.phone_variants,
                 )
+                .options(contains_eager(Phone.phone_variants))
             )
             .scalars()
+            .unique()
             .all()
         )
         return [PhoneModel.model_validate(phone) for phone in phones]

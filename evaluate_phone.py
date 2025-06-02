@@ -900,10 +900,11 @@ def evaluate_conversation(
                 else []
             ),
         )
-        role_adherence_metric.measure(convo_test_case)
-        faithfulness_metric.measure(faiithfullness_test_case)
-        role_adherence_scores.append(role_adherence_metric.score)
-        faithfulness_scrores.append(faithfulness_metric.score)
+
+        role_adherence_scores.append(role_adherence_metric.measure(convo_test_case))
+        faithfulness_scrores.append(
+            faithfulness_metric.measure(faiithfullness_test_case)
+        )
     return {
         "faithfulness_score": (
             sum(faithfulness_scrores) / len(faithfulness_scrores)

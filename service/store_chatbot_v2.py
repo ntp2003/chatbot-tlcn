@@ -85,9 +85,7 @@ def gen_answer(
     )
     wandb_client.finish_call(detect_demand_call, output=detect_demand_response)
     if detect_demand_response.type == "message":
-        evaluate_context.instruction = instructions_to_string(
-            detect_demand_response.instructions
-        )
+        evaluate_context.instruction = f"## INSTRUCTIONS:\n{instructions_to_string(detect_demand_response.instructions)}"
         update_user_memory(
             id=user_memory.id,
             data=UpdateUserMemoryModel.model_validate(
@@ -298,6 +296,15 @@ def handle_laptop_request(
         laptop_knowledge=collect_and_retrieval_response.knowledge,
     )  # run agent generate response about laptop
     print("Laptop generate response:", generate_response)
+    if generate_agent.system_prompt_config.laptop_knowledge:
+        evaluate_context.knowledge.append(
+            f"""## PHONE KNOWLEDGE:\n{generate_agent.system_prompt_config.laptop_knowledge_to_string()}"""
+        )
+
+    evaluate_context.knowledge.append(
+        generate_agent.system_prompt_config.base_knowledge_to_string()
+    )
+    evaluate_context.instruction = f"""## INSTRUCTIONS:\n{generate_agent.system_prompt_config.instructions_to_string()}"""
 
     wandb_client.finish_call(
         generate_agent_call,

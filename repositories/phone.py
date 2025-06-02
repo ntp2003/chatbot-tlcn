@@ -116,7 +116,15 @@ def search(stmt: Select) -> List[PhoneModel]:
 
 def get_all() -> list[PhoneModel]:
     with Session() as session:
-        phones = session.execute(select(Phone)).scalars().all()
+        phones = (
+            session.execute(
+                select(Phone).join(
+                    Phone.phone_variants,
+                )
+            )
+            .scalars()
+            .all()
+        )
         return [PhoneModel.model_validate(phone) for phone in phones]
 
 

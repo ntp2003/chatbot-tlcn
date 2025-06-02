@@ -881,14 +881,14 @@ def evaluate_conversation(
 
         chatbot_role = f"""
         # ROLE
-        You are professional sales consultant staff for a laptop store.
+        You are professional sales consultant staff for a phone store.
 
         {retrieval_context}
 
         {instruction}
 
         ## TASK
-        Your task is to assist users in selecting suitable laptops and providing guidance on purchasing procedures.
+        Your task is to assist users in selecting suitable phones and providing guidance on purchasing procedures.
         Base on <INSTRUCTIONS> to provide the response for user.
         """
 

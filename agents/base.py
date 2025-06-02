@@ -38,11 +38,11 @@ class Agent:
     def __init__(
         self,
         system_prompt_config: SystemPromptConfig = SystemPromptConfig(),
-        model: ChatModel = _chat_model,
+        model: str = _chat_model,
         temporary_memory: AgentTemporaryMemory = AgentTemporaryMemory(),
     ):
         self.system_prompt_config = system_prompt_config
-        self.model: ChatModel = model
+        self.model: str = model
         self.temporary_memory = temporary_memory
 
     def run(self, *args: Any, **kwargs: Any) -> AgentResponseBase:

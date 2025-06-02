@@ -40,6 +40,11 @@ class Tool(LangGPTTemplateTool):
                         "input": "laptop B",
                         "output": "Laptop B v2",
                     },
+                    {
+                        "The one suggested laptop in the consultation process": "Laptop X",
+                        "input": "details about it",
+                        "output": "Laptop X",
+                    },
                 ],
             }
         },

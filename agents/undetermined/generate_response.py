@@ -9,6 +9,7 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
 )
 from models.faq import FAQModel
+from models.user import UserModel
 from service.openai import OpenAIChatCompletionsRequest, _client, _chat_model
 from openai.types.chat_model import ChatModel
 from agents.base import (
@@ -136,7 +137,8 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
 
 class AgentTemporaryMemory(AgentTemporaryMemoryBase):
-    pass
+    user: Optional[UserModel] = None
+    use_fine_tune_tone: bool = False
 
 
 class AgentResponse(AgentResponseBase):
@@ -147,7 +149,7 @@ class Agent(AgentBase):
     def __init__(
         self,
         system_prompt_config: SystemPromptConfig = SystemPromptConfig(),
-        model: ChatModel = _chat_model,
+        model: str = _chat_model,
         temporary_memory: AgentTemporaryMemory = AgentTemporaryMemory(),
     ):
         self.system_prompt_config = system_prompt_config
@@ -177,6 +179,25 @@ class Agent(AgentBase):
             return AgentResponse(type="message", content="No valid user message found.")
 
         faqs = self.retrieval_faq(str(latest_user_message["content"]))
+
+        if self.temporary_memory.use_fine_tune_tone:
+            self.system_prompt_config.rules = [
+                "Don't talk nonsense and make up facts.",
+                "Use only the Vietnamese language in your response. Always refer to yourself using 'em' pronoun. Address the user based on how they refer to themselves . If their preferred address term cannot be determined from their self-reference, then base it on their provided <User gender>: use 'anh' for male, 'chị' for female. If the gender is unknown or not provided, use the polite neutral term 'anh/chị'.",
+            ]
+
+        if (
+            self.temporary_memory.user
+            and self.temporary_memory.user.gender
+            and self.temporary_memory.use_fine_tune_tone
+        ):
+            self.system_prompt_config.base_knowledge = [
+                f"User gender: {self.temporary_memory.user.gender}"
+            ] + self.system_prompt_config.base_knowledge
+        elif self.temporary_memory.use_fine_tune_tone:
+            self.system_prompt_config.base_knowledge = [
+                "User gender: unknown"
+            ] + self.system_prompt_config.base_knowledge
 
         if faqs:
             self.system_prompt_config.base_knowledge.append(

@@ -28,7 +28,7 @@ from service.laptop import Config, search, LaptopFilter
 from agents.config import BRAND_DEFAULT
 from repositories.user_memory import update as update_user_memory
 from models.user_memory import UpdateUserMemoryModel
-from tools.laptop.brand_and_version import Tool as BrandAndVersionTool
+from tools.laptop.configuration import Tool as ConfigurationTool
 from tools.laptop.price import Tool as PriceTool
 from tools.laptop.user_intent import Tool as UserIntentTool
 from tools.laptop.name import Tool as NameTool
@@ -158,7 +158,7 @@ class Agent(AgentBase):
         tools: list[ToolBase] = [
             UserIntentTool(),
             NameTool(),
-            BrandAndVersionTool(),
+            ConfigurationTool(),
             PriceTool(),
         ],
         system_prompt_config: SystemPromptConfig = SystemPromptConfig(),
@@ -452,6 +452,7 @@ class Agent(AgentBase):
             max_price=user_memory.max_price,
             min_price=user_memory.min_price,
             name=user_memory.current_filter.product_name or user_memory.product_name,
+            color=user_memory.color,
         )
 
         return filter
@@ -477,7 +478,8 @@ class Agent(AgentBase):
     def _laptops_to_response(self, laptops: list[LaptopModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
         knowledge = [
-            laptop.to_text(include_key_selling_points=True) for laptop in laptops
+            laptop.to_text(include_key_selling_points=True, include_sku_variants=True)
+            for laptop in laptops
         ]
 
         instructions = []

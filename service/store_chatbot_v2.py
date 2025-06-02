@@ -1,4 +1,6 @@
 from typing import Optional
+
+from pydantic import BaseModel
 import agents.phone.collect_and_retrieval as phone_collect_and_retrieval
 import agents.phone.generate_response as phone_generate_response
 
@@ -11,6 +13,7 @@ import agents.accessory.generate_response as accessories_generate_response
 import agents.undetermined.generate_response as undetermined_generate_response
 import agents.detect_demand as detect_demand
 from agents.utils import instructions_to_string
+from models.user import UserModel
 from service.wandb import client as wandb_client
 from uuid import UUID
 from openai.types.chat import (
@@ -33,6 +36,14 @@ from repositories.user_memory import (
 )
 
 from utils import EvaluateContext
+from repositories.user import get as get_user
+
+
+class ConfigModel(BaseModel):
+    detect_demand: str = "gpt-4o-mini"
+    collect_and_retrieval: str = "gpt-4o-mini"
+    response: str = "gpt-4o-mini"
+    user_fine_tune_tone: bool = False
 
 
 def gen_answer(
@@ -41,6 +52,7 @@ def gen_answer(
     history: list[ChatCompletionMessageParam],
     limit: int = 10,
     evaluate_context: EvaluateContext = EvaluateContext(),
+    config: ConfigModel = ConfigModel(),
 ) -> str:
     gen_answer_call = wandb_client.create_call(
         op="gen_answer",
@@ -52,9 +64,14 @@ def gen_answer(
         user_memory = create_user_memory(
             CreateUserMemoryModel(user_id=user_id, thread_id=thread_id)
         )
+    user = get_user(user_id)
+    if user is None:
+        raise ValueError(f"User with id {user_id} not found")
 
     detect_demand_memory = detect_demand.AgentTemporaryMemory(
         user_memory=user_memory,
+        user=user,
+        use_fine_tune_tone=config.user_fine_tune_tone,
     )
 
     detect_demand_call = wandb_client.create_call(
@@ -72,7 +89,7 @@ def gen_answer(
 
     detect_demand_response = detect_demand_agent.run(messages=conversation_messages)
     detect_demand_response = detect_demand_agent.post_process(
-        detect_demand_response, user_memory
+        detect_demand_response, config.response
     )
     print(
         "Detect demand response:",
@@ -105,15 +122,15 @@ def gen_answer(
             handler = handle_phone_request
         case ProductType.LAPTOP:
             handler = handle_laptop_request
-        case ProductType.ACCESSORY:
-            handler = handle_accessories_request
         case _:
             handler = handle_undetermined_request
 
     response = handler(
         user_memory=detect_demand_agent_temp_memory_user_memory,  # type: ignore
+        user=user,
         conversation_messages=conversation_messages,
         evaluate_context=evaluate_context,
+        config=config,
     )
 
     wandb_client.finish_call(gen_answer_call, output=response)
@@ -122,8 +139,10 @@ def gen_answer(
 
 def handle_phone_request(
     user_memory: UserMemoryModel,
+    user: UserModel,
     conversation_messages: list[ChatCompletionMessageParam],
     evaluate_context: EvaluateContext,
+    config: ConfigModel = ConfigModel(),
 ) -> str:
 
     # 1. collect and retrieval phone
@@ -173,7 +192,9 @@ def handle_phone_request(
 
     # 2. generate response phone
     generate_memory = phone_generate_response.AgentTemporaryMemory(
-        user_memory=user_memory
+        user_memory=user_memory,
+        user=user,
+        use_fine_tune_tone=config.user_fine_tune_tone,
     )
 
     generate_agent_call = wandb_client.create_call(
@@ -223,8 +244,10 @@ def handle_phone_request(
 
 def handle_laptop_request(
     user_memory: UserMemoryModel,
+    user: UserModel,
     conversation_messages: list[ChatCompletionMessageParam],
     evaluate_context: EvaluateContext,
+    config: ConfigModel = ConfigModel(),
 ) -> str:
     collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
@@ -270,7 +293,9 @@ def handle_laptop_request(
     )
 
     generate_memory = laptop_generate_response.AgentTemporaryMemory(
-        user_memory=user_memory
+        user_memory=user_memory,
+        user=user,
+        use_fine_tune_tone=config.user_fine_tune_tone,
     )
 
     generate_response_system_prompt_config = (
@@ -317,102 +342,12 @@ def handle_laptop_request(
     return generate_response.content or "Not content produced"
 
 
-def handle_accessories_request(
-    user_memory: UserMemoryModel,
-    conversation_messages: list[ChatCompletionMessageParam],
-    evaluate_context: EvaluateContext,
-) -> str:
-    collect_and_retrieval_memory = (
-        accessories_collect_and_retrieval.AgentTemporaryMemory(
-            user_memory=user_memory,
-        )
-    )
-
-    collect_and_retrieval_call = wandb_client.create_call(
-        op="collect_and_retrieval_accessory",
-        inputs={
-            "temporary_memory": collect_and_retrieval_memory,
-            "messages": conversation_messages,
-        },
-    )  # create call collect and retrieval accessory
-
-    collect_and_retrieval_system_prompt_config = (
-        accessories_collect_and_retrieval.SystemPromptConfig()
-    )
-
-    collect_and_retrieval_agent = accessories_collect_and_retrieval.Agent(
-        temporary_memory=collect_and_retrieval_memory,
-        system_prompt_config=collect_and_retrieval_system_prompt_config,
-    )
-    collect_and_retrieval_response = collect_and_retrieval_agent.run(
-        messages=conversation_messages
-    )
-
-    print(
-        "Accessories collect and retrieval response:",
-        collect_and_retrieval_response,
-    )
-
-    update_user_memory(
-        id=user_memory.id,
-        data=UpdateUserMemoryModel.model_validate(user_memory, from_attributes=True),
-    )
-    set_value(
-        f"offset:{user_memory.thread_id}", collect_and_retrieval_memory.offset
-    )  # lưu offset vào redis
-
-    wandb_client.finish_call(
-        collect_and_retrieval_call,
-        output={
-            "response": collect_and_retrieval_response,
-            "temporary_memory": collect_and_retrieval_memory,
-        },
-    )
-
-    # 2. generate response accessory
-    generate_memory = accessories_generate_response.AgentTemporaryMemory(
-        user_memory=user_memory
-    )
-
-    generate_agent_call = wandb_client.create_call(
-        op="generate_response_accessory",
-        inputs={
-            "temporary_memory": generate_memory,
-            "conversation_messages": conversation_messages,
-            "instructions": collect_and_retrieval_response.instructions,
-            "accessory_knowledge": collect_and_retrieval_response.knowledge,
-        },
-    )  # create call generate response accessory
-
-    generate_response_system_prompt_config = (
-        accessories_generate_response.SystemPromptConfig()
-    )
-    generate_agent = accessories_generate_response.Agent(
-        temporary_memory=generate_memory,
-        system_prompt_config=generate_response_system_prompt_config,
-    )
-    generate_response = generate_agent.run(
-        conversation_messages=conversation_messages,
-        instructions=collect_and_retrieval_response.instructions,
-        accessory_knowledge=collect_and_retrieval_response.knowledge,
-    )
-    print("Accessories generate response:", generate_response)
-
-    wandb_client.finish_call(
-        generate_agent_call,
-        output={
-            "response": generate_response,
-            "temporary_memory": generate_memory,
-        },
-    )
-
-    return generate_response.content or "Not content produced"
-
-
 def handle_undetermined_request(
     user_memory: UserMemoryModel,
+    user: UserModel,
     conversation_messages: list[ChatCompletionMessageParam],
     evaluate_context: EvaluateContext,
+    config: ConfigModel = ConfigModel(),
 ) -> str:
 
     generate_agent_call = wandb_client.create_call(
@@ -423,7 +358,9 @@ def handle_undetermined_request(
         },
     )
     generate_memory = undetermined_generate_response.AgentTemporaryMemory(
-        user_memory=user_memory
+        user_memory=user_memory,
+        user=user,
+        use_fine_tune_tone=config.user_fine_tune_tone,
     )
     generate_response_system_prompt_config = (
         undetermined_generate_response.SystemPromptConfig()

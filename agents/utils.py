@@ -50,7 +50,8 @@ def generate_response_by_instructions(
     instructions: list[Instruction],
     knowledge: list[str],
     conversation_history: list[ChatCompletionMessageParam],
-    model: ChatModel = "gpt-4o-mini",
+    model: str = "gpt-4o-mini",
+    user_fine_tune_tone: bool = False,
 ) -> str:
     if not instructions:
         raise ValueError("Instructions cannot be empty.")
@@ -60,14 +61,14 @@ def generate_response_by_instructions(
             "role": "system",
             "content": (
                 "## KNOWLEDGE\n"
-                "- Information about your phone store:\n"
+                + ("\n".join([f"- {knowledge}" for knowledge in knowledge]))
+                + "- Information about your phone store:\n"
                 "   - Name: FPTShop\n"
                 "   - Location: https://fptshop.com.vn/cua-hang\n"
                 "   - Hotline: 1800.6601\n"
                 "   - Website: [FPTShop](https://fptshop.com.vn)\n"
                 "   - Customer service email: cskh@fptshop.com\n"
                 f"- Current date: {datetime.now().strftime('%A, %B %d, %Y')} ({datetime.now().strftime('%Y-%m-%d')})\n"
-                "\n".join([f"- {knowledge}" for knowledge in knowledge])
             ),
         },
         {
@@ -84,8 +85,20 @@ def generate_response_by_instructions(
                 "- The response must be follow the <INSTRUCTIONS> and don't say anything else."
             ),
         },
-        *conversation_history,
     ]
+
+    if user_fine_tune_tone:
+        messages.append(
+            {
+                "role": "system",
+                "content": (
+                    "## RULES\n"
+                    "- Use only the Vietnamese language in your response. Always refer to yourself using 'em' pronoun. Address the user based on how they refer to themselves . If their preferred address term cannot be determined from their self-reference, then base it on their provided <User gender>: use 'anh' for male, 'chị' for female. If the gender is unknown or not provided, use the polite neutral term 'anh/chị'."
+                ),
+            }
+        )
+
+    messages.extend(conversation_history)
 
     openai_request = OpenAIChatCompletionsRequest(
         messages=messages,

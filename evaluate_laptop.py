@@ -37,7 +37,6 @@ class Step(str, Enum):
     GREETING_AND_PROVIDE_NEED = "greeting and provide needs about the laptop"
     SEARCH_LAPTOP_BASE_ON_THE_BRAND = "search laptop base on the brand"
     SEARCH_LAPTOP_BASE_ON_THE_PRICE = "search laptop base on the price"
-    SEARCH_LAPTOP_BASE_ON_THE_PURPOSE = "search laptop base on the purpose"
     SELECT_ONE_LAPTOP_FROM_THE_LIST = "select one laptop from the list"
     ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP = (
         "ask for the details of the selected laptop"
@@ -53,7 +52,6 @@ class VietnameseLaptopUserSimulator(BaseModel):
     gender: str = "male"  # Default
     phone_number: str = "0912345678"  # Default phone number, will be overwritten
     email: str = "ntp@gmail.com"  # Default email, will be overwritten
-    purpose: str = "work"  # Default purpose for laptop
 
     min_budget: int = 0
     max_budget: int = (
@@ -79,13 +77,16 @@ class VietnameseLaptopUserSimulator(BaseModel):
         self.gender = user_info["gender"]
         self.phone_number = user_info["phone_number"]
         self.email = user_info["email"]
-        self.purpose = user_info["purpose"]
 
         # Calculate raw budget values
-        raw_min_budget = min(self.laptop.price * 0.9, self.laptop.price - 2000000)
+        raw_min_budget = min(
+            self.laptop.min_price * 0.9, self.laptop.min_price - 2000000
+        )
         if raw_min_budget < 0:
             raw_min_budget = 0
-        raw_max_budget = max(self.laptop.price * 1.1, 0, self.laptop.price + 2000000)
+        raw_max_budget = max(
+            self.laptop.max_price * 1.1, 0, self.laptop.max_price + 2000000
+        )
 
         # Round to millions
         self.min_budget = math.floor(raw_min_budget / 1000000) * 1000000
@@ -135,36 +136,9 @@ class VietnameseLaptopUserSimulator(BaseModel):
         self.llm_test_cases: list[LLMTestCase] = []
 
     def generate_user_info(self) -> dict:
-        """Generate diverse and random Vietnamese user information with laptop purposes"""
-        # ...existing code for name generation (same as phone)...
-
-        # Laptop-specific purposes
-        purposes = [
-            "work",
-            "gaming",
-            "study",
-            "design",
-            "programming",
-            "office work",
-            "video editing",
-            "general use",
-            "business",
-        ]
-
-        # Generate purpose based on age
-        if self.age < 25:
-            purpose_weights = [0.2, 0.3, 0.4, 0.05, 0.05]  # More gaming and study
-        elif self.age < 40:
-            purpose_weights = [0.4, 0.2, 0.1, 0.15, 0.15]  # More work and design
-        else:
-            purpose_weights = [0.5, 0.1, 0.05, 0.1, 0.25]  # More work and office
-
-        purpose = random.choices(purposes[:5], weights=purpose_weights)[0]
-
+        """Generate diverse and random Vietnamese user information"""
         # Use existing phone generation logic for basic info
         user_info = self._generate_basic_user_info()
-        user_info["purpose"] = purpose
-
         return user_info
 
     def _generate_basic_user_info(self) -> dict:
@@ -798,7 +772,6 @@ class VietnameseLaptopUserSimulator(BaseModel):
             f"- Gender: {self.gender}\n"
             f"- Phone number: {self.phone_number}\n"
             f"- Email: {self.email}\n"
-            f"- Purpose: {self.purpose}\n"
             f"- Min budget: {self.min_budget}\n"
             f"- Max budget: {self.max_budget}\n"
         )
@@ -812,7 +785,6 @@ class VietnameseLaptopUserSimulator(BaseModel):
                 Step.GREETING_AND_PROVIDE_NEED,
                 Step.SEARCH_LAPTOP_BASE_ON_THE_BRAND,
                 Step.SEARCH_LAPTOP_BASE_ON_THE_PRICE,
-                Step.SEARCH_LAPTOP_BASE_ON_THE_PURPOSE,
                 Step.SELECT_ONE_LAPTOP_FROM_THE_LIST,
             ]
             else (
@@ -823,14 +795,13 @@ class VietnameseLaptopUserSimulator(BaseModel):
 
         step_descriptions = (
             "## STEP DESCRIPTIONS\n"
-            f"1. **{Step.GREETING_AND_PROVIDE_NEED.value}**: Greet the customer support agent and provide your needs about the laptop. Example: 'Mình cần tư vấn laptop', 'Hello', 'Mình cần mua laptop tầm {self.min_budget} đến {self.max_budget} VNĐ', 'Xin chào', 'Tôi cần một chiếc laptop mới cho {self.purpose}'.\n"
+            f"1. **{Step.GREETING_AND_PROVIDE_NEED.value}**: Greet the customer support agent and provide your needs about the laptop. Example: 'Mình cần tư vấn laptop', 'Hello', 'Mình cần mua laptop tầm {self.min_budget} đến {self.max_budget} VNĐ', 'Xin chào', 'Tôi cần một chiếc laptop mới'.\n"
             f"2. **{Step.SEARCH_LAPTOP_BASE_ON_THE_BRAND.value}**: Search for a laptop based on the brand. Example: 'Tìm laptop {self.laptop._get_brand_name()}', 'Tìm laptop thương hiệu {self.laptop._get_brand_name()}', '{self.laptop._get_brand_name()}', 'hãng {self.laptop._get_brand_name()}'.\n"
             f"3. **{Step.SEARCH_LAPTOP_BASE_ON_THE_PRICE.value}**: Search for a laptop based on the price. Example: 'Tìm laptop dưới {self.max_budget} VNĐ', 'Tìm laptop giá {self.min_budget} đến {self.max_budget} VNĐ'.\n"
-            f"4. **{Step.SEARCH_LAPTOP_BASE_ON_THE_PURPOSE.value}**: Search for a laptop based on the purpose. Example: 'Tìm laptop cho {self.purpose}', 'laptop dành cho {self.purpose}', 'laptop {self.purpose}'.\n"
-            f"5. **{Step.SELECT_ONE_LAPTOP_FROM_THE_LIST.value}**: Select one laptop from the suggested list in past. Example: 'Chọn laptop {self.laptop.name} trong danh sách', 'Chọn laptop {self.laptop.name}', 'cái đầu', 'mẫu số 2'.\n"
-            f"6. **{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP.value}**: Ask for the details of the selected laptop by analyzing the information in the <INFORMATION ABOUT LAPTOP LOOKING FOR> section. Extract key specifications, features, and selling points from this section, and formulate natural, relevant questions about these aspects. Generate diverse questions that someone would genuinely ask when considering purchasing this specific laptop model. Vary your questions between technical specifications, features, promotions, colors, accessories, user experience, and purchase conditions.\n"
-            f"7. **{Step.PROVIDE_PHONE_NUMBER.value}**: Provide your phone number when you need further consultation or are ready to purchase. Example: 'Số điện thoại của mình là {self.phone_number}'.\n"
-            f"8. **{Step.PROVIDE_EMAIL.value}**: Provide your email. Example: 'Email của mình là {self.email}'.\n"
+            f"4. **{Step.SELECT_ONE_LAPTOP_FROM_THE_LIST.value}**: Select one laptop from the suggested list in past. Example: 'Chọn laptop {self.laptop.name} trong danh sách', 'Chọn laptop {self.laptop.name}', 'cái đầu', 'mẫu số 2'.\n"
+            f"5. **{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP.value}**: Ask for the details of the selected laptop by analyzing the information in the <INFORMATION ABOUT LAPTOP LOOKING FOR> section. Extract key specifications, features, and selling points from this section, and formulate natural, relevant questions about these aspects. Generate diverse questions that someone would genuinely ask when considering purchasing this specific laptop model. Vary your questions between technical specifications, features, promotions, colors, accessories, user experience, and purchase conditions.\n"
+            f"6. **{Step.PROVIDE_PHONE_NUMBER.value}**: Provide your phone number when you need further consultation or are ready to purchase. Example: 'Số điện thoại của mình là {self.phone_number}'.\n"
+            f"7. **{Step.PROVIDE_EMAIL.value}**: Provide your email. Example: 'Email của mình là {self.email}'.\n"
         )
 
         if latest_step_in_past:
@@ -870,15 +841,14 @@ class VietnameseLaptopUserSimulator(BaseModel):
             "3. If the user asks for the type of product that you are looking for, provide the type of product that you are looking for is a laptop.\n"
             f"4. If the user asks for the brand of the laptop that you are looking for, provide the brand of the laptop that you are looking for is {self.laptop._get_brand_name()} (Step 2).\n"
             f"5. If the user asks for the price of the laptop that you are looking for, provide the price of the laptop that you are looking for is between {self.min_budget} and {self.max_budget} (Step 3).\n"
-            f"6. If the user asks for the purpose of the laptop, provide the purpose is {self.purpose} (Step 4).\n"
-            f"7. If the user provides a list of laptops and has a laptop that you are looking for ({self.laptop.name}), select that laptop from the list (Step 5).\n"
-            "8. If the user provides the details of the selected laptop and asks your contact information, ask for the details of the selected laptop (Step 6).\n"
-            "9. If the user provides the details of the selected laptop and the latest step in past is Step 6, provide your phone number or email (Step 7 or Step 8).\n"
+            f"6. If the user provides a list of laptops and has a laptop that you are looking for ({self.laptop.name}), select that laptop from the list (Step 4).\n"
+            "7. If the user provides the details of the selected laptop and asks your contact information, ask for the details of the selected laptop (Step 5).\n"
+            "8. If the user provides the details of the selected laptop and the latest step in past is Step 5, provide your phone number or email (Step 6 or Step 7).\n"
             "\n## NOTE:\n"
             "- Imagine you are a real customer who has just interacted with a business. Your response should sound natural and authentic.\n"
-            "- You need to stay at the Step 6 minimum 2 turns and maximum 4 turns before moving to Step 7 or Step 8.\n"
+            f"- You MUST stay at the Step 5 (**{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP.value}**) minimum 2 turns and maximum 3 turns before moving to Step 6 or Step 7. If you stay at Step 5 (**{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP.value}**) for more than 3 turns, you can provide your contact information (Step 6 or Step 7).\n"
             f"- If you can't find the laptop ({self.laptop.name}) in the list of laptops suggested by the customer service agent, you can ask for other laptops (e.g., 'Có mẫu nào khác không?'). "
-            "If still unavailable, then provide your contact information (Step 7 or Step 8).\n"
+            "If still unavailable, then provide your contact information (Step 6 or Step 7).\n"
         )
 
         return [
@@ -905,8 +875,12 @@ def evaluate_laptop_conversation(
     output: VietnameseLaptopUserSimulator,
 ) -> dict:
     """Evaluate the laptop conversation of the simulated user"""
-    faithfulness_metric = FaithfulnessMetric(threshold=0.5, model=gpt_41_mini)
-    role_adherence_metric = RoleAdherenceMetric(threshold=0.5, model=gpt_41_mini)
+    faithfulness_metric = FaithfulnessMetric(
+        threshold=0.5, model=gpt_41_mini, include_reason=False
+    )
+    role_adherence_metric = RoleAdherenceMetric(
+        threshold=0.5, model=gpt_41_mini, include_reason=False
+    )
     faithfulness_scrores = []
     role_adherence_scores = []
 

@@ -12,6 +12,7 @@ import weave
 from agents.utils import generate_response_by_instructions
 from env import env
 from db import redis
+from models.user import UserModel
 from service.converter import (
     convert_to_standard_email,
     convert_to_standard_phone_number,
@@ -151,7 +152,8 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
 
 class AgentTemporaryMemory(AgentTemporaryMemoryBase):
-    pass
+    use_fine_tune_tone: bool = False
+    user: Optional[UserModel] = None
 
 
 class AgentResponse(AgentResponseBase):
@@ -162,11 +164,11 @@ class Agent(AgentBase):
     def __init__(
         self,
         system_prompt_config: SystemPromptConfig = SystemPromptConfig(),
-        model: ChatModel = _chat_model,
+        model: str = _chat_model,
         temporary_memory: AgentTemporaryMemory = AgentTemporaryMemory(),
     ):
         self.system_prompt_config: SystemPromptConfig = system_prompt_config
-        self.model: ChatModel = model
+        self.model: str = model
         self.temporary_memory: AgentTemporaryMemory = temporary_memory
 
     def run(
@@ -283,24 +285,41 @@ class Agent(AgentBase):
     def post_process(
         self,
         response: AgentResponse,
-        user_memory: UserMemoryModel,
+        model: str = _chat_model,
     ) -> AgentResponse:
         if response.type == "message":
             knowledge = []
+            if (
+                self.temporary_memory.user
+                and self.temporary_memory.user.gender
+                and self.temporary_memory.use_fine_tune_tone
+            ):
+                knowledge = [f"User gender: {self.temporary_memory.user.gender}"]
+            elif self.temporary_memory.use_fine_tune_tone:
+                knowledge = ["User gender: unknown"]
             user_contact_info = (
-                f"   - Phone number: {user_memory.phone_number}\n"
-                if user_memory.phone_number
+                f"   - Phone number: {self.temporary_memory.user_memory.phone_number}\n"
+                if self.temporary_memory.user_memory
+                and self.temporary_memory.user_memory.phone_number
                 else ""
-            ) + (f"   - Email: {user_memory.email}\n" if user_memory.email else "")
+            ) + (
+                f"   - Email: {self.temporary_memory.user_memory.email}\n"
+                if self.temporary_memory.user_memory
+                and self.temporary_memory.user_memory.email
+                else ""
+            )
 
             if user_contact_info:
-                knowledge = [f"- The user's contact information:\n{user_contact_info}"]
+                knowledge.append(
+                    f"- The user's contact information:\n{user_contact_info}"
+                )
 
             finished_response = generate_response_by_instructions(
                 instructions=response.instructions,
                 knowledge=knowledge,
                 conversation_history=[],
-                model=self.model,
+                model=model,
+                user_fine_tune_tone=self.temporary_memory.use_fine_tune_tone,
             )
 
             return AgentResponse(

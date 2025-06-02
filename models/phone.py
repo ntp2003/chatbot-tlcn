@@ -192,7 +192,7 @@ class PhoneModel(BaseModel):
 
         if include_description:
             result += (
-                f"\n- Phone configuration: {self.attributes_table_text}\n"
+                f"\n- Phone configuration:\n{self.attributes_table_text}\n"
                 if self.attributes_table_text
                 else ""
             )

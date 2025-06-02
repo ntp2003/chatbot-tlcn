@@ -586,8 +586,8 @@ class VietnameseUserSimulator(BaseModel):
 
             step_descriptions += (
                 "\n## LATEST STEP IN PAST\n"
-                f"Latest step in past: {latest_step_in_past.value}\n"
-                f"Stay at step {latest_step_in_past.value} for {count} turns.\n"
+                f"Latest step in past: **{latest_step_in_past.value}**\n"
+                f"Stay at step **{latest_step_in_past.value}** for {count} turns.\n"
             )
 
         task = (
@@ -607,7 +607,7 @@ class VietnameseUserSimulator(BaseModel):
             "8. If the user provides the details of the selected phone and the latest step in past is Step 5, provide your phone number or email (Step 6 or Step 7).\n"
             "\n## NOTE:\n"
             "- Imagine you are a real customer who has just interacted with a business. Your response should sound natural and authentic.\n"
-            "- You need to stay at the Step 5 minimum 2 turns and maximum 4 turns before moving to Step 6 or Step 7.\n"
+            f"- You MUST stay at the Step 5 (**{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE.value}**) minimum 2 turns and maximum 3 turns before moving to Step 6 or Step 7. If you stay at Step 5 (**{Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE.value}**) for more than 3 turns, you should provide your contact information (Step 6 or Step 7).\n"
             f"- If you can't find the phone ({self.phone.name}) in the list of phones suggested by the customer service agent, you can ask for other phones (e.g., 'Có mẫu nào khác không?'). "
             "If still unavailable, then provide your contact information (Step 6 or Step 7).\n"
         )
@@ -858,8 +858,12 @@ def evaluate_conversation(
     output: VietnameseUserSimulator,
 ) -> dict:
     """Evaluate the conversation of the simulated user"""
-    faithfulness_metric = FaithfulnessMetric(threshold=0.5, model=gpt_41_mini)
-    role_adherence_metric = RoleAdherenceMetric(threshold=0.5, model=gpt_41_mini)
+    faithfulness_metric = FaithfulnessMetric(
+        threshold=0.5, model=gpt_41_mini, include_reason=False
+    )
+    role_adherence_metric = RoleAdherenceMetric(
+        threshold=0.5, model=gpt_41_mini, include_reason=False
+    )
     faithfulness_scrores = []
     role_adherence_scores = []
     for llm_test_case in output.llm_test_cases:

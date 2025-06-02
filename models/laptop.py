@@ -1,11 +1,15 @@
 from .base import Base
 from datetime import datetime, timezone
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import Text, DateTime, JSON
+from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy import Text, DateTime, JSON, Integer
 from sqlalchemy.dialects.postgresql import JSONB, ARRAY
 from pydantic import BaseModel, ConfigDict
 from pgvector.sqlalchemy import Vector
 from env import env
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from models.laptop_variant import LaptopVariant, LaptopVariantModel
 
 
 class Laptop(Base):
@@ -16,19 +20,27 @@ class Laptop(Base):
     name: Mapped[str] = mapped_column(Text, nullable=False)
     slug: Mapped[str] = mapped_column(Text, nullable=False)
     brand_code: Mapped[str] = mapped_column(Text, nullable=False)
-    """
-    brand_code: Mapped[str] = mapped_column(
-        Text, 
-        ForeignKey("brands.id", ondelete="CASCADE"),  # Thêm ForeignKey
-        nullable=False
-    )
-    """
     product_type: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     promotions: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
     skus: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
     key_selling_points: Mapped[list[dict]] = mapped_column(ARRAY(JSON), nullable=False)
-    price: Mapped[int] = mapped_column(Text, nullable=False)
+
+    laptop_variants: Mapped[list["LaptopVariant"]] = relationship(
+        "LaptopVariant",
+        foreign_keys="LaptopVariant.laptop_id",
+        back_populates="laptop",
+        uselist=True,
+        lazy="joined",
+    )
+
+    attributes_table_text: Mapped[str] = mapped_column(
+        Text, nullable=True, default=None
+    )
+    variants_table_text: Mapped[str] = mapped_column(Text, nullable=True, default=None)
+
+    min_price: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    max_price: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     score: Mapped[float] = mapped_column(Text, nullable=False)
     name_embedding: Mapped[list[float]] = mapped_column(Vector, nullable=False)
 
@@ -40,18 +52,6 @@ class Laptop(Base):
         default=datetime.now(timezone.utc),
         onupdate=datetime.now(timezone.utc),
     )
-    """
-    #Ko cao duoc data nay
-    cpu: Mapped[str] = mapped_column(Text, nullable=True)  # Ví dụ: "Intel Core i5-1235U"
-    ram: Mapped[int] = mapped_column(Integer, nullable=True)  # Đơn vị: GB
-    storage: Mapped[int] = mapped_column(Integer, nullable=True)  # Đơn vị: GB
-    storage_type: Mapped[str] = mapped_column(Text, nullable=True)  # SSD hoặc HDD
-    
-    # Có thể thêm các trường bổ sung khác
-    gpu: Mapped[str] = mapped_column(Text, nullable=True)  # Card đồ họa
-    screen_size: Mapped[float] = mapped_column(Text, nullable=True)  # Kích thước màn hình
-    screen_resolution: Mapped[str] = mapped_column(Text, nullable=True)  # Độ phân giải
-    """
 
 
 class CreateLaptopModel(BaseModel):
@@ -65,24 +65,16 @@ class CreateLaptopModel(BaseModel):
     promotions: list[dict]
     skus: list[dict]
     key_selling_points: list[dict]
-    price: int
+    min_price: int
+    max_price: int
     score: float
     name_embedding: list[float]
-    """
-    cpu: str | None = None
-    ram: int | None = None
-    storage: int | None = None
-    storage_type: str | None = None
-    gpu: str | None = None
-    screen_size: float | None = None
-    screen_resolution: str | None = None
-    """
+    attributes_table_text: Optional[str] = None
+    variants_table_text: Optional[str] = None
 
 
 class LaptopModel(BaseModel):
-    model_config = ConfigDict(
-        from_attributes=True
-    )  # allow pydantic model to populate its fields from SQLAlchemy ORM model
+    model_config = ConfigDict(from_attributes=True)
 
     id: str
     data: dict = {}
@@ -93,10 +85,14 @@ class LaptopModel(BaseModel):
     description: str
     promotions: list[dict]
     skus: list[dict]
+    laptop_variants: list["LaptopVariantModel"] = []
     key_selling_points: list[dict]
-    price: int
+    min_price: int
+    max_price: int
     score: float
     name_embedding: list[float]
+    attributes_table_text: Optional[str] = None
+    variants_table_text: Optional[str] = None
     created_at: datetime
     updated_at: datetime
     """
@@ -171,14 +167,15 @@ class LaptopModel(BaseModel):
         include_promotion: bool = False,
         include_sku_variants: bool = False,
         include_key_selling_points: bool = False,
+        is_markdown: bool = True,
     ) -> str:
-        result = f"Laptop: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
+        result = (
+            f"Laptop: [{self.name}]({env.FPTSHOP_BASE_URL}/{self.slug})\n"
+            if is_markdown
+            else f"Laptop: {self.name}\n"
+        )
 
-        if self.is_on_sale():
-            # result += f"- Price: ~~{self._get_original_price()}~~ {self._get_current_price()} (Sale)\n"
-            result += f"- Original price: {self._get_original_price()}. Sale price: {self._get_current_price()}\n"
-        else:
-            result += f"- Price: {self._get_current_price() if self._get_current_price() > 0 else 'Liên hệ'}\n"
+        result += f"- Prices starting from: {self.min_price} VND\n"
 
         if include_key_selling_points:
             key_selling_points_text = self._get_key_selling_points_text(
@@ -196,55 +193,21 @@ class LaptopModel(BaseModel):
             result += f"- Promotions:\n{promotion_text}\n" if promotion_text else ""
 
         if include_sku_variants:
-            sku_variants_text = self._get_sku_variants_text()
-            result += f"- Variants: {sku_variants_text}\n" if sku_variants_text else ""
+            result += (
+                f"- Variants:\n{self.variants_table_text}\n"
+                if self.variants_table_text
+                else "\n"
+            )
 
         if include_description:
-            result += f"- Description: [{self.description}]"
+            result += (
+                f"\n- Laptop configuration:\n{self.attributes_table_text}\n"
+                if self.attributes_table_text
+                else ""
+            )
+            result += f"\n- Description: [{self.description}]"
+
+        if not is_markdown:
+            result += "\nReference Link: " + env.FPTSHOP_BASE_URL + "/" + self.slug
 
         return result
-
-    """
-    def get_specifications(self) -> str:
-        specs = []
-        if self.cpu:
-            specs.append(f"CPU: {self.cpu}")
-        if self.ram:
-            specs.append(f"RAM: {self.ram}GB")
-        if self.storage:
-            storage_info = f"Storage: {self.storage}GB"
-            if self.storage_type:
-                storage_info += f" {self.storage_type}"
-            specs.append(storage_info)
-        if self.gpu:
-            specs.append(f"GPU: {self.gpu}")
-        if self.screen_size:
-            screen_info = f"Screen: {self.screen_size}\""
-            if self.screen_resolution:
-                screen_info += f" ({self.screen_resolution})"
-            specs.append(screen_info)
-        return "\n".join(specs)
-
-    def to_text(
-        self,
-        include_description: bool = False,
-        include_promotion: bool = False,
-        include_sku_variants: bool = False,
-        include_key_selling_points: bool = False,
-        include_specifications: bool = True,  # Thêm option mới
-    ) -> str:
-        result = super().to_text(
-            include_description,
-            include_promotion,
-            include_sku_variants,
-            include_key_selling_points
-        )
-        
-        # Thêm thông số kỹ thuật vào kết quả
-        if include_specifications:
-            specs = self.get_specifications()
-            if specs:
-                result += f"\nSpecifications:\n{specs}"
-        
-        return result
-    """

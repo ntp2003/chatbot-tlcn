@@ -13,6 +13,13 @@ from bs4 import BeautifulSoup
 from models.laptop import CreateLaptopModel  # Cần tạo model này
 from repositories.laptop import upsert_laptop  # Cần tạo repository này
 from service.embedding import get_embedding
+from repositories.laptop_variant import (
+    delete_laptop_variants_by_laptop_id,
+    create_laptop_variant,
+    CreateLaptopVariantModel,
+)
+from models.laptop_variant import LaptopVariantModel, Variant
+from service.crawl_data import get_attributes, get_description
 
 """
 How to run:
@@ -21,9 +28,9 @@ from tasks.import_laptop_data import *
 import_laptop_data_jsonl_to_database()
 """
 
-'''
+"""
 Cần chạy extract đưa data vào jsonl rồi từ file jsonl import data cho brands trước rồi mới import data cho laptop
-'''
+"""
 
 # request URL (API)
 post_url = "https://papi.fptshop.com.vn/gw/v1/public/fulltext-search-service/category"
@@ -45,9 +52,10 @@ header = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
 }
 
-category_slug = "may-tinh-xach-tay"  
+category_slug = "may-tinh-xach-tay"
 
-file_path = "tasks/laptop_data.jsonl"  
+file_path = "tasks/laptop_data.jsonl"
+
 
 def import_laptop_data_jsonl_to_database(
     file_path: str = file_path,
@@ -65,11 +73,12 @@ def import_laptop_data_jsonl_to_database(
             current_offset += 1
             if start_offset <= current_offset < start_offset + limit:
                 batch.append(laptop)
-                if len(batch) >= batch_size :
+                if len(batch) >= batch_size:
                     import_batch_data_to_database(batch)
                     batch = []
         if len(batch) > 0:
             import_batch_data_to_database(batch)
+
 
 def import_batch_data_to_database(batch: list[dict]):
     for laptop in batch:
@@ -84,14 +93,14 @@ def import_batch_data_to_database(batch: list[dict]):
         key_selling_points = laptop.get("keySellingPoints", [])
         price = laptop.get("price", -1)
         score = laptop.get("score", 0)
-        #name_embedding = get_embedding(name)
+        # name_embedding = get_embedding(name)
         name_embedding = get_embedding(f"Laptop Name: {name}")
 
-        if id is not None:
+        if id is not None and brand_code is not None and product_type is not None:
             print(f"Upserting laptop: {id}, {name}, {brand_code}")
 
             try:
-                upsert_laptop(
+                laptop_model = upsert_laptop(
                     CreateLaptopModel(
                         id=id,
                         name=name,
@@ -102,15 +111,56 @@ def import_batch_data_to_database(batch: list[dict]):
                         promotions=promotions,
                         skus=skus,
                         key_selling_points=key_selling_points,
-                        price=price,
+                        min_price=(
+                            min([sku.get("currentPrice", 0) for sku in skus])
+                            if skus
+                            else price
+                        ),
+                        max_price=(
+                            max([sku.get("currentPrice", 0) for sku in skus])
+                            if skus
+                            else price
+                        ),
                         score=score,
                         data=laptop,
                         name_embedding=name_embedding,
+                        variants_table_text=variants_to_markdown(skus),
                     )
                 )
+
+                delete_laptop_variants_by_laptop_id(id)
+                laptop_variants: list[LaptopVariantModel] = []
+                for sku in skus:
+                    sku_id = sku.get("sku", "")
+                    laptop_variants.append(
+                        create_laptop_variant(
+                            CreateLaptopVariantModel(
+                                laptop_id=id,
+                                attributes=sku.get("attributes", []),
+                                slug=sku.get("slug", ""),
+                                sku=sku_id,
+                                name=sku.get("name", "not known"),
+                                data=sku,
+                                variants=[
+                                    Variant(**variant)
+                                    for variant in sku.get("variants", [])
+                                ],
+                            )
+                        )
+                    )
+                laptop_model.attributes_table_text = (
+                    convert_json_list_to_markdown_table(
+                        [
+                            laptop_variant.attributes
+                            for laptop_variant in laptop_variants
+                        ]
+                    )
+                )
+                upsert_laptop(CreateLaptopModel(**laptop_model.model_dump()))
             except Exception as e:
                 print(f"Error upserting laptop: {id}, {name}, {brand_code}")
                 print(e)
+
 
 def extract_fpt_laptop_data(
     skip_count: int = 0,
@@ -147,9 +197,14 @@ def extract_fpt_laptop_data(
         if total_count is None or total_count <= 0 or items is None:
             raise Exception(f"not found category ({category_slug})")
 
-        # Lấy mô tả của sản phẩm
+        # Lấy mô tả của sản phẩm và attributes cho từng sku
         for item in items:
             item["description"] = get_description(item.get("slug"))
+            skus = []
+            for sku in item.get("skus", []):
+                sku["attributes"] = get_attributes(sku.get("sku", ""))
+                skus.append(sku)
+            item["skus"] = skus
 
         if len(items) > limit:
             write_to_jsonlines(items[0:limit], file_path)
@@ -169,8 +224,8 @@ def extract_fpt_laptop_data(
                     post_url,
                     json=body,
                     headers=header,
-                    #timeout=20.0,
-                    timeout=40.0, # tang thoi gian timeout 
+                    # timeout=20.0,
+                    timeout=40.0,  # tang thoi gian timeout
                 )
 
                 response.raise_for_status()
@@ -182,77 +237,167 @@ def extract_fpt_laptop_data(
                     description = get_description(item.get("slug"))
                     if description:
                         item["description"] = description
+                    skus = []
+                    for sku in item.get("skus", []):
+                        sku["attributes"] = get_attributes(sku.get("sku", ""))
+                        skus.append(sku)
+                    item["skus"] = skus
 
         print(f"Import successful {imported_count} {category_slug} items")
         print("--- %s seconds ---" % (time.time() - start_time))
 
+
 def write_to_jsonlines(data: dict | list[dict], file_path: str = file_path):
     with jsonlines.open(file_path, "a") as writer:
-    #with jsonlines.open(file_path, "w") as writer: 
-    # Cach nay co van de , vi qa moi batch data lai dong mo file 1 lan => Dan den batch moi se ghi de len data batch cu
+        # with jsonlines.open(file_path, "w") as writer:
+        # Cach nay co van de , vi qa moi batch data lai dong mo file 1 lan => Dan den batch moi se ghi de len data batch cu
         if type(data) is dict:
             writer.write(data)
         else:
             writer.write_all(data)
 
-def get_description(item_slug: str) -> str | None:
-    '''
-    Lấy nội dung mô tả sản phẩm từ trang chi tiết FPTShop.
 
-    Args:
-        item_slug: Phần slug của URL sản phẩm (ví dụ: 'dien-thoai/samsung-galaxy-m55').
-    '''
-    url = f"{env.FPTSHOP_BASE_URL}/{item_slug}"
+# ...existing code for get_description function...
 
-    response = httpx.get(url, headers=header)
-    data = BeautifulSoup(response.content, "html.parser")
-    description_object = data.find("div", {"id": "ThongTinSanPham"})
-    if description_object is None:
-        return None
+import json
+from collections import defaultdict
 
-    description_object = description_object.select_one(
-        #"div.relative.w-full .description-container"
-        #"div.ProductContent_description-container__miT3z"
-        "div.ProductContent_description-container__miT3z"
+
+def format_value(value):
+    """Format giá trị thành string phù hợp"""
+    if value is None:
+        return ""
+    elif isinstance(value, str):
+        return value.strip()
+    elif isinstance(value, list):
+        if len(value) == 0:
+            return ""
+        # Xử lý list có object với displayValue
+        formatted_items = set()
+        for item in value:
+            if isinstance(item, dict) and "displayValue" in item:
+                formatted_items.add(item["displayValue"])
+            else:
+                formatted_items.add(str(item))
+        return ", ".join(formatted_items)
+    elif isinstance(value, dict):
+        # Nếu là dict, lấy displayValue nếu có
+        if "displayValue" in value:
+            return value["displayValue"]
+        else:
+            return str(value)
+    else:
+        return str(value)
+
+
+def convert_json_list_to_markdown_table(json_data_list):
+    """
+    Chuyển đổi danh sách JSON data thành bảng markdown
+    """
+    # Dictionary để lưu trữ tất cả attributes theo propertyName
+    all_attributes = defaultdict(lambda: defaultdict(list))
+
+    # Thu thập tất cả attributes từ tất cả JSON objects
+    for json_idx, json_data in enumerate(json_data_list):
+        for group in json_data:
+            group_name = group["groupName"]
+            for attr in group["attributes"]:
+                property_name = attr["propertyName"]
+                display_name = attr["displayName"]
+                unit = attr.get("unit", "")
+                value = attr.get("value")
+
+                # Lưu thông tin attribute
+                all_attributes[property_name]["display_name"] = display_name
+                all_attributes[property_name]["unit"] = unit
+                all_attributes[property_name]["group_name"] = group_name
+                all_attributes[property_name]["values"].append(format_value(value))
+
+    # Tạo bảng markdown
+    markdown_lines = []
+
+    # Header
+    headers = ["Nhóm", "Thuộc tính", "Giá trị"]
+    markdown_lines.append("| " + " | ".join(headers) + " |")
+    markdown_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+    # Data rows
+    for property_name, attr_info in all_attributes.items():
+        group_name = attr_info["group_name"]
+        display_name = attr_info["display_name"]
+        unit = attr_info["unit"] or ""
+
+        # Gộp tất cả values thành một string, loại bỏ duplicates và empty values
+        unique_values = []
+        for val in attr_info["values"]:
+            if val and val not in unique_values:
+                unique_values.append(val)
+
+        formatted_values = ", ".join(unique_values) if unique_values else ""
+        # Nếu không có giá trị nào, bỏ qua dòng này
+        if not formatted_values or not formatted_values.strip():
+            continue
+
+        # Gộp unit và formatted_values
+        if unit and formatted_values:
+            combined_value = f"{formatted_values} ({unit})"
+        elif formatted_values:
+            combined_value = formatted_values
+        elif unit:
+            combined_value = f"({unit})"
+        else:
+            combined_value = ""
+
+        row = [group_name, display_name, combined_value]
+        markdown_lines.append("| " + " | ".join(row) + " |")
+
+    return "\n".join(markdown_lines)
+
+
+def variants_to_markdown(products: list[dict]) -> str:
+    if not products:
+        return "Không có sản phẩm nào."
+
+    # Xác định tất cả các loại variant để tạo cột động
+    variant_keys = set()
+    for product in products:
+        for variant in product.get("variants", []):
+            variant_keys.add(variant.get("propertyName"))
+    variant_keys = sorted(variant_keys)
+
+    # Tạo header bảng Markdown
+    headers = (
+        ["Tên sản phẩm"]
+        + [key.capitalize() for key in variant_keys]
+        + ["Giá gốc", "Giá hiện tại"]
     )
+    header_row = "| " + " | ".join(headers) + " |"
+    separator_row = "| " + " | ".join(["---"] * len(headers)) + " |"
 
-    if description_object is None:
-        print(f"Không tìm thấy description container (ProductContent_description-container__miT3z) cho slug: {item_slug}")
-        return None
+    # Tạo từng dòng cho bảng
+    rows = []
+    for product in products:
+        name = f"{product['displayName']}"
+        original_price = f"{product['originalPrice']:,}₫"
+        current_price = f"{product['currentPrice']:,}₫"
 
-    #contents = description_object.select("p, h2")
-    contents = description_object.select("p,h2,h3")
-    if not contents:
-        print(f"Không tìm thấy thẻ p hoặc h3 bên trong description container cho slug: {item_slug}")
-        return None
+        # Chuẩn bị variant theo đúng cột
+        variant_map = {
+            v["propertyName"]: v["displayValue"] for v in product.get("variants", [])
+        }
+        variant_values = [variant_map.get(key, "") for key in variant_keys]
 
-    #return "\n".join([i.get_text() for i in contents])
-    # trích xuất text và ghép nối lại, thêm strip=True để loại bỏ khoảng trắng thừa
-    description_text = "\n".join([tag.get_text(strip=True) for tag in contents])
+        row = (
+            "| "
+            + " | ".join([name] + variant_values + [original_price, current_price])
+            + " |"
+        )
+        rows.append(row)
 
-    # --- Kết thúc phần chỉnh sửa ---
+    return "\n".join([header_row, separator_row] + rows)
 
-    return description_text
-    '''
-    # THÊM ** VÀO ĐẦU VÀ CUỐI CỦA TEXT KHI LÀ H3
-     processed_texts = []
-    for tag in contents:
-        text = tag.get_text(strip=True)
-        if tag.name == 'h3':
-            # Nếu là thẻ h3, thêm Markdown bold
-            processed_texts.append(f"**{text}**")
-        elif tag.name == 'p':
-            # Nếu là thẻ p, giữ nguyên text
-             processed_texts.append(text)
-        # Bỏ qua các thẻ khác nếu có (mặc dù select chỉ lấy p và h3)
 
-    # Ghép nối các phần đã xử lý
-    description_text = "\n".join(processed_texts)
-    # --- Kết thúc phần chỉnh sửa ---
-
-    return description_text
-    '''
-'''
+"""
 def test_get_description():
 
     slug_to_test = 'may-tinh-xach-tay/lenovo-gaming-legion-5-16irx9-i7-14650hx-32gb'
@@ -266,4 +411,4 @@ def test_get_description():
     
 if __name__ == "__main__":
     test_get_description()
-'''
+"""

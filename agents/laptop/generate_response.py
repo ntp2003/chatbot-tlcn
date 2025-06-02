@@ -9,7 +9,7 @@ from openai.types.chat import (
     ChatCompletionToolMessageParam,
 )
 from models.faq import FAQModel
-from service.openai import OpenAIChatCompletionsRequest, _client, _chat_model
+from service.openai import OpenAIChatCompletionsRequest, _client, _chat_model, _fine_tuning_model
 from openai.types.chat_model import ChatModel
 from agents.base import (
     Agent as AgentBase,
@@ -287,7 +287,8 @@ class Agent(AgentBase):
     ) -> OpenAIChatCompletionsRequest:
         return OpenAIChatCompletionsRequest(
             messages=self.temporary_memory.chat_completions_messages,
-            model=self.model,
+            #model=self.model,
+            model=_fine_tuning_model,
             temperature=0,
             timeout=60,
         )

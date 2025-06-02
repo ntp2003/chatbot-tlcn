@@ -3,12 +3,12 @@
     "conversation_id": "conv_01",
     "turns": [
       {
-        "user_input": "Anh muốn hỏi cách tra cứu về hóa đơn đã mua hàng tại FPT Shop?",
+        "user_input": "Cách tra cứu về hóa đơn đã mua hàng tại FPT Shop?",
         "user_gender_context": "male",
         "bot_actual_output_placeholder": ""
       },
       {
-        "user_input": "Nếu hóa đơn đó mua hơn 1 năm rồi thì có tìm lại được không shop?",
+        "user_input": "Nếu hóa đơn đó mua hơn 1 năm rồi thì có tìm lại được không?",
         "user_gender_context": "male",
         "bot_actual_output_placeholder": ""
       }
@@ -28,13 +28,13 @@
     "conversation_id": "conv_03",
     "turns": [
       {
-        "user_input": "Em muốn kiểm tra sản phẩm đã mua từ FPT Shop có chính hãng của Apple thì xem như thế nào?",
-        "user_gender_context": "unknown",
+        "user_input": "Anh muốn kiểm tra sản phẩm đã mua từ FPT Shop có chính hãng của Apple thì xem như thế nào?",
+        "user_gender_context": "male",
         "bot_actual_output_placeholder": ""
       },
       {
-        "user_input": "Có cần phải mang sản phẩm đến cửa hàng không?",
-        "user_gender_context": "unknown",
+        "user_input": "Vậy Có cần phải mang sản phẩm đến cửa hàng không?",
+        "user_gender_context": "male",
         "bot_actual_output_placeholder": ""
       }
     ]
@@ -43,7 +43,7 @@
     "conversation_id": "conv_04",
     "turns": [
       {
-        "user_input": "Cô hỏi chút, FPT Shop có chính sách giao hàng tận nhà không?",
+        "user_input": "Cô muốn hỏi FPT Shop có chính sách giao hàng tận nhà không?",
         "user_gender_context": "female",
         "bot_actual_output_placeholder": ""
       },
@@ -83,7 +83,7 @@
     "conversation_id": "conv_07",
     "turns": [
       {
-        "user_input": "Em muốn hỏi về chính sách đổi trả sản phẩm tại FPT Shop?",
+        "user_input": "Chính sách đổi trả sản phẩm tại FPT Shop?",
         "user_gender_context": "unknown",
         "bot_actual_output_placeholder": ""
       },
@@ -113,8 +113,8 @@
     "conversation_id": "conv_09",
     "turns": [
       {
-        "user_input": "Mình cần tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop thì làm thế nào?",
-        "user_gender_context": "unknown",
+        "user_input": "Chị cần tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop thì làm thế nào?",
+        "user_gender_context": "female",
         "bot_actual_output_placeholder": ""
       }
     ]
@@ -198,7 +198,7 @@
         "bot_actual_output_placeholder": ""
       },
       {
-        "user_input": "Chính sách này có áp dụng cho trẻ em không?",
+        "user_input": "cho cô hỏi chính sách này có áp dụng cho trẻ em không?",
         "user_gender_context": "female",
         "bot_actual_output_placeholder": ""
       }
@@ -218,7 +218,7 @@
     "conversation_id": "conv_18",
     "turns": [
       {
-        "user_input": "Em muốn hỏi về cách thanh toán tiền thu hộ qua kênh online?",
+        "user_input": "tui muốn hỏi về cách thanh toán tiền thu hộ qua kênh online?",
         "user_gender_context": "unknown",
         "bot_actual_output_placeholder": ""
       }
@@ -318,7 +318,7 @@
     "conversation_id": "conv_27",
     "turns": [
       {
-        "user_input": "Em muốn biết FPT Shop có những biện pháp nào để bảo vệ dữ liệu của khách hàng?",
+        "user_input": "FPT Shop có những biện pháp nào để bảo vệ dữ liệu của khách hàng?",
         "user_gender_context": "unknown",
         "bot_actual_output_placeholder": ""
       },
@@ -343,7 +343,7 @@
     "conversation_id": "conv_29",
     "turns": [
       {
-        "user_input": "Chị muốn biết FPT Shop có hỗ trợ kỹ thuật và sao lưu dữ liệu không?",
+        "user_input": "FPT Shop có hỗ trợ kỹ thuật và sao lưu dữ liệu không?",
         "user_gender_context": "female",
         "bot_actual_output_placeholder": ""
       }
@@ -353,7 +353,7 @@
     "conversation_id": "conv_30",
     "turns": [
       {
-        "user_input": "Tôi muốn hỏi về những trường hợp sản phẩm không được bảo hành tại FPT Shop?",
+        "user_input": "Những trường hợp sản phẩm không được bảo hành tại FPT Shop?",
         "user_gender_context": "unknown",
         "bot_actual_output_placeholder": ""
       }

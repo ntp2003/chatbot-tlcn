@@ -162,7 +162,7 @@ class Agent(AgentBase):
 
     @override
     def run(
-        self, conversation_messages: list[ChatCompletionMessageParam], gen_answer_model: ChatModel = _chat_model, *args, **kwargs
+        self, conversation_messages: list[ChatCompletionMessageParam], *args, **kwargs
     ) -> AgentResponseBase:
         """
         Run the agent to generate a response based on the conversation messages.
@@ -209,7 +209,7 @@ class Agent(AgentBase):
             )
         )
 
-        openai_request = self._get_openai_request(gen_answer_model)
+        openai_request = self._get_openai_request()
         response = openai_request.create()
         response_message = response.choices[0].message
 

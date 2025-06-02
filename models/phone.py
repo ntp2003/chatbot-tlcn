@@ -90,7 +90,6 @@ class PhoneModel(BaseModel):
     min_price: int
     max_price: int
     score: float
-    name_embedding: list[float]
     attributes_table_text: Optional[str] = None
     variants_table_text: Optional[str] = None
     created_at: datetime

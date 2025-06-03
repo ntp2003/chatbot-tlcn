@@ -319,7 +319,7 @@ class Agent(AgentBase):
                 knowledge=knowledge,
                 conversation_history=[],
                 model=model,
-                user_fine_tune_tone=self.temporary_memory.use_fine_tune_tone,
+                use_fine_tune_tone=self.temporary_memory.use_fine_tune_tone,
             )
 
             return AgentResponse(

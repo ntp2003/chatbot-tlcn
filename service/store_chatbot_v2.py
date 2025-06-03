@@ -43,7 +43,7 @@ class ConfigModel(BaseModel):
     detect_demand: str = "gpt-4o-mini"
     collect_and_retrieval: str = "gpt-4o-mini"
     response: str = "gpt-4o-mini"
-    user_fine_tune_tone: bool = True
+    user_fine_tune_tone: bool = False
 
 
 def gen_answer(

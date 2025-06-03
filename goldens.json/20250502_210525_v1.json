@@ -1,0 +1,614 @@
+[
+    {
+        "input": "Hãy mô tả quy trình thanh toán tiền thu hộ online tại FPT Shop.",
+        "actual_output": null,
+        "expected_output": "Quý khách có thể thực hiện thanh toán tiền thu hộ online tại FPT Shop bằng cách truy cập vào đường dẫn sau: [https://fptshop.com.vn/dich-vu](https://fptshop.com.vn/dich-vu). Tại đây, quý khách sẽ được hướng dẫn chi tiết để hoàn tất quy trình thanh toán một cách nhanh chóng và tiện lợi. Nếu cần thêm hỗ trợ, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn thanh toán tiền thu hộ qua kênh online thì thực hiện bằng cách nào?\nCâu trả lời: Quý khách thực hiện truy cập đường dẫn (https://fptshop.com.vn/dich-vu) để thực hiện thanh toán online \n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Hình thức thanh toán cho đơn hàng trực tuyến tại FPT Shop là gì?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến FPT Shop! Về hình thức thanh toán khi mua hàng trực tuyến, đối với đơn hàng có giá trị từ 50 triệu trở lên, quý khách cần thanh toán trước 100% giá trị đơn hàng để được giao hàng tại nhà. Đối với đơn hàng dưới 50 triệu, quý khách có thể chọn nhận hàng và thanh toán tại nhà. Nếu cần hỗ trợ thêm, xin hãy cho chúng tôi biết!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Hình thức thanh toán khi mua hàng trực tuyến tại FPT Shop?\nCâu trả lời: Đơn hàng có giá trị từ 50 triệu trở lên: Quý khách phải thanh toán trước 100% giá trị đơn hàng nếu muốn giao hàng tại nhà.\nĐơn hàng có giá trị dưới 50 triệu: Quý khách có thể nhận hàng và thanh toán tại nhà khi đồng ý mua hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop cung cấp những sản phẩm và dịch vụ gì để cạnh tranh với Apple tại Việt Nam?",
+        "actual_output": null,
+        "expected_output": "FPT Shop cung cấp các sản phẩm chính hãng Apple và dịch vụ bảo hành chuẩn hãng, giúp khách hàng yên tâm khi mua sắm. Bên cạnh đó, đội ngũ tư vấn của chúng tôi được đào tạo bởi các chuyên gia Apple, đảm bảo hỗ trợ khách hàng một cách tốt nhất. Chúng tôi cam kết mang đến trải nghiệm mua sắm tốt nhất với sản phẩm chất lượng và dịch vụ chuyên nghiệp.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có phải là đại lý ủy quyền của Apple không?\nCâu trả lời: FPT Shop là đại lý ủy quyền toàn cầu của Apple tại Việt Nam:\n    - Cung cấp sản phẩm chính hãng Apple và dịch vụ bảo hành chuẩn hãng.\n    - Đội ngũ tư vấn được đào tạo bởi chuyên gia Apple.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Cách theo dõi lịch sử tích điểm mua hàng tại FPT Shop như thế nào?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn: Quý khách có thể theo dõi lịch sử tích điểm mua hàng tại FPT Shop bằng cách truy cập vào link sau: (https://fptshop.com.vn/tai-khoan/lich-su-tich-diem). Sau đó, quý khách chỉ cần đăng nhập bằng số điện thoại đã sử dụng để mua hàng. Nếu cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần tra cứu điểm mua hàng tại FPT Shop đã tích điểm được bao nhiêu thì xem ở đâu?\nCâu trả lời: Quý khách thực hiện tra cứu điểm tích tại  (https://fptshop.com.vn/tai-khoan/lich-su-tich-diem) bằng cách đăng nhập số điện thoại mua hàng của Quý khách.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để giải quyết vấn đề không cập nhật bảo hành cho thiết bị Apple tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã liên hệ với FPT Shop. Để giải quyết vấn đề thiết bị Apple không cập nhật bảo hành, Quý khách vui lòng chờ 72 giờ sau khi kích hoạt máy để kiểm tra lại thông tin bảo hành. Nếu sau thời gian này mà vẫn chưa cập nhật, Quý khách hãy gọi tổng đài 1800.6616 để được hỗ trợ từ tổng đài viên. Chúng tôi rất mong được phục vụ Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn cập nhật máy Apple có thời gian bảo hành không đúng hoặc chưa kích hoạt bảo hành trên hệ thống Website của Apple thì làm thế nào?\nCâu trả lời: Quý khách vui lòng chờ thêm và kiểm tra lại thông tin bảo hành sau 72h kể từ khi kích hoạt máy. Nếu sau thời gian này vẫn chưa cập nhật thời gian bảo hành thì Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp tổng đài viên hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Chế độ bảo hành 1 đổi 1 trong 30 ngày cho máy đổi trả tại FPT Shop là gì?",
+        "actual_output": null,
+        "expected_output": "Chế độ bảo hành 1 đổi 1 trong 30 ngày cho máy đổi trả tại FPT Shop có nghĩa là nếu sản phẩm gặp lỗi do nhà sản xuất trong vòng 30 ngày kể từ ngày mua, khách hàng sẽ được đổi sản phẩm mới miễn phí. Sau 30 ngày, sản phẩm sẽ được bảo hành theo chính sách của hãng nếu còn thời gian bảo hành. Nếu hết thời gian bảo hành mặc định, FPT Shop sẽ cung cấp dịch vụ bảo hành từ 1 đến 12 tháng tùy theo loại sản phẩm. Chúng tôi luôn sẵn sàng hỗ trợ bạn!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Chế độ bảo hành cho máy đổi trả tại FPT Shop như thế nào?\nCâu trả lời: Máy đổi trả tại FPT Shop được bảo hành 1 đổi 1 trong 30 ngày nếu có lỗi nhà sản xuất, và bảo hành theo chính sách của hãng nếu còn bảo hành mặc định. Hết bảo hành mặc định, FPT Shop bảo hành từ 1 đến 12 tháng tùy loại sản phẩm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có cung cấp dịch vụ lắp đặt miễn phí cho các sản phẩm lớn như TV không? Nếu có, điều này sẽ ảnh hưởng như thế nào đến trải nghiệm của khách hàng?",
+        "actual_output": null,
+        "expected_output": "Chào bạn! FPT Shop rất vui được thông báo rằng chúng tôi cung cấp dịch vụ lắp đặt miễn phí cho các sản phẩm lớn như TV ngay sau khi giao hàng đến nơi. Dịch vụ này không chỉ giúp tiết kiệm thời gian cho khách hàng mà còn đảm bảo sản phẩm được lắp đặt đúng cách, mang lại trải nghiệm tốt nhất khi sử dụng. Nếu bạn có thêm câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có hỗ trợ lắp đặt sản phẩm tại nhà không?\nCâu trả lời: FPT Shop hỗ trợ lắp đặt miễn phí cho các sản phẩm cần lắp đặt như TV, điều hòa sau khi giao hàng đến nơi.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop hỗ trợ đổi trả sản phẩm bị lỗi ngoại quan hoặc lỗi kỹ thuật như thế nào?",
+        "actual_output": null,
+        "expected_output": "Tại FPT Shop, chúng tôi hỗ trợ khách hàng đổi trả sản phẩm bị lỗi ngoại quan hoặc lỗi kỹ thuật rất linh hoạt. Khách hàng có thể đổi sản phẩm nếu phát hiện lỗi ngoại quan trước khi kích hoạt bảo hành điện tử hoặc ngay khi nhận hàng. Đối với sản phẩm có lỗi kỹ thuật của nhà sản xuất, chúng tôi sẵn sàng đổi sản phẩm mới cho khách hàng tại cửa hàng. Nếu bạn cần thêm thông tin, hãy liên hệ với chúng tôi để được tư vấn chi tiết hơn!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop hỗ trợ đổi trả sản phẩm như thế nào?\nCâu trả lời: Khách hàng có thể đổi sản phẩm nếu phát hiện lỗi ngoại quan trước khi kích hoạt bảo hành điện tử hoặc ngay khi nhận hàng. Nếu sản phẩm có lỗi kỹ thuật của nhà sản xuất, khách hàng được đổi sản phẩm mới tại FPT Shop.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Đặc điểm nổi bật trong chính sách bảo hành của FPT Shop là gì?",
+        "actual_output": null,
+        "expected_output": "Chính sách bảo hành của FPT Shop nổi bật với các điểm sau: \n\n- Tất cả sản phẩm chính hãng được bảo hành theo đúng chính sách của nhà sản xuất.\n- Hỗ trợ gửi bảo hành miễn phí, bao gồm cả sản phẩm mua từ chuỗi bán lẻ khác.\n- Bảo hành đổi sản phẩm mới ngay tại shop trong 30 ngày nếu có lỗi do nhà sản xuất.\n- Khách hàng có thể theo dõi tiến độ bảo hành dễ dàng qua hotline hoặc tra cứu trực tuyến.\n- FPT Shop hỗ trợ làm việc với hãng để xử lý các vấn đề phát sinh trong quá trình bảo hành.\n\nChúng tôi luôn sẵn sàng hỗ trợ bạn. Hãy liên hệ với FPT Shop để biết thêm chi tiết!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Chính sách bảo hành của FPT ?\nCâu trả lời: Tất cả sản phẩm tại FPT Shop kinh doanh đều là sản phẩm chính hãng và được bảo hành theo đúng chính sách của nhà sản xuất(*). Ngoài ra FPT Shop cũng hỗ trợ gửi bảo hành miễn phí giúp khách hàng đối với cả sản phẩm do FPT Shop bán ra và sản phẩm Quý khách mua tại các chuỗi bán lẻ khác.\nMua hàng tại FPT Shop, Quý khách sẽ được hưởng những đặc quyền sau:\n    - Bảo hành đổi sản phẩm mới ngay tại shop trong 30 ngày nếu có lỗi NSX.(**)\n    - Gửi bảo hành chính hãng không mất phí vận chuyển.(***)\n    - Theo dõi tiến độ bảo hành nhanh chóng qua kênh hotline hoặc tự tra cứu Tại đây.\n    - Hỗ trợ làm việc với hãng để xử lý phát sinh trong quá trình bảo hành.\nBên cạnh đó Quý khách có thể tham khảo một số các trường hợp thường gặp nằm ngoài chính sách bảo hành sau để xác định sơ bộ máy có đủ điều kiện bảo hành hãng:\n    - Sản phẩm hết hạn bảo hành (Vui lòng tra cứu thời hạn bảo hành sản phẩm tại (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh)\n    - Sản phẩm đã bị thay đổi, sửa chữa không thuộc các Trung Tâm Bảo Hành Ủy Quyền của Hãng.\n    - Sản phẩm lắp đặt, bảo trì, sử dụng không đúng theo hướng dẫn của Nhà sản xuất gây ra hư hỏng.\n    - Sản phẩm lỗi do ngấm nước, chất lỏng và bụi bẩn. Quy định này áp dụng cho cả những thiết bị đạt chứng nhận kháng nước/kháng bụi cao nhất là IP68.\n    - Sản phẩm bị biến dạng, nứt vỡ, cấn móp, trầy xước nặng do tác động nhiệt, tác động bên ngoài.\n    - Sản phẩm có vết mốc, rỉ sét hoặc bị ăn mòn, oxy hóa bởi hóa chất.\n    - Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh, côn trùng, động vật vào.\n    - Sản phẩm trong tình trạng bị khóa tài khoản cá nhân như: Tài khoản khóa máy/màn hình, khóa tài khoản trực tuyến Xiaomi Cloud, Samsung Cloud, iCloud, Gmail...\n    - Khách hàng sử dụng phần mềm, ứng dụng không chính hãng, không bản quyền.\n    - Màn hình có bốn (04) điểm chết trở xuống.\nLưu ý:\n    - Chương trình bảo hành bắt đầu có hiệu lực từ thời điểm FPT Shop xuất hóa đơn cho Quý khách.\n    - Với mỗi dòng sản phẩm khác nhau sẽ có chính sách bảo hành khác nhau tùy theo chính sách của Hãng/Nhà cung cấp.\n    - Để tìm hiểu thông tin chi tiết về chính sách bảo hành cho sản phẩm cụ thể, xin liên hệ bộ phận Chăm sóc Khách hàng của FPT Shop 1800 6616.\n    - Tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào Tại đây.\n    - Trong quá trình thực hiện dịch vụ bảo hành, các nội dung lưu trữ trên sản phẩm của Quý khách sẽ bị xóa và định dạng lại. Do đó, Quý khách vui lòng tự sao lưu toàn bộ dữ liệu trong sản phẩm, đồng thời gỡ bỏ tất cả các thông tin cá nhân mà Quý khách muốn bảo mật. FPT Shop không chịu trách nhiệm đối với bất kỳ mất mát nào liên quan tới các chương trình phần mềm, dữ liệu hoặc thông tin nào khác lưu trữ trên sản phẩm bảo hành.\n    - Vui lòng tắt tất cả các mật khẩu bảo vệ, FPT Shop sẽ từ chối tiếp nhận bảo hành nếu thiết bị của bạn bị khóa bởi bất cứ phương pháp nào.\n(*) Áp dụng với các sản phẩm bán mới hoặc còn hạn bảo hành mặc định nếu đã qua sử dụng.\n(**) Áp dụng với các sản phẩm thuộc diện đổi mới trong 30 ngày nếu có lỗi NSX được công bố trên website Chính sách đổi trả.\n(***) Trừ các sản phẩm có chính sách bảo hành tại nhà, sản phẩm thuộc diện cồng kềnh.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Với 63 tỉnh thành và phí 10.000 VNĐ, chính sách giao hàng của FPT Shop là gì?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách giao hàng của FPT Shop. Chúng tôi hỗ trợ giao hàng tại nhà trên toàn quốc với phạm vi phủ sóng 63 tỉnh thành. Đặc biệt, chúng tôi miễn phí giao hàng trong bán kính 20km. Nếu đơn hàng của bạn dưới 100.000 VNĐ, phí giao hàng sẽ là 10.000 VNĐ. Đối với các khoảng cách xa hơn, nhân viên của chúng tôi sẽ tư vấn chi tiết để bạn có được thông tin đầy đủ nhất. Nếu bạn cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có chính sách giao hàng tại nhà như thế nào?\nCâu trả lời: FPT Shop hỗ trợ giao hàng tại nhà trên toàn quốc với phạm vi phủ sóng 63 tỉnh thành. Miễn phí giao hàng trong bán kính 20km với đơn hàng dưới 100.000 VNĐ thu phí 10.000 VNĐ. Với khoảng cách xa hơn, nhân viên sẽ tư vấn chi tiết.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng có thể thanh toán khi nhận hàng cho đơn hàng dưới 50 triệu không?",
+        "actual_output": null,
+        "expected_output": "Chào quý khách! Đối với đơn hàng có giá trị dưới 50 triệu, quý khách hoàn toàn có thể lựa chọn hình thức thanh toán khi nhận hàng. Chúng tôi luôn sẵn sàng hỗ trợ quý khách trong quá trình mua sắm. Nếu có bất kỳ thắc mắc nào khác, xin vui lòng liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Hình thức thanh toán khi mua hàng trực tuyến tại FPT Shop?\nCâu trả lời: Đơn hàng có giá trị từ 50 triệu trở lên: Quý khách phải thanh toán trước 100% giá trị đơn hàng nếu muốn giao hàng tại nhà.\nĐơn hàng có giá trị dưới 50 triệu: Quý khách có thể nhận hàng và thanh toán tại nhà khi đồng ý mua hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Sau khi kích hoạt máy, cần chờ bao lâu trước khi kiểm tra thông tin bảo hành?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Quý khách vui lòng chờ thêm 72 giờ kể từ khi kích hoạt máy để kiểm tra thông tin bảo hành. Nếu sau thời gian này mà vẫn chưa thấy cập nhật, quý khách hãy liên hệ tổng đài 1800.6616 để được hỗ trợ thêm.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn cập nhật máy Apple có thời gian bảo hành không đúng hoặc chưa kích hoạt bảo hành trên hệ thống Website của Apple thì làm thế nào?\nCâu trả lời: Quý khách vui lòng chờ thêm và kiểm tra lại thông tin bảo hành sau 72h kể từ khi kích hoạt máy. Nếu sau thời gian này vẫn chưa cập nhật thời gian bảo hành thì Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp tổng đài viên hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop là đại lý ủy quyền của Apple tại Việt Nam, cung cấp sản phẩm chính hãng và dịch vụ bảo hành như thế nào?",
+        "actual_output": null,
+        "expected_output": "FPT Shop là đại lý ủy quyền toàn cầu của Apple tại Việt Nam, chuyên cung cấp sản phẩm chính hãng Apple với dịch vụ bảo hành chuẩn hãng. Đội ngũ tư vấn tại FPT Shop được đào tạo bởi chuyên gia Apple, đảm bảo mang đến cho khách hàng trải nghiệm mua sắm tốt nhất và dịch vụ hỗ trợ chuyên nghiệp. Nếu bạn cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có phải là đại lý ủy quyền của Apple không?\nCâu trả lời: FPT Shop là đại lý ủy quyền toàn cầu của Apple tại Việt Nam:\n    - Cung cấp sản phẩm chính hãng Apple và dịch vụ bảo hành chuẩn hãng.\n    - Đội ngũ tư vấn được đào tạo bởi chuyên gia Apple.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Chính sách bảo hành của FPT Shop cho các sản phẩm trả lại bao gồm đổi 1 đổi 1 trong vòng 30 ngày đối với sản phẩm bị lỗi do nhà sản xuất; thời gian bảo hành cụ thể dựa trên loại sản phẩm là gì?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách bảo hành của FPT Shop! Đối với các sản phẩm trả lại, FPT Shop áp dụng chế độ bảo hành 1 đổi 1 trong vòng 30 ngày nếu sản phẩm có lỗi do nhà sản xuất. Sau thời gian này, thời gian bảo hành sẽ tuỳ thuộc vào từng loại sản phẩm, từ 1 đến 12 tháng, theo chính sách bảo hành của hãng. Nếu bạn có bất kỳ thắc mắc nào khác, đừng ngần ngại hỏi thêm nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Chế độ bảo hành cho máy đổi trả tại FPT Shop như thế nào?\nCâu trả lời: Máy đổi trả tại FPT Shop được bảo hành 1 đổi 1 trong 30 ngày nếu có lỗi nhà sản xuất, và bảo hành theo chính sách của hãng nếu còn bảo hành mặc định. Hết bảo hành mặc định, FPT Shop bảo hành từ 1 đến 12 tháng tùy loại sản phẩm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để thực hiện thanh toán online qua đường dẫn được cung cấp tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã quan tâm đến dịch vụ của FPT Shop! Để thực hiện thanh toán online, quý khách vui lòng truy cập vào đường dẫn sau: [https://fptshop.com.vn/dich-vu](https://fptshop.com.vn/dich-vu). Tại đây, quý khách sẽ được hướng dẫn chi tiết để hoàn tất giao dịch. Nếu cần thêm hỗ trợ, chúng tôi luôn sẵn sàng giúp đỡ!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn thanh toán tiền thu hộ qua kênh online thì thực hiện bằng cách nào?\nCâu trả lời: Quý khách thực hiện truy cập đường dẫn (https://fptshop.com.vn/dich-vu) để thực hiện thanh toán online \n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Dịch vụ lắp đặt miễn phí của FPT Shop áp dụng cho những sản phẩm nào cần lắp đặt?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến dịch vụ của FPT Shop! Dịch vụ lắp đặt miễn phí áp dụng cho các sản phẩm cần lắp đặt như TV và điều hòa, sau khi sản phẩm được giao hàng đến nơi. Nếu bạn có thêm câu hỏi nào khác, hãy cho chúng tôi biết nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có hỗ trợ lắp đặt sản phẩm tại nhà không?\nCâu trả lời: FPT Shop hỗ trợ lắp đặt miễn phí cho các sản phẩm cần lắp đặt như TV, điều hòa sau khi giao hàng đến nơi.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu điểm tích lũy tại FPT Shop thông qua số điện thoại mua hàng?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã quan tâm đến việc tra cứu điểm tích lũy tại FPT Shop. Để kiểm tra số điểm đã tích lũy, Quý khách vui lòng truy cập vào liên kết sau: (https://fptshop.com.vn/tai-khoan/lich-su-tich-diem). Sau đó, chỉ cần đăng nhập bằng số điện thoại mà Quý khách đã sử dụng để mua hàng. Nếu cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần tra cứu điểm mua hàng tại FPT Shop đã tích điểm được bao nhiêu thì xem ở đâu?\nCâu trả lời: Quý khách thực hiện tra cứu điểm tích tại  (https://fptshop.com.vn/tai-khoan/lich-su-tich-diem) bằng cách đăng nhập số điện thoại mua hàng của Quý khách.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng có thể đổi sản phẩm nếu phát hiện lỗi trước khi kích hoạt bảo hành điện tử tại FPT Shop không?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop. \n\nĐúng vậy, khách hàng có thể đổi sản phẩm nếu phát hiện lỗi ngoại quan trước khi kích hoạt bảo hành điện tử tại FPT Shop. Chúng tôi luôn sẵn sàng hỗ trợ bạn trong việc đổi trả sản phẩm để đảm bảo sự hài lòng cao nhất.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop hỗ trợ đổi trả sản phẩm như thế nào?\nCâu trả lời: Khách hàng có thể đổi sản phẩm nếu phát hiện lỗi ngoại quan trước khi kích hoạt bảo hành điện tử hoặc ngay khi nhận hàng. Nếu sản phẩm có lỗi kỹ thuật của nhà sản xuất, khách hàng được đổi sản phẩm mới tại FPT Shop.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có chính sách giao hàng miễn phí trong vòng 20km, nhưng phí giao hàng cho các đơn hàng dưới 100,000 VNĐ là bao nhiêu?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách giao hàng của FPT Shop. Đối với các đơn hàng dưới 100.000 VNĐ, phí giao hàng trong bán kính 20km là 10.000 VNĐ. Nếu bạn cần thêm thông tin chi tiết, hãy để chúng tôi biết!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có chính sách giao hàng tại nhà như thế nào?\nCâu trả lời: FPT Shop hỗ trợ giao hàng tại nhà trên toàn quốc với phạm vi phủ sóng 63 tỉnh thành. Miễn phí giao hàng trong bán kính 20km với đơn hàng dưới 100.000 VNĐ thu phí 10.000 VNĐ. Với khoảng cách xa hơn, nhân viên sẽ tư vấn chi tiết.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Tôi có thể yêu cầu bảo hành cho sản phẩm mua tại FPT Shop không?",
+        "actual_output": null,
+        "expected_output": "Quý khách hoàn toàn có thể yêu cầu bảo hành cho sản phẩm đã mua tại FPT Shop. Tất cả các sản phẩm tại cửa hàng đều được bảo hành chính hãng và FPT Shop hỗ trợ gửi bảo hành miễn phí cho cả những sản phẩm mua từ các chuỗi bán lẻ khác. Đặc biệt, nếu sản phẩm của Quý khách gặp lỗi do nhà sản xuất trong vòng 30 ngày, Quý khách có thể đổi sản phẩm mới ngay tại shop. Hãy liên hệ với bộ phận Chăm sóc Khách hàng của chúng tôi qua số hotline 1800 6616 để được hỗ trợ thêm. Cảm ơn Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Chính sách bảo hành của FPT ?\nCâu trả lời: Tất cả sản phẩm tại FPT Shop kinh doanh đều là sản phẩm chính hãng và được bảo hành theo đúng chính sách của nhà sản xuất(*). Ngoài ra FPT Shop cũng hỗ trợ gửi bảo hành miễn phí giúp khách hàng đối với cả sản phẩm do FPT Shop bán ra và sản phẩm Quý khách mua tại các chuỗi bán lẻ khác.\nMua hàng tại FPT Shop, Quý khách sẽ được hưởng những đặc quyền sau:\n    - Bảo hành đổi sản phẩm mới ngay tại shop trong 30 ngày nếu có lỗi NSX.(**)\n    - Gửi bảo hành chính hãng không mất phí vận chuyển.(***)\n    - Theo dõi tiến độ bảo hành nhanh chóng qua kênh hotline hoặc tự tra cứu Tại đây.\n    - Hỗ trợ làm việc với hãng để xử lý phát sinh trong quá trình bảo hành.\nBên cạnh đó Quý khách có thể tham khảo một số các trường hợp thường gặp nằm ngoài chính sách bảo hành sau để xác định sơ bộ máy có đủ điều kiện bảo hành hãng:\n    - Sản phẩm hết hạn bảo hành (Vui lòng tra cứu thời hạn bảo hành sản phẩm tại (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh)\n    - Sản phẩm đã bị thay đổi, sửa chữa không thuộc các Trung Tâm Bảo Hành Ủy Quyền của Hãng.\n    - Sản phẩm lắp đặt, bảo trì, sử dụng không đúng theo hướng dẫn của Nhà sản xuất gây ra hư hỏng.\n    - Sản phẩm lỗi do ngấm nước, chất lỏng và bụi bẩn. Quy định này áp dụng cho cả những thiết bị đạt chứng nhận kháng nước/kháng bụi cao nhất là IP68.\n    - Sản phẩm bị biến dạng, nứt vỡ, cấn móp, trầy xước nặng do tác động nhiệt, tác động bên ngoài.\n    - Sản phẩm có vết mốc, rỉ sét hoặc bị ăn mòn, oxy hóa bởi hóa chất.\n    - Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh, côn trùng, động vật vào.\n    - Sản phẩm trong tình trạng bị khóa tài khoản cá nhân như: Tài khoản khóa máy/màn hình, khóa tài khoản trực tuyến Xiaomi Cloud, Samsung Cloud, iCloud, Gmail...\n    - Khách hàng sử dụng phần mềm, ứng dụng không chính hãng, không bản quyền.\n    - Màn hình có bốn (04) điểm chết trở xuống.\nLưu ý:\n    - Chương trình bảo hành bắt đầu có hiệu lực từ thời điểm FPT Shop xuất hóa đơn cho Quý khách.\n    - Với mỗi dòng sản phẩm khác nhau sẽ có chính sách bảo hành khác nhau tùy theo chính sách của Hãng/Nhà cung cấp.\n    - Để tìm hiểu thông tin chi tiết về chính sách bảo hành cho sản phẩm cụ thể, xin liên hệ bộ phận Chăm sóc Khách hàng của FPT Shop 1800 6616.\n    - Tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào Tại đây.\n    - Trong quá trình thực hiện dịch vụ bảo hành, các nội dung lưu trữ trên sản phẩm của Quý khách sẽ bị xóa và định dạng lại. Do đó, Quý khách vui lòng tự sao lưu toàn bộ dữ liệu trong sản phẩm, đồng thời gỡ bỏ tất cả các thông tin cá nhân mà Quý khách muốn bảo mật. FPT Shop không chịu trách nhiệm đối với bất kỳ mất mát nào liên quan tới các chương trình phần mềm, dữ liệu hoặc thông tin nào khác lưu trữ trên sản phẩm bảo hành.\n    - Vui lòng tắt tất cả các mật khẩu bảo vệ, FPT Shop sẽ từ chối tiếp nhận bảo hành nếu thiết bị của bạn bị khóa bởi bất cứ phương pháp nào.\n(*) Áp dụng với các sản phẩm bán mới hoặc còn hạn bảo hành mặc định nếu đã qua sử dụng.\n(**) Áp dụng với các sản phẩm thuộc diện đổi mới trong 30 ngày nếu có lỗi NSX được công bố trên website Chính sách đổi trả.\n(***) Trừ các sản phẩm có chính sách bảo hành tại nhà, sản phẩm thuộc diện cồng kềnh.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu thông tin trúng thưởng từ các mini game của FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã quan tâm đến thông tin trúng thưởng của FPT Shop. Để tra cứu thông tin về các chương trình mini game, quý khách vui lòng truy cập vào trang web sau: [https://fptshop.com.vn/khuyen-mai/thong-tin-trao-thuong](https://fptshop.com.vn/khuyen-mai/thong-tin-trao-thuong). Chúng tôi luôn sẵn sàng hỗ trợ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cách tra cứu về thông tin trúng thưởng của FPT Shop khi tham gia các chương trình mini game?\nCâu trả lời: Quý khách thực hiện tra cứu tại (https://fptshop.com.vn/khuyen-mai/thong-tin-trao-thuong)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Tôi cần liên hệ tổng đài để được hướng dẫn thanh toán phí sửa chữa online tại FPT Shop. Bạn có thể cho tôi biết số điện thoại và giờ làm việc của tổng đài không?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã liên hệ với FPT Shop! Để được hướng dẫn thanh toán phí sửa chữa online, bạn vui lòng gọi đến tổng đài 1800.6616. Giờ làm việc của tổng đài là từ thứ Hai đến Chủ Nhật, trong khung giờ từ 8h00 đến 21h00. Chúng tôi rất hân hạnh được hỗ trợ bạn!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Máy gửi đi sửa dịch vụ và đã nhận thông tin báo phí nhưng muốn thanh toán phí online thì thực hiện bằng cách nào?\nCâu trả lời: Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng có thể yêu cầu xóa dữ liệu cá nhân tại FPT Shop qua email như thế nào?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: \n\nKhách hàng có thể yêu cầu xóa dữ liệu cá nhân bằng cách gửi email đến Trung tâm hỗ trợ của FPT Shop tại địa chỉ fptshop@fpt.com.vn. Sau khi nhận yêu cầu, chúng tôi sẽ chuyển đến bộ phận xử lý và thông báo cho khách hàng về tiến trình xóa dữ liệu. Nếu cần thêm hỗ trợ, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để yêu cầu xóa dữ liệu cá nhân tại FPT Shop?\nCâu trả lời: Khách hàng có thể gửi yêu cầu xóa dữ liệu qua email đến Trung tâm hỗ trợ của FPT Shop: fptshop@fpt.com.vn. Yêu cầu sẽ được chuyển đến bộ phận xử lý và khách hàng sẽ được cập nhật về tiến trình xóa dữ liệu.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng như thế nào, và ai là đối tác chịu trách nhiệm bảo mật theo tiêu chuẩn PCI DSS?",
+        "actual_output": null,
+        "expected_output": "FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng bằng cách không lưu trữ thông tin này trên hệ thống của mình. Thay vào đó, các đối tác cổng thanh toán của chúng tôi sẽ chịu trách nhiệm lưu giữ và bảo mật thông tin theo tiêu chuẩn quốc tế PCI DSS, đảm bảo an toàn tuyệt đối cho khách hàng. Nếu có thêm câu hỏi nào khác, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng như thế nào?\nCâu trả lời: FPTShop đảm bảo thông tin thẻ thanh toán của khách hàng không được lưu trên hệ thống. Các đối tác cổng thanh toán sẽ lưu giữ và bảo mật thông tin này theo tiêu chuẩn quốc tế PCI DSS.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Chính sách bảo hành sản phẩm tại FPT Shop có điều khoản nào và địa điểm bảo hành ra sao?",
+        "actual_output": null,
+        "expected_output": "Chào Quý khách, khi mua sản phẩm tại FPT Shop, Quý khách sẽ được hưởng chính sách bảo hành theo các điều khoản cụ thể được quy định tại thời điểm xuất hóa đơn. Đối với các sản phẩm điện thoại, chính sách bảo hành có thể khác nhau tùy thuộc vào từng hãng sản xuất. Quý khách có thể mang sản phẩm đến bảo hành tại bất kỳ cửa hàng FPT Shop nào trên toàn quốc hoặc các trung tâm bảo hành chính hãng. Nếu cần thêm thông tin chi tiết, đừng ngần ngại liên hệ với chúng tôi! Chúc Quý khách có trải nghiệm mua sắm tuyệt vời tại FPT Shop.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Mua sản phẩm FPT Shop được bảo hành như thế nào?\nCâu trả lời: Để đảm bảo quyền lợi của Quý khách hàng khi mua sản phẩm tại các cửa hàng thuộc hệ thống cửa hàng FPT Shop. Chúng tôi cam kết tất cả các sản phẩm được tuân theo các điều khoản bảo hành của sản phẩm tại thời điểm xuất hóa đơn cho Quý khách hàng. Các sản phẩm điện thoại sẽ có chính sách bảo hành khác nhau tùy thuộc vào hãng sản xuất. Khách hàng có thể bảo hành máy tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Chính sách lưu trữ dữ liệu của FPT Shop có gì khác biệt so với các thực tiễn thông thường trong việc lưu trữ dữ liệu cá nhân?",
+        "actual_output": null,
+        "expected_output": "Chào bạn, cảm ơn bạn đã quan tâm đến chính sách lưu trữ dữ liệu của FPT Shop. Chính sách của chúng tôi cho phép lưu trữ dữ liệu cá nhân của khách hàng đến khi có yêu cầu hủy bỏ hoặc khi khách hàng tự hủy thông tin. Điều này thể hiện sự linh hoạt hơn so với một số thực tiễn thông thường khác. Đặc biệt, mọi dữ liệu đều được bảo mật trên máy chủ của FPTshop.com.vn, đảm bảo sự an toàn và quyền riêng tư cho khách hàng. Nếu bạn có thêm câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Thông tin cá nhân của khách hàng được lưu trữ bao lâu?\nCâu trả lời: Dữ liệu cá nhân sẽ được lưu trữ đến khi có yêu cầu hủy bỏ từ khách hàng hoặc khi khách hàng tự hủy bỏ thông tin. Trong mọi trường hợp, dữ liệu cá nhân sẽ được bảo mật trên máy chủ của FPTshop.com.vn.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop sử dụng thông tin cá nhân của khách hàng như thế nào so với việc sử dụng dữ liệu thông thường trong ngành bán lẻ?",
+        "actual_output": null,
+        "expected_output": "Chào bạn! FPT Shop cam kết sử dụng thông tin cá nhân của khách hàng một cách minh bạch và bảo mật. So với việc sử dụng dữ liệu thông thường trong ngành bán lẻ, FPT Shop chỉ sử dụng thông tin của bạn trong phạm vi đã thông báo, để phục vụ cho việc liên hệ trực tiếp, xử lý đơn hàng, gửi thông tin khuyến mãi và các dịch vụ liên quan khác. Chúng tôi đảm bảo rằng thông tin của bạn được bảo vệ và chỉ sử dụng cho mục đích hỗ trợ khách hàng tốt nhất. Cảm ơn bạn đã tin tưởng FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Thông tin cá nhân của khách hàng được sử dụng trong phạm vi nào?\nCâu trả lời: FPTshop.com.vn chỉ sử dụng thông tin cá nhân của khách hàng trong phạm vi đã thông báo, bao gồm liên hệ trực tiếp qua thư ngỏ, đơn đặt hàng, thư cảm ơn, sms, thông tin bảo mật, và các dịch vụ khác liên quan.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có những biện pháp nào để bảo vệ dữ liệu khách hàng khỏi việc truy cập trái phép hoặc vi phạm?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến FPT Shop! Chúng tôi cam kết bảo mật thông tin khách hàng bằng cách áp dụng các biện pháp bảo vệ dữ liệu mạnh mẽ, bao gồm: mã hóa thông tin, kiểm soát truy cập chặt chẽ và các quy trình an ninh mạng hiện đại. Tất cả các thông tin cá nhân đều được bảo vệ tuyệt đối và chỉ sử dụng khi có sự đồng ý từ khách hàng, nhằm ngăn chặn bất kỳ việc truy cập trái phép nào. Nếu bạn cần thêm thông tin chi tiết, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop cam kết bảo mật thông tin khách hàng như thế nào?\nCâu trả lời: FPTshop.com.vn cam kết bảo mật thông tin cá nhân của khách hàng tuyệt đối, chỉ thu thập và sử dụng khi có sự đồng ý từ khách hàng, và không chia sẻ với bên thứ ba trừ trường hợp có quy định của pháp luật.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Có thể đổi hoặc trả sản phẩm tại FPT Shop không? Nếu có, xin cho biết phí đổi trả là bao nhiêu?",
+        "actual_output": null,
+        "expected_output": "Chào bạn, tại FPT Shop, bạn hoàn toàn có thể đổi hoặc trả sản phẩm. Đối với các sản phẩm như điện thoại di động, máy tính bảng, máy tính xách tay và smartwatch (bao gồm cả sản phẩm Apple), nếu bạn muốn đổi, bạn có thể chọn một sản phẩm tương đương hoặc có giá trị cao hơn. Trong trường hợp bạn muốn trả sản phẩm, chúng tôi sẽ kiểm tra tình trạng máy và thông báo giá trị thu lại ngay tại cửa hàng. Phí đổi trả có thể khác nhau tùy thuộc vào sản phẩm cụ thể, vì vậy bạn hãy đến cửa hàng để được tư vấn chi tiết và chính xác nhất nhé! Cảm ơn bạn đã quan tâm đến FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Mua sản phẩm tại FPT Shop có được đổi trả không? Nếu được thì phí đổi trả sẽ được tính như thế nào?\nCâu trả lời: Đối với các sản phẩm ĐTDĐ, MTB, MTXT, SMARTWATCH (Áp dụng bao gồm các sản phẩm Apple), sản phẩm cùng model, cùng màu, cùng dung lượng. Trong tình huống sản phẩm đổi hết hàng, khách hàng có thể đổi sang một sản phẩm khác tương đương hoặc cao hơn về giá trị so với sản phẩm lỗi. Trường hợp khách hàng muốn trả sản phẩm: FPTShop sẽ kiểm tra tình trạng máy và thông báo đến Khách hàng về giá trị thu lại sản phẩm ngay tại cửa hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tìm bảng giá linh kiện thay thế cho sản phẩm của FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Để tìm bảng giá linh kiện thay thế cho sản phẩm đã mua tại FPT Shop, quý khách có thể truy cập vào đường link sau: [bảng giá sửa chữa](https://fptshop.com.vn/ho-tro/bang-gia-sua-chua). Nếu cần thêm thông tin, xin vui lòng liên hệ với chúng tôi, chúng tôi luôn sẵn lòng hỗ trợ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn xem giá thay thế linh kiện cho sản phẩm đã mua tại FPT Shop thì xem ở đâu?\nCâu trả lời: Quý khách tham khảo bảng giá sửa chữa  (https://fptshop.com.vn/ho-tro/bang-gia-sua-chua)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Tôi muốn biết quy trình đăng ký tham gia các mini game tại FPT Shop để nhận quà như thế nào?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Quý khách có thể tham gia các mini game tại FPT Shop bằng cách theo dõi thông tin trên website hoặc các kênh truyền thông của chúng tôi. Mỗi mini game sẽ có quy định và cách thức đăng ký riêng. Để biết thêm chi tiết, vui lòng truy cập vào trang khuyến mãi trên website của FPT Shop. Chúng tôi luôn sẵn sàng hỗ trợ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cách tra cứu về thông tin trúng thưởng của FPT Shop khi tham gia các chương trình mini game?\nCâu trả lời: Quý khách thực hiện tra cứu tại (https://fptshop.com.vn/khuyen-mai/thong-tin-trao-thuong)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Liên hệ tổng đài nào để được hỗ trợ thanh toán phí sửa chữa tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Quý khách vui lòng liên hệ tổng đài 1800.6616 để được hỗ trợ thanh toán phí sửa chữa tại FPT Shop. Tôi rất mong được giúp đỡ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Máy gửi đi sửa dịch vụ và đã nhận thông tin báo phí nhưng muốn thanh toán phí online thì thực hiện bằng cách nào?\nCâu trả lời: Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Thông tin thẻ thanh toán của tôi có được lưu tại FPT Shop không, và ai sẽ bảo mật thông tin này?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến vấn đề bảo mật thông tin tại FPT Shop. Chúng tôi xin khẳng định rằng thông tin thẻ thanh toán của bạn không được lưu trữ trên hệ thống của FPT Shop. Các đối tác cổng thanh toán sẽ lưu giữ và bảo mật thông tin này theo tiêu chuẩn quốc tế PCI DSS, đảm bảo an toàn tuyệt đối cho bạn. Nếu bạn cần thêm thông tin, xin vui lòng liên hệ với chúng tôi.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng như thế nào?\nCâu trả lời: FPTShop đảm bảo thông tin thẻ thanh toán của khách hàng không được lưu trên hệ thống. Các đối tác cổng thanh toán sẽ lưu giữ và bảo mật thông tin này theo tiêu chuẩn quốc tế PCI DSS.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Nếu hàng triệu khách hàng yêu cầu xóa dữ liệu qua email, FPT Shop sẽ xử lý yêu cầu này như thế nào?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến quy trình xóa dữ liệu cá nhân tại FPT Shop. Nếu có hàng triệu khách hàng gửi yêu cầu qua email, chúng tôi sẽ tiếp nhận và phân loại các yêu cầu này. Đội ngũ hỗ trợ khách hàng sẽ làm việc không ngừng để đảm bảo mỗi yêu cầu được xử lý kịp thời và thông báo đến khách hàng về tiến trình xóa dữ liệu. Bạn có thể yên tâm rằng chúng tôi cam kết bảo vệ thông tin cá nhân của bạn một cách tốt nhất. Nếu bạn cần thêm thông tin, hãy liên hệ với chúng tôi qua email fptshop@fpt.com.vn.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để yêu cầu xóa dữ liệu cá nhân tại FPT Shop?\nCâu trả lời: Khách hàng có thể gửi yêu cầu xóa dữ liệu qua email đến Trung tâm hỗ trợ của FPT Shop: fptshop@fpt.com.vn. Yêu cầu sẽ được chuyển đến bộ phận xử lý và khách hàng sẽ được cập nhật về tiến trình xóa dữ liệu.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Xin hãy cho biết thông tin về chính sách bảo mật thông tin của FPT Shop, bao gồm điều kiện thu thập và chia sẻ dữ liệu cá nhân.",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách bảo mật thông tin của FPT Shop. FPT Shop cam kết bảo mật thông tin cá nhân của khách hàng một cách tuyệt đối. Chúng tôi chỉ thu thập và sử dụng thông tin khi có sự đồng ý từ khách hàng. Đặc biệt, thông tin khách hàng sẽ không được chia sẻ với bên thứ ba, trừ khi có quy định của pháp luật. Nếu bạn cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop cam kết bảo mật thông tin khách hàng như thế nào?\nCâu trả lời: FPTshop.com.vn cam kết bảo mật thông tin cá nhân của khách hàng tuyệt đối, chỉ thu thập và sử dụng khi có sự đồng ý từ khách hàng, và không chia sẻ với bên thứ ba trừ trường hợp có quy định của pháp luật.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có tuân thủ chính sách bảo mật thông tin khách hàng và sử dụng thông tin giới hạn không?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: FPT Shop luôn tuân thủ chính sách bảo mật thông tin khách hàng. Chúng tôi chỉ sử dụng thông tin cá nhân trong phạm vi đã thông báo, bao gồm việc liên hệ qua thư ngỏ, đơn đặt hàng, và các dịch vụ liên quan. Quý khách có thể hoàn toàn yên tâm khi sử dụng dịch vụ của chúng tôi.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Thông tin cá nhân của khách hàng được sử dụng trong phạm vi nào?\nCâu trả lời: FPTshop.com.vn chỉ sử dụng thông tin cá nhân của khách hàng trong phạm vi đã thông báo, bao gồm liên hệ trực tiếp qua thư ngỏ, đơn đặt hàng, thư cảm ơn, sms, thông tin bảo mật, và các dịch vụ khác liên quan.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng có thể so sánh dịch vụ bảo hành cho sản phẩm mua tại FPT Shop với các trung tâm ủy quyền ở đâu?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã quan tâm đến dịch vụ bảo hành tại FPT Shop. Quý khách có thể so sánh dịch vụ bảo hành cho sản phẩm mua tại FPT Shop với các trung tâm ủy quyền chính hãng thông qua thông tin và chính sách bảo hành được cung cấp bởi từng hãng sản xuất. Tại FPT Shop, chúng tôi diễn giải rõ ràng các điều khoản bảo hành cho từng sản phẩm và Quý khách có thể yên tâm rằng bảo hành tại hệ thống của chúng tôi đảm bảo quyền lợi tối đa. Nếu cần thêm thông tin chi tiết, xin vui lòng liên hệ với nhân viên tư vấn tại cửa hàng FPT Shop gần nhất. Chúng tôi luôn sẵn sàng hỗ trợ Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Mua sản phẩm FPT Shop được bảo hành như thế nào?\nCâu trả lời: Để đảm bảo quyền lợi của Quý khách hàng khi mua sản phẩm tại các cửa hàng thuộc hệ thống cửa hàng FPT Shop. Chúng tôi cam kết tất cả các sản phẩm được tuân theo các điều khoản bảo hành của sản phẩm tại thời điểm xuất hóa đơn cho Quý khách hàng. Các sản phẩm điện thoại sẽ có chính sách bảo hành khác nhau tùy thuộc vào hãng sản xuất. Khách hàng có thể bảo hành máy tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Nếu giá sửa chữa tại FPT Shop bỗng tăng gấp đôi, khách hàng có thể làm gì để đảm bảo quyền lợi của mình?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Nếu giá sửa chữa tại FPT Shop tăng gấp đôi, quý khách có thể liên hệ trực tiếp với chúng tôi qua hotline hoặc đến cửa hàng để được tư vấn và hỗ trợ giải quyết vấn đề, đảm bảo quyền lợi hợp pháp của mình. Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ quý khách.",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn xem giá thay thế linh kiện cho sản phẩm đã mua tại FPT Shop thì xem ở đâu?\nCâu trả lời: Quý khách tham khảo bảng giá sửa chữa  (https://fptshop.com.vn/ho-tro/bang-gia-sua-chua)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Phí đổi trả sản phẩm tại FPT Shop được xác định như thế nào dựa trên tình trạng và giá trị sản phẩm?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách đổi trả tại FPT Shop. Phí đổi trả sản phẩm sẽ được xác định dựa trên tình trạng của sản phẩm và giá trị của sản phẩm khi được thu lại. Nếu sản phẩm của bạn còn nguyên vẹn và không có lỗi kỹ thuật, bạn có thể đổi sang sản phẩm khác tương đương hoặc cao hơn về giá trị. Trong trường hợp bạn muốn trả sản phẩm, FPT Shop sẽ kiểm tra tình trạng sản phẩm và thông báo số tiền thu lại ngay tại cửa hàng. Nếu cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Mua sản phẩm tại FPT Shop có được đổi trả không? Nếu được thì phí đổi trả sẽ được tính như thế nào?\nCâu trả lời: Đối với các sản phẩm ĐTDĐ, MTB, MTXT, SMARTWATCH (Áp dụng bao gồm các sản phẩm Apple), sản phẩm cùng model, cùng màu, cùng dung lượng. Trong tình huống sản phẩm đổi hết hàng, khách hàng có thể đổi sang một sản phẩm khác tương đương hoặc cao hơn về giá trị so với sản phẩm lỗi. Trường hợp khách hàng muốn trả sản phẩm: FPTShop sẽ kiểm tra tình trạng máy và thông báo đến Khách hàng về giá trị thu lại sản phẩm ngay tại cửa hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Bảo mật dữ liệu cá nhân của khách hàng tại FPT Shop được đảm bảo như thế nào trong trường hợp có hacker cố gắng xâm nhập vào máy chủ?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến vấn đề bảo mật dữ liệu cá nhân tại FPT Shop. Chúng tôi cam kết bảo vệ thông tin cá nhân của khách hàng bằng cách lưu trữ dữ liệu trên máy chủ an toàn và áp dụng các biện pháp bảo mật tiên tiến. Ngoài việc lưu giữ thông tin đến khi khách hàng yêu cầu hủy bỏ, chúng tôi cũng theo dõi và cập nhật thường xuyên các biện pháp phòng ngừa để ngăn chặn các cuộc tấn công từ hacker. Bạn hoàn toàn có thể yên tâm khi mua sắm và sử dụng dịch vụ của chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Thông tin cá nhân của khách hàng được lưu trữ bao lâu?\nCâu trả lời: Dữ liệu cá nhân sẽ được lưu trữ đến khi có yêu cầu hủy bỏ từ khách hàng hoặc khi khách hàng tự hủy bỏ thông tin. Trong mọi trường hợp, dữ liệu cá nhân sẽ được bảo mật trên máy chủ của FPTshop.com.vn.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có hỗ trợ hoàn trả sản phẩm khi giao hàng tại nhà không?",
+        "actual_output": null,
+        "expected_output": "Chào Quý khách, FPT Shop cam kết hỗ trợ hoàn trả sản phẩm khi giao hàng tại nhà. Nếu Quý khách không ưng ý với sản phẩm khi nhận hàng, Quý khách có thể từ chối mua hàng mà không mất bất kỳ chi phí nào. Chúng tôi mong muốn mang đến trải nghiệm mua sắm tốt nhất cho Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có chính sách giao hàng tận nhà không? Nếu giao hàng tại nhà mà không ưng sản phẩm có được trả lại không?\nCâu trả lời: FPT Shop cam kết giao hàng toàn bộ 63 tỉnh thành, FPT Shop nhận giao đơn hàng có thời gian hẹn giao tại nhà trước 20h00. Miễn phí giao hàng với các đơn hàng trong bán kính 20km có đặt shop (Với đơn hàng có giá trị nhỏ hơn 100.000đ sẽ thu phí 10.000đ). Nếu Quý khách hàng không ưng ý với sản phẩm khi nhận hàng, Quý khách có thể từ chối mua hàng mà không mất bất cứ chi phí nào.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Cách nào để kiểm tra tình trạng bảo hành máy gửi đi tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Để kiểm tra tình trạng bảo hành của máy đã gửi đi tại FPT Shop, Quý khách vui lòng truy cập vào đường link sau: (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh). Chúng tôi luôn sẵn sàng hỗ trợ Quý khách trong quá trình này. Cảm ơn Quý khách đã tin tưởng sử dụng dịch vụ của FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để kiểm tra được tình trạng máy đã gửi đi bảo hành tại FPT Shop?\nCâu trả lời: Để tra cứu thông tin máy gửi bảo hành tại FPT Shop, Quý khách hàng có thể truy cập tại (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Tôi có thể theo dõi tiến độ đơn hàng của mình ở đâu và có cần cung cấp mã đơn hàng không?",
+        "actual_output": null,
+        "expected_output": "Chào quý khách! Để theo dõi tiến độ đơn hàng của mình, quý khách có thể truy cập vào đường dẫn sau: (https://fptshop.com.vn/tai-khoan/don-hang-cua-toi). Quý khách sẽ cần đăng nhập vào tài khoản của mình nhưng không cần cung cấp mã đơn hàng cụ thể. Nếu cần thêm sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Đặt đơn hàng thành công và muốn theo dõi tiến độ đơn hàng đã được đi giao chưa thì xem ở đâu?\nCâu trả lời: Để tra cứu thông tin đơn hàng đã đặt thành công và tiến độ xử lý đơn hàng, Quý khách hàng có thể truy cập tại (https://fptshop.com.vn/tai-khoan/don-hang-cua-toi)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Hãy mô tả quy trình từng bước để tra cứu hóa đơn mua hàng tại FPT Shop.",
+        "actual_output": null,
+        "expected_output": "Để tra cứu hóa đơn mua hàng tại FPT Shop, quý khách vui lòng thực hiện theo các bước sau:\n\n1. Truy cập vào trang web tra cứu hóa đơn: [hddt.fptshop.com.vn](https://hddt.fptshop.com.vn/).\n2. Nhập thông tin cần thiết theo yêu cầu trên trang web.\n3. Nhấn nút tìm kiếm để hiển thị hóa đơn của quý khách.\n\nNếu quý khách gặp bất kỳ khó khăn nào, vui lòng liên hệ với chúng tôi để được hỗ trợ thêm. Cảm ơn quý khách đã tin tưởng FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để tra cứu về hóa đơn đã mua hàng tại FPT Shop?\nCâu trả lời: Quý khách thực hiện tra cứu hóa đơn mua hàng tại (https://hddt.fptshop.com.vn/)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm cách nào để xác minh tính chính hãng của sản phẩm Apple mua tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Để xác minh tính chính hãng của sản phẩm Apple mà Quý khách đã mua tại FPT Shop, Quý khách có thể truy cập vào trang web kiểm tra thông tin sản phẩm chính hãng của Apple tại địa chỉ (https://checkcoverage.apple.com/). Cảm ơn Quý khách đã lựa chọn FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn kiểm tra sản phẩm đã mua từ FPT Shop có chính hãng của Apple thì xem như thế nào?\nCâu trả lời: Để tra cứu thông tin sản phẩm chính hãng của Apple, Quý khách hàng có thể truy cập tại (https://checkcoverage.apple.com/)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Hướng dẫn sử dụng sản phẩm tại FPT Shop có gì khác biệt so với các dịch vụ hỗ trợ khách hàng thông thường?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã quan tâm đến dịch vụ hỗ trợ khách hàng của FPT Shop. Điểm khác biệt của chúng tôi là bên cạnh sách hướng dẫn sử dụng kèm theo sản phẩm, quý khách còn có thể gọi đến tổng đài 1800.6601 nhánh số 2 để nhận sự hỗ trợ tận tình từ đội ngũ điện thoại viên chuyên nghiệp. Chúng tôi cam kết mang đến thông tin hữu ích và nhanh chóng, giúp quý khách sử dụng sản phẩm một cách hiệu quả nhất. Rất mong được phục vụ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần hướng dẫn cách sử dụng về sản phẩm thì liên hệ hoặc xem ở đâu được?\nCâu trả lời: Quý khách có thể tham khảo sách hướng dẫn sử dụng kèm theo sản phẩm hoặc gọi vào tổng đài 1800.6601 nhánh số 2 để gặp điện thoại viên hướng dẫn thêm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khi sản phẩm mới gặp lỗi, tôi nên đến đâu để nhận hỗ trợ nhanh nhất tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã liên hệ với FPT Shop. Khi sản phẩm mới gặp lỗi, quý khách có thể mang máy đến bất kỳ cửa hàng FPT Shop nào trên toàn quốc hoặc tới trung tâm bảo hành chính hãng gần nhất để được hỗ trợ nhanh chóng và hiệu quả nhất. Chúng tôi luôn sẵn sàng giúp đỡ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Sản phẩm mới mua về bị lỗi không sử dụng được thì liên hệ ai để xử lý nhanh mà không bị mất thời gian di chuyển nhiều lần?\nCâu trả lời: Khách hàng có thể mang máy đến tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm nơi gần nhà khách hàng nhất.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để điều chỉnh hóa đơn sai thông tin tại FPT Shop? Tôi cần gọi số nào và cần cung cấp thông tin gì cho điện thoại viên?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã liên hệ với FPT Shop! Để điều chỉnh hóa đơn sai thông tin, bạn vui lòng gọi tổng đài 1800.6616 để được tư vấn và hỗ trợ. Khi gọi, bạn cần cung cấp thông tin liên quan đến hóa đơn sai, bao gồm số hóa đơn và thông tin khách hàng để điện thoại viên có thể giúp bạn nhanh chóng. Nếu bạn cần thêm thông tin chi tiết, hãy tham khảo hướng dẫn tại (https://hddt.fptshop.com.vn/bien-ban-huy). Chúng tôi luôn sẵn sàng hỗ trợ bạn!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần hướng dẫn vấn đề điều chỉnh hoặc xuất lại hóa đơn do bị sai thông tin khách hàng?\nCâu trả lời: Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ hoặc Quý khách tham khảo qua hướng dẫn Tại (https://hddt.fptshop.com.vn/bien-ban-huy) nếu liên quan đến hóa đơn công ty.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Hãy giải thích quy trình tra cứu thông tin bảo hành tại FPT Shop qua trang web của họ.",
+        "actual_output": null,
+        "expected_output": "Quy trình tra cứu thông tin bảo hành tại FPT Shop rất đơn giản. Quý khách hàng chỉ cần truy cập vào trang web theo đường link sau: (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh). Tại đây, quý khách sẽ thấy hướng dẫn chi tiết để nhập thông tin máy và kiểm tra tình trạng bảo hành. Nếu cần thêm thông tin hoặc hỗ trợ, đội ngũ của chúng tôi luôn sẵn sàng giúp đỡ!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để kiểm tra được tình trạng máy đã gửi đi bảo hành tại FPT Shop?\nCâu trả lời: Để tra cứu thông tin máy gửi bảo hành tại FPT Shop, Quý khách hàng có thể truy cập tại (https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Nếu không hài lòng với sản phẩm khi giao tận nhà, tôi có thể từ chối mua theo chính sách của FPT Shop không?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: \n\nCó, Quý khách hàng hoàn toàn có thể từ chối mua sản phẩm khi giao tận nhà nếu không hài lòng. Theo chính sách của FPT Shop, nếu Quý khách không ưng ý với sản phẩm khi nhận hàng, Quý khách có thể từ chối mua mà không mất bất kỳ chi phí nào. Chúng tôi luôn mong muốn mang đến sự hài lòng cho Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có chính sách giao hàng tận nhà không? Nếu giao hàng tại nhà mà không ưng sản phẩm có được trả lại không?\nCâu trả lời: FPT Shop cam kết giao hàng toàn bộ 63 tỉnh thành, FPT Shop nhận giao đơn hàng có thời gian hẹn giao tại nhà trước 20h00. Miễn phí giao hàng với các đơn hàng trong bán kính 20km có đặt shop (Với đơn hàng có giá trị nhỏ hơn 100.000đ sẽ thu phí 10.000đ). Nếu Quý khách hàng không ưng ý với sản phẩm khi nhận hàng, Quý khách có thể từ chối mua hàng mà không mất bất cứ chi phí nào.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Các bước cần thực hiện để đủ điều kiện trở thành thành viên của chương trình F.Friends tại FPT Shop là gì?",
+        "actual_output": null,
+        "expected_output": "Để đủ điều kiện trở thành thành viên của chương trình F.Friends tại FPT Shop, quý khách hàng cần thực hiện các bước sau:\n\n1. Đăng ký trở thành hội viên tại FPT Shop.\n2. Kiểm tra xem bạn đã ký hợp đồng chính thức với doanh nghiệp tham gia chương trình F.Friends hay chưa.\n\nKhi hoàn thành các bước trên, bạn sẽ đủ điều kiện để mua hàng và hưởng các quyền lợi theo chính sách F.Friends. Nếu cần thêm thông tin chi tiết, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để được mua hàng theo chính sách F.Friends?\nCâu trả lời: Để được mua hàng và hưởng quyền lợi theo chính sách mua hàng F.Friends, Quý khách hàng phải là hội viên. Điều kiện tiếp theo là bạn đã ký hợp đồng chính thức với doanh nghiệp đã tham gia chương trình F.Friends hay chưa.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Có khả năng mượn thiết bị di động tạm thời trong quá trình sửa chữa bảo hành không?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã quan tâm đến dịch vụ của FPT Shop! Chúng tôi hỗ trợ khách hàng mượn điện thoại tạm thời trong thời gian chờ bảo hành, theo quy định của công ty. Quý khách vui lòng liên hệ với cửa hàng FPT Shop nơi đã gửi máy để được tư vấn và hỗ trợ cụ thể. Chúc Quý khách có trải nghiệm tốt!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Điện thoại mua tại FPT Shop bị lỗi và gửi đi bảo hành nhưng muốn mượn một máy khác để dùng trong thời gian chờ bảo hành thì có được không và liên hệ đến ai để hỗ trợ vấn đề này?\nCâu trả lời: FPT Shop sẽ hỗ trợ cho khách hàng mượn điện thoại khác sử dụng theo quy định của công ty, mời Quý khách liên hệ tại cửa hàng FPT Shop nơi khách hàng gửi máy đi bảo hành để được tư vấn hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Nếu hóa đơn mua hàng bị mất, tôi có thể làm gì để lấy lại hóa đơn tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Quý khách có thể liên hệ trực tiếp với tổng đài hỗ trợ khách hàng của FPT Shop hoặc đến cửa hàng nơi quý khách đã mua hàng để được hỗ trợ lấy lại hóa đơn. Chúng tôi luôn sẵn lòng giúp đỡ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để tra cứu về hóa đơn đã mua hàng tại FPT Shop?\nCâu trả lời: Quý khách thực hiện tra cứu hóa đơn mua hàng tại (https://hddt.fptshop.com.vn/)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Quý khách hàng có thể tra cứu thông tin đơn hàng thành công ở đâu tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã quan tâm đến FPT Shop! Để tra cứu thông tin đơn hàng đã đặt thành công, Quý khách có thể truy cập vào đường link sau: [Thông tin đơn hàng của tôi](https://fptshop.com.vn/tai-khoan/don-hang-cua-toi). Chúng tôi luôn sẵn sàng hỗ trợ Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Đặt đơn hàng thành công và muốn theo dõi tiến độ đơn hàng đã được đi giao chưa thì xem ở đâu?\nCâu trả lời: Để tra cứu thông tin đơn hàng đã đặt thành công và tiến độ xử lý đơn hàng, Quý khách hàng có thể truy cập tại (https://fptshop.com.vn/tai-khoan/don-hang-cua-toi)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Sách hướng dẫn sử dụng sản phẩm có thể được tìm thấy ở đâu và làm thế nào để nhận được tư vấn thêm từ tổng đài 1800.6601?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã liên hệ với FPT Shop. Quý khách có thể tìm thấy sách hướng dẫn sử dụng kèm theo sản phẩm mà quý khách đã mua. Ngoài ra, nếu cần tư vấn thêm, quý khách vui lòng gọi vào tổng đài 1800.6601 và chọn nhánh số 2 để gặp điện thoại viên, người sẽ sẵn lòng hỗ trợ quý khách. Chúc quý khách có trải nghiệm tốt nhất với sản phẩm!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần hướng dẫn cách sử dụng về sản phẩm thì liên hệ hoặc xem ở đâu được?\nCâu trả lời: Quý khách có thể tham khảo sách hướng dẫn sử dụng kèm theo sản phẩm hoặc gọi vào tổng đài 1800.6601 nhánh số 2 để gặp điện thoại viên hướng dẫn thêm.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để kiểm tra tính chính hãng của sản phẩm Apple khi mua tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Để kiểm tra tính chính hãng của sản phẩm Apple mà Quý khách đã mua tại FPT Shop, Quý khách có thể truy cập vào trang web sau: [https://checkcoverage.apple.com/](https://checkcoverage.apple.com/). Tại đây, Quý khách chỉ cần nhập thông tin cần thiết để xác nhận tính chính hãng của sản phẩm. Nếu cần thêm bất kỳ hỗ trợ nào, đừng ngần ngại liên hệ với đội ngũ nhân viên của chúng tôi tại FPT Shop. Cảm ơn Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Muốn kiểm tra sản phẩm đã mua từ FPT Shop có chính hãng của Apple thì xem như thế nào?\nCâu trả lời: Để tra cứu thông tin sản phẩm chính hãng của Apple, Quý khách hàng có thể truy cập tại (https://checkcoverage.apple.com/)\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng nên gọi số hotline nào để được hỗ trợ về vấn đề hóa đơn tại FPT Shop, và có hướng dẫn trực tuyến nào có sẵn không?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop: Quý khách nên gọi số hotline 1800.6616 để được hỗ trợ về vấn đề hóa đơn tại FPT Shop. Ngoài ra, quý khách có thể tham khảo hướng dẫn trực tuyến tại link sau: (https://hddt.fptshop.com.vn/bien-ban-huy) nếu có liên quan đến hóa đơn công ty. Chúng tôi luôn sẵn sàng hỗ trợ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Cần hướng dẫn vấn đề điều chỉnh hoặc xuất lại hóa đơn do bị sai thông tin khách hàng?\nCâu trả lời: Quý khách vui lòng liên hệ tổng đài 1800.6616 để gặp điện thoại viên tư vấn hỗ trợ hoặc Quý khách tham khảo qua hướng dẫn Tại (https://hddt.fptshop.com.vn/bien-ban-huy) nếu liên quan đến hóa đơn công ty.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng muốn biết cách tìm cửa hàng FPT Shop hoặc trung tâm bảo hành gần nhất để thực hiện bảo hành sản phẩm.",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã quan tâm đến dịch vụ của FPT Shop. Để tìm cửa hàng FPT Shop hoặc trung tâm bảo hành gần nhất, quý khách có thể truy cập vào website của chúng tôi và sử dụng tính năng tìm kiếm cửa hàng theo địa điểm. Ngoài ra, quý khách cũng có thể gọi điện đến tổng đài chăm sóc khách hàng để được hỗ trợ nhanh chóng. Chúng tôi luôn sẵn sàng giúp đỡ quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Sản phẩm mới mua về bị lỗi không sử dụng được thì liên hệ ai để xử lý nhanh mà không bị mất thời gian di chuyển nhiều lần?\nCâu trả lời: Khách hàng có thể mang máy đến tại các cửa hàng FPT Shop trên toàn quốc cũng như các trung tâm bảo hành chính hãng sản phẩm nơi gần nhà khách hàng nhất.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Tôi có thể liên hệ với chi nhánh FPT Shop nào để được cung cấp điện thoại mượn trong thời gian bảo hành?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã liên hệ với FPT Shop. Để được cung cấp điện thoại mượn trong thời gian bảo hành, Quý khách vui lòng liên hệ với chi nhánh FPT Shop nơi Quý khách đã gửi máy đi bảo hành. Nhân viên của chúng tôi sẽ hỗ trợ Quý khách tận tình. Rất mong được phục vụ Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Điện thoại mua tại FPT Shop bị lỗi và gửi đi bảo hành nhưng muốn mượn một máy khác để dùng trong thời gian chờ bảo hành thì có được không và liên hệ đến ai để hỗ trợ vấn đề này?\nCâu trả lời: FPT Shop sẽ hỗ trợ cho khách hàng mượn điện thoại khác sử dụng theo quy định của công ty, mời Quý khách liên hệ tại cửa hàng FPT Shop nơi khách hàng gửi máy đi bảo hành để được tư vấn hỗ trợ.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Những bước nào cần thực hiện để đủ điều kiện tham gia chính sách mua sắm F.Friends của FPT Shop với tư cách là thành viên?",
+        "actual_output": null,
+        "expected_output": "Để đủ điều kiện tham gia chính sách mua sắm F.Friends của FPT Shop với tư cách là thành viên, Quý khách cần thực hiện các bước sau: \n\n1. Trở thành hội viên của FPT Shop.\n2. Ký hợp đồng chính thức với doanh nghiệp đã tham gia chương trình F.Friends.\n\nChúng tôi luôn sẵn sàng hỗ trợ Quý khách trong quá trình này. Nếu cần thêm thông tin, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để được mua hàng theo chính sách F.Friends?\nCâu trả lời: Để được mua hàng và hưởng quyền lợi theo chính sách mua hàng F.Friends, Quý khách hàng phải là hội viên. Điều kiện tiếp theo là bạn đã ký hợp đồng chính thức với doanh nghiệp đã tham gia chương trình F.Friends hay chưa.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Có thể gửi phụ kiện Apple hết hạn bảo hành tới FPT Shop để sửa chữa không? Nếu có, liệu có mất phí không?",
+        "actual_output": null,
+        "expected_output": "Chào Quý khách, \n\nFPT Shop rất hân hạnh hỗ trợ Quý khách trong việc gửi phụ kiện nhập khẩu Apple hết hạn bảo hành để sửa chữa. Chúng tôi sẽ tiếp nhận sản phẩm và gửi về Trung tâm Bảo hành để kiểm tra. Xin lưu ý rằng sẽ có chi phí sửa chữa, và chúng tôi sẽ báo lại cụ thể cho Quý khách sau khi có kết quả kiểm tra. \n\nCảm ơn Quý khách đã tin tưởng FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không?\nCâu trả lời: Đối với Phụ kiện nhập khẩu nếu Quý khách có nhu cầu gửi hãng để làm dịch vụ FPT Shop tiếp nhận sản phẩm gửi về TTBH kiểm tra, có chi phí báo lại Quý khách sau.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Cách thức thực hiện mua sắm và thanh toán trực tuyến tại FPT Shop như thế nào?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn quý khách đã quan tâm đến FPT Shop! Để mua sắm và thanh toán trực tuyến, quý khách có thể thực hiện theo các bước sau:\n\nBước 1: Truy cập vào trang chủ FPT Shop tại https://fptshop.com.vn/ và sử dụng thanh tìm kiếm để tìm sản phẩm mình muốn, chẳng hạn như iPhone.\n\nBước 2: Click vào sản phẩm để xem thông tin chi tiết và các đánh giá liên quan.\n\nBước 3: Khi đã chọn xong sản phẩm, hãy nhấn nút 'MUA NGAY' để thêm vào giỏ hàng.\n\nBước 4: Kiểm tra lại thông tin đơn hàng và điền thông tin cá nhân. Quý khách có thể lựa chọn hình thức giao hàng tận nơi hoặc nhận tại cửa hàng, kèm theo các thông tin cần thiết.\n\nBước 5: Chọn phương thức thanh toán: tiền mặt khi nhận hàng, trả góp qua tài chính, hoặc qua thẻ ATM/thẻ tín dụng. Nhấn 'Đặt hàng' để hoàn tất.\n\nSau khi đặt hàng, nhân viên FPT Shop sẽ gọi điện xác nhận đơn hàng và hỗ trợ quý khách nếu cần. Chúc quý khách mua sắm vui vẻ!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để mua hàng và thanh toán online tại FPT Shop?\nCâu trả lời: Bước 1: Tại giao diện trang chủ của FPT Shop (https://fptshop.com.vn/)\nQuý khách gõ vào thanh tìm kiếm tên sản phẩm mà mình quan tâm. Ví dụ Quý khách đang muốn mua sản phẩm iPhone, sau khi gõ hệ thống sẽ truy xuất ra các sản phẩm liên quan tới từ khóa mà Quý khách muốn tìm.\nBước 2: Bây giờ Quý khách hãy click chọn sản phẩm mà mình muốn tham khảo. Ví dụ Quý khách chọn sản phẩm iPhone 15, sau khi click chọn sẽ hiển thị trang chi tiết sản phẩm. Quý khách có thể xem các thông số thuộc tính cũng như bài viết đánh giá về sản phẩm phía bên dưới trang web.\nBước 3: Sau khi đã chọn được sản phẩm phù hợp, Quý khách vui lòng click vào nút 'MUA NGAY'. Sau đó Quý khách có thể thấy được giỏ hàng của mình đang gồm những sản phẩm đã chọn mua.\nBước 4: Quý khách kiểm tra thông tin sản phẩm đã chọn, sau đó điền thông tin đặt hàng.\nQuý khách lựa chọn hình thức giao hàng mong muốn: Giao hàng tận nơi/Nhận tại cửa hàng và điền form thông tin khách hàng bao gồm: 'Anh/Chị', 'Họ và tên', 'Số điện thoại', 'Email'. Trường 'Email' Quý khách có thể bỏ qua nếu không muốn.\n    - Đối với phương án giao hàng tận nơi: Quý khách điền thông tin địa chỉ nhận hàng và thời gian giao hàng.\n    - Đối với phương án nhận tại cửa hàng: Quý khách chọn tỉnh, huyện mong muốn và chọn cửa hàng phù hợp trong danh sách kết quả.\nBước 5: Thanh Toán.\nQuý khách có thể lựa chọn hình thức thanh toán bằng tiền mặt khi nhận hàng, trả góp qua nhà tài chính hoặc qua thẻ ATM và thẻ tín dụng hoặc theo chương trình bạn đồng hành F.Friends.\nNếu Quý khách chọn hình thức thanh toán tiền mặt khi nhận hàng, vui lòng bấm nút 'Đặt hàng' để hoàn tất.\nVậy là Quý khách đã hoàn tất việc đặt hàng và thanh toán, tư vấn viên của FPT Shop sẽ gọi điện để xác nhận đơn hàng trong thời gian sớm nhất, đồng thời giải đáp các thắc mắc liên quan nếu khách hàng có nhu cầu.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "So sánh quy trình sửa chữa phụ kiện nhập khẩu tại FPT Shop với dịch vụ bảo hành của hãng như thế nào?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop:\n\nQuy trình sửa chữa phụ kiện nhập khẩu tại FPT Shop khác với dịch vụ bảo hành của hãng ở một số điểm quan trọng. Tại FPT Shop, nếu sản phẩm của Quý khách đã hết hạn bảo hành, chúng tôi vẫn tiếp nhận để gửi về Trung tâm Bảo hành (TTBH) của hãng cho quý vị. Chúng tôi sẽ kiểm tra và báo lại chi phí sửa chữa cho Quý khách trước khi tiến hành. Trong khi đó, dịch vụ bảo hành của hãng thường miễn phí nếu sản phẩm còn trong thời gian bảo hành và đáp ứng đầy đủ các điều kiện bảo hành. \n\nNếu Quý khách cần thêm thông tin hoặc hỗ trợ, hãy liên hệ với chúng tôi nhé!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không?\nCâu trả lời: Đối với Phụ kiện nhập khẩu nếu Quý khách có nhu cầu gửi hãng để làm dịch vụ FPT Shop tiếp nhận sản phẩm gửi về TTBH kiểm tra, có chi phí báo lại Quý khách sau.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "FPT Shop có chính sách bảo mật nào để bảo vệ thông tin cá nhân của khách hàng trong quá trình mua sắm?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến chính sách bảo mật của FPT Shop. Chúng tôi cam kết bảo vệ thông tin cá nhân của khách hàng thông qua việc sử dụng các công nghệ bảo mật tiên tiến và quy trình nghiêm ngặt để đảm bảo rằng dữ liệu của bạn luôn an toàn. Mọi thông tin cá nhân được thu thập đều nhằm mục đích cung cấp dịch vụ hiệu quả, xác minh danh tính và bảo vệ các giao dịch mua sắm. Nếu bạn có thêm câu hỏi nào khác, vui lòng liên hệ với chúng tôi để được hỗ trợ tốt nhất!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop thu thập thông tin cá nhân của khách hàng với mục đích gì?\nCâu trả lời: FPTshop.com.vn thu thập thông tin cá nhân của khách hàng để cung cấp dịch vụ, xác minh danh tính, và đảm bảo các hoạt động giao dịch an toàn. Các thông tin được thu thập bao gồm số lần truy cập, số trang bạn xem, số liên kết bạn click và thông tin trình duyệt khi truy cập website.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng nên thực hiện các biện pháp sao lưu nào để bảo vệ dữ liệu cá nhân của mình trước khi mang thiết bị đến FPT Shop sửa chữa?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn Quý khách đã quan tâm đến vấn đề bảo vệ dữ liệu cá nhân. Trước khi đem thiết bị đến FPT Shop để sửa chữa, Quý khách nên thực hiện các biện pháp sao lưu dữ liệu sau:\n\n- Vui lòng sao lưu toàn bộ dữ liệu cá nhân của mình, bao gồm ảnh, tài liệu và ứng dụng quan trọng.\n- Sau khi sao lưu, Quý khách nên xoá tất cả dữ liệu cá nhân khỏi thiết bị.\n- Kiểm tra các tài khoản như iCloud, Google và các tài khoản xã hội khác để đảm bảo đã đăng xuất trước khi rời cửa hàng.\n\nChúng tôi khuyến nghị Quý khách lưu lại thông tin tài khoản vừa tạo nếu cần hỗ trợ tạo tài khoản iCloud hoặc Google tại cửa hàng. Chúng tôi rất hân hạnh được hỗ trợ Quý khách!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có quy định hỗ trợ kỹ thuật và sao lưu dữ liệu như thế nào?\nCâu trả lời: Đối tượng áp dụng: Khách hàng có nhu cầu hỗ trợ phần mềm bảo hành sửa chữa sản phẩm tại FPT Shop.\nNhằm đảm bảo đầy đủ quyền lợi của khách hàng khi cài đặt, bảo hành sửa chữa sản phẩm, FPT Shop xin thông báo Quy định như sau:\n    - Để bảo vệ dữ liệu cá nhân, Quý khách vui lòng sao lưu và XOÁ các dữ liệu cá nhân trước khi bàn giao sản phẩm cho nhân viên FPT Shop.\n    - FPT Shop không chịu trách nhiệm về việc mất dữ liệu của Quý khách trong quá trình cài đặt, bảo hành sửa chữa.\n    - Để đảm bảo Quyền lợi, Quý khách vui lòng ký xác nhận để thông tin bàn giao thiết bị của Quý khách được ghi nhận trên hệ thống FPT Shop.\n    - FPT Shop không hỗ trợ cài đặt phần mềm không có bản quyền trên máy tính của Quý khách.\n    - Quý khách vui lòng kiểm tra tài khoản iCloud/ Google và các tài khoản xã hội khác trên máy trước khi rời cửa hàng.\n    - Tài khoản cài đặt trên máy phải là tài khoản cá nhân của Quý khách (chủ sở hữu máy).\n    - Nếu chưa có tài khoản iCloud, Quý khách liên hệ NV Kỹ thuật để được hỗ trợ tạo Tài khoản iCloud (Apple ID)/ Google và các tài khoản khác miễn phí tại cửa hàng. Đồng thời yêu cầu nhân viên cung cấp thông tin, mật khẩu tài khoản vừa được tạo trước khi rời cửa hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Các biện pháp bảo vệ dữ liệu cá nhân của FPT Shop khi khách hàng thực hiện giao dịch là gì?",
+        "actual_output": null,
+        "expected_output": "Cảm ơn bạn đã quan tâm đến bảo vệ dữ liệu cá nhân tại FPT Shop! Chúng tôi luôn đặt sự an toàn của thông tin khách hàng lên hàng đầu. FPT Shop thực hiện nhiều biện pháp bảo vệ dữ liệu, bao gồm mã hóa thông tin giao dịch, xác thực danh tính và sử dụng hệ thống bảo mật tiên tiến để ngăn chặn truy cập trái phép. Chúng tôi cam kết đảm bảo mọi thông tin cá nhân của khách hàng đều được bảo mật, giúp bạn yên tâm khi thực hiện giao dịch. Nếu bạn có thêm câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop thu thập thông tin cá nhân của khách hàng với mục đích gì?\nCâu trả lời: FPTshop.com.vn thu thập thông tin cá nhân của khách hàng để cung cấp dịch vụ, xác minh danh tính, và đảm bảo các hoạt động giao dịch an toàn. Các thông tin được thu thập bao gồm số lần truy cập, số trang bạn xem, số liên kết bạn click và thông tin trình duyệt khi truy cập website.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Khách hàng cần làm gì để bảo vệ dữ liệu cá nhân trước khi giao thiết bị tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Để bảo vệ dữ liệu cá nhân trước khi giao thiết bị tại FPT Shop, quý khách vui lòng thực hiện các bước sau:\n\n1. **Sao lưu dữ liệu**: Trước khi bàn giao sản phẩm, quý khách nên sao lưu toàn bộ dữ liệu quan trọng.\n2. **Xoá dữ liệu cá nhân**: Vui lòng xoá tất cả thông tin cá nhân trên thiết bị để đảm bảo quyền riêng tư.\n3. **Kiểm tra tài khoản**: Hãy chắc chắn rằng tài khoản iCloud/Google và các tài khoản xã hội khác đã được kiểm tra và đăng xuất trước khi rời cửa hàng.\n4. **Ký xác nhận**: Quý khách nên ký xác nhận để thông tin bàn giao thiết bị được ghi nhận trong hệ thống FPT Shop.\n\nRất mong quý khách hiểu và thực hiện các bước trên để đảm bảo an toàn cho dữ liệu của mình. Cảm ơn quý khách đã tin tưởng FPT Shop!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: FPT Shop có quy định hỗ trợ kỹ thuật và sao lưu dữ liệu như thế nào?\nCâu trả lời: Đối tượng áp dụng: Khách hàng có nhu cầu hỗ trợ phần mềm bảo hành sửa chữa sản phẩm tại FPT Shop.\nNhằm đảm bảo đầy đủ quyền lợi của khách hàng khi cài đặt, bảo hành sửa chữa sản phẩm, FPT Shop xin thông báo Quy định như sau:\n    - Để bảo vệ dữ liệu cá nhân, Quý khách vui lòng sao lưu và XOÁ các dữ liệu cá nhân trước khi bàn giao sản phẩm cho nhân viên FPT Shop.\n    - FPT Shop không chịu trách nhiệm về việc mất dữ liệu của Quý khách trong quá trình cài đặt, bảo hành sửa chữa.\n    - Để đảm bảo Quyền lợi, Quý khách vui lòng ký xác nhận để thông tin bàn giao thiết bị của Quý khách được ghi nhận trên hệ thống FPT Shop.\n    - FPT Shop không hỗ trợ cài đặt phần mềm không có bản quyền trên máy tính của Quý khách.\n    - Quý khách vui lòng kiểm tra tài khoản iCloud/ Google và các tài khoản xã hội khác trên máy trước khi rời cửa hàng.\n    - Tài khoản cài đặt trên máy phải là tài khoản cá nhân của Quý khách (chủ sở hữu máy).\n    - Nếu chưa có tài khoản iCloud, Quý khách liên hệ NV Kỹ thuật để được hỗ trợ tạo Tài khoản iCloud (Apple ID)/ Google và các tài khoản khác miễn phí tại cửa hàng. Đồng thời yêu cầu nhân viên cung cấp thông tin, mật khẩu tài khoản vừa được tạo trước khi rời cửa hàng.\n"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Liệt kê và so sánh các phương thức thanh toán khi mua sắm trực tuyến tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Câu trả lời tư vấn rõ ràng, chính xác, thể hiện sự chuyên nghiệp và thân thiện như một nhân viên bán hàng của FPT Shop:\n\nTại FPT Shop, quý khách có thể lựa chọn nhiều phương thức thanh toán khi mua sắm trực tuyến như sau:\n\n1. **Thanh toán tiền mặt khi nhận hàng:** Đây là lựa chọn phổ biến và an toàn cho nhiều khách hàng, cho phép quý khách thanh toán ngay khi hàng tới tay.\n\n2. **Thanh toán qua thẻ ATM và thẻ tín dụng:** Quý khách có thể sử dụng thẻ ngân hàng để thanh toán online, giúp quá trình nhanh gọn và tiện lợi.\n\n3. **Trả góp qua nhà tài chính:** Nếu quý khách muốn chia nhỏ số tiền thanh toán, FPT Shop cung cấp dịch vụ trả góp với nhiều hình thức linh hoạt, hỗ trợ quý khách dễ dàng sở hữu sản phẩm mong muốn.\n\n4. **Chương trình bạn đồng hành F.Friends:** Đây là chương trình khuyến mãi đặc biệt giúp quý khách có thêm những ưu đãi hấp dẫn khi thanh toán.\n\nQuý khách hãy lựa chọn phương thức thanh toán phù hợp nhất với nhu cầu và thuận tiện của mình. Nếu có bất kỳ thắc mắc nào, nhân viên tư vấn của FPT Shop luôn sẵn sàng hỗ trợ!",
+        "context": [
+            "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: Làm thế nào để mua hàng và thanh toán online tại FPT Shop?\nCâu trả lời: Bước 1: Tại giao diện trang chủ của FPT Shop (https://fptshop.com.vn/)\nQuý khách gõ vào thanh tìm kiếm tên sản phẩm mà mình quan tâm. Ví dụ Quý khách đang muốn mua sản phẩm iPhone, sau khi gõ hệ thống sẽ truy xuất ra các sản phẩm liên quan tới từ khóa mà Quý khách muốn tìm.\nBước 2: Bây giờ Quý khách hãy click chọn sản phẩm mà mình muốn tham khảo. Ví dụ Quý khách chọn sản phẩm iPhone 15, sau khi click chọn sẽ hiển thị trang chi tiết sản phẩm. Quý khách có thể xem các thông số thuộc tính cũng như bài viết đánh giá về sản phẩm phía bên dưới trang web.\nBước 3: Sau khi đã chọn được sản phẩm phù hợp, Quý khách vui lòng click vào nút 'MUA NGAY'. Sau đó Quý khách có thể thấy được giỏ hàng của mình đang gồm những sản phẩm đã chọn mua.\nBước 4: Quý khách kiểm tra thông tin sản phẩm đã chọn, sau đó điền thông tin đặt hàng.\nQuý khách lựa chọn hình thức giao hàng mong muốn: Giao hàng tận nơi/Nhận tại cửa hàng và điền form thông tin khách hàng bao gồm: 'Anh/Chị', 'Họ và tên', 'Số điện thoại', 'Email'. Trường 'Email' Quý khách có thể bỏ qua nếu không muốn.\n    - Đối với phương án giao hàng tận nơi: Quý khách điền thông tin địa chỉ nhận hàng và thời gian giao hàng.\n    - Đối với phương án nhận tại cửa hàng: Quý khách chọn tỉnh, huyện mong muốn và chọn cửa hàng phù hợp trong danh sách kết quả.\nBước 5: Thanh Toán.\nQuý khách có thể lựa chọn hình thức thanh toán bằng tiền mặt khi nhận hàng, trả góp qua nhà tài chính hoặc qua thẻ ATM và thẻ tín dụng hoặc theo chương trình bạn đồng hành F.Friends.\nNếu Quý khách chọn hình thức thanh toán tiền mặt khi nhận hàng, vui lòng bấm nút 'Đặt hàng' để hoàn tất.\nVậy là Quý khách đã hoàn tất việc đặt hàng và thanh toán, tư vấn viên của FPT Shop sẽ gọi điện để xác nhận đơn hàng trong thời gian sớm nhất, đồng thời giải đáp các thắc mắc liên quan nếu khách hàng có nhu cầu.\n"
+        ],
+        "source_file": null
+    }
+]

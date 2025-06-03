@@ -136,7 +136,12 @@ def import_batch_data_to_database(batch: list[dict]):
             phone_model.attributes_table_text = convert_json_list_to_markdown_table(
                 [phone_variant.attributes for phone_variant in phone_variants]
             )
-            upsert_phone(CreatePhoneModel(**phone_model.model_dump()))
+
+            upsert_phone(
+                CreatePhoneModel(
+                    name_embedding=name_embedding, **phone_model.model_dump()
+                )
+            )
 
 
 def extract_fpt_phone_data(

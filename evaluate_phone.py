@@ -1,8 +1,6 @@
 from enum import Enum
 import json
 from typing import Optional
-from openai.types.chat.completion_create_params import ResponseFormat
-from openai.types.chat import ChatCompletionMessageParam
 from pydantic import BaseModel
 from models.phone import PhoneModel
 from uuid import uuid4
@@ -61,9 +59,9 @@ class VietnameseUserSimulator(BaseModel):
     basic_phone_info: str = ""
     full_phone_info: str = ""
 
-    response_format: Optional[ResponseFormat] = None  # Will be set in init method
+    response_format: Optional[dict] = None  # Will be set in init method
     step_history: list[Step] = []
-    conversation_history: list[ChatCompletionMessageParam] = []
+    conversation_history: list[dict] = []
     user: Optional[UserModel] = None  # Will be created in init method
     thread: Optional[ThreadModel] = None  # Will be created in init method
     llm_test_cases: list[LLMTestCase] = []
@@ -122,7 +120,7 @@ class VietnameseUserSimulator(BaseModel):
             },
         }
         self.step_history: list[Step] = []
-        self.conversation_history: list[ChatCompletionMessageParam] = []
+        self.conversation_history: list[dict] = []
         self.user = create_user(
             CreateUserModel(
                 user_name=str(uuid4()), role=UserRole.chainlit_user, gender=self.gender
@@ -522,7 +520,7 @@ class VietnameseUserSimulator(BaseModel):
             result += accent_map.get(char, char)
         return result
 
-    def get_system_prompt(self) -> list[ChatCompletionMessageParam]:
+    def get_system_prompt(self) -> list[dict]:
         role = (
             "# ROLE\n"
             "You are a Vietnamese virtual user playing the role of a customer searching for a new phone. You are chatting with an online customer service agent.\n"
@@ -589,6 +587,12 @@ class VietnameseUserSimulator(BaseModel):
                 f"Latest step in past: **{latest_step_in_past.value}**\n"
                 f"Stay at step **{latest_step_in_past.value}** for {count} turns.\n"
             )
+            if (
+                count > 3
+                and latest_step_in_past
+                == Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_PHONE
+            ):
+                step_descriptions += f"Since you have stayed at step **{latest_step_in_past.value}** for more than 3 turns, you should provide your contact information (Step 6 or Step 7).\n\n"
 
         task = (
             "## TASK\n"
@@ -627,7 +631,7 @@ class VietnameseUserSimulator(BaseModel):
             return []
 
         # Create a format for the response
-        topic_format: ResponseFormat = {
+        topic_format: dict = {
             "type": "json_schema",
             "json_schema": {
                 "name": "AskedTopics",
@@ -693,7 +697,7 @@ class VietnameseUserSimulator(BaseModel):
     def suggest_new_topics(self, asked_topics: list[str]) -> list[str]:
         """Suggest topics that haven't been asked about yet using OpenAI API"""
         # Setup the response format
-        topic_format: ResponseFormat = {
+        topic_format: dict = {
             "type": "json_schema",
             "json_schema": {
                 "name": "SuggestedTopics",
@@ -751,7 +755,7 @@ class VietnameseUserSimulator(BaseModel):
 
     def get_next_user_message(self) -> str:
 
-        messages: list[ChatCompletionMessageParam] = [
+        messages: list[dict] = [
             *self.get_system_prompt(),
             *self.conversation_history,
         ]
@@ -806,7 +810,7 @@ class VietnameseUserSimulator(BaseModel):
 
     def get_reversed_role_in_conversation_history(
         self,
-    ) -> list[ChatCompletionMessageParam]:
+    ) -> list[dict]:
         reversed_history = []
         for message in self.conversation_history:
             # Only include messages that have a 'content' key

@@ -1,0 +1,234 @@
+﻿__module__,__annotations__,__dict__,__weakref__,__doc__,__dataclass_params__,__dataclass_fields__,__init__,__repr__,__eq__,__hash__,__match_args__,gender,user_message
+__main__,"{'gender': <class 'str'>, 'user_message': <class 'str'>}",<attribute '__dict__' of 'ConversationData' objects>,<attribute '__weakref__' of 'ConversationData' objects>,"ConversationData(gender: str, user_message: str)","_DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False,match_args=True,kw_only=False,slots=False,weakref_slot=False)","{'gender': Field(name='gender',type=<class 'str'>,default=<dataclasses._MISSING_TYPE object at 0x7294b4179280>,default_factory=<dataclasses._MISSING_TYPE object at 0x7294b4179280>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD), 'user_message': Field(name='user_message',type=<class 'str'>,default=<dataclasses._MISSING_TYPE object at 0x7294b4179280>,default_factory=<dataclasses._MISSING_TYPE object at 0x7294b4179280>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)}",<function ConversationData.__init__ at 0x7294a14bd4e0>,<function ConversationData.__repr__ at 0x7294a14bed40>,<function ConversationData.__eq__ at 0x7294a063e8e0>,,"('gender', 'user_message')",,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Chị muốn hỏi về chính sách bảo hành pin điện thoại mua ở shop mình.
+,,,,,,,,,,,,,Chị muốn hỏi về chính sách bảo hành pin điện thoại mua ở shop mình.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Anh mua cái màn hình máy tính, giờ nó bị sọc thì bảo hành sao em?"
+,,,,,,,,,,,,,"Anh mua cái màn hình máy tính, giờ nó bị sọc thì bảo hành sao em?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Tôi mới mua con chuột máy tính hôm qua mà giờ thấy không ưng ý, có được đổi con khác không shop?"
+,,,,,,,,,,,,,"Tôi mới mua con chuột máy tính hôm qua mà giờ thấy không ưng ý, có được đổi con khác không shop?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Điện thoại của chị tự nhiên không nhận sạc, phải làm sao đây em?"
+,,,,,,,,,,,,,"Điện thoại của chị tự nhiên không nhận sạc, phải làm sao đây em?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Sao gọi hotline không ai bắt máy?
+,,,,,,,,,,,,,Sao gọi hotline không ai bắt máy?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Laptop của mình mới mua sao vào wifi chập chờn quá shop ơi.
+,,,,,,,,,,,,,Laptop của mình mới mua sao vào wifi chập chờn quá shop ơi.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh đặt hàng online thì bao lâu nhận được hàng ở Thủ Đức vậy em?
+,,,,,,,,,,,,,Anh đặt hàng online thì bao lâu nhận được hàng ở Thủ Đức vậy em?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn xem bảng giá sửa chữa điện thoại thì vào đâu em?
+,,,,,,,,,,,,,Anh muốn xem bảng giá sửa chữa điện thoại thì vào đâu em?
+,,,,,,,,,,,,,Anh muốn xem bảng giá sửa chữa điện thoại thì vào đâu em?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Chị mua cái máy xay sinh tố mà không biết dùng, shop hướng dẫn chị với."
+,,,,,,,,,,,,,"Chị mua cái máy xay sinh tố mà không biết dùng, shop hướng dẫn chị với."
+,,,,,,,,,,,,,"Chị mua cái máy xay sinh tố mà không biết dùng, shop hướng dẫn chị với."
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Cho tui hỏi , FPT Shop có chính sách giao hàng miễn phí trong vòng 20km, nhưng phí giao hàng cho các đơn hàng dưới 100,000 VNĐ là bao nhiêu?"
+,,,,,,,,,,,,,"Cho tui hỏi , FPT Shop có chính sách giao hàng miễn phí trong vòng 20km, nhưng phí giao hàng cho các đơn hàng dưới 100,000 VNĐ là bao nhiêu?"
+,,,,,,,,,,,,,"Cho tui hỏi , FPT Shop có chính sách giao hàng miễn phí trong vòng 20km, nhưng phí giao hàng cho các đơn hàng dưới 100,000 VNĐ là bao nhiêu?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cô muốn xem giá thay linh kiện cho sản phẩm đã mua tại FPT Shop
+,,,,,,,,,,,,,Cô muốn xem giá thay linh kiện cho sản phẩm đã mua tại FPT Shop
+,,,,,,,,,,,,,Cô muốn xem giá thay linh kiện cho sản phẩm đã mua tại FPT Shop
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn đặt mua cái tai nghe Sony WH-1000XM5 online thì làm thế nào em?
+,,,,,,,,,,,,,Anh muốn đặt mua cái tai nghe Sony WH-1000XM5 online thì làm thế nào em?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Tui vừa thanh toán đơn hàng #56789 bằng thẻ tín dụng mà thấy báo lỗi, tiền thì bị trừ rồi. Shop kiểm tra giúp tui."
+,,,,,,,,,,,,,"Tui vừa thanh toán đơn hàng #56789 bằng thẻ tín dụng mà thấy báo lỗi, tiền thì bị trừ rồi. Shop kiểm tra giúp tui."
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Tôi thấy có quảng cáo mua laptop được tặng balo, chương trình này còn không?"
+,,,,,,,,,,,,,"Tôi thấy có quảng cáo mua laptop được tặng balo, chương trình này còn không?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Tôi mới nhận được cái nồi chiên không dầu mà thấy nó bị móp ở góc, giờ sao shop?"
+,,,,,,,,,,,,,"Tôi mới nhận được cái nồi chiên không dầu mà thấy nó bị móp ở góc, giờ sao shop?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Ok cảm ơn em nhiều nha.
+,,,,,,,,,,,,,Ok cảm ơn em nhiều nha.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Thời tiết Sài Gòn hôm nay sao em nhỉ?
+,,,,,,,,,,,,,Thời tiết Sài Gòn hôm nay sao em nhỉ?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Chào em.
+,,,,,,,,,,,,,Chào em.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Shop mình có cửa hàng ở quận 7 không?
+,,,,,,,,,,,,,Shop mình có cửa hàng ở quận 7 không?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Dạo này shop có gì mới không em?
+,,,,,,,,,,,,,Dạo này shop có gì mới không em?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Dịch vụ bên mình tốt quá.
+,,,,,,,,,,,,,Dịch vụ bên mình tốt quá.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Giá sao em?
+,,,,,,,,,,,,,Giá sao em?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Thôi tui không hỏi gì nữa đâu.
+,,,,,,,,,,,,,Thôi tui không hỏi gì nữa đâu.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Shop mở cửa lúc mấy giờ vậy?
+,,,,,,,,,,,,,Shop mở cửa lúc mấy giờ vậy?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Chú muốn xác minh tính chính hãng của sản phẩm Apple mua tại FPT Shop thì phải làm sao?
+,,,,,,,,,,,,,Chú muốn xác minh tính chính hãng của sản phẩm Apple mua tại FPT Shop thì phải làm sao?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Sao điện thoại của tôi tụt nhanh quá vậy?
+,,,,,,,,,,,,,Sao điện thoại của tôi tụt nhanh quá vậy?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Nếu cô không hài lòng với sản phẩm khi giao tận nhà thì có thể từ chối mua không?
+,,,,,,,,,,,,,Nếu cô không hài lòng với sản phẩm khi giao tận nhà thì có thể từ chối mua không?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Làm sao để tra cứu thông tin đơn hàng thành công tại FPT Shop?
+,,,,,,,,,,,,,Làm sao để tra cứu thông tin đơn hàng thành công tại FPT Shop?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Tôi có thể liên hệ với chi nhánh FPT Shop nào để được cung cấp điện thoại mượn trong thời gian bảo hành?
+,,,,,,,,,,,,,Tôi có thể liên hệ với chi nhánh FPT Shop nào để được cung cấp điện thoại mượn trong thời gian bảo hành?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Tui muốn tư vấn mua điện thoại
+,,,,,,,,,,,,,Tui muốn tư vấn mua điện thoại
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Tui có thể gửi phụ kiện Apple hết hạn bảo hành tới FPT Shop để sửa chữa không? Chi phí như thế nào?
+,,,,,,,,,,,,,Tui có thể gửi phụ kiện Apple hết hạn bảo hành tới FPT Shop để sửa chữa không? Chi phí như thế nào?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Anh muốn lên đời điện thoại, shop có chính sách thu cũ đổi mới không?"
+,,,,,,,,,,,,,"Anh muốn lên đời điện thoại, shop có chính sách thu cũ đổi mới không?"
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,"Điện thoại giờ nhiều loại quá, khó chọn thật."
+,,,,,,,,,,,,,"Điện thoại giờ nhiều loại quá, khó chọn thật."
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,So sánh giúp mình hai con chip Snapdragon 8 Gen 2 và Dimensity 9200.
+,,,,,,,,,,,,,So sánh giúp mình hai con chip Snapdragon 8 Gen 2 và Dimensity 9200.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cô cần liên lạc với tổng đài của FPTShop.
+,,,,,,,,,,,,,Cô cần liên lạc với tổng đài của FPTShop.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Bác muốn hỏi cách kiểm tra tình trạng máy đã gửi đi bảo hành tại FPT Shop.
+,,,,,,,,,,,,,Bác muốn hỏi cách kiểm tra tình trạng máy đã gửi đi bảo hành tại FPT Shop.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Bác muốn tra cứu thông tin trúng thưởng của FPTShop khi tham gia chương trình mini game
+,,,,,,,,,,,,,Bác muốn tra cứu thông tin trúng thưởng của FPTShop khi tham gia chương trình mini game
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Chú có phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không
+,,,,,,,,,,,,,Chú có phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Chú muốn tra cứu hóa đơn đã mua hàng tại FPT Shop
+,,,,,,,,,,,,,Chú muốn tra cứu hóa đơn đã mua hàng tại FPT Shop
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cô muốn hỏi cách thanh toán tiền thu hộ qua kênh online
+,,,,,,,,,,,,,Cô muốn hỏi cách thanh toán tiền thu hộ qua kênh online
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cô muốn hỏi về thời gian lưu trữ thông tin người dùng
+,,,,,,,,,,,,,Cô muốn hỏi về thời gian lưu trữ thông tin người dùng
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn tra cứu điểm tích lũy khi mua hàng tại FPT Shop
+,,,,,,,,,,,,,Anh muốn tra cứu điểm tích lũy khi mua hàng tại FPT Shop
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cho chú hỏi FPT Shop có hỗ trợ giao hàng tận nhà không
+,,,,,,,,,,,,,Cho chú hỏi FPT Shop có hỗ trợ giao hàng tận nhà không
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Bên mình có hỗ trợ lắp đặt cho tivi mua ở cửa hàng không? Chi phí như thế nào?
+,,,,,,,,,,,,,Bên mình có hỗ trợ lắp đặt cho tivi mua ở cửa hàng không? Chi phí như thế nào?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn mua điện thoại nhưng giao đến nhà mới thanh toán có được không ?
+,,,,,,,,,,,,,Anh muốn mua điện thoại nhưng giao đến nhà mới thanh toán có được không ?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Cô muốn hỏi về chính sách giá ưu đãi cho các sản phẩm điện máy chỉ bán online tại FPT Shop.
+,,,,,,,,,,,,,Cô muốn hỏi về chính sách giá ưu đãi cho các sản phẩm điện máy chỉ bán online tại FPT Shop.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn cập nhật thời gian bảo hành của máy Apple vì thông tin trên hệ thống chưa đúng hoặc chưa kích hoạt.
+,,,,,,,,,,,,,Anh muốn cập nhật thời gian bảo hành của máy Apple vì thông tin trên hệ thống chưa đúng hoặc chưa kích hoạt.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn hỏi về cách FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng.
+,,,,,,,,,,,,,Anh muốn hỏi về cách FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng.
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn yêu cầu xóa dữ liệu cá nhân tại FPT Shop thì cần làm thế nào?
+,,,,,,,,,,,,,Anh muốn yêu cầu xóa dữ liệu cá nhân tại FPT Shop thì cần làm thế nào?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,Anh muốn biết cách mua hàng theo chính sách F.Friends tại FPT Shop.
+,,,,,,,,,,,,,Anh muốn biết cách mua hàng theo chính sách F.Friends tại FPT Shop.

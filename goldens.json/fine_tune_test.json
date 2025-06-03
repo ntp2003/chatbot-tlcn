@@ -1,0 +1,81 @@
+[
+    {
+        "input": "chính sách bảo hành pin điện thoại?",
+        "actual_output": null,
+        "expected_output": "Chính sách bảo hành pin điện thoại thường sẽ khác nhau tùy thuộc vào từng hãng sản xuất và loại sản phẩm. Thông thường, pin điện thoại sẽ được bảo hành trong một khoảng thời gian nhất định, thường là từ 6 tháng đến 1 năm, tùy thuộc vào chính sách của nhà sản xuất.Để biết thông tin chi tiết về chính sách bảo hành pin cho sản phẩm cụ thể mà anh quan tâm, anh có thể liên hệ với bộ phận Chăm sóc Khách hàng của FPT Shop qua hotline 1800 6616 hoặc đến trực tiếp cửa hàng FPT Shop gần nhất để được tư vấn.Nếu anh cần hỗ trợ thêm về sản phẩm nào khác, hãy cho em biết nhé!",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "tui muốn hỏi cách tra cứu hóa đơn đã mua hàng",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể thực hiện tra cứu hóa đơn mua hàng tại [đây](https://hddt.fptshop.com.vn/).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "chị theo dõi tiến độ đơn hàng đã được đi giao chưa thì xem ở đâu?",
+        "actual_output": null,
+        "expected_output": "Để tra cứu thông tin đơn hàng đã đặt thành công và tiến độ xử lý đơn hàng, chị có thể truy cập [tại đây](https://fptshop.com.vn/tai-khoan/don-hang-cua-toi)",
+        
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    },
+    {
+        "input": "Làm thế nào để tra cứu tình trạng sản phẩm gửi bảo hành tại FPT Shop?",
+        "actual_output": null,
+        "expected_output": "Dạ anh có thể tra cứu tình trạng máy gửi bảo hành bất cứ lúc nào [Tại đây](https://fptshop.com.vn/kiem-tra-bao-hanh?tab=thong-tin-bao-hanh).",
+        "context": [
+            "user_gender: male"
+        ],
+        "source_file": null
+    }
+]

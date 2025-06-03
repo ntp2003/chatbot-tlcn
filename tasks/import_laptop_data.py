@@ -156,7 +156,11 @@ def import_batch_data_to_database(batch: list[dict]):
                         ]
                     )
                 )
-                upsert_laptop(CreateLaptopModel(**laptop_model.model_dump()))
+                upsert_laptop(
+                    CreateLaptopModel(
+                        name_embedding=name_embedding, **laptop_model.model_dump()
+                    )
+                )
             except Exception as e:
                 print(f"Error upserting laptop: {id}, {name}, {brand_code}")
                 print(e)

@@ -981,7 +981,7 @@ if __name__ == "__main__":
         dataset = weave.ref("Laptop-Evaluation-Dataset").get()
     except:
         print("Dataset not found, creating a new one...")
-        dataset = create_laptop_dataset(limit=10)
+        dataset = create_laptop_dataset(limit=25)
 
     evaluation = Evaluation(
         name="Laptop Evaluation",

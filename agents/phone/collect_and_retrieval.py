@@ -5,6 +5,7 @@ from typing import Any, Callable, Literal, Optional
 from openai import NOT_GIVEN, InternalServerError, NotGiven
 from overrides import override
 from models.phone import PhoneModel
+from models.user import UserModel
 from models.user_memory import UserIntent, UserMemoryModel
 from repositories.redis import get_value
 from service.openai import _client, _chat_model, OpenAIChatCompletionsRequest
@@ -144,6 +145,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
 class AgentTemporaryMemory(AgentTemporaryMemoryBase):
     offset: int = 0
+    user: Optional[UserModel] = None
 
 
 class AgentResponse(AgentResponseBase):
@@ -483,7 +485,13 @@ class Agent(AgentBase):
     def _phones_to_response(self, phones: list[PhoneModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory  # type: ignore
         knowledge = [
-            phone.to_text(include_key_selling_points=True, include_sku_variants=True)
+            phone.to_text(
+                include_key_selling_points=True,
+                include_sku_variants=True,
+                is_markdown=not (
+                    self.temporary_memory.user and self.temporary_memory.user.fb_user_id
+                ),
+            )
             for phone in phones
         ]
 
@@ -561,6 +569,10 @@ class Agent(AgentBase):
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,
+                    is_markdown=not (
+                        self.temporary_memory.user
+                        and self.temporary_memory.user.fb_user_id
+                    ),
                 )
             ],
             instructions=instructions,

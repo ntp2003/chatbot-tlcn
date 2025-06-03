@@ -148,6 +148,7 @@ def handle_phone_request(
     # 1. collect and retrieval phone
     collect_and_retrieval_memory = phone_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
+        user=user,
     )  # init temporary memory collect and retrieval phone
 
     collect_and_retrieval_call = wandb_client.create_call(
@@ -251,6 +252,7 @@ def handle_laptop_request(
 ) -> str:
     collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
+        user=user,
     )
 
     collect_and_retrieval_system_prompt_config = (

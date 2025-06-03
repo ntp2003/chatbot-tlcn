@@ -102,7 +102,7 @@ def search_phone_by_phone_name(
 
 def search(stmt: Select) -> List[PhoneModel]:
     with Session() as session:
-        phones = session.execute(stmt).scalars().unique().all()
+        phones = session.execute(stmt).scalars().all()
         return [PhoneModel.model_validate(phone) for phone in phones]
 
 
@@ -110,11 +110,9 @@ def get_all() -> list[PhoneModel]:
     with Session() as session:
         phones = (
             session.execute(
-                select(Phone)
-                .join(
+                select(Phone).join(
                     Phone.phone_variants,
                 )
-                .options(contains_eager(Phone.phone_variants))
             )
             .scalars()
             .unique()

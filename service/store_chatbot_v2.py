@@ -43,7 +43,7 @@ class ConfigModel(BaseModel):
     detect_demand: str = "gpt-4o-mini"
     collect_and_retrieval: str = "gpt-4o-mini"
     response: str = "gpt-4o-mini"
-    user_fine_tune_tone: bool = False
+    user_fine_tune_tone: bool = True
 
 
 def gen_answer(
@@ -148,6 +148,7 @@ def handle_phone_request(
     # 1. collect and retrieval phone
     collect_and_retrieval_memory = phone_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
+        user=user,
     )  # init temporary memory collect and retrieval phone
 
     collect_and_retrieval_call = wandb_client.create_call(
@@ -251,6 +252,7 @@ def handle_laptop_request(
 ) -> str:
     collect_and_retrieval_memory = laptop_collect_and_retrieval.AgentTemporaryMemory(
         user_memory=user_memory,
+        user=user,
     )
 
     collect_and_retrieval_system_prompt_config = (

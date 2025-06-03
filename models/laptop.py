@@ -30,8 +30,7 @@ class Laptop(Base):
         "LaptopVariant",
         foreign_keys="LaptopVariant.laptop_id",
         back_populates="laptop",
-        uselist=True,
-        lazy="joined",
+        lazy="noload",
     )
 
     attributes_table_text: Mapped[str] = mapped_column(
@@ -90,7 +89,6 @@ class LaptopModel(BaseModel):
     min_price: int
     max_price: int
     score: float
-    name_embedding: list[float]
     attributes_table_text: Optional[str] = None
     variants_table_text: Optional[str] = None
     created_at: datetime

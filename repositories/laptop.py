@@ -75,11 +75,9 @@ def get_all() -> List[LaptopModel]:
     with Session() as session:
         laptops = (
             session.execute(
-                select(Laptop)
-                .join(
+                select(Laptop).join(
                     Laptop.laptop_variants,
                 )
-                .options(contains_eager(Laptop.laptop_variants))
             )
             .scalars()
             .unique()

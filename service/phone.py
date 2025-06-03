@@ -204,13 +204,31 @@ class PhoneFilter(BaseModel):
         if self.config.is_recommending:
             return true()
 
-        return (
+        base_conditions = (
             self.get_price_condition_expression()
             & self.get_brand_condition_expression()
             & self.get_name_condition_expression()
-            & self.get_rom_condition_expression()
-            & self.get_color_condition_expression()
         )
+
+        # Add subquery conditions for PhoneVariant-related filters
+        variant_conditions = []
+
+        if self.rom:
+            variant_conditions.append(self.get_rom_condition_expression())
+
+        if self.color:
+            variant_conditions.append(self.get_color_condition_expression())
+
+        if variant_conditions:
+            # Create subquery to check if phone has variants matching the conditions
+            variant_condition = variant_conditions[0]
+            for condition in variant_conditions[1:]:
+                variant_condition = variant_condition & condition
+
+            variant_subquery = select(PhoneVariant.phone_id).where(variant_condition)
+            base_conditions = base_conditions & Phone.id.in_(variant_subquery)
+
+        return base_conditions
 
     def score_by_priority(
         self, filter_type: FilterType, priority: int
@@ -234,14 +252,24 @@ class PhoneFilter(BaseModel):
             )
 
         if filter_type == FilterType.COLOR:
+            if not self.color:
+                return literal(0)
+            color_subquery = select(PhoneVariant.phone_id).where(
+                self.get_color_condition_expression()
+            )
             return case(
-                (self.get_color_condition_expression(), func.pow(10, priority)),
+                (Phone.id.in_(color_subquery), func.pow(10, priority)),
                 else_=0,
             )
 
         if filter_type == FilterType.ROM:
+            if not self.rom:
+                return literal(0)
+            rom_subquery = select(PhoneVariant.phone_id).where(
+                self.get_rom_condition_expression()
+            )
             return case(
-                (self.get_rom_condition_expression(), func.pow(10, priority)),
+                (Phone.id.in_(rom_subquery), func.pow(10, priority)),
                 else_=0,
             )
 
@@ -290,10 +318,6 @@ class PhoneFilter(BaseModel):
     def to_statement(self) -> Select:
         stmt = (
             select(Phone)
-            .join(
-                Phone.phone_variants,
-            )
-            .options(contains_eager(Phone.phone_variants))
             .where(self.condition_expression())
             .order_by(*self.order_by_expressions())
             .limit(self.config.limit)

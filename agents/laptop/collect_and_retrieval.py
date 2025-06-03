@@ -5,6 +5,7 @@ from typing import Any, Callable, Literal, Optional
 from openai import NOT_GIVEN, InternalServerError, NotGiven
 from overrides import override
 from models.laptop import LaptopModel
+from models.user import UserModel
 from models.user_memory import UserIntent, UserMemoryModel
 from repositories.redis import get_value
 from service.openai import _client, _chat_model, OpenAIChatCompletionsRequest
@@ -145,6 +146,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
 class AgentTemporaryMemory(AgentTemporaryMemoryBase):
     offset: int = 0
+    user: Optional[UserModel] = None
 
 
 class AgentResponse(AgentResponseBase):
@@ -478,7 +480,13 @@ class Agent(AgentBase):
     def _laptops_to_response(self, laptops: list[LaptopModel]) -> AgentResponse:
         user_memory: UserMemoryModel = self.temporary_memory.user_memory
         knowledge = [
-            laptop.to_text(include_key_selling_points=True, include_sku_variants=True)
+            laptop.to_text(
+                include_key_selling_points=True,
+                include_sku_variants=True,
+                is_markdown=not (
+                    self.temporary_memory.user and self.temporary_memory.user.fb_user_id
+                ),
+            )
             for laptop in laptops
         ]
 
@@ -551,6 +559,10 @@ class Agent(AgentBase):
                     include_promotion=True,
                     include_sku_variants=True,
                     include_description=True,
+                    is_markdown=not (
+                        self.temporary_memory.user
+                        and self.temporary_memory.user.fb_user_id
+                    ),
                 )
             ],
             instructions=instructions,

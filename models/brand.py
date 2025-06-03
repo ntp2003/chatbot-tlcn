@@ -33,6 +33,5 @@ class BrandModel(BaseModel):
 
     id: str
     name: str
-    embedding: list[float]
     created_at: datetime
     updated_at: datetime

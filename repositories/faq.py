@@ -70,3 +70,9 @@ def get_all() -> list[FAQModel]:
         faqs = session.execute(stmt).scalars().all()
 
         return [FAQModel.model_validate(faq) for faq in faqs]
+
+
+def delete_all() -> None:
+    with Session() as session:
+        session.query(FAQ).delete()
+        session.commit()

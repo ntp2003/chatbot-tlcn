@@ -51,6 +51,5 @@ class FAQModel(BaseModel):
     category: str
     question: str
     answer: str
-    embedding: list[float]
     created_at: datetime
     updated_at: datetime

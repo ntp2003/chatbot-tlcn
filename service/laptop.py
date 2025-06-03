@@ -135,12 +135,21 @@ class LaptopFilter(BaseModel):
     def condition_expression(self) -> ColumnElement[bool]:
         if self.config.is_recommending:
             return true()
-        return (
+
+        base_conditions = (
             self.get_price_condition_expression()
             & self.get_brand_condition_expression()
             & self.get_name_condition_expression()
-            & self.get_color_condition_expression()
         )
+
+        # Add subquery conditions for LaptopVariant-related filters
+        if self.color:
+            color_subquery = select(LaptopVariant.laptop_id).where(
+                self.get_color_condition_expression()
+            )
+            base_conditions = base_conditions & Laptop.id.in_(color_subquery)
+
+        return base_conditions
 
     def score_by_priority(
         self, filter_type: FilterType, priority: int
@@ -162,8 +171,13 @@ class LaptopFilter(BaseModel):
                     else_=0,
                 )
             case FilterType.COLOR:
+                if not self.color:
+                    return literal(0)
+                color_subquery = select(LaptopVariant.laptop_id).where(
+                    self.get_color_condition_expression()
+                )
                 return case(
-                    (self.get_color_condition_expression(), func.pow(10, priority)),
+                    (Laptop.id.in_(color_subquery), func.pow(10, priority)),
                     else_=0,
                 )
         raise ValueError(f"Unknown filter type: {filter_type}")
@@ -196,13 +210,12 @@ class LaptopFilter(BaseModel):
     def to_statement(self) -> Select:
         stmt = (
             select(Laptop)
-            .join(Laptop.laptop_variants)
-            .options(contains_eager(Laptop.laptop_variants))
             .where(self.condition_expression())
             .order_by(*self.order_by_expressions())
             .limit(self.config.limit)
             .offset(self.config.offset)
         )
+
         return stmt
 
 

@@ -194,15 +194,27 @@ class LaptopFilter(BaseModel):
         return [Laptop.score.expression.desc()]
 
     def to_statement(self) -> Select:
-        stmt = (
-            select(Laptop)
-            .join(Laptop.laptop_variants)
-            .options(contains_eager(Laptop.laptop_variants))
+        laptop_subquery = (
+            select(
+                Laptop.id,
+                func.row_number()
+                .over(order_by=self.order_by_expressions())
+                .label("order_seq"),
+            )
+            .join(LaptopVariant, Laptop.id == LaptopVariant.laptop_id)
             .where(self.condition_expression())
-            .order_by(*self.order_by_expressions())
+            .group_by(Laptop.id)
             .limit(self.config.limit)
             .offset(self.config.offset)
+            .subquery()
         )
+
+        stmt = (
+            select(Laptop)
+            .join(laptop_subquery, Laptop.id == laptop_subquery.c.id)
+            .order_by(laptop_subquery.c.order_seq)
+        )
+
         return stmt
 
 

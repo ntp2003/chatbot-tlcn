@@ -30,8 +30,7 @@ class Phone(Base):
         "PhoneVariant",
         foreign_keys="PhoneVariant.phone_id",
         back_populates="phone",
-        uselist=True,
-        lazy="joined",
+        lazy="noload",
     )
 
     attributes_table_text: Mapped[str] = mapped_column(

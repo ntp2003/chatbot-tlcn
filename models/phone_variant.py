@@ -33,7 +33,7 @@ class PhoneVariant(Base):
         "Phone",
         foreign_keys=[phone_id],
         back_populates="phone_variants",
-        lazy="selectin",
+        lazy="noload",
     )
     data: Mapped[dict] = mapped_column(JSONB, nullable=False, default={})
     attributes: Mapped[list[dict]] = mapped_column(

@@ -30,8 +30,7 @@ class Laptop(Base):
         "LaptopVariant",
         foreign_keys="LaptopVariant.laptop_id",
         back_populates="laptop",
-        uselist=True,
-        lazy="joined",
+        lazy="noload",
     )
 
     attributes_table_text: Mapped[str] = mapped_column(

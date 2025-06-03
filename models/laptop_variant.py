@@ -42,7 +42,7 @@ class LaptopVariant(Base):
         "Laptop",
         foreign_keys=[laptop_id],
         back_populates="laptop_variants",
-        lazy="selectin",
+        lazy="noload",
     )
 
     created_at: Mapped[datetime] = mapped_column(

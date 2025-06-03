@@ -288,16 +288,25 @@ class PhoneFilter(BaseModel):
         )
 
     def to_statement(self) -> Select:
-        stmt = (
-            select(Phone)
-            .join(
-                Phone.phone_variants,
+        phone_subquery = (
+            select(
+                Phone.id,
+                func.row_number()
+                .over(order_by=self.order_by_expressions())
+                .label("order_seq"),
             )
-            .options(contains_eager(Phone.phone_variants))
+            .join(PhoneVariant, Phone.id == PhoneVariant.phone_id)
             .where(self.condition_expression())
-            .order_by(*self.order_by_expressions())
+            .group_by(Phone.id)
             .limit(self.config.limit)
             .offset(self.config.offset)
+            .subquery()
+        )
+
+        stmt = (
+            select(Phone)
+            .join(phone_subquery, Phone.id == phone_subquery.c.id)
+            .order_by(phone_subquery.c.order_seq)
         )
 
         return stmt

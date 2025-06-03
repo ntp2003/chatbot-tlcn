@@ -42,8 +42,8 @@ from repositories.user import get as get_user
 class ConfigModel(BaseModel):
     detect_demand: str = "gpt-4o-mini"
     collect_and_retrieval: str = "gpt-4o-mini"
-    response: str = "gpt-4o-mini"
-    user_fine_tune_tone: bool = False
+    response: str = "ft:gpt-4o-mini-2024-07-18:personal::Bdao7Wp2"
+    user_fine_tune_tone: bool = True
 
 
 def gen_answer(

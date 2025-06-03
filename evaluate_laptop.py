@@ -905,9 +905,10 @@ def evaluate_laptop_conversation(
 
         {instruction}
 
-        ## TASK
-        Your task is to assist users in selecting suitable laptops and providing guidance on purchasing procedures.
-        Base on <INSTRUCTIONS> to provide the response for user.
+         ## TASK
+        - Your task is to assist users in selecting suitable laptops and providing guidance on purchasing procedures.
+        - Base on <INSTRUCTIONS> to provide the response for user. 
+        - You must ensure that all actions marked with 'must' in the <INSTRUCTIONS> are carried out. If any of those actions are not performed, it will be considered as NOT adhering to the chatbot role.
         """
 
         convo_test_case = ConversationalTestCase(

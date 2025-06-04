@@ -823,8 +823,8 @@ class VietnameseLaptopUserSimulator(BaseModel):
 
             step_descriptions += (
                 "\n## LATEST STEP IN PAST\n"
-                f"Latest step in past: {latest_step_in_past.value}\n"
-                f"Stay at step {latest_step_in_past.value} for {count} turns.\n"
+                f"Latest step in past: **{latest_step_in_past.value}**\n"
+                f"Stay at step **{latest_step_in_past.value}** for {count} turns.\n"
             )
 
             if (
@@ -832,7 +832,7 @@ class VietnameseLaptopUserSimulator(BaseModel):
                 and latest_step_in_past
                 == Step.ASK_FOR_THE_DETAILS_OF_THE_SELECTED_LAPTOP
             ):
-                step_descriptions += "You have stayed at this step for more than 3 turns, you can provide your contact information (Step 6 or Step 7).\n"
+                step_descriptions += f"Since you have stayed at step **{latest_step_in_past.value}** for more than 3 turns, you should provide your contact information (Step 6 or Step 7).\n\n"
 
         task = (
             "## TASK\n"

@@ -29,28 +29,61 @@ model = "ft:gpt-4o-mini-2024-07-18:personal::BeMUbWFj:ckpt-step-200"
 
 pronoun_consistency_metric = ConversationalGEval(
     name="Vietnamese Pronoun Consistency",
-    criteria="""Đánh giá khả năng của chatbot trong việc sử dụng đại từ nhân xưng tiếng Việt một cách chính xác và nhất quán trong suốt cuộc hội thoại. Cụ thể:
-    1. Chatbot (assistant) trong 'actual_output' phải LUÔN LUÔN tự xưng là 'em'.  Ví dụ: 'dạ em chào anh', 'em có thể giúp gì ạ'. KHÔNG được dùng 'tôi', 'mình'
-    2. Cách chatbot gọi người dùng (user) phải dựa trên thông tin được cung cấp hoặc cách người dùng tự xưng:
-        - Nếu 'User gender' được cung cấp là 'male' hoặc người dùng tự xưng là 'anh' như 'anh muốn hỏi...', chatbot phải gọi người dùng là 'anh'.
-        - Nếu 'User gender' được cung cấp là 'female' hoặc người dùng tự xưng là 'chị' như 'chị muốn hỏi...', chatbot phải gọi người dùng là 'chị'.
-        - Nếu người dùng tự xưng là 'chú', chatbot phải gọi người dùng là 'chú' và tự xưng 'cháu'.
-        - Nếu người dùng tự xưng là 'bác', chatbot phải gọi người dùng là 'bác' và tự xưng 'cháu'.
-        - Nếu người dùng tự xưng là 'cô', chatbot phải gọi người dùng là 'cô' và tự xưng 'cháu'. 
-        - Nếu 'User gender' được cung cấp là 'unknown' hoặc không được cung cấp, và người dùng không tự xưng theo một đại từ cụ thể nào ở trên, chatbot phải gọi người dùng là 'anh/chị'.
+    criteria="""Đánh giá khả năng của chatbot trong việc sử dụng đại từ nhân xưng tiếng Việt một cách chính xác và nhất quán trong suốt cuộc hội thoại. 
 
-    3. Tính nhất quán: Chatbot phải duy trì cách xưng hô đã được thiết lập với người dùng một cách nhất quán trong các lượt trả lời tiếp theo trong cùng một cuộc hội thoại, trừ khi có thông tin mới rõ ràng thay đổi cách xưng hô.
-    4. Không được sử dụng các cách xưng hô không phù hợp hoặc thiếu tôn trọng.
-      HƯỚNG DẪN CHẤM ĐIỂM:
-    - Điểm 1.0: Tuân thủ hoàn hảo tất cả các quy tắc trên trong mọi lượt của hội thoại.
-    - Phạt nặng (điểm gần 0): Nếu chatbot tự xưng sai (ví dụ: xưng 'tôi' thay vì 'em').
-    - Phạt nặng (điểm gần 0): Nếu chatbot gọi sai người dùng một cách rõ ràng (ví dụ: context là 'User gender: male' nhưng chatbot gọi là 'chị').
-    - Xem xét toàn bộ cuộc hội thoại để đánh giá tính nhất quán.
+    THÔNG TIN CẦN PHÂN TÍCH:
+    - 'input': Tin nhắn của người dùng - cần phân tích cách người dùng tự xưng và ngữ cảnh
+    - 'actual_output': Phản hồi của chatbot - cần đánh giá cách chatbot tự xưng và gọi người dùng
+    - 'context': Thông tin bổ sung về người dùng (ví dụ: User gender) và ngữ cảnh cuộc hội thoại
+
+    QUY TẮC ĐÁNH GIÁ:
+
+    1. **Cách chatbot tự xưng trong 'actual_output':**
+       - Chatbot **nên** tự xưng là 'em' (được ưu tiên, đặc biệt ở các lượt nói đầu hoặc khi cần làm rõ hành động)
+       - Chatbot **TUYỆT ĐỐI KHÔNG** được dùng 'tôi', 'mình' để tự xưng
+       - Ngoại lệ: Khi người dùng trong 'input' tự xưng là 'chú', 'bác', 'cô' thì chatbot phải tự xưng 'cháu'
+
+    2. **Cách chatbot gọi người dùng (dựa trên 'input' và 'context'):**
+       - Nếu trong 'context' có 'User gender: male' HOẶC người dùng trong 'input' tự xưng 'anh' → chatbot gọi 'anh'
+       - Nếu trong 'context' có 'User gender: female' HOẶC người dùng trong 'input' tự xưng 'chị' → chatbot gọi 'chị'
+       - Nếu người dùng trong 'input' tự xưng 'chú' → chatbot gọi 'chú' và tự xưng 'cháu'
+       - Nếu người dùng trong 'input' tự xưng 'bác' → chatbot gọi 'bác' và tự xưng 'cháu'
+       - Nếu người dùng trong 'input' tự xưng 'cô' → chatbot gọi 'cô' và tự xưng 'cháu'
+       - Nếu trong 'context' có 'User gender: unknown' hoặc không có thông tin gender, và người dùng trong 'input' không tự xưng rõ ràng → chatbot gọi 'anh/chị'
+
+    3. **Tính nhất quán:** 
+       - Phân tích toàn bộ lịch sử hội thoại trong 'context' để đảm bảo chatbot duy trì cách xưng hô đã thiết lập
+       - Chỉ chấp nhận thay đổi cách xưng hô khi có thông tin mới rõ ràng trong 'input'
+
+    4. **Tính lịch sự và phù hợp:**
+       - Không sử dụng cách xưng hô thiếu tôn trọng hoặc không phù hợp với văn hóa Việt Nam
+
+    HƯỚNG DẪN CHẤM ĐIỂM:
+    - **Điểm 1.0:** Tuân thủ hoàn hảo tất cả các quy tắc trên, phù hợp với thông tin trong 'input', 'context' và thể hiện tính nhất quán trong 'actual_output'
+    
+    - **Phạt nặng (điểm 0.0-0.3):**
+      • Chatbot tự xưng sai hoàn toàn ('tôi', 'mình' thay vì 'em')
+      • Sử dụng sai giữa 'em' và 'cháu' khi 'input' hoặc 'context' yêu cầu rõ ràng
+      • Gọi sai người dùng rõ ràng (ví dụ: 'context' là 'User gender: male' nhưng gọi 'chị')
+      • Không nhất quán trong cùng cuộc hội thoại mà không có lý do chính đáng từ 'input' mới
+    
+    - **Phạt vừa (điểm 0.4-0.7):**
+      • Thiếu một số cách xưng hô cần thiết ở những vị trí quan trọng
+      • Không tận dụng đầy đủ thông tin từ 'context' để xác định cách xưng hô phù hợp
+    
+    - **Phạt nhẹ hoặc không phạt (điểm 0.8-1.0):**
+      • Chatbot không tự xưng 'em' trong một số ít câu trả lời ngắn, trực tiếp ở các lượt sau, khi vai trò đã được thiết lập và không ảnh hưởng đến tính lịch sự
+
+    CÁCH PHÂN TÍCH:
+    1. Đọc kỹ 'context' để hiểu thông tin về người dùng và lịch sử hội thoại
+    2. Phân tích 'input' để xác định cách người dùng tự xưng và mong đợi được gọi
+    3. Đánh giá 'actual_output' dựa trên các quy tắc trên
+    4. Xem xét tính nhất quán với các lượt hội thoại trước đó (nếu có trong context)
     """,
     evaluation_params=[
-        LLMTestCaseParams.INPUT,  # Để phân tích input của user (ví dụ: "anh muốn hỏi...")
-        LLMTestCaseParams.ACTUAL_OUTPUT,  # Để phân tích output của model
-        LLMTestCaseParams.CONTEXT,  # Nếu thông tin `User gender` được truyền qua context cho mỗi lượt
+        LLMTestCaseParams.INPUT,
+        LLMTestCaseParams.ACTUAL_OUTPUT,
+        LLMTestCaseParams.CONTEXT,
     ],
     model=gpt_41_mini,
 )

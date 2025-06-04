@@ -106,8 +106,8 @@ def get_conversation_testcase(
     llm_test_cases = []
     conversation_history = []
     for turn in turns:
-        user.gender = turn.get("user_gender_context")
-        user_message = turn["user_input"]
+        user.gender = str(turn.get("user_gender_context"))
+        user_message = str(turn["user_input"])
         update(user)
         conversation_history.append(
             {
@@ -141,8 +141,8 @@ def get_conversation_testcase(
 def evaluate_fine_tune_model(output: ConfigModel):
     scores = []
     for row in test_dataset.rows:
-        conversation_id = row["conversation_id"]
-        turns = row["turns"]
+        conversation_id: str = row["conversation_id"]
+        turns: list[dict] = row["turns"]
         conversation_testcase = get_conversation_testcase(
             conversation_id=conversation_id, turns=turns, config_model=output
         )

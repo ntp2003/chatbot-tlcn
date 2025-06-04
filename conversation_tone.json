@@ -48,7 +48,7 @@
         "bot_actual_output_placeholder": ""
       },
       {
-        "user_input": "Nếu giao hàng tại nhà mà không ưng sản phẩm thì có được trả lại không?",
+        "user_input": "Nếu giao hàng tại nhà mà cô không ưng sản phẩm thì có được trả lại không?",
         "user_gender_context": "female",
         "bot_actual_output_placeholder": ""
       }
@@ -355,6 +355,231 @@
       {
         "user_input": "Những trường hợp sản phẩm không được bảo hành tại FPT Shop?",
         "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  {
+    "conversation_id": "conv_31",
+    "turns": [
+      {
+        "user_input": "Muốn xem giá thay thế linh kiện cho sản phẩm đã mua tại FPT Shop thì xem ở đâu?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  {
+    "conversation_id": "conv_32",
+    "turns": [
+      {
+        "user_input": "Đặt đơn hàng thành công và muốn theo dõi tiến độ đơn hàng đã được đi giao chưa thì xem ở đâu?",
+        "user_gender_context": "female",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  {
+    "conversation_id": "conv_33",
+    "turns": [
+      {
+        "user_input": "Chú cần hướng dẫn điều chỉnh hoặc xuất lại hóa đơn do bị sai thông tin nhập vào thì làm thế nào?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_34",
+    "turns": [
+      {
+        "user_input": "Chị cần hướng dẫn cách sử dụng về sản phẩm thì liên hệ hoặc xem ở đâu được?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_35",
+    "turns": [
+      {
+        "user_input": "Điều kiện cụ thể để FPT Shop áp dụng chính sách 1 đổi 1 cho máy cũ trong 30 ngày là gì?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  {   
+    "conversation_id": "conv_36",
+    "turns": [
+      {
+        "user_input": "Nếu chị phát hiện máy bị trầy xước hoặc có bụi trong màn hình trước khi sản phẩm được kích hoạt bảo hành sẽ được giải quyết như thế nào?",
+        "user_gender_context": "female",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_37",
+    "turns": [
+      {
+        "user_input": "FPT Shop có cho phép đặt giữ máy cũ nếu tôi tìm thấy sản phẩm ưng ý trên website không?",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_38",
+    "turns": [
+      {
+        "user_input": "Anh muốn hỏi về chính sách bảo hành cho máy cũ mua tại FPT Shop?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      },
+      {
+        "user_input": "Phụ kiện nhập khẩu Apple đã hết hạn bảo hành và muốn gửi sửa chữa dịch vụ tại FPT Shop thì có được không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_39",
+    "turns": [
+      {
+        "user_input": "Làm thế nào để yêu cầu xóa dữ liệu cá nhân tại FPT Shop?",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_40",
+    "turns": [
+      {
+        "user_input": "Cho tui hỏi , FPT Shop có chính sách giao hàng miễn phí trong vòng 20km, nhưng phí giao hàng cho các đơn hàng dưới 100,000 VNĐ là bao nhiêu?",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_41",
+    "turns": [
+      {
+        "user_input": "Hình thức thanh toán khi mua hàng trực tuyến tại FPT Shop?",
+        "user_gende,r_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      },
+      {
+        "user_input": "FPT Shop có hỗ trợ lắp đặt sản phẩm tại nhà không?",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_42",
+    "turns": [
+      {
+        "user_input": "cách FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng.",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_43",
+    "turns": [
+      {
+        "user_input": "Cách FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng.",
+        "user_gender_context": "unknown",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_44",
+    "turns": [
+      {
+        "user_input": "Khi tôi mua điện thoại hoặc máy tính bảng tại FPT Shop, sản phẩm có bắt buộc phải được mở hộp và kích hoạt ngay tại cửa hàng không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      },
+      {
+        "user_input": "Cách FPT Shop bảo mật thông tin thẻ thanh toán của khách hàng.",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_45",
+    "turns": [
+      {
+        "user_input": "Anh muốn lên đời điện thoại, shop có chính sách thu cũ đổi mới không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_46",
+    "turns": [
+      {
+        "user_input": "Chính sách khui hộp sản phẩm của FPT Shop áp dụng cho những loại mặt hàng nào?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_47",
+    "turns": [
+      {
+        "user_input": "Nếu tôi phát hiện máy bị trầy xước hoặc có bụi trong màn hình trước khi sản phẩm được kích hoạt bảo hành sẽ được giải quyết như thế nào?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_48",
+    "turns": [
+      {
+        "user_input": "FPT Shop có hỗ trợ trả góp qua Home PayLater không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      },
+      {
+        "user_input": "Vậy cửa hàng có hỗ trợ trả góp qua Kredivo không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_49",
+    "turns": [
+      {
+        "user_input": "Muốn cập nhật máy Apple có thời gian bảo hành không đúng hoặc chưa kích hoạt bảo hành trên hệ thống Website của Apple thì làm thế nào?",
+        "user_gender_context": "female",
+        "bot_actual_output_placeholder": ""
+      }
+    ]
+  },
+  { 
+    "conversation_id": "conv_50",
+    "turns": [
+      {
+        "user_input": "Nếu anh làm mất vỏ hộp hoặc thiếu phụ kiện đi kèm của sản phẩm mới, khi đổi trả tôi có bị trừ phí không?",
+        "user_gender_context": "male",
+        "bot_actual_output_placeholder": ""
+      },
+      {
+        "user_input": "Chính sách đổi trả cho sản phẩm cũ (đã qua sử dụng) mua tại FPT Shop nếu bị lỗi do nhà sản xuất trong 30 ngày đầu là gì?",
+        "user_gender_context": "male",
         "bot_actual_output_placeholder": ""
       }
     ]

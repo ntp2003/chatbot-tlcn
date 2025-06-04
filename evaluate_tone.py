@@ -166,6 +166,6 @@ if __name__ == "__main__":
         name="Tone Evaluation",
         dataset=fine_tune_tone_models,
         scorers=[evaluate_fine_tune_model],
-        evaluation_name="phone_evaluation",
+        evaluation_name="tone_evaluation",
     )
     asyncio.run(evaluation.evaluate(get_config_model))

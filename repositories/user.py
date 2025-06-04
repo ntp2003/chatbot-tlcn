@@ -3,6 +3,9 @@ from db import Session
 from typing import Optional, List
 from models.user import CreateUserModel, User, UserModel, UserRole
 from sqlalchemy import select, case
+from models.thread import Thread
+from models.message import Message
+from models.user_memory import UserMemory
 
 
 def create(data: CreateUserModel) -> UserModel:
@@ -94,3 +97,29 @@ def update(data: UserModel) -> int:
         )
         session.commit()
         return update_count
+
+
+def delete_by_user_name(user_name: str) -> int:
+    with Session() as session:
+        user = session.query(User).filter(User.user_name == user_name).one()
+        threads = session.query(Thread).filter(Thread.user_id == user.id).all()
+        for thread in threads:
+            messages = (
+                session.query(Message).filter(Message.thread_id == thread.id).all()
+            )
+            for message in messages:
+                session.delete(message)
+
+            memories = (
+                session.query(UserMemory)
+                .filter(UserMemory.thread_id == thread.id)
+                .all()
+            )
+            for memory in memories:
+                session.delete(memory)
+
+            session.delete(thread)
+
+        delete_count = session.query(User).filter(User.user_name == user_name).delete()
+        session.commit()
+        return delete_count

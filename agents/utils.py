@@ -51,7 +51,7 @@ def generate_response_by_instructions(
     knowledge: list[str],
     conversation_history: list[ChatCompletionMessageParam],
     model: str = "gpt-4o-mini",
-    user_fine_tune_tone: bool = False,
+    use_fine_tune_tone: bool = False,
 ) -> str:
     if not instructions:
         raise ValueError("Instructions cannot be empty.")
@@ -87,7 +87,7 @@ def generate_response_by_instructions(
         },
     ]
 
-    if user_fine_tune_tone:
+    if use_fine_tune_tone:
         messages.append(
             {
                 "role": "system",

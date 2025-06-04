@@ -43,7 +43,7 @@ class ConfigModel(BaseModel):
     detect_demand: str = "gpt-4o-mini"
     collect_and_retrieval: str = "gpt-4o-mini"
     response: str = "gpt-4o-mini"
-    user_fine_tune_tone: bool = False
+    use_fine_tune_tone: bool = False
 
 
 def gen_answer(
@@ -71,7 +71,7 @@ def gen_answer(
     detect_demand_memory = detect_demand.AgentTemporaryMemory(
         user_memory=user_memory,
         user=user,
-        use_fine_tune_tone=config.user_fine_tune_tone,
+        use_fine_tune_tone=config.use_fine_tune_tone,
     )
 
     detect_demand_call = wandb_client.create_call(
@@ -195,7 +195,7 @@ def handle_phone_request(
     generate_memory = phone_generate_response.AgentTemporaryMemory(
         user_memory=user_memory,
         user=user,
-        use_fine_tune_tone=config.user_fine_tune_tone,
+        use_fine_tune_tone=config.use_fine_tune_tone,
     )
 
     generate_agent_call = wandb_client.create_call(
@@ -297,7 +297,7 @@ def handle_laptop_request(
     generate_memory = laptop_generate_response.AgentTemporaryMemory(
         user_memory=user_memory,
         user=user,
-        use_fine_tune_tone=config.user_fine_tune_tone,
+        use_fine_tune_tone=config.use_fine_tune_tone,
     )
 
     generate_response_system_prompt_config = (
@@ -362,7 +362,7 @@ def handle_undetermined_request(
     generate_memory = undetermined_generate_response.AgentTemporaryMemory(
         user_memory=user_memory,
         user=user,
-        use_fine_tune_tone=config.user_fine_tune_tone,
+        use_fine_tune_tone=config.use_fine_tune_tone,
     )
     generate_response_system_prompt_config = (
         undetermined_generate_response.SystemPromptConfig()

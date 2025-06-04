@@ -25,7 +25,6 @@ gpt_41_mini = deepeval_models.GPTModel(
 json_file = "conversation_tone.json"
 test_dataset: Dataset = weave.ref("conversation_tone").get()
 fine_tune_tone_models: Dataset = weave.ref("fine_tune_tone").get()
-model = "ft:gpt-4o-mini-2024-07-18:personal::BeMUbWFj:ckpt-step-200"
 
 pronoun_consistency_metric = ConversationalGEval(
     name="Vietnamese Pronoun Consistency",
@@ -164,7 +163,7 @@ def get_config_model(fine_tuned_model_checkpoint_id: str) -> ConfigModel:
 
 if __name__ == "__main__":
     evaluation = Evaluation(
-        name="Phone Evaluation",
+        name="Tone Evaluation",
         dataset=fine_tune_tone_models,
         scorers=[evaluate_fine_tune_model],
         evaluation_name="phone_evaluation",

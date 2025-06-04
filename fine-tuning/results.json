@@ -1,0 +1,74 @@
+[
+    {
+        "lr_multiplier": "auto",
+        "n_epochs": 3,
+        "job_id": "ftjob-M2qbbRtobmLxdaDCqyZ8jAoP",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BejsaPFu",
+        "train_loss": 0.11896969377994537,
+        "epoch": 3
+    },
+    {
+        "lr_multiplier": "auto",
+        "n_epochs": 3,
+        "job_id": "ftjob-M2qbbRtobmLxdaDCqyZ8jAoP",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::Bejsa6J7:ckpt-step-120",
+        "train_loss": 1.0175371170043945,
+        "epoch": 2
+    },
+    {
+        "lr_multiplier": "auto",
+        "n_epochs": 3,
+        "job_id": "ftjob-M2qbbRtobmLxdaDCqyZ8jAoP",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BejsZy9k:ckpt-step-60",
+        "train_loss": 0.913822591304779,
+        "epoch": 1
+    },
+    {
+        "lr_multiplier": "0.9",
+        "n_epochs": 3,
+        "job_id": "ftjob-5tntFVtOjbsCLIqjCW2dABvg",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePMzLnB",
+        "train_loss": 0.45584574341773987,
+        "epoch": 3
+    },
+    {
+        "lr_multiplier": "0.9",
+        "n_epochs": 3,
+        "job_id": "ftjob-5tntFVtOjbsCLIqjCW2dABvg",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePMzMbT:ckpt-step-100",
+        "train_loss": 0.551426112651825,
+        "epoch": 2
+    },
+    {
+        "lr_multiplier": "0.9",
+        "n_epochs": 3,
+        "job_id": "ftjob-5tntFVtOjbsCLIqjCW2dABvg",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePMyK6B:ckpt-step-50",
+        "train_loss": 1.3087761402130127,
+        "epoch": 1
+    },
+    {
+        "lr_multiplier": "2.7",
+        "n_epochs": 3,
+        "job_id": "ftjob-gW9fFrEThhAwUt7gZRmRW8Rw",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePLas4R",
+        "train_loss": 0.2537245452404022,
+        "epoch": 3
+    },
+    {
+        "lr_multiplier": "2.7",
+        "n_epochs": 3,
+        "job_id": "ftjob-gW9fFrEThhAwUt7gZRmRW8Rw",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePLaKdq:ckpt-step-100",
+        "train_loss": 0.3635803461074829,
+        "epoch": 2
+    },
+    {
+        "lr_multiplier": "2.7",
+        "n_epochs": 3,
+        "job_id": "ftjob-gW9fFrEThhAwUt7gZRmRW8Rw",
+        "fine_tuned_model_checkpoint_id": "ft:gpt-4o-mini-2024-07-18:personal::BePLaZa5:ckpt-step-50",
+        "train_loss": 0.9651479721069336,
+        "epoch": 1
+    }
+]

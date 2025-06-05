@@ -45,6 +45,10 @@ class Tool(LangGPTTemplateTool):
                         "input": "details about it",
                         "output": "Laptop X",
                     },
+                    {
+                        "input": "laptop macbook",
+                        "output": None,
+                    },
                 ],
             }
         },

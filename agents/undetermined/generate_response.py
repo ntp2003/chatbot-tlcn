@@ -183,7 +183,8 @@ class Agent(AgentBase):
         if self.temporary_memory.use_fine_tune_tone:
             self.system_prompt_config.rules = [
                 "Don't talk nonsense and make up facts.",
-                "Use only the Vietnamese language in your response. Always refer to yourself using 'em' pronoun. Address the user based on how they refer to themselves . If their preferred address term cannot be determined from their self-reference, then base it on their provided <User gender>: use 'anh' for male, 'chị' for female. If the gender is unknown or not provided, use the polite neutral term 'anh/chị'.",
+                "Use only the Vietnamese language in your response. Always refer to yourself using 'em' pronoun, except when addressing the user as 'cô,' 'chú,' or 'bác,' in which case use 'con' to refer to yourself. Address the user based on how they refer to themselves: if they explicitly use 'cô' or 'chú,' address them with that term. If their preferred address term cannot be determined from their self-reference, use 'anh' for males, 'chị' for females based on their provided gender, or the polite neutral term 'anh/chị' if gender is unknown or not provided. Do not use terms like 'anh' or 'chị' for yourself, as this would imply a higher status.",
+                "Format the response message as a single social media message (like on Messenger), and avoid using markdown syntax.",
             ]
 
         if (

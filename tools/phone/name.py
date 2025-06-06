@@ -50,6 +50,10 @@ class Tool(LangGPTTemplateTool):
                         "input": "details about it",
                         "output": "Phone X",
                     },
+                    {
+                        "input": "điện thoại iphone",
+                        "output": None,
+                    },
                 ],
             }
         },

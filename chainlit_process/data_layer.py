@@ -1,13 +1,10 @@
-from typing import Callable, Dict, List, Optional
+from typing import Dict, List, Optional
 from uuid import UUID
 import chainlit as cl
 from chainlit.data.base import BaseDataLayer
 from models.thread import ThreadModel
-from models.user import CreateUserModel, UserRole
-from repositories.user import get as get_user, create, get_by_user_name_and_role
+from repositories.user import get as get_user
 from repositories.message import (
-    create as create_message,
-    get as get_message,
     get_all as get_all_messages,
     update as update_message,
     delete as delete_message,
@@ -16,15 +13,11 @@ from repositories.thread import (
     get as get_thread,
     delete as delete_thread,
     get_all as get_all_threads,
-    create as create_thread,
 )
 from models.message import (
-    MessageModel,
-    CreateMessageModel,
     MessageType,
     UpdateMessageModel,
 )
-from models.thread import CreateThreadModel
 from chainlit.data.utils import queue_until_user_message
 from chainlit.types import (
     Feedback,
@@ -43,17 +36,15 @@ class DataLayer(BaseDataLayer):
     """Custom data layer for Chainlit."""
 
     async def get_user(self, identifier: str) -> Optional[cl.PersistedUser]:
-        user = get_by_user_name_and_role(
-            user_name=identifier, role=UserRole.chainlit_user
-        )
+        user = get_user(UUID(identifier))
         if not user:
             return None
 
         return cl.PersistedUser(
             id=str(user.id),
-            identifier=user.user_name,
+            identifier=str(user.id),
             createdAt=user.created_at.isoformat(),
-            metadata={"user_id": str(user.id)},
+            metadata={"user_id": str(user.id), "role": user.role.value},
         )
 
     async def create_user(self, user: cl.User) -> Optional[cl.PersistedUser]:
@@ -115,10 +106,7 @@ class DataLayer(BaseDataLayer):
         if not thread:
             return ""
 
-        user_id = thread.user_id
-        user = get_user(user_id)
-
-        return str(user.user_name) if user else ""
+        return str(thread.user_id)
 
     async def delete_thread(self, thread_id: str):
         delete_thread(UUID(thread_id))
@@ -148,9 +136,7 @@ class DataLayer(BaseDataLayer):
         return ThreadDict(
             id=str(thread.id),
             name=thread.name,
-            userIdentifier=(
-                user.user_name if (user := get_user(thread.user_id)) else None
-            ),
+            userIdentifier=str(thread.user_id),
             createdAt=thread.created_at.isoformat(),
             metadata={},
             tags=[],

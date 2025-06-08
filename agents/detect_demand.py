@@ -219,7 +219,10 @@ class Agent(AgentBase):
         if phone_number and not standard_phone_number:
             invalid_infos.append("phone number")
         else:
-            updated_phone_number = standard_phone_number != user_memory.phone_number
+            updated_phone_number = (
+                standard_phone_number != user_memory.phone_number
+                and standard_phone_number is not None
+            )
             user_memory.phone_number = standard_phone_number or user_memory.phone_number
 
         if email and not standard_email:

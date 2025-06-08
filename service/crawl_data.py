@@ -30,15 +30,18 @@ header = {
     "content-type": "application/json",
     "order-channel": "1",
     "origin": "https://fptshop.com.vn",
-    "priority": "u=1, i",
     "referer": "https://fptshop.com.vn/",
     "sec-ch-ua": '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
     "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "Windows",
+    "sec-ch-ua-platform": '"Windows"',
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-site",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+}
+
+cookies = {
+    "cf_clearance": "nFlGMMbXxUGoiEkx_3DkQMl9AaxSs6jR0lauUzDe.IM-1748777740-1.2.1.1-JsUXaBKx.Turo.rdMI2EcosliXykZbS.o5hbHQFXfAxfP84aCRJw3ti578y0ZAS8J5T1DZ4PudGCm5iiB69d9qFNncrHCHGQcLwyf0VWp0CTmvtolDo7TVrSd.94neanysthZA8_U4wbirTVBeH_TOCqx.mnJS6zvg3DufWbivWs3vqqomt9_6gRRKmA_R7AJZvN1IrQaTCBhdBP4ytFu.2qZ_lK5v70qRH25N628xRIdCJDwx5.14vrSy42KqgeDSwqj1LpoLh2qElE4B15inFpi2U0Zz_WZDAM3ScX1EaeEB5aDWUHd2DqH3ry_6xrXsDADoM3oGxKLbViPVprgWjovEL.SIrym2Uel.l29B0",
 }
 
 
@@ -76,8 +79,7 @@ def get_price_information(sku: str) -> dict:
 
 def get_attributes(sku: str) -> list[dict]:
     """
-    Get the attributes of a product by its SKU.
-    Returns a list of attributes.
+    Get product attributes using Playwright's request context to bypass 403.
     """
     url = f"https://papi.fptshop.com.vn/gw/v1/public/bff-before-order/product/attribute?sku={sku}"
 

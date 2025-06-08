@@ -11,6 +11,7 @@ import time
 from controllers.home import router as home_router
 from controllers.fb_webhook import router as fb_webhook_router
 from service.wandb import *
+from controllers.heatlh import router as health_router
 
 rq_command = ["rq", "worker", "--with-scheduler"]
 rq_process = subprocess.Popen(
@@ -22,6 +23,8 @@ app = FastAPI(debug=True)
 
 app.include_router(home_router, prefix="", tags=["home"])
 app.include_router(fb_webhook_router, prefix="/api", tags=["webhook"])
+app.include_router(health_router, prefix="/api", tags=["health"])
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("my_logger")
@@ -49,4 +52,4 @@ mount_path = "/chainlit"
 mount_chainlit(app=app, target=target_module, path=mount_path)
 
 if __name__ == "__main__":
-    uvicorn.run(app="app:app", reload=True, workers=4)
+    uvicorn.run(app="app:app", reload=True, host="0.0.0.0", workers=4)

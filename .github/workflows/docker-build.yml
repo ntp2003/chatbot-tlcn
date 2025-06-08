@@ -1,0 +1,70 @@
+name: Deploy API
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to DigitalOcean Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: registry.digitalocean.com
+          username: ntp2003
+          password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            registry.digitalocean.com/chatbot-tlcn/api:latest
+            registry.digitalocean.com/chatbot-tlcn/api:sha-${{ github.sha }}
+          cache-from: type=registry,ref=registry.digitalocean.com/chatbot-tlcn/api:buildcache
+          cache-to: type=registry,ref=registry.digitalocean.com/chatbot-tlcn/api:buildcache,mode=max
+      
+      # Using environment files instead of set-output
+      - name: Set build info
+        run: |
+          echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          echo "BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+
+  deploy-api:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Debug SSH key format before attempting connection
+      - name: Debug SSH key
+        run: |
+          # Create a temporary key file
+          echo "${{ secrets.DO_API_KEY }}" > deploy_key.pem
+          # Make it read-only for current user (required by OpenSSH)
+          chmod 600 deploy_key.pem
+          # Check if the key is in a valid format (will not print the key)
+          ssh-keygen -l -f deploy_key.pem || echo "Invalid key format"
+
+          
+      - name: Deploy API to DigitalOcean Droplet
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.DO_API1_HOST }}
+          username: root
+          key: ${{ secrets.DO_API_KEY }}
+          port: 22
+          script_stop: true  # Stop script execution if any command fails
+          script: |
+            bash /opt/webhooks/scripts/deploy.sh
+            bash /opt/webhooks/scripts/get_ngrok_url.sh
+      
+      - name: Clean up
+        if: always()
+        run: rm -f deploy_key.pem

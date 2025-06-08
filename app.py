@@ -49,4 +49,4 @@ mount_path = "/chainlit"
 mount_chainlit(app=app, target=target_module, path=mount_path)
 
 if __name__ == "__main__":
-    uvicorn.run(app="app:app", reload=True)
+    uvicorn.run(app="app:app", reload=True, workers=4)

@@ -121,26 +121,27 @@ def update(id: UUID, data: UpdateUserModel) -> int:
 
 def delete_by_user_name(user_name: str) -> int:
     with Session() as session:
-        user = session.query(User).filter(User.user_name == user_name).first()
-        if user is None:
+        users = session.query(User).filter(User.user_name == user_name)
+        if not users:
             return 0
-        threads = session.query(Thread).filter(Thread.user_id == user.id).all()
-        for thread in threads:
-            messages = (
-                session.query(Message).filter(Message.thread_id == thread.id).all()
-            )
-            for message in messages:
-                session.delete(message)
+        for user in users:
+            threads = session.query(Thread).filter(Thread.user_id == user.id).all()
+            for thread in threads:
+                messages = (
+                    session.query(Message).filter(Message.thread_id == thread.id).all()
+                )
+                for message in messages:
+                    session.delete(message)
 
-            memories = (
-                session.query(UserMemory)
-                .filter(UserMemory.thread_id == thread.id)
-                .all()
-            )
-            for memory in memories:
-                session.delete(memory)
+                memories = (
+                    session.query(UserMemory)
+                    .filter(UserMemory.thread_id == thread.id)
+                    .all()
+                )
+                for memory in memories:
+                    session.delete(memory)
 
-            session.delete(thread)
+                session.delete(thread)
 
         delete_count = session.query(User).filter(User.user_name == user_name).delete()
         session.commit()

@@ -72,6 +72,14 @@ def get_all() -> list[FAQModel]:
         return [FAQModel.model_validate(faq) for faq in faqs]
 
 
+def get_by_ignore_ids(ignore_ids: list[int]) -> list[FAQModel]:
+    with Session() as session:
+        stmt = select(FAQ).where(FAQ.id.not_in(ignore_ids))
+        faqs = session.execute(stmt).scalars().all()
+
+        return [FAQModel.model_validate(faq) for faq in faqs]
+
+
 def delete_all() -> None:
     with Session() as session:
         session.query(FAQ).delete()

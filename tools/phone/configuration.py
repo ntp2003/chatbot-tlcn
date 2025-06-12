@@ -56,6 +56,10 @@ class Tool(LangGPTTemplateTool):
                         "input": "Có màu khác không?",
                         "output": None,
                     },
+                    {
+                        "input": "điện thoại có màu gì?",
+                        "output": None,
+                    },
                 ],
             },
             "phone_storage": {

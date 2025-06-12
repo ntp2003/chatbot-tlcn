@@ -71,6 +71,12 @@ def search_laptop_by_laptop_name(
         return [LaptopModel.model_validate(laptop) for laptop in laptops]
 
 
+def get_all_ids() -> List[str]:
+    with Session() as session:
+        laptop_ids = session.execute(select(Laptop.id)).scalars().unique().all()
+        return list(laptop_ids)
+
+
 def get_all() -> List[LaptopModel]:
     with Session() as session:
         laptops = (

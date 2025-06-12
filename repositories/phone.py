@@ -106,6 +106,12 @@ def search(stmt: Select) -> List[PhoneModel]:
         return [PhoneModel.model_validate(phone) for phone in phones]
 
 
+def get_all_ids() -> list[str]:
+    with Session() as session:
+        phone_ids = session.execute(select(Phone.id)).scalars().unique().all()
+        return list(phone_ids)
+
+
 def get_all() -> list[PhoneModel]:
     with Session() as session:
         phones = (

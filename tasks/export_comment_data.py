@@ -1,8 +1,13 @@
+import re
 import sys
 import os
 from datetime import datetime
 from typing import List, Dict, Any
+import numpy as np
 import pandas as pd
+from sklearn.cluster import KMeans
+from service.embedding import get_list_embedding
+from sklearn.metrics.pairwise import cosine_similarity, cosine_distances
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -35,7 +40,7 @@ def comment_model_to_raw_data(comment: CommentModel) -> Dict[str, Any]:
     # Remove None values to match original crawler format
     return {k: v for k, v in raw_data.items() if v is not None}
 
-
+from sklearn.feature_extraction.text import TfidfVectorizer
 def build_comment_tree(comments: List[CommentModel]) -> List[Dict[str, Any]]:
     """
     Build hierarchical comment tree from flat list of comments.
@@ -51,8 +56,14 @@ def build_comment_tree(comments: List[CommentModel]) -> List[Dict[str, Any]]:
     root_comments = []
     for comment in comments:
         if comment.parent_id is None:
+            if comment.content is None or not comment.content.strip():
+                continue
+            
             if comment.score is not None:
-                continue  # Skip comments with score None
+                continue
+            if not quality_check(comment.content):
+                continue
+            
             root_comments.append(comment_dict[comment.id])
         else:
             # Child comment - add to parent's children
@@ -60,8 +71,129 @@ def build_comment_tree(comments: List[CommentModel]) -> List[Dict[str, Any]]:
                 comment_dict[comment.parent_id]["children"].append(
                     comment_dict[comment.id]
                 )
+                
+    
+    try:
+        with open("vietnamese_stopwords.txt", "r", encoding="utf-8") as f:
+            vietnamese_stopwords = [
+                line.strip() for line in f if line.strip() and not line.startswith("#")
+            ]
+        
+        vectorizer = TfidfVectorizer(
+            max_features=5000,
+            stop_words=vietnamese_stopwords,
+            ngram_range=(1, 2),
+            min_df=2
+        )
+        
+        tfidf_matrix = vectorizer.fit_transform([root_comment["content"] for root_comment in root_comments])
+        similarity_matrix = cosine_similarity(tfidf_matrix)
+        
+        # Find near-duplicates (similarity > 0.8)
+        to_remove = set()
+        for i in range(len(similarity_matrix)):
+            if i in to_remove:
+                continue
+            for j in range(i + 1, len(similarity_matrix)):
+                if similarity_matrix[i, j] > 0.9:  # Adjust threshold as needed
+                    to_remove.add(j)
+                    
+        root_comments = [
+            root_comments[i] for i in range(len(root_comments)) if i not in to_remove
+        ]
+        print(f"Removed {len(to_remove)} near-duplicates")
+        
+    except Exception as e:
+        print(f"Near-duplicate removal failed: {e}")
+    finally:
+        for i, root_comment in enumerate(root_comments):
+        
 
+    
+    
     return root_comments
+
+
+def quality_check(text: str, min_words=3, min_chars=10, 
+                         min_alnum_ratio=0.6, max_digit_ratio=0.3,
+                         min_unique_chars=5, max_repeated_chars=4) -> bool:
+    """Enhanced quality checking with multiple criteria"""
+    
+    if not text or not isinstance(text, str):
+        return False
+        
+    text = text.strip()
+    if len(text) < min_chars:
+        return False
+        
+    # Word count check
+    words = text.split()
+    if len(words) < min_words:
+        return False
+    
+    # Character composition checks
+    total_chars = len(text)
+    alnum_count = sum(c.isalnum() for c in text)
+    digit_count = sum(c.isdigit() for c in text)
+    unique_chars = len(set(text.lower()))
+    
+    # Alphanumeric ratio
+    if alnum_count / total_chars < min_alnum_ratio:
+        return False
+    
+    # Too many digits (likely spam/noise)
+    if digit_count / total_chars > max_digit_ratio:
+        return False
+    
+    # Character diversity
+    if unique_chars < min_unique_chars:
+        return False
+    
+    # Repeated character sequences
+    if re.search(rf"(.)\1{{{max_repeated_chars},}}", text):
+        return False
+    
+    # Only punctuation
+    if re.fullmatch(r"[^\w\s]+", text):
+        return False
+            
+    return True
+
+def sample_with_clustering(self, texts: List[str], indices: List[int], 
+                         target_count: int, random_state=42) -> List[int]:
+    """Sample texts using clustering for maximum diversity with cosine distance"""
+
+    if len(texts) <= target_count:
+        return indices
+
+    # Generate embeddings
+    embeddings = get_list_embedding(texts)
+
+    # Clustering
+    kmeans = KMeans(n_clusters=target_count, random_state=random_state, n_init=20)
+    labels = kmeans.fit_predict(embeddings)
+    centroids = kmeans.cluster_centers_
+
+    selected_indices = []
+
+    for cluster_id in range(target_count):
+        # Find texts in this cluster
+        cluster_mask = labels == cluster_id
+        if not np.any(cluster_mask):
+            continue
+
+        cluster_indices = np.where(cluster_mask)[0]
+        cluster_embeddings = embeddings[cluster_mask]
+        centroid = centroids[cluster_id]
+
+        # Calculate cosine distances to centroid
+        cosine_dists = cosine_distances(cluster_embeddings, centroid.reshape(1, -1)).flatten()
+
+        # Find text with minimum cosine distance (most similar to centroid)
+        best_idx = cluster_indices[np.argmin(cosine_dists)]
+        selected_indices.append(indices[best_idx])
+
+    return selected_indices
 
 
 def export_comments_by_product(

@@ -42,7 +42,7 @@ from repositories.user import get as get_user
 class ConfigModel(BaseModel):
     detect_demand: str = "gpt-4o-mini"
     collect_and_retrieval: str = "gpt-4o-mini"
-    response: str = "gpt-4o-mini"
+    response: str = "ft:gpt-4o-mini-2024-07-18:personal:hello:Biepb0lp"
     use_fine_tune_tone: bool = True
 
 

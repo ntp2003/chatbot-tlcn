@@ -1,0 +1,31 @@
+{
+  "product_id": "419899532803",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27399,
+      "content": "pin của laptop dùng ok không ạ?",
+      "creationTime": "2024-12-23T13:21:20.780000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hoàng Thị Ngân",
+      "likeCount": 0,
+      "tags": ["pin","hiệu năng"],
+      "children": [
+        {
+          "id": 27400,
+          "content": "Chào chị Ngân\n\nDạ thời gian sử dụng pin khoảng 6-8 giờ, tùy vào cách sử dụng. Ưu điểm là pin của máy khá bền, có thể sử dụng liên tục trong vài giờ mà không phải lo lắng về việc sạc.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-23T13:42:44Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

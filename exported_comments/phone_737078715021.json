@@ -1,0 +1,31 @@
+{
+  "product_id": "737078715021",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 21312,
+      "content": "Shop fpt Kon Tum có bán con đó ko",
+      "creationTime": "2025-05-06T11:34:18.550000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nguyễn Huy Hoàng ",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 21313,
+          "content": "Chào anh Hoàng,\n\nDạ sản phẩm Tecno Spark 30 5G hiện tại vẫn đang còn hàng tại khu vực Kon Tum anh nhé. Sản phẩm đang có mức giá ưu đãi chỉ còn **3.690.000 ₫** khi được giảm ngay 800.000đ và trả góp 0%.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-06T11:52:22Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lương Hoàng Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

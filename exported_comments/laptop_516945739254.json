@@ -1,0 +1,31 @@
+{
+  "product_id": "516945739254",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27939,
+      "content": "Dòng cao cấp này rất ổn nha mình còn được tặng máy lọc không khí nữa",
+      "creationTime": "2024-12-25T06:52:00.739000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["khuyến mãi", "hiệu năng","đánh giá sản phẩm"],
+      "children": [
+        {
+          "id": 27940,
+          "content": "Cảm ơn anh/ chị rất nhiều vì đã ủng hộ ! FPT Shop rất vui vì anh/chị thích sản phẩm.",
+          "creationTime": "2024-12-25T06:55:02Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

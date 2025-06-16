@@ -1,0 +1,31 @@
+{
+  "product_id": "234763512150",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29204,
+      "content": "Có áp dụng chương trình giảm giá hay ưu đãi nào khi mua máy không?",
+      "creationTime": "2024-12-24T03:56:40.291000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nhân",
+      "likeCount": 0,
+      "tags": ["chính sách bán hàng","khuyến mãi"],
+      "children": [
+        {
+          "id": 29205,
+          "content": "Chào anh Nhân,\n\nLaptop HP Envy x360 14-fc0162TU Core Ultra 5-125U/AI/16GB/512GB/14'' Touch 2.8K OLED/Pen/Win11/Office HS21 có giá sau giảm còn 26.790.000 ₫ áp dụng đến 26/12. Tặng phiếu mua hàng 500,000đ (Không áp dụng trả góp 0%) áp dụng đến 26/12\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-24T03:57:29Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đỗ Thị Cẩm  Tiên",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

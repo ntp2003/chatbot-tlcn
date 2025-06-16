@@ -1,0 +1,31 @@
+{
+  "product_id": "120117528553",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27053,
+      "content": "Mình vừa mua hôm qua ad chỉ cách tắt phím chức năng F1-F12 dc k",
+      "creationTime": "2025-03-12T04:04:42.067000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tú",
+      "likeCount": 0,
+      "tags": ["Hỗ trợ kỹ thuật"],
+      "children": [
+        {
+          "id": 27054,
+          "content": "Chào anh Tú,\n\nDạ anh Tú cần hỗ trợ về kĩ thuật, vui lòng gọi tới Hotline miễn phí 18006601, chọn phím 2 để được nhân viên HTKT tư vấn nhé.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-03-12T04:06:30Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thúy Oanh ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

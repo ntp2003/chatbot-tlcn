@@ -1,0 +1,31 @@
+{
+  "product_id": "861557140019",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26068,
+      "content": "máy này dùng dòng phím nào ạ, giá mấy tiền ạ",
+      "creationTime": "2025-05-28T10:56:29.658000Z",
+      "creationTimeDisplay": "13 ngày trước",
+      "isAdministrator": false,
+      "fullName": "dũng",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật", "giá cả"],
+      "children": [
+        {
+          "id": 26069,
+          "content": "Chào anh Dũng ,\n\nDạ bàn phím máy có các phím cách nhau, nổi bật và dễ gõ.Laptop HP 14s-em0078AU R5 7520U/8GB/ 512GB/14'FHD/Win11 có ưu đãi giảm ngay 3,500,000đ còn 10.690.000 ₫ ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-28T11:03:26Z",
+          "creationTimeDisplay": "13 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Thành Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

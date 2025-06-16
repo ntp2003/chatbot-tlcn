@@ -1,0 +1,31 @@
+{
+  "product_id": "551184011082",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24837,
+      "content": "Cho em hỏi là giá mua tại cửa hàng ở quận Hà Đông, Hà Nội là bao nhiêu ạ. Em cảm ơn",
+      "creationTime": "2025-06-07T10:17:56.416000Z",
+      "creationTimeDisplay": "3 ngày trước",
+      "isAdministrator": false,
+      "fullName": "Em Lê Anh",
+      "likeCount": 0,
+      "tags": ["giá cả"],
+      "children": [
+        {
+          "id": 24838,
+          "content": "Chào anh Lê Anh,\n\nDạ sản phẩm Laptop Lenovo IdeaPad Slim 3 14IRH10 i7-13620H/24GB/512GB/14\" WUXGA/Win 11 có giá 18.290.000 ₫, đang có ưu đãi cho HSSV/Giáo viên hoặc khách hàng có ưu đãi sinh nhật trong tháng. Ngoài kiểu dáng gọn nhẹ chuyên nghiệp, Lenovo IdeaPad Slim 3 14IRH10 còn ghi điểm nhờ hiệu năng mạnh mẽ với chip Intel Core i7 13620H và dung lượng RAM 24GB. Màn hình sắc nét và thời lượng pin ấn tượng khiến sản phẩm trở thành lựa chọn số một cho những ai thường xuyên di chuyển và có nhu cầu giải trí thường xuyên trên laptop của mình.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-06-07T10:22:13Z",
+          "creationTimeDisplay": "3 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Kien Nguyen",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "product_id": "708793233419",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26586,
+      "content": "⭐️ ⭐️ ⭐️ ⭐️ ⭐️\nMáy có hiệu năng tốt nhưng vẫn gọn nhẹ, mình học lập trình nên cần xử lý code và phần mềm nhanh, thỉnh thoảng chơi Valorant giải trí cũng rất ổn, không bị giật lag.",
+      "creationTime": "2025-05-20T00:45:16.710000Z",
+      "creationTimeDisplay": "21 ngày trước",
+      "isAdministrator": false,
+      "fullName": "MINH THƯ",
+      "likeCount": 0,
+      "tags": ["nhu cầu sử dụng", "hiệu năng"],
+      "children": [
+        {
+          "id": 26587,
+          "content": "Chào chị Thư,\n\nCảm ơn anh đã quan tâm lựa chọn sản phẩm của FPT Shop ạ.",
+          "creationTime": "2025-05-20T01:36:24Z",
+          "creationTimeDisplay": "21 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 26596,
+      "content": "Shop giao trong bao lâu, mình muốn nhận ngay",
+      "creationTime": "2025-05-16T16:54:05.881000Z",
+      "creationTimeDisplay": "25 ngày trước",
+      "isAdministrator": false,
+      "fullName": "Thanh Thương",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 26597,
+          "content": "Chào chị Thương,\n\nSản phẩm Laptop bên em hỗ trợ giao miễn phí bán kính 90 phút, bán kính 20km. Mẫu này đang có giá chỉ **17.490.000 ₫.** Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-16T16:55:57Z",
+          "creationTimeDisplay": "25 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

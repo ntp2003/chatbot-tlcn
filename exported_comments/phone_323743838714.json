@@ -1,0 +1,31 @@
+{
+  "product_id": "323743838714",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 18929,
+      "content": "Mình mua thì có được tặng quà gì ko shop",
+      "creationTime": "2025-04-04T09:22:10.850000Z",
+      "creationTimeDisplay": "2 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hưũ Đức",
+      "likeCount": 0,
+      "tags": ["khuyến mãi"],
+      "children": [
+        {
+          "id": 18930,
+          "content": "Em chào anh Đức\n\nSản phẩm OPPO Reno13 F 5G 12GB 256GB giá chỉ từ 10.690.000 ₫\n\nTặng phiếu mua hàng 200.000đ mua phụ kiện áp dụng đến 07/04\n\nTặng thêm 12 tháng bảo hành chính hãng\n\nTrả góp 0%\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-04-04T09:31:18Z",
+          "creationTimeDisplay": "2 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Lưu Ly",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "product_id": "859112167381",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24798,
+      "content": "Máy này còn giảm giá trong bao lâu vậy ạ?",
+      "creationTime": "2025-03-01T06:14:33.305000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 24799,
+          "content": "Chào anh/chị,\n\nDạ, Laptop Acer Nitro 5 Tiger Gaming AN515-58-52SP giá chỉ từ 18.990.000 ₫ giá này đã Giảm ngay 10,500,000đ ngoài ra Tặng phiếu mua hàng 250,000đ áp dụng đến 03/03 (Không áp dụng kèm trả góp 0%) và Tặng thêm bảo hành 1 năm + Tặng tai nghe Bluetooth choàng đầu có mic Havit H628BT áp dụng đến 03/03 còn Tặng RAM 8GB cho MTXT Gaming 8GB, sinh viên sẽ được giảm thêm 2% 589.800 ₫ khi xác thực thành công, anh/chị ở khu vực nào em hỗ trợ mình mua hàng nha\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-03-01T06:19:03Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Ngô Hải Long",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 24808,
+      "content": "Con này nâng dc 2 ram, 2 ổ thì phải, nhiều vãi",
+      "creationTime": "2025-01-15T10:59:34.681000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hoàng",
+      "likeCount": 0,
+      "tags": ["đánh giá sản phẩm","nâng cấp cấu hình"],
+      "children": [
+        {
+          "id": 24809,
+          "content": "Chào anh Hoàng\n\nDạ cảm ơn anh đã quan tâm sản phẩm của FPT Shop ạ.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-01-15T11:01:58Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

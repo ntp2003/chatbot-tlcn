@@ -1,0 +1,56 @@
+{
+  "product_id": "44384069702",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 19552,
+      "content": "Có ưu đãi gì không shop",
+      "creationTime": "2024-12-18T02:46:23.223000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "An Nhiên",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 19553,
+          "content": "Chào chị Nhiên,\n\nDạ, sản phẩm đang có giá ưu đãi 390.000 ₫, nếu có máy cũ không sử dụng chị mang máy ghé qua cửa hàng em tham gia chương trình Đổi máy cũ 2G - hư hỏng giảm thêm 20,000đ.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-18T02:48:11Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 19550,
+      "content": "máy dùng được sim 4G ko ad",
+      "creationTime": "2024-12-18T02:49:35.265000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Duy",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 19551,
+          "content": "Chào anh Duy,\n\nDạ, sản phẩm có hỗ trợ Kết nối 4G mạnh mẽ, ổn định, người dùng có thể dễ dàng truy cập internet, duyệt web hoặc kiểm tra email với tốc độ tải xuống lên tới 150 Mbps và tốc độ tải lên lên tới 50 Mbps\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-18T02:50:51Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

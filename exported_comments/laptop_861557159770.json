@@ -1,0 +1,31 @@
+{
+  "product_id": "861557159770",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28793,
+      "content": "C muốn mua cho con trai vào đhoc, shop tv giúp c cách thanh toán",
+      "creationTime": "2024-12-22T17:28:58.947000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Mỹ Phượng",
+      "likeCount": 0,
+      "tags": ["chính sách thanh toán"],
+      "children": [
+        {
+          "id": 28794,
+          "content": "Chào chị Phượng,\n\nDạ bên em hỗ trợ thanh toán qua nhiều hình thức, bao gồm ví điện tử, chuyển khoản hoặc trả góp. Bên em sẽ liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin, chị gọi tổng đài miễn phí 18006601 hoặc chat qua Zalo tại **[tại đây](https://zalo.me/265948766610305574)**.\n\nThân mến!",
+          "creationTime": "2024-12-22T17:29:18Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Diệu Linh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

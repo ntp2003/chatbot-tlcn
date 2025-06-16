@@ -1,0 +1,31 @@
+{
+  "product_id": "224036734846",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28593,
+      "content": "cho mình hỏi khi nào Laptop này về hàng vậy shop ?",
+      "creationTime": "2025-03-22T03:09:08.651000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Lân",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 28594,
+          "content": "Chào anh Lân,\n\nDạ bên em đang kiểm tra lại thông tin hàng hóa cụ thể .Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-03-22T03:40:13Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thúy Oanh ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

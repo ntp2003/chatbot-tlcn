@@ -1,0 +1,31 @@
+{
+  "product_id": "829664835033",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25520,
+      "content": "Máy này có hàng thu hồi kh ạ",
+      "creationTime": "2025-05-05T01:47:10.184000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trà",
+      "likeCount": 0,
+      "tags": ["thu cũ đổi mới"],
+      "children": [
+        {
+          "id": 25521,
+          "content": "Chào chị Trà,\n\nDạ chị bán lại máy bên em thu lại sản phẩm mua của FPT Shop còn trong hạn bảo hành 1 năm nhé chị tham khảo ghé cửa hàng gần nhất thẩm định giá máy nhé.\n\nNếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-05-05T02:21:52Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

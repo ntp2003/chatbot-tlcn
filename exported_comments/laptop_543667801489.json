@@ -1,0 +1,31 @@
+{
+  "product_id": "543667801489",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27232,
+      "content": "nâng 2tb ssd ở shop dc ko",
+      "creationTime": "2025-05-01T10:46:36.716000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "hieu",
+      "likeCount": 0,
+      "tags": ["nâng cấp cấu hình"],
+      "children": [
+        {
+          "id": 27233,
+          "content": "Chào anh Hiếu,\n\nDạ, sản phẩm Laptop Asus TUF Gaming FX507ZC4-HN095W i5 12500H/16GB/512GB/15.6\"/Nvidia RTX3050 4GB/Win11 **Đồ họa sống động, chân thực đến từng chi tiết**\n\nCó mức giá ưu đãi chỉ còn **19.690.000 ₫**  áp dụng đến 04/05. Tặng thêm bảo hành 1 năm áp dụng đến 04/05 ạ.\n\nDạ thông tin nâng cấp SSD sẽ gửi về hãng hỗ trợ ạ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác, anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-05-01T11:06:03Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Triệu Nhiên",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

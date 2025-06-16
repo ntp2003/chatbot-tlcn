@@ -1,0 +1,56 @@
+{
+  "product_id": "202045110255",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29139,
+      "content": "Có ưu đãi gì không ạ?",
+      "creationTime": "2024-12-09T18:24:08.086000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Lan",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 29140,
+          "content": "Chào chị Lan\n\nDạ Macbook Air M3 13 2024 8CPU 10GPU/16GB/256GB giá chỉ 28.790.000 ₫\n\náp dụng đến 12/12 - ưu đãi giảm ngay 1.000.000đ đơn từ 5.000.000đ khi mở thẻ tín dụng VPBank trên SenID ạ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-09T18:42:48Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 29106,
+      "content": "MacBook Air M3 phù hợp với những ai dùng??",
+      "creationTime": "2024-12-10T04:23:19.560000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hoàng Hà",
+      "likeCount": 0,
+      "tags": ["nhu cầu sử dụng"],
+      "children": [
+        {
+          "id": 29107,
+          "content": "Chào anh Hà\n\nDạ Macbook Air M3 13 2024 8CPU 10GPU/16GB/256GB phù hợp với sinh viên, nhân viên văn phòng, và người cần máy tính xách tay di động nhẹ, pin lâu​ giá chỉ 28.790.000 ₫ áp dụng đến 12/12 - Đặc quyền sinh viên Giảm ngay 300.000 ₫.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-10T04:36:25Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

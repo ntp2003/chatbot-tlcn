@@ -1,0 +1,31 @@
+{
+  "product_id": "052698224173",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27176,
+      "content": "mình muốn mua con này có ưu đãi gì kh ạ",
+      "creationTime": "2025-05-06T08:50:44.855000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hoàng",
+      "likeCount": 0,
+      "tags": ["khuyến mãi", "chính sách bán hàng"],
+      "children": [
+        {
+          "id": 27177,
+          "content": "Chào anh Hoàng ,\n\nDạ, Laptop Asus Vivobook 14 A1407CA-LY008WS Ultra 5-225H/AI/16GB/512GB/14\" WUXGA/Win11/Office HS24/OS365 có ưu đãi Giảm ngay 2,500,000đ áp dụng đến 08/05 còn 19.990.000 ₫ ạ, HSSV giảm thêm 674.700 ₫ ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại đây.\n\nThân mến!",
+          "creationTime": "2025-05-06T08:57:00Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Thành Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

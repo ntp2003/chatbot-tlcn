@@ -1,0 +1,56 @@
+{
+  "product_id": "073581741775",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 16016,
+      "content": "Bên mình có thể giao hàng tận nơi không?",
+      "creationTime": "2024-12-18T15:04:44.319000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Bùi Thị Kim Dung",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 16017,
+          "content": "Chào chị Dung,\n\nDạ, sản phẩm Nokia 3210 4G sẽ được giao hàng tận nơi miễn phí trong vòng 20km tính từ shop có hàng cho mình ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-18T15:05:49Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lương Hoàng Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 16028,
+      "content": "Đổi máy cũ 2g là sao ạ ?",
+      "creationTime": "2024-12-18T14:38:29.477000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Phạm Thị Thu Hà",
+      "likeCount": 0,
+      "tags": ["thu cũ đổi mới"],
+      "children": [
+        {
+          "id": 16029,
+          "content": "Chào chị Hà,\n\nDạ, Nokia 3210 4G có chương trình thu cũ máy 2G (bất kể tình trạng nào: sử dụng được, hư hỏng) mang đến shop đổi và sẽ được giảm thêm 60.000đ vào giá mua sản phẩm ạ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-18T14:39:07Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lương Hoàng Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

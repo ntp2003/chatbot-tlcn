@@ -1,0 +1,31 @@
+{
+  "product_id": "084122414684",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25137,
+      "content": "laptop này chơi game có ổn không shop",
+      "creationTime": "2024-12-21T19:55:35.788000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Khoa Học",
+      "likeCount": 0,
+      "tags": ["nhu cầu sử dụng", "hiệu năng"],
+      "children": [
+        {
+          "id": 25138,
+          "content": "Chào anh Khoa,\n\nDạ, mẫu laptop này có cấu hình đủ mạnh để chơi các tựa game nặng và có yêu cầu đồ họa cao.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh Khoa gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại [đây](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748).\n\nThân mến!\"",
+          "creationTime": "2024-12-21T19:57:37Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Đức Thắng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

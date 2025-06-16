@@ -1,0 +1,31 @@
+{
+  "product_id": "957169829290",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24854,
+      "content": "laptop này có loa thế nào ạ",
+      "creationTime": "2024-12-21T20:19:58.469000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Thảo Nguyên",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 24855,
+          "content": "Chào chị Thảo,\n\nDạ, mẫu laptop này được trang bị hệ thống loa chất lượng cao, âm thanh rõ ràng, phù hợp để nghe nhạc, xem phim hoặc tham gia các cuộc họp trực tuyến.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị Thảo gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748).\n\nThân mến!\"",
+          "creationTime": "2024-12-21T20:20:52Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Đức Thắng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

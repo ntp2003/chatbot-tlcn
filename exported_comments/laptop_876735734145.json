@@ -1,0 +1,31 @@
+{
+  "product_id": "876735734145",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27516,
+      "content": "Dòng này mấy quạt vậy ad, thấy có khe 2 bên là 2 quạt phải ko, mình đang tìm mấy con gaming form gọn gọn như này ",
+      "creationTime": "2025-04-29T07:08:04.534000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Luân",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm","thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 27517,
+          "content": "Chào anh Luân,\n\nDạ sản phẩm  Acer Aspire 7 A715-59G-57TU được trang bị hệ thống làm mát với 2 quạt tản nhiệt và 4 ống dẫn nhiệt nhằm tối ưu khả năng tản nhiệt cho CPU và GPU. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-04-29T07:21:18Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thúy Oanh ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

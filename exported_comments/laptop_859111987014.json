@@ -1,0 +1,31 @@
+{
+  "product_id": "859111987014",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28291,
+      "content": "dùng bền ko mình tính mua",
+      "creationTime": "2024-12-23T10:32:10.837000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Khương",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 28292,
+          "content": "Chào anh Khương\n\nDạ sản phẩm với độ bền bỉ cao, có thể sử dụng lâu dài ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-23T10:35:19Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Quang Nguyễn ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

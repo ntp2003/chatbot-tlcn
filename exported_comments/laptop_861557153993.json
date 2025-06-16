@@ -1,0 +1,56 @@
+{
+  "product_id": "861557153993",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25987,
+      "content": "12.790.000 trả trước 30pt(3.837.000) góp 4 tháng thì mỗi tháng phải trả bao nhiu vậy shop",
+      "creationTime": "2025-02-28T03:55:41.084000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hiếu",
+      "likeCount": 0,
+      "tags": ["chính sách trả góp"],
+      "children": [
+        {
+          "id": 25988,
+          "content": "Chào anh Hiếu,\n\nAnh trả trước 3.837.000đ, kỳ hạn 4 tháng, góp qua Fe Credit có lãi suất 0.89%/1.67%, mỗi tháng đóng 2.493.000đ ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-02-28T04:06:49Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thanh Tùng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 25991,
+      "content": "Này là máy mới à shop",
+      "creationTime": "2025-02-11T09:36:16.218000Z",
+      "creationTimeDisplay": "4 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Anh",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 25992,
+          "content": "Chào anh/chị\n\nDạ máy bên shop là mới 100% ạ. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-02-11T09:44:53Z",
+          "creationTimeDisplay": "4 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Quang Nguyễn ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

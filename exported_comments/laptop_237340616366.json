@@ -1,0 +1,31 @@
+{
+  "product_id": "237340616366",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26162,
+      "content": "Mới mua con này hôm trước về nâng ram luôn có bị mất bảo hành k nhỉ, tại mình tự tháo",
+      "creationTime": "2025-03-12T03:06:44.679000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Chiến",
+      "likeCount": 0,
+      "tags": ["chính sách bảo hành","nâng cấp cấu hình"],
+      "children": [
+        {
+          "id": 26163,
+          "content": "Chào anh Chiến,\n\nDạ mình tự nâng cấp ram thì sẽ bị mất bảo hành anh nhé, anh qua cửa hàng để bên em hỗ trợ gửi hãng nâng giúp mình ạ.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-03-12T03:12:21Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Đức Thắng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

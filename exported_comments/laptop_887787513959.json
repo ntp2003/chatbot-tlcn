@@ -1,0 +1,31 @@
+{
+  "product_id": "887787513959",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25312,
+      "content": "Mua máy này có được tặng kèm gì không",
+      "creationTime": "2024-12-23T06:36:01.846000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Lý Gia Bảo",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 25313,
+          "content": "Chào anh Bảo,\n\nDạ khi mua sản phẩm mình sẽ nhận được thêm Balo Gaming SUV, phiếu mua hàng 300,000đ mua màn hình (Hạn sử dụng 15 ngày) ngoài ra mình sẽ tiết kiệm được 600,000đ khi mua Microsoft 365 Personal kèm thiết bị và phiếu mua hàng giảm ngay 200.000đ, áp dụng cho sản phẩm Máy in (thời hạn sử dụng 15 ngày). Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-23T06:39:33Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lương Hoàng Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "640859430061",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27552,
+      "content": "Bên mình có thể giao hàng tận nơi không?",
+      "creationTime": "2024-12-23T17:37:30.851000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nhã Uyên",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 27553,
+          "content": "Chào chị Uyên,\n\nDạ, bên em giao hàng tận nơi miễn phí trong vòng 20km tính từ shop có hàng cho mình ạ.\n\nNếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-23T17:41:06Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Ngọc Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

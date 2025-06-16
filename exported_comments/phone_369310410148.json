@@ -1,0 +1,56 @@
+{
+  "product_id": "369310410148",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 19279,
+      "content": "Bên mình có hỗ trợ thanh toán khi nhận hàng ko ạ",
+      "creationTime": "2024-12-18T06:36:32.941000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Linh",
+      "likeCount": 0,
+      "tags": ["chính sách thanh toán"],
+      "children": [
+        {
+          "id": 19280,
+          "content": "Chào chị Linh,\n\nDạ, cửa hàng em có hỗ trợ thanh toán khi nhận hàng (COD), hoặc chị cũng có thể thanh toán qua thẻ ngân hàng hoặc ví điện tử.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-18T06:36:51Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 19285,
+      "content": "điện thoại này có nghe nhạc được k shop",
+      "creationTime": "2024-12-18T06:32:28.234000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Chi",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật","thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 19286,
+          "content": "Chào chị Chi,\n\nInoi 244 Modern Plus 4G có thể nghe nhạc MP3, MIDI, AAC và WAV trực tiếp trên điện thoại, mang lại những phút giây thư giãn mọi lúc, mọi nơi. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2024-12-18T06:33:11Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

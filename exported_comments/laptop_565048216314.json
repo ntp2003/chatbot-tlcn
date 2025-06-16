@@ -1,0 +1,31 @@
+{
+  "product_id": "565048216314",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28277,
+      "content": "Máy này có cảm ứng k shop",
+      "creationTime": "2024-10-08T14:57:47.376000Z",
+      "creationTimeDisplay": "8 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trang",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 28278,
+          "content": "Chào chị Trang,\n\nDạ, sản phẩm này không có cảm ứng ạ. Để được hỗ trợ chi tiết về sản phẩm, chị vui lòng liên hệ tổng đài miễn phí 18006601 hoặc để lại SĐT bên em liên hệ tư vấn nhanh nhất ạ.\n\nThân mến !",
+          "creationTime": "2024-10-08T15:02:12Z",
+          "creationTimeDisplay": "8 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đức  Minh ( Quản Trị Viên)",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

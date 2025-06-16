@@ -1,0 +1,56 @@
+{
+  "product_id": "264739610738",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27152,
+      "content": "Sản phẩm có ưu đãi gì không?",
+      "creationTime": "2024-12-24T17:07:05.355000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Thanh Mai",
+      "likeCount": 0,
+      "tags": ["chính sách bán hàng","khuyến mãi"],
+      "children": [
+        {
+          "id": 27153,
+          "content": "Chào chị Mai\n\nDạ sản phẩm đang có ưu đãi thanh toán chủ thẻ NCB giảm thêm 10% tối đa 500.000đ cho đơn hàng khi thanh toán 100%.  Laptop Acer Gaming Aspire 5 A515-58GM-53CM i5 13420H/32GB/512GB/15.6\"FHD/RTX2050 4GB/Win11 đang có giá ưu đãi chỉ từ 17.990.000đ áp dụng đến 26/12, tặng phiếu mua hàng 500,000đ (Không áp dụng trả góp 0%) áp dụng đến 26/12.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-24T17:08:03Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Hoàng Lâm",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 27142,
+      "content": "Máy dùng rất bền và dịch vụ hỗ trợ tốt",
+      "creationTime": "2024-12-25T06:43:25.620000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["đánh giá sản phẩm"],
+      "children": [
+        {
+          "id": 27143,
+          "content": "Cảm ơn anh/ chị rất nhiều vì đã ủng hộ ! FPT Shop rất vui vì anh/chị thích sản phẩm.",
+          "creationTime": "2024-12-25T06:47:30Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

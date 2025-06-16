@@ -1,0 +1,31 @@
+{
+  "product_id": "435315135642",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27767,
+      "content": "Con này sử dụng bộ vi xử lý nào nhỉ?",
+      "creationTime": "2024-12-23T11:39:11.932000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Chí Thông",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 27768,
+          "content": "Chào anh Thông\n\nDạ Laptop Asus Vivobook S16 OLED S5606MA-MX051W được trang bị bộ vi xử lý Intel Core Ultra 7 155H, mang lại hiệu suất mạnh mẽ cho các tác vụ đa nhiệm.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-23T11:51:16Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

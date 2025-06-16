@@ -1,0 +1,31 @@
+{
+  "product_id": "859111013627",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25248,
+      "content": "em này chơi game mượt ko",
+      "creationTime": "2024-12-25T09:22:51.262000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tuấn",
+      "likeCount": 0,
+      "tags": ["nhu cầu sử dụng","hiệu năng"],
+      "children": [
+        {
+          "id": 25249,
+          "content": "Chào anh Tuấn,\n\nDạ, sản phẩm được trang bị cấu hình mạnh mẽ với CPU i7-13620H, card đồ họa NVIDIA GeForce RTX 4060, giúp anh chiến game mượt mà ở mọi cấu hình. Nếu cần thêm thông tin khác mình gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây.](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-25T09:23:04Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Quang Nguyễn ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "product_id": "059663525766",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28917,
+      "content": "Máy có được bảo hành bao lâu",
+      "creationTime": "2024-12-09T12:13:59.063000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "nguyễn Phúc",
+      "likeCount": 0,
+      "tags": ["chính sách bảo hành"],
+      "children": [
+        {
+          "id": 28918,
+          "content": "Chào anh Phúc,\n\nBảo hành 12 tháng chính hãng, kèm các chính sách hỗ trợ sửa chữa tại FPT Shop.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến",
+          "creationTime": "2024-12-09T12:14:39Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Vũ Thị Vân Anh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 28945,
+      "content": "MacBook Air M3 có bền không",
+      "creationTime": "2024-12-08T07:27:10.911000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "hải Lâm",
+      "likeCount": 0,
+      "tags": ["hiệu năng"],
+      "children": [
+        {
+          "id": 28946,
+          "content": "Chào anh Lâm,\n\nDạ vỏ máy làm từ hợp kim nhôm tái chế, vừa bền vừa thân thiện với môi trường. Macbook Air M3 15 2024 8CPU 10GPU/16GB/512GB đang có giá giảm chỉ từ 38.990.000 ₫ áp dụng đến 09/12.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-08T07:28:01Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Vũ Thị Vân Anh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "product_id": "480145836077",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28183,
+      "content": "Máy tốt mượt , pin trâu rất đáng để mua ",
+      "creationTime": "2024-12-28T14:16:47.931000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["hiệu năng"],
+      "children": [
+        {
+          "id": 28184,
+          "content": "Chào anh/chị\n\nDạ cảm ơn mình đã tin tưởng và sử dụng dịch vụ của FPT SHOP ạ\n\nNếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-28T14:23:32Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Triệu Nhiên",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 28203,
+      "content": "Máy có hỗ trợ nâng cấp RAM và ổ cứng không?",
+      "creationTime": "2024-12-25T18:50:49.120000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Phạm Tuấn Kiệt",
+      "likeCount": 0,
+      "tags": ["nâng cấp cấu hình"],
+      "children": [
+        {
+          "id": 28204,
+          "content": "Chào Anh Kiệt,\n\nMáy hỗ trợ nâng cấp RAM lên tối đa 64GB và ổ cứng SSD lên tối đa 2TB, giúp người dùng dễ dàng nâng cấp theo nhu cầu sử dụng.\n\nSản phẩm đang có giá ưu đãi chỉ còn 13.490.000đ - FPT Shop có chương trình dành cho HSSV - Giáo viên giảm thêm 3% lên đến 449.700đ\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-25T18:51:22Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Ngô Thị Hồng Ngọc",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

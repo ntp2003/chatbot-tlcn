@@ -1,0 +1,56 @@
+{
+  "product_id": "075352030049",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28727,
+      "content": "Bảo hành sản phẩm như thế nào",
+      "creationTime": "2024-12-09T11:18:39.353000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "QUỐC ANH",
+      "likeCount": 0,
+      "tags": ["chính sách bảo hành"],
+      "children": [
+        {
+          "id": 28728,
+          "content": "Chào anh Quốc Anh,\n\nMáy được bảo hành chính hãng 12 tháng, 1 đổi 1 nếu gặp lỗi từ nhà sản xuất trong 30 ngày đầu. Trong quá trình sử dụng cần hỗ trợ có thể mang đến bất kì FPTShop nào gần nhất để được kiểm tra nhanh chóng.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến",
+          "creationTime": "2024-12-09T11:19:43Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Vũ Thị Vân Anh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 28759,
+      "content": "MacBook Pro 14 2023 M3 Pro có những cấu hình nào",
+      "creationTime": "2024-12-08T07:07:56.544000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "THANH VAN",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 28760,
+          "content": "Chào chị Vân,\n\nSản phẩm sử dụng chip M3 Pro với 11 nhân CPU, 14 nhân GPU, RAM 36GB và bộ nhớ SSD 512GB, đáp ứng tối đa các tác vụ từ đồ họa đến lập trình. Sản phẩm MacBook Pro 14 2023 M3 Pro 11 CPU/14GPU/36GB/512GB đang có giá 59.990.000 ₫ ₫-Trả góp 0% .\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-08T07:10:41Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Vũ Thị Vân Anh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

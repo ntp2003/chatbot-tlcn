@@ -1,0 +1,81 @@
+{
+  "product_id": "719812218603",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 21230,
+      "content": "Hiện tại còn hàng k ạ ",
+      "creationTime": "2024-10-15T12:58:09.682000Z",
+      "creationTimeDisplay": "8 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Văn Thiệp ",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 21231,
+          "content": "Chào anh Thiệp,\n\nDạ sản phẩm Honor X6b 6GB 128GB bên em vẫn đang còn hàng giá chỉ từ 3.690.000 ₫ áp dụng Đổi máy cũ 2G - hư hỏng giảm thêm 300.000đ. Để được hỗ trợ chi tiết về sản phẩm, anh vui lòng liên hệ tổng đài miễn phí 18006601 hoặc để lại SĐT bên em liên hệ tư vấn nhanh nhất ạ.\n\nThân mến !",
+          "creationTime": "2024-10-15T13:18:05Z",
+          "creationTimeDisplay": "8 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đức  Minh ( Quản Trị Viên)",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 21210,
+      "content": "Màn hình của Honor X6b sử dụng công nghệ gì?",
+      "creationTime": "2024-12-15T10:07:52.490000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "ANH THANH",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 21211,
+          "content": "Chào anh Thanh\n\nDạ Honor X6b được trang bị màn hình sử dụng công nghệ **LCD IPS**. Đây là loại màn hình mang lại:\n\n**Kích thước**: 6.56 inch, phù hợp để giải trí và sử dụng hàng ngày.\n\n**Độ phân giải**: HD+ (720 x 1612 pixel), đủ dùng cho các tác vụ cơ bản nhưng không quá sắc nét như màn hình Full HD.\n\n**Màu sắc**: Hiển thị chân thực, góc nhìn ổn định nhờ công nghệ IPS.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác mình gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-15T10:08:28Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Triệu Nhiên",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 21220,
+      "content": "máy có hỗ trợ nfc không ạ",
+      "creationTime": "2024-10-22T13:45:47.898000Z",
+      "creationTimeDisplay": "8 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nguyễn Huy",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 21221,
+          "content": "Chào anh Huy,\n\nSản phẩm Honor X6b 6GB 128GB chưa hỗ trợ NFC anh nhé\n\nNếu cần thêm thông tin khác anh chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ\n\nThân mến!",
+          "creationTime": "2024-10-22T14:21:33Z",
+          "creationTimeDisplay": "8 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

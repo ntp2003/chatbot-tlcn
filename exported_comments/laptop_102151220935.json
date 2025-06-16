@@ -1,0 +1,31 @@
+{
+  "product_id": "102151220935",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29281,
+      "content": "Dùng đồ họa render rất nhanh, máy rất mát",
+      "creationTime": "2024-12-25T06:53:16.395000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["hiệu năng", "nhu cầu sử dụng"],
+      "children": [
+        {
+          "id": 29282,
+          "content": "Cảm ơn anh/ chị rất nhiều vì đã ủng hộ ! FPT Shop rất vui vì anh/chị thích sản phẩm.",
+          "creationTime": "2024-12-25T06:55:16Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

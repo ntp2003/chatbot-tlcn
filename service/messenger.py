@@ -41,20 +41,22 @@ class Messenger(fb.BaseMessenger):
         super().__init__(page_access_token=env.FB_PAGE_ACCESS_TOKEN)
 
     def message(self, message):
-        if self.message_is_exists(message):
+        if self.message_is_exists(message): #neu tn trung lap -> return tranh xu ly lai
             return
 
-        sender_id = self.get_user_id()
-        recipient_id = self.get_recipient_id()
-        is_echo = message.get("message", {}).get("is_echo", False)
-        app_id = message.get("message", {}).get("app_id", None)
+        
+        sender_id = self.get_user_id() 
+        recipient_id = self.get_recipient_id() 
+        is_echo = message.get("message", {}).get("is_echo", False) # check xem co phai tin nhan tu dong
+        app_id = message.get("message", {}).get("app_id", None) # id app
         user = None
         page_admin_is_sender = None
-
+        
+        # xac dinh nguoi gui la page admin hay user
         if sender_id == env.FB_PAGE_ID:
-            page_admin_is_sender = True
+            page_admin_is_sender = True # page admin gửi tin
         elif recipient_id == env.FB_PAGE_ID:
-            page_admin_is_sender = False
+            page_admin_is_sender = False # user nhắn tin
 
         if page_admin_is_sender is None:
             raise ValueError("Page ID not found")
@@ -74,7 +76,7 @@ class Messenger(fb.BaseMessenger):
         if not thread.is_active:
             return
 
-        history = self.get_openai_message(thread)
+        history = self.get_openai_message(thread) # lấy message history từ db dựa trên thread
         answer = gen_answer(thread_id=thread.id, user_id=user.id, history=history)
         chatbot_message = self.create_chatbot_message(answer, thread)
         self.send(
@@ -85,7 +87,8 @@ class Messenger(fb.BaseMessenger):
 
     def get_recipient_id(self):
         return self.last_message["recipient"]["id"]
-
+    
+    # tạo message mới từ page admin
     def create_page_admin_message(
         self, message: dict, thread: ThreadModel
     ) -> MessageModel:

@@ -1,0 +1,31 @@
+{
+  "product_id": "554487313440",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25959,
+      "content": "Mình ở tỉnh, đặt thì shop có giao không vậy?",
+      "creationTime": "2025-05-17T12:40:40.370000Z",
+      "creationTimeDisplay": "24 ngày trước",
+      "isAdministrator": false,
+      "fullName": "hoàng Nam",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 25960,
+          "content": "Chào anh Nam,\n\nSản phẩm FPT shop hỗ trợ giao các tỉnh anh nhé, miễn phí bán kính 20km, giao nhanh trong 90 phút. Sản phẩm anh đặt hiện đang có giá chỉ 16.490.000 ₫ và trả góp 0%.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại đây.\n\nThân mến!",
+          "creationTime": "2025-05-17T12:42:31Z",
+          "creationTimeDisplay": "24 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

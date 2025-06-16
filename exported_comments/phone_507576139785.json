@@ -1,0 +1,31 @@
+{
+  "product_id": "507576139785",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 19815,
+      "content": "Mình đặt bây giờ mai có giao hàng được khoog?",
+      "creationTime": "2025-05-16T16:00:55.438000Z",
+      "creationTimeDisplay": "25 ngày trước",
+      "isAdministrator": false,
+      "fullName": "Hải Yến",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 19816,
+          "content": "Chào chị Hải Yến,\n\nSản phẩm bên em giao miễn phí hoàn toàn, nhận hàng mới cần thanh toán chị nhé. Mai em hỗ trợ giao nhanh trong 60 phút chị nhé. Máy hiện đang có ưu đãi Tặng củ sạc 25W chính hãng (không lấy sạc hoàn tiền 300.000đ). Đổi điện thoại bàn phím/ĐT cũ/MTB cũ còn lên nguồn giảm 300,000đ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-16T16:02:33Z",
+          "creationTimeDisplay": "25 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

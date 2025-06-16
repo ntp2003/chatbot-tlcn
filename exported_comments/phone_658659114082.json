@@ -1,0 +1,31 @@
+{
+  "product_id": "658659114082",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 20931,
+      "content": "Máy mượt lắm, RAM 8GB xài thoải mái, mở nhiều ứng dụng không bị lag.",
+      "creationTime": "2024-12-17T16:38:37.109000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nguyễn Minh Khôi",
+      "likeCount": 0,
+      "tags": ["đánh giá sản phẩm","hiệu năng"],
+      "children": [
+        {
+          "id": 20932,
+          "content": "Chào anh Khôi,\n\nDạ, Tecno Spark 20C với RAM 8GB giúp chạy đa nhiệm mượt mà và xử lý tốt các tác vụ hàng ngày. Đây là lựa chọn rất ổn trong tầm giá ạ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-17T16:38:51Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Mạnh Cường",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "565841217788",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29008,
+      "content": "máy này có nặng không ạ? Em có nhu cầu di chuyển nhiều nên ưu tiên gọn nhẹ. Với cả giá máy ngoài cửa hàng có giống trên web đang để không ạ",
+      "creationTime": "2025-05-22T13:55:56.366000Z",
+      "creationTimeDisplay": "19 ngày trước",
+      "isAdministrator": false,
+      "fullName": "Kim Dung",
+      "likeCount": 0,
+      "tags": ["trọng lượng","nhu cầu sử dụng"],
+      "children": [
+        {
+          "id": 29009,
+          "content": "Chào chị Dung,\n\nDạ sản phẩm có trọng lượng 1.67 kg có thể hơi nặng đối với những người cần di chuyển thường xuyên hoặc mang theo trong thời gian dài. Về chương trình ưu đãi giá áp dụng như nhau trên toàn hệ thống chị nhé. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-22T14:20:23Z",
+          "creationTimeDisplay": "19 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Thúy Oanh ",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "252399529603",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24614,
+      "content": "Tầm giữ tháng 3 em mới đủ kinh tế, nên em muốn đc tư vấn về máy này ạ",
+      "creationTime": "2025-02-16T04:41:53.618000Z",
+      "creationTimeDisplay": "4 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Giàng A Rùa",
+      "likeCount": 0,
+      "tags": ["tư vấn sản phẩm"],
+      "children": [
+        {
+          "id": 24615,
+          "content": "Chào anh/chị,\n\nDạ sản phẩm hiện đang có giá ưu đãi chỉ từ 18.490.000 ₫ áp dụng đến 17/02, đang có ưu đãi tặng tai nghe Bluetooth choàng đầu có mic Havit H628BT và bảo hành 1 năm. Tuy nhiên giá sản phẩm vào thời điểm tháng 3 có thể sẽ thay đổi, nên thời điểm chuẩn bị mua hàng, mình có thể liên hệ lại để bên em tư vấn thêm nhé ạ.\n\nNếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-02-16T04:47:04Z",
+          "creationTimeDisplay": "4 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Diệu Linh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

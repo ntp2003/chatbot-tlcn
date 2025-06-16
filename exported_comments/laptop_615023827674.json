@@ -1,0 +1,31 @@
+{
+  "product_id": "615023827674",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25863,
+      "content": "Em này có bền không shop ơi",
+      "creationTime": "2024-12-21T20:28:44.022000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Dũng Hồ",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm","hiệu năng"],
+      "children": [
+        {
+          "id": 25864,
+          "content": "Chào anh Dũng,\n\nDạ, dòng laptop này được thiết kế để đảm bảo hiệu suất ổn định trong thời gian dài, rất bền bỉ và đáng tin cậy.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh Dũng gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748).\n\nThân mến!\"",
+          "creationTime": "2024-12-21T20:29:28Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Đức Thắng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

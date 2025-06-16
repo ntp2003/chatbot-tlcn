@@ -1,0 +1,31 @@
+{
+  "product_id": "503622134806",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26907,
+      "content": "Shop có chương trình thu mua máy laptop dell cũ để lên đời máy mới k vây",
+      "creationTime": "2025-03-21T10:46:07.454000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quang",
+      "likeCount": 0,
+      "tags": ["thu cũ đổi mới"],
+      "children": [
+        {
+          "id": 26908,
+          "content": "Chào anh Quang,\n\nDạ, nếu đây là máy anh mua mới tại FPT Shop, còn trong thời hạn bảo hành và có thời gian sử dụng dưới 12 tháng. Anh có thể mang sản phẩm qua chi nhánh FPT Shop gần nhất để được thẩm định và báo giá thu mua. Sau đó Anh/chị sẽ bù phần chênh lệch (nếu có) để mua sản phẩm mới nhé.Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748).\n\nThân mến !",
+          "creationTime": "2025-03-21T10:49:08Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đức  Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

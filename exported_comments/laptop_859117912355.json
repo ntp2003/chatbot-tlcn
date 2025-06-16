@@ -1,0 +1,56 @@
+{
+  "product_id": "859117912355",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25266,
+      "content": "MacBook Air M2 có hỗ trợ các phần mềm văn phòng như Microsoft Office dc không",
+      "creationTime": "2024-12-09T14:47:12.874000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trần Thành Đạt",
+      "likeCount": 0,
+      "tags": [],
+      "children": [
+        {
+          "id": 25267,
+          "content": "Chào anh Đạt,\n\nMacBook Air M2 hoàn toàn hỗ trợ các phần mềm văn phòng như Microsoft Word, Excel, PowerPoint và nhiều ứng dụng khác từ Microsoft 365. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-09T14:47:25Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thanh Tùng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 25280,
+      "content": "có hỗ trợ sạc nhanh không shop ơi",
+      "creationTime": "2024-12-09T14:39:07.756000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Thuý Vy",
+      "likeCount": 0,
+      "tags": [],
+      "children": [
+        {
+          "id": 25281,
+          "content": "Chào chị Vy,\n\nMacBook Air M2 hỗ trợ sạc nhanh lên đến 50% chỉ trong khoảng 30 phút. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo tại [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-09T14:39:37Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thanh Tùng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "product_id": "152155027815",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 16351,
+      "content": "Máy có hỗ trợ sạc nhanh không?",
+      "creationTime": "2024-12-18T16:56:36.572000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Lê Minh Tuấn",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 16352,
+          "content": "Chào anh Tuấn,\n\nDạ Itel IT8010 4G chưa hỗ trợ sạc nhanh ạ.Sản phẩm có giá 390.000 ₫. Đổi máy cũ 2G - hư hỏng giảm thêm 20,000đ\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-18T17:01:21Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Minh Phúc",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 16372,
+      "content": "Kích thước màn hình của điện thoại là bao nhiêu?",
+      "creationTime": "2024-12-18T07:58:54.524000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trần Hoàng Anh",
+      "likeCount": 0,
+      "tags": ["màn hình","thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 16373,
+          "content": "Chào anh Hoàng Anh,\n\nDạ Itel IT8010 4G có màn hình 2 inch ạ. Sản phẩm có giá 390.000 ₫. Đổi máy cũ 2G - hư hỏng giảm thêm 20,000đ\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-18T08:23:44Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Minh Phúc",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

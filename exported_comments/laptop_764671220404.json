@@ -1,0 +1,56 @@
+{
+  "product_id": "764671220404",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27037,
+      "content": "Sản phẩm có cài sẵn Windows bản quyền không?",
+      "creationTime": "2024-12-31T10:35:38.914000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "văn Hoàng",
+      "likeCount": 0,
+      "tags": ["bản quyền","hệ điều hành"],
+      "children": [
+        {
+          "id": 27038,
+          "content": "Chào anh Hoàng,\n\nDạ, sản phẩm Laptop HP 245 G10 (A20TFPT) đã được cài đặt sẵn Win 11 luôn rồi nhé ạ\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-31T10:36:34Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 27041,
+      "content": "Sinh viên mua laptop này có được giảm giá không?",
+      "creationTime": "2024-12-31T10:29:57.313000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Thân Thúy Hằng",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 27042,
+          "content": "Chào chị Hằng,\n\nDạ, Sản phẩm có thêm ưu đãi đặc quyền cho HSSV giảm thêm 3% khoảng 443.700 ₫ nhé ạ\n\nNếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến",
+          "creationTime": "2024-12-31T10:30:20Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

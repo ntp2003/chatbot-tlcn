@@ -1,0 +1,31 @@
+{
+  "product_id": "147341328969",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25506,
+      "content": "Mẫu này trên web và shop giá bao nhiêu ạ, khi mua có được tặng ram không ạ",
+      "creationTime": "2025-04-26T00:33:01.139000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Xuan Khanh",
+      "likeCount": 0,
+      "tags": ["khuyến mãi", "giá cả"],
+      "children": [
+        {
+          "id": 25507,
+          "content": "Chào anh Khanh,\n\nDạ sản phẩm Laptop Lenovo Gaming LOQ 15IRX9 i5-13450HX/12GB/512GB/15.6\" FHD/RTX3050 6GB/Win 11 giá ưu đãi **20.990.000 đ** áp dụng đến 28/04. Tặng thêm bảo hành 1 năm áp dụng đến 28/04.\n\nKhá tiếc không có ưu đãi tặng ram nhé. Sự kết hợp giữa chip Intel Core i5 13450Hx cùng card đồ họa GeForce RTX 3050 khiến sản phẩm đáp ứng tốt nhu cầu của giới game thủ và những ai cần một chiếc laptop hiệu năng cao cho công việc.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-04-26T01:12:36Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

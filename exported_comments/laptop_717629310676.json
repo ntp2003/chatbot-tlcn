@@ -1,0 +1,56 @@
+{
+  "product_id": "717629310676",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29289,
+      "content": "e có thể nhờ các bạn nhân viên tải phần mềm giúp có được ko ạ, e đã mua máy",
+      "creationTime": "2025-05-12T12:37:11.657000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nam",
+      "likeCount": 0,
+      "tags": ["hỗ trợ kỹ thuật", "dịch vụ khách hàng"],
+      "children": [
+        {
+          "id": 29290,
+          "content": "Chào anh Nam,\n\nFPT sẽ hỗ trợ cài các ứng dụng không mất phí anh nhé. Anh có thể mang qua shop các bạn kiểm tra.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-05-12T13:03:48Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 29335,
+      "content": "Bộ vi xử lý Intel Core i5-1235U trên Dell Latitude L3540 có hiệu năng như thế nào?",
+      "creationTime": "2024-12-23T07:25:36.920000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Cửu Việt",
+      "likeCount": 0,
+      "tags": ["hiệu năng","thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 29336,
+          "content": "Chào anh Việt,\n\nDạ với bộ vi xử lý **Intel Core i5-1235U** trên **Dell Latitude L3540** thuộc dòng chip thế hệ 12, mang lại hiệu năng vượt trội nhờ:\n\n**Kiến trúc hybrid (P-core và E-core)**:\n\n2 nhân hiệu năng cao (P-core) xử lý các tác vụ nặng.\n\n8 nhân tiết kiệm điện (E-core) tối ưu cho đa nhiệm và kéo dài thời lượng pin.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-23T07:34:29Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lê Hưng Khánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

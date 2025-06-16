@@ -1,0 +1,81 @@
+{
+  "product_id": "219298212321",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 17747,
+      "content": "mình muốn trả góp thì cần giấy tờ gì vậy? ",
+      "creationTime": "2024-12-15T10:00:42.886000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "NGUYEN VAN DAM",
+      "likeCount": 0,
+      "tags": ["chính sách trả góp"],
+      "children": [
+        {
+          "id": 17748,
+          "content": "Chào anh Đam,\n\nSản phẩm có hỗ trợ trả góp 0% qua công ty tài chính và sử dụng CCCD để làm thủ tục, anh có thể tham khảo qua công ty tài chính Home Credit, trả mỗi tháng từ 642.000đ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-15T10:04:23Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 17743,
+      "content": "Máy màu Xanh còn hàng tại Ninh bình không shop",
+      "creationTime": "2024-12-15T10:07:54.235000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nguyễn Toàn",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng","phiên bản"],
+      "children": [
+        {
+          "id": 17744,
+          "content": "Chào anh Toàn,\n\nSản phẩm còn hàng tại Ninh Bình anh nh, giá máy chỉ từ 2.790.000 ₫, thiết kế nhỏ gọn, pin khủng. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-15T10:09:11Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 17715,
+      "content": "Máy này sài 4g được không vậy shop",
+      "creationTime": "2025-03-08T13:49:01.222000Z",
+      "creationTimeDisplay": "3 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trần Thị Mỹ Hân ",
+      "likeCount": 0,
+      "tags": [],
+      "children": [
+        {
+          "id": 17716,
+          "content": "Chào chị Hân,\n\nSản phẩm Realme C60 4GB-64GB có sử dụng 4G chị nhé, giá máy chỉ **2.390.000 ₫.** Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-03-08T14:04:09Z",
+          "creationTimeDisplay": "3 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Bùi Thành",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

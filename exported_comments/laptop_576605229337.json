@@ -1,0 +1,31 @@
+{
+  "product_id": "576605229337",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29065,
+      "content": "Dự kiến Thủ Đức HCM khi nào có hàng ạ?",
+      "creationTime": "2024-12-26T05:58:04.254000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tiên",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 29066,
+          "content": "Chào chị Tiên,\n\nDạ sản phẩm hiện chưa có dự kiến về hàng, mình cân nhắc tham khảo thêm các mẫu Lenovo khác nhé ạ. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2024-12-26T06:02:24Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Diệu Linh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

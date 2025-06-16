@@ -1,0 +1,31 @@
+{
+  "product_id": "108821314687",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25008,
+      "content": "phiếu mua hàng có đc sd vào sản phẩm ko ạ",
+      "creationTime": "2024-12-15T01:29:42.020000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "duy",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 25009,
+          "content": "Chào anh Duy,\n\nDạ, Laptop Acer Aspire 7 Gaming A715-76G-73FM i7 12650H được ưu đãi giảm ngay 8,400,000đ áp dụng đến 16/12, tặng phiếu mua hàng 500,000đ (Không áp dụng trả góp 0%) áp dụng đến 16/12 có thể áp dụng trực tiếp vào sản phẩm ạ, giá đang khá tốt chỉ từ **17.290.000 ₫.**\n\nBên em xin phép inbox tư vấn kĩ hơn cho mình. Nếu cần thêm thông tin khác anh (chị) gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-15T01:38:00Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Ngọc Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

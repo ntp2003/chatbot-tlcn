@@ -1,0 +1,56 @@
+{
+  "product_id": "107396712966",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 29621,
+      "content": "Giao hàng thế nào shop?",
+      "creationTime": "2024-12-09T09:47:59.092000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Phạm Thế",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 29622,
+          "content": "Chào anh Thế\n\nDạ FPT Shop hỗ trợ giao hàng miễn phí tối đa tầm 3 tiếng trong bán kính 20km (tính từ shop có hàng). Sản phẩm MacBook Pro 14 2023 M3 8 CPU/10 GPU/8GB/512GB giá ưu đãi chỉ từ 35.990.000đ áp dụng đến 09/12 có hỗ trợ trả góp 0%. Với nhiều phương thức kết nối đa năng và Âm thanh cao cấp, video call hoàn hảo.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-09T09:48:43Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 29628,
+      "content": "MacBook Pro 14 2023 sử dụng loại màn hình gì vậy shop",
+      "creationTime": "2024-12-09T09:41:24.372000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tùng Nguyễn",
+      "likeCount": 0,
+      "tags": ["màn hình", "thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 29629,
+          "content": "Chào anh Tùng\n\nDạ Sản phẩm MacBook Pro 14 2023 M3 8 CPU/10 GPU/8GB/512GB sử dụng màn hình Liquid Retina XDR, giá ưu đãi chỉ từ 35.990.000đ áp dụng đến 09/12 có hỗ trợ trả góp 0%. Với nhiều phương thức kết nối đa năng và Âm thanh cao cấp, video call hoàn hảo.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-09T09:42:59Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Huỳnh Ngọc Dư",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

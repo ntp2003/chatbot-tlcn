@@ -1,0 +1,56 @@
+{
+  "product_id": "12697098901",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28351,
+      "content": "shop ơi máy có nâng thêm được Ram không ạ",
+      "creationTime": "2025-02-14T12:56:09.843000Z",
+      "creationTimeDisplay": "4 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Ngô Văn Huân",
+      "likeCount": 0,
+      "tags": ["nâng cấp cấu hình"],
+      "children": [
+        {
+          "id": 28352,
+          "content": "Chào anh Huân\n\nDạ có, Laptop Acer Gaming Aspire 5 A515-58GM-53PZ i5 13420H/8GB/512GB/15.6\"FHD/RTX2050 4GB/Win11 hỗ trợ RAM tối đa 32GB ạ! Acer Aspire 5 A515-58GM-53PZ có giá bán và vẻ ngoài tương tự một chiếc laptop văn phòng bình thường nhưng bên trong lại sở hữu cấu hình mạnh mẽ đáng kinh ngạc giá giảm còn 14.990.000 ₫ áp dụng đến 17/02 - Tặng tai nghe Bluetooth choàng đầu có mic Havit H628BT.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-02-14T13:33:54Z",
+          "creationTimeDisplay": "4 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 28355,
+      "content": "Mua trực tiếp ở shop có được khuyến mãi như này không hay chỉ được khuyến mãi như này khi mua trực tuyến vậy shop",
+      "creationTime": "2025-02-08T03:49:19.513000Z",
+      "creationTimeDisplay": "4 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 28356,
+          "content": "Chào Anh/ Chị,\n\nDạ sản phẩm có giá sau giảm là 14.990.000đ **t**ặng tai nghe Bluetooth choàng đầu có mic Havit H628BT.\n\nTặng phiếu mua hàng 300,000đ áp dụng đến 10/02 (Không áp dụng kèm trả góp 0%).\n\nTặng thêm bảo hành 1 năm.\n\nKhuyến mãi áp dụng cả mua online và offline ạ.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-02-08T04:00:31Z",
+          "creationTimeDisplay": "4 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Hoàng Thị Thanh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

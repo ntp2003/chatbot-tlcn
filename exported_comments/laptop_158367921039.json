@@ -1,0 +1,31 @@
+{
+  "product_id": "158367921039",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26653,
+      "content": "Sinh viên mua laptop này có được giảm giá không?",
+      "creationTime": "2024-12-31T10:27:18.727000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trọng Hoàng Phạm",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 26654,
+          "content": "Chào anh Hoàng,\n\nDạ, Sản phẩm có thêm ưu đãi đặc quyền cho HSSV giảm thêm 3% khoảng 734.700 ₫ nhé ạ\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-31T10:27:53Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

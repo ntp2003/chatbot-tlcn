@@ -1,0 +1,31 @@
+{
+  "product_id": "879454733722",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24534,
+      "content": "Giao hàng có mất phí không?",
+      "creationTime": "2025-01-01T01:22:36.849000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tuấn Kiệt",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 24535,
+          "content": "Chào anh Kiệt,\n\nFPT Shop hỗ trợ giao hàng miễn phí trong bán kính 20 km kể từ shop có hàng, sản phẩm có giá sau giảm còn 24.990.000 ₫ áp dụng đến 01/01. Tặng phiếu mua hàng phụ kiện 500,000đ áp dụng đến 02/01 (Không áp dụng kèm trả góp 0%)\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-01-01T01:23:16Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đỗ Thị Cẩm  Tiên",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

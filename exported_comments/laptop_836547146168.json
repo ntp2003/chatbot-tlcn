@@ -1,0 +1,56 @@
+{
+  "product_id": "836547146168",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28223,
+      "content": "quá tuyệt vời 3050 mà có 18tr",
+      "creationTime": "2024-12-25T06:50:17.168000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quy Khach",
+      "likeCount": 0,
+      "tags": ["đánh giá sản phẩm"],
+      "children": [
+        {
+          "id": 28224,
+          "content": "Cảm ơn anh/ chị rất nhiều vì đã ủng hộ ! FPT Shop rất vui vì anh/chị thích sản phẩm.",
+          "creationTime": "2024-12-25T06:54:48Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 28241,
+      "content": "bên mình sửa tại shop hay gửi hãng thế",
+      "creationTime": "2024-12-20T16:17:30.370000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Đức Huy",
+      "likeCount": 0,
+      "tags": ["hỗ trợ kỹ thuật"],
+      "children": [
+        {
+          "id": 28242,
+          "content": "Chào anh Huy,\n\nDạ mình có thể cầm qua shop để các bạn hỗ trợ gửi hãng sửa chữa ạ.Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến !",
+          "creationTime": "2024-12-20T16:18:47Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Đức  Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

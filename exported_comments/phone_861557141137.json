@@ -1,0 +1,56 @@
+{
+  "product_id": "861557141137",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 23731,
+      "content": "Vậy còn hàng ở cà mau ko",
+      "creationTime": "2024-10-02T06:06:26.130000Z",
+      "creationTimeDisplay": "8 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Ut",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 23732,
+          "content": "Chào chị Út,\n\nDạ sản phẩm hiện tại đã hết hàng ở khu vực của chị, chi tiết các sản phẩm tương tự chị tham khảo qua lịn này https://fptshop.com.vn/dien-thoai/pho-thong nhé\n\nChị để lại SĐT hoặc liên hệ tổng đài 1800 6601 để được hỗ trợ nhanh nhất ạ.\n\nThân mến !",
+          "creationTime": "2024-10-02T06:40:37Z",
+          "creationTimeDisplay": "8 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lê Hưng Khánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 23677,
+      "content": "Máy hỗ trợ thẻ nhớ từ bao nhiu gb v ạ . S e mua về gắn 1gb thì máy bảo k có hỗ trợ ",
+      "creationTime": "2025-01-13T13:30:41.423000Z",
+      "creationTimeDisplay": "5 tháng trước",
+      "isAdministrator": false,
+      "fullName": "My",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 23678,
+          "content": "Chào chị My,\n\nDạ, sản phẩm Masstel Izi 15 4G hỗ trợ thẻ nhớ tối đa 128 GB ạ, mình có thể liên hệ bộ phận hỗ trợ kỹ thuật online bên em qua số hotline 18006601 (phím số 2) để được hỗ trợ ạ.Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến!",
+          "creationTime": "2025-01-13T13:42:05Z",
+          "creationTimeDisplay": "5 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "659321435353",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 24784,
+      "content": "có sẵn tại đà nẵng không ạ",
+      "creationTime": "2025-05-30T02:20:25.473000Z",
+      "creationTimeDisplay": "11 ngày trước",
+      "isAdministrator": false,
+      "fullName": "Khánh Hòa",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 24785,
+          "content": "Chào anh Hòa,\n\nDạ, sản phẩm đang giảm còn 18.490.000đ áp dụng đến 02/06. Tặng tai nghe Bluetooth choàng đầu có mic Havit H628BT (hết hàng hoàn tiền 250,000đ).\n\nBên em xin phép liên hệ tư vấn thêm. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2025-05-30T03:00:47Z",
+          "creationTimeDisplay": "11 ngày trước",
+          "isAdministrator": true,
+          "fullName": "Võ Hoàng Trọng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

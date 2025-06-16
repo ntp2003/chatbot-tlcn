@@ -1,0 +1,56 @@
+{
+  "product_id": "72363309912",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 21274,
+      "content": "Tecno Spark Go 1 có hỗ trợ kết nối 4G không?",
+      "creationTime": "2024-12-17T13:59:36.298000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Thư hà",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 21275,
+          "content": "Chào chị Hà,\n\nDạ. Có, **Tecno Spark Go 1** hỗ trợ **kết nối 4G LTE**. Điều này giúp chị truy cập internet nhanh chóng và ổn định hơn, dù chị đang di chuyển hay ở nhà nhé ạ\n\nNếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây.](https://zalo.me/2659487666103055748)\n\nThân mến",
+          "creationTime": "2024-12-17T14:01:19Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 21272,
+      "content": "Máy có hỗ trợ sạc nhanh không?",
+      "creationTime": "2024-12-17T14:00:51.393000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Người Vô Tâm",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật","thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 21273,
+          "content": "Chào anh/chị,\n\nDạ. Có, **Tecno Spark Go 1** hỗ trợ **sạc nhanh**! Máy được trang bị cổng sạc **Type-C** với tốc độ sạc nhanh **15W**. Với dung lượng pin lớn **5000 mAh**, anh/chị có thể sạc từ 0% lên 80% trong vòng **90 phút** nhé ạ\n\nNếu cần thêm thông tin khác anh/chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây.](https://zalo.me/2659487666103055748)\n\nThân mến",
+          "creationTime": "2024-12-17T14:02:30Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "510107136292",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27198,
+      "content": "dòng này có webcam tích hợp k thế",
+      "creationTime": "2024-12-24T08:09:20.554000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Nga Ngo",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 27199,
+          "content": "Chào chị Nga,\n\nDạ, mẫu laptop này có webcam tích hợp sẵn, hỗ trợ họp trực tuyến và học online với hình ảnh rõ nét.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị Nga gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://id.zalo.me/account?continue=http%3A%2F%2Fzalo%2Eme%2F2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-24T08:09:40Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Đức Thắng",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

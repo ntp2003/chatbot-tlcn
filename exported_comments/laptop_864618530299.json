@@ -1,0 +1,31 @@
+{
+  "product_id": "864618530299",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25961,
+      "content": "MÁY ĐÃ KÈM SẠC CHƯA?",
+      "creationTime": "2025-06-09T09:45:49.123000Z",
+      "creationTimeDisplay": "20 giờ trước",
+      "isAdministrator": false,
+      "fullName": "LÊ ",
+      "likeCount": 0,
+      "tags": ["thông tin sản phẩm", "phụ kiện đi kèm"],
+      "children": [
+        {
+          "id": 25962,
+          "content": "Chào anhLÊ.\n\nMacbook Air 13 M4 2025 10CPU/10GPU/16GB/512GB Đêm Xanh Thẳm đã có đi kèm Adapter trong hộp rồi ạ .\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-06-09T09:50:25Z",
+          "creationTimeDisplay": "20 giờ trước",
+          "isAdministrator": true,
+          "fullName": "Trần Hải  Ngọc",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "product_id": "382313126939",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26995,
+      "content": "màn hình máy có to ko ad",
+      "creationTime": "2024-12-24T06:09:09.301000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Ngọc Tuyền",
+      "likeCount": 0,
+      "tags": ["màn hình","thông tin sản phẩm"],
+      "children": [
+        {
+          "id": 26996,
+          "content": "Chào chị Tuyền,\n\nDạ. điểm ấn tượng nhất của HP 15-fc0089AU chính là màn hình 15,6 inch lớn, độ phân giải Full HD sắc nét cùng viền màn hình siêu mỏng giúp mang đến trải nghiệm hình ảnh chân thực và sống động nhất.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-24T06:10:18Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

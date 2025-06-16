@@ -1,0 +1,31 @@
+{
+  "product_id": "162963412331",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27116,
+      "content": "Cho chị hỏi máy này có hỗ trợ mua trả góp ko nhỉ",
+      "creationTime": "2024-12-24T06:52:44.330000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tâm ",
+      "likeCount": 0,
+      "tags": ["chính sách trả góp"],
+      "children": [
+        {
+          "id": 27117,
+          "content": "Chào chị Tâm,\n\nDạ, sản phẩm có hỗ trợ trả góp qua nhà tài chính và thẻ tín dụng với số tiền chỉ từ 6.345.834 ₫/tháng ạ. Bên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến !",
+          "creationTime": "2024-12-24T06:53:14Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

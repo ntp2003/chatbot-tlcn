@@ -1,0 +1,31 @@
+{
+  "product_id": "934370125986",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 25911,
+      "content": "Xin hỏi giáo viên mua máy ưu đãi thế nào ạ",
+      "creationTime": "2024-10-07T13:54:07.437000Z",
+      "creationTimeDisplay": "8 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Khánh",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 25912,
+          "content": "Chào anh Khánh\n\nHiện FPT Shop đang có chương trình ưu đãi giảm 3% dành cho giảng viên và giáo viên.\n\nCần tư vấn anh vui lòng để lại SĐT hoặc liên hệ tổng đài 1800 6601\n\nThân mến !",
+          "creationTime": "2024-10-07T14:17:41Z",
+          "creationTimeDisplay": "8 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Quang Nguyen",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "product_id": "528007133007",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26280,
+      "content": "Dạ bên mình có thu cũ đổi mới kh ạ",
+      "creationTime": "2025-05-10T14:22:11.514000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Duy Anh",
+      "likeCount": 0,
+      "tags": ["thu cũ đổi mới"],
+      "children": [
+        {
+          "id": 26281,
+          "content": "E mua đã mua sp ở bên mình rồi ạ",
+          "creationTime": "2025-05-10T14:24:05.400000Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": false,
+          "fullName": "Duy Anh",
+          "likeCount": 0,
+          "tags": ["thu cũ đổi mới"],
+          "children": [],
+          "media": []
+        },
+        {
+          "id": 26282,
+          "content": "Em chào anh Duy Anh ,\n\nDạ, sản phẩm là máy anh mua mới tại FPT Shop, còn trong thời hạn bảo hành và có thời gian sử dụng dưới 12 tháng. Anh có thể mang sản phẩm qua chi nhánh FPT Shop gần nhất để được thẩm định và báo giá thu mua.\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748). Để được hỗ trợ nhanh nhất ạ.\n\nThân mến",
+          "creationTime": "2025-05-10T14:30:37Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Lưu Ly",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 26278,
+      "content": "Đã có màu xanh da trời ở chi nhánh bình dương ch ạ",
+      "creationTime": "2025-05-14T12:47:13.648000Z",
+      "creationTimeDisplay": "một tháng trước",
+      "isAdministrator": false,
+      "fullName": "Hà",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng","phiên bản"],
+      "children": [
+        {
+          "id": 26279,
+          "content": "Chào chị Hà,\n\nDạ sản phẩm Macbook Air 13 M4 2025 phiên bản màu xanh da trời hiện tại vẫn đang sẵn hàng tại khu vực Bình Dương đó ạ. Sản phẩm đang có mức giá ưu đãi chỉ còn **26.890.000 ₫** khi đang đượcGiảm ngay 100,000đ áp dụng đến 15/05 và hỗ trợ trả góp 0%.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-05-14T12:59:50Z",
+          "creationTimeDisplay": "một tháng trước",
+          "isAdministrator": true,
+          "fullName": "Lương Hoàng Đạt",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

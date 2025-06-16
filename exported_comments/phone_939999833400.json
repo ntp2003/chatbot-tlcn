@@ -1,0 +1,56 @@
+{
+  "product_id": "939999833400",
+  "product_type": "phone",
+  "comments": [
+    {
+      "id": 24145,
+      "content": "Bên mình có thể giao hàng tận nơi không?",
+      "creationTime": "2024-12-17T13:29:08.374000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Tiến Đạt",
+      "likeCount": 0,
+      "tags": ["chính sách giao hàng"],
+      "children": [
+        {
+          "id": 24146,
+          "content": "Chào anh Đạt,\n\nDạ, bên em giao hàng tận nơi miễn phí trong vòng 20km tính từ shop có hàng cho mình ạ.\n\nNếu cần thêm thông tin khác anh/chị vui lòng gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-17T13:30:09Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Ngọc Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 24119,
+      "content": "Máy này dùng được mấy sim ?",
+      "creationTime": "2024-12-17T15:02:57.968000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Đức Anh",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 24120,
+          "content": "Chào anh Đức Anh,\n\nDạ, Benco V91c 4GB 128GB có hỗ trợ lên đến 2 sim nano, để mình có thể linh hoạt trong khi kết nối với mọi người.\n\nNếu cần thêm thông tin khác anh/chị vui lòng gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-17T15:03:35Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Ngọc Minh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

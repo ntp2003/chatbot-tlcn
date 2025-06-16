@@ -1,0 +1,31 @@
+{
+  "product_id": "178210514203",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28823,
+      "content": "Bên mình có ưu đãi gì không ạ ",
+      "creationTime": "2025-04-06T16:03:14.917000Z",
+      "creationTimeDisplay": "2 tháng trước",
+      "isAdministrator": false,
+      "fullName": "ANH Khải",
+      "likeCount": 0,
+      "tags": ["khuyến mãi","chính sách bán hàng"],
+      "children": [
+        {
+          "id": 28824,
+          "content": "Em chào anh Khải\n\nSản phẩm Laptop Lenovo Ideapad Slim 3 15IRH8 i7 13620H/16GB/512GB/15.6\" FHD/Win 11 giá chỉ từ 16.990.000 ₫\n\nĐặc quyền HSSV - Giáo viên giảm ngay 3% 554.700 ₫\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2025-04-07T01:25:35Z",
+          "creationTimeDisplay": "2 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Lưu Ly",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

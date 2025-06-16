@@ -1,0 +1,31 @@
+{
+  "product_id": "849993831689",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 28697,
+      "content": "Hải Phòng còn máy này ko shop ",
+      "creationTime": "2024-12-22T07:11:11.762000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Quân",
+      "likeCount": 0,
+      "tags": ["tình trạng hàng"],
+      "children": [
+        {
+          "id": 28698,
+          "content": "Chào anh Quân,\n\nDạ, Laptop MSI Gaming Thin 15 B13UCX-2080VN đang có giá ưu đãi **16.990.000 ₫** , cùng chương trình tặng phiếu mua hàng 200,000đ áp dụng đến 23/12. Máy đã có hàng sẵn tại các cửa hàng ở Hải Phòng.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-22T07:12:15Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Thành Nhân",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

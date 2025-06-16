@@ -1,0 +1,56 @@
+{
+  "product_id": "312759537151",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27097,
+      "content": "Giá sao shop ơi",
+      "creationTime": "2024-12-25T13:39:10.025000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Johny Trí",
+      "likeCount": 0,
+      "tags": ["giá cả"],
+      "children": [
+        {
+          "id": 27098,
+          "content": "Chào anh Trí\n\nDạ Laptop HP 245 G10 R7- 7730U/16GB/512GB/14\" FHD/Win11\\_8F157PA giá ưu đãi sau giảm chỉ từ 15.990.000 ₫ - Trả góp 0% và ưu đãi Đặc quyền HSSV - Giáo viên Giảm thêm 3%\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-25T13:41:27Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 27085,
+      "content": "Laptop HP 245 G10 có cấu hình gì?",
+      "creationTime": "2024-12-25T14:08:46.330000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Trần Thị Khánh Ngọc",
+      "likeCount": 0,
+      "tags": ["thông số kỹ thuật"],
+      "children": [
+        {
+          "id": 27086,
+          "content": "Chào chị Ngọc\n\nDạ Laptop HP 245 G10 được trang bị bộ vi xử lý AMD Ryzen 7 7730U, RAM 16GB, ổ cứng SSD 512GB, màn hình 14 inch Full HD (1920 x 1080), hệ điều hành Windows 11.\n\nBên em xin phép liên hệ để tư vấn chi tiết hơn. Nếu cần thêm thông tin khác anh/ chị gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748).\n\nThân mến!",
+          "creationTime": "2024-12-25T14:30:35Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Trần Thị Khánh An",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

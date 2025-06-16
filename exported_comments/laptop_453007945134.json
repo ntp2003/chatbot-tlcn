@@ -1,0 +1,31 @@
+{
+  "product_id": "453007945134",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 27720,
+      "content": "Dell Inspiron N3520 có hỗ trợ phần mềm bản quyền nào đi kèm không?",
+      "creationTime": "2024-12-25T11:30:41.903000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Anh Tuấn",
+      "likeCount": 0,
+      "tags": ["hỗ trợ kỹ thuật","dịch vụ khách hàng"],
+      "children": [
+        {
+          "id": 27721,
+          "content": "Chào anh Tuấn,\n\nDạ, Hiện máy đã được cài sẵn win 11 rồi nhé ạ\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-25T11:31:31Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

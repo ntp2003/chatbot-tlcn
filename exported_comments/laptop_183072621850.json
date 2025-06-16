@@ -1,0 +1,31 @@
+{
+  "product_id": "183072621850",
+  "product_type": "laptop",
+  "comments": [
+    {
+      "id": 26370,
+      "content": "Máy có phù hợp để làm việc đồ họa và chơi game song song không?",
+      "creationTime": "2024-12-23T21:25:24.810000Z",
+      "creationTimeDisplay": "6 tháng trước",
+      "isAdministrator": false,
+      "fullName": "Đại Bằng",
+      "likeCount": 0,
+      "tags": ["nhu cầu sử dụng"],
+      "children": [
+        {
+          "id": 26371,
+          "content": "Chào anh Liêm,\n\nDạ, Laptop Dell Inspiron N3520 có khả năng xử lý tốt các tác vụ văn phòng và đồ họa cơ bản. Tuy nhiên, do máy không có card đồ họa rời, nên khả năng xử lý các tác vụ đồ họa nặng và chơi game cao cấp sẽ bị hạn chế nhé ạ\n\nNếu cần thêm thông tin khác anh gọi tổng đài miễn phí 18006601 hoặc có thể chat qua Zalo [tại đây](https://zalo.me/2659487666103055748)\n\nThân mến!",
+          "creationTime": "2024-12-23T21:26:21Z",
+          "creationTimeDisplay": "6 tháng trước",
+          "isAdministrator": true,
+          "fullName": "Nguyễn Ánh",
+          "likeCount": 0,
+          "tags": [],
+          "children": [],
+          "media": []
+        }
+      ],
+      "media": []
+    }
+  ]
+}

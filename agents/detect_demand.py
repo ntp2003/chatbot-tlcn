@@ -275,10 +275,10 @@ class Agent(AgentBase):
             to=env.RECEIVER_EMAIL,
             subject=f"{user_memory.phone_number} - Người dùng cần hỗ trợ",
             message_text=(
-                "Người dùng cần hỗ trợ với.\n"
-                f"Số điện thoại: {user_memory.phone_number}\n"
-                f"Email: {user_memory.email}\n"
-                f"Reference: {env.CHAINLIT_ROOT_PATH}/thread/{user_memory.thread_id}\n"
+                "<p>Người dùng cần được hỗ trợ:</p>"
+                f"<p><strong>Số điện thoại:</strong> {user_memory.phone_number}</p>"
+                f"<p><strong>Email:</strong> {user_memory.email}</p>"
+                f"<p><strong>Link tham chiếu:</strong> <a href='{env.CHAINLIT_HOST}/thread/{user_memory.thread_id}'>Xem cuộc trò chuyện</a></p>"
             ),
         )
         queue = Queue(connection=redis)

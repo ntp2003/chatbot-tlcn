@@ -101,7 +101,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
         text = ""
         for i, instruction in enumerate(self.instructions):
-            text += f"{i}. {instruction.content}:\n"
+            text += f"{i}. {instruction.content}\n"
             if not instruction.examples:
                 continue
             if len(instruction.examples) == 1:

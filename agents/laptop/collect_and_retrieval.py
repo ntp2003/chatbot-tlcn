@@ -504,12 +504,18 @@ class Agent(AgentBase):
         else:
             instructions.append(
                 Instruction(
-                    content="The information about laptop products in <LAPTOP KNOWLEDGE> is based on the user's requirements.",
+                    content="The information about laptop products in <LAPTOP KNOWLEDGE> related to the user's requirements.",
                 )
             )
             instructions.append(
                 Instruction(
-                    content="If user has any question about laptop in <LAPTOP KNOWLEDGE>, you should provide concise answer based on <LAPTOP KNOWLEDGE>. Otherwise, you should provide the general information about the laptop in <LAPTOP KNOWLEDGE> and suggest the user to visit the website for more details.",
+                    content="If user has any question about laptop in <LAPTOP KNOWLEDGE>, you should provide concise answer based on <LAPTOP KNOWLEDGE>. Otherwise, you should provide the general information about the laptops in <LAPTOP KNOWLEDGE> and suggest the user to visit the website for more details. Avoid providing rambling information, vague examples, or unnecessary details.",
+                )
+            )
+
+            instructions.append(
+                Instruction(
+                    content="If the product is on sale, you need to show both the original price and the discounted price.",
                 )
             )
 

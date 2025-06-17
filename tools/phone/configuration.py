@@ -30,7 +30,7 @@ class Tool(LangGPTTemplateTool):
         params: dict[str, Any] = {
             "phone_color": {
                 "type": "string",
-                "description": "The color of the phone product that the user needs to search for or purchase. It should be a specific color name, not a general term.",
+                "description": "The color of the phone product that the user needs to search for or purchase. It should be a specific real-world color name, not a general term.",
                 "examples": [
                     {
                         "input": "Tìm điện thoại có mầu <color>.",
@@ -53,11 +53,11 @@ class Tool(LangGPTTemplateTool):
                         "output": "<color>",
                     },
                     {
-                        "input": "Có màu khác không?",
+                        "input": "Có màu khác ko?",
                         "output": None,
                     },
                     {
-                        "input": "điện thoại có màu gì?",
+                        "input": "điện thoại có màu j?",
                         "output": None,
                     },
                 ],

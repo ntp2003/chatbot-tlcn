@@ -55,7 +55,7 @@ change_is_thread_author_function()
 @cl.password_auth_callback  # type: ignore
 def password_auth_callback(username: str, password: str) -> Optional[cl.User]:
     user = password_auth_user(username, password, UserRole.chainlit_user)
-
+    config.config.code.on_chat_resume = None
     if user:
         config.config.code.on_chat_resume = wrap_user_function(
             on_chat_resume, with_task=True
@@ -64,7 +64,6 @@ def password_auth_callback(username: str, password: str) -> Optional[cl.User]:
     admin = password_auth_user(username, password, UserRole.admin)
 
     if admin:
-        config.config.code.on_chat_resume = None
         return cl.User(
             identifier=str(admin.id),
             metadata={"user_id": str(admin.id), "role": "admin"},
@@ -80,6 +79,7 @@ async def oauth_callback(
     default_user: cl.User,
     id_token: Optional[str] = None,
 ) -> Optional[cl.User]:
+    config.config.code.on_chat_resume = None
     if provider_id == "google":
         email = raw_user_data.get("email")
         verified_email = raw_user_data.get("verified_email", False)

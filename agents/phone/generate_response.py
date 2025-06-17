@@ -31,7 +31,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
     )
     skills: list[str] = [
         "Clear and concise communication - ability to explain solutions, policies, and procedures in easy-to-understand language",
-        "Problem-solving abilities - quickly identifying customer issues and providing appropriate solutions or workarounds",
+        "Problem-solving abilities - quickly identifying customer issues and providing natural responses based on the specific information in the context",
         "Empathy and patience - maintaining a helpful attitude when dealing with frustrated customers and complex situations",
         "Efficiency - resolving issues promptly while balancing thoroughness with speed to minimize customer wait times",
     ]
@@ -101,7 +101,7 @@ class SystemPromptConfig(SystemPromptConfigBase):
 
         text = ""
         for i, instruction in enumerate(self.instructions):
-            text += f"{i}. {instruction.content}:\n"
+            text += f"{i}. {instruction.content}\n"
             if not instruction.examples:
                 continue
             if len(instruction.examples) == 1:

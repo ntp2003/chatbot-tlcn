@@ -509,12 +509,12 @@ class Agent(AgentBase):
         else:
             instructions.append(
                 Instruction(
-                    content="The information about phone products in <PHONE KNOWLEDGE> is based on the user's requirements.",
+                    content="The information about phone products in <PHONE KNOWLEDGE> related to the user's requirements.",
                 )
             )
             instructions.append(
                 Instruction(
-                    content="If user has any question about phone in <PHONE KNOWLEDGE>, you should provide concise answer based on <PHONE KNOWLEDGE>. Otherwise, you should provide the general information about the phones in <PHONE KNOWLEDGE> and suggest the user to visit the website for more details.",
+                    content="If user has any question about phone in <PHONE KNOWLEDGE>, you should provide concise answer based on <PHONE KNOWLEDGE>. Otherwise, you should provide the general information about the phones in <PHONE KNOWLEDGE> and suggest the user to visit the website for more details. Avoid providing rambling information, vague examples, or unnecessary details.",
                 )
             )
             instructions.append(

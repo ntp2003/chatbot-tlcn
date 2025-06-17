@@ -33,9 +33,11 @@ def _authenticate_gmail():
     return build("gmail", "v1", credentials=creds)
 
 
-def create_message(sender: str, to: str, subject: str, message_text: str) -> dict:
+def create_message(
+    sender: str, to: str, subject: str, message_text: str, content_type: str = "html"
+) -> dict:
     """Create an email message."""
-    message = MIMEText(message_text)
+    message = MIMEText(message_text, _subtype=content_type)
     message["to"] = to
     message["from"] = sender
     message["subject"] = subject

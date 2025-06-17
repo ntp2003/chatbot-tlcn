@@ -146,3 +146,15 @@ def delete_by_user_name(user_name: str) -> int:
         delete_count = session.query(User).filter(User.user_name == user_name).delete()
         session.commit()
         return delete_count
+
+
+def create_sample_user(user_name: str, password: str, role: str) -> UserModel:
+    """
+    Create a sample user with the given user_name, password, and role.
+    """
+    data = CreateUserModel(
+        user_name=user_name,
+        password=password,
+        role=UserRole(role),
+    )
+    return create(data)

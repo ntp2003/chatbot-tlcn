@@ -18,7 +18,7 @@ from weave.flow.eval import Evaluation
 import asyncio
 import deepeval.models.llms.openai_model as deepeval_models
 
-faq_dataset = weave.ref("20250502_210525").get()
+faq_dataset = weave.ref("20250502_210525:v2").get()
 context_format = "Thông tin về câu hỏi và câu trả lời thường gặp của khách hàng tại FPT Shop:\nCâu hỏi: {question}\nCâu trả lời: {answer}\n"
 gpt_41_mini = deepeval_models.GPTModel(
     model="gpt-4.1-mini",

@@ -278,7 +278,7 @@ class Agent(AgentBase):
                 "Người dùng cần hỗ trợ với.\n"
                 f"Số điện thoại: {user_memory.phone_number}\n"
                 f"Email: {user_memory.email}\n"
-                f"Reference: {env.CHAINLIT_HOST}:{env.CHAINLIT_PORT}/thread/{user_memory.thread_id}\n"
+                f"Reference: {env.CHAINLIT_ROOT_PATH}/thread/{user_memory.thread_id}\n"
             ),
         )
         queue = Queue(connection=redis)

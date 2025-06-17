@@ -12,6 +12,7 @@ from controllers.home import router as home_router
 from controllers.fb_webhook import router as fb_webhook_router
 from service.wandb import *
 from controllers.heatlh import router as health_router
+import chainlit_process.authentication
 
 rq_command = ["rq", "worker", "--with-scheduler"]
 rq_process = subprocess.Popen(
@@ -49,7 +50,14 @@ async def log_requests(request: Request, call_next):
 target_module = "./chainlit_app.py"
 mount_path = "/chainlit"
 
+
 mount_chainlit(app=app, target=target_module, path=mount_path)
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    print(f"An error occurred: {exc}")
+
 
 if __name__ == "__main__":
     uvicorn.run(app="app:app", reload=True, host="0.0.0.0", workers=4)

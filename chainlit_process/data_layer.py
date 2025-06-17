@@ -3,6 +3,7 @@ from uuid import UUID
 import chainlit as cl
 from chainlit.data.base import BaseDataLayer
 from models.thread import ThreadModel
+from models.user import UserRole
 from repositories.user import get as get_user
 from repositories.message import (
     get_all as get_all_messages,
@@ -13,6 +14,7 @@ from repositories.thread import (
     get as get_thread,
     delete as delete_thread,
     get_all as get_all_threads,
+    get_all_by_user_id as get_all_threads_by_user_id,
 )
 from models.message import (
     MessageType,
@@ -30,12 +32,14 @@ from chainlit.types import (
 from chainlit.element import ElementDict, Element
 from chainlit.step import StepDict
 import chainlit.data as cl_data
+import chainlit as cl
 
 
 class DataLayer(BaseDataLayer):
     """Custom data layer for Chainlit."""
 
     async def get_user(self, identifier: str) -> Optional[cl.PersistedUser]:
+        print(f"get_user: {identifier}")
         user = get_user(UUID(identifier))
         if not user:
             return None
@@ -111,7 +115,9 @@ class DataLayer(BaseDataLayer):
     async def delete_thread(self, thread_id: str):
         delete_thread(UUID(thread_id))
 
-    def _convert_to_chainlit_thread(self, thread: ThreadModel) -> ThreadDict:
+    def _convert_to_chainlit_thread(
+        self, thread: ThreadModel, user_id: Optional[str] = None
+    ) -> ThreadDict:
         messages = get_all_messages(thread.id, limit=None)
 
         chainlit_steps = []
@@ -136,11 +142,11 @@ class DataLayer(BaseDataLayer):
         return ThreadDict(
             id=str(thread.id),
             name=thread.name,
-            userIdentifier=str(thread.user_id),
+            userIdentifier=str(thread.user_id) if user_id is None else user_id,
             createdAt=thread.created_at.isoformat(),
             metadata={},
             tags=[],
-            userId=str(thread.user_id),
+            userId=str(thread.user_id) if user_id is None else user_id,
             elements=[],
             steps=chainlit_steps,
         )
@@ -150,11 +156,20 @@ class DataLayer(BaseDataLayer):
     ) -> PaginatedResponse[ThreadDict]:
         if not filters.userId:
             raise ValueError("userId is required")
-
-        threads = get_all_threads(UUID(filters.userId))
+        user = get_user(UUID(filters.userId))
+        if not user:
+            print(f"User with ID {filters.userId} not found")
+            raise ValueError(f"User with ID {filters.userId} not found")
+        if user.role == UserRole.admin:
+            threads = get_all_threads()
+        else:
+            threads = get_all_threads_by_user_id(UUID(filters.userId))
 
         return PaginatedResponse(
-            data=[self._convert_to_chainlit_thread(thread) for thread in threads],
+            data=[
+                self._convert_to_chainlit_thread(thread, user_id=str(user.id))
+                for thread in threads
+            ],
             pageInfo=PageInfo(
                 hasNextPage=False,
                 startCursor=None,

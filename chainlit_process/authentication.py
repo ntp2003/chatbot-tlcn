@@ -1,4 +1,5 @@
 import datetime
+from uuid import UUID
 import chainlit as cl
 from repositories.user import (
     password_auth_user,
@@ -8,10 +9,46 @@ from repositories.user import (
     CreateUserModel,
     update as update_user,
     UpdateUserModel,
+    get as get_user,
 )
 from service.google_api import get_gender
 from typing import Dict, Optional
 from models.user import OAuthProvider
+import chainlit.data.acl as acl
+from chainlit.data import get_data_layer
+from fastapi import HTTPException
+import chainlit.config as config
+from chainlit_process.message import on_chat_resume
+from chainlit.utils import wrap_user_function
+
+
+async def is_thread_author(username: str, thread_id: str):
+    data_layer = get_data_layer()
+    if not data_layer:
+        raise HTTPException(status_code=400, detail="Data layer not initialized")
+
+    thread_author = await data_layer.get_thread_author(thread_id)
+
+    if not thread_author:
+        raise HTTPException(status_code=404, detail="Thread not found")
+
+    if thread_author != username:
+        user = get_user(UUID(username))
+        if user and user.role == UserRole.admin:
+            # Admins can access any thread
+            return True
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    else:
+        return True
+
+
+def change_is_thread_author_function():
+    """Change the is_thread_author function to use the new data layer."""
+    print("Changing is_thread_author function to use the new data layer")
+    acl.is_thread_author = is_thread_author
+
+
+change_is_thread_author_function()
 
 
 # decorator chainlit regis hàm auth_callback gọi khi user xác thực bằng mật khẩu
@@ -19,10 +56,20 @@ from models.user import OAuthProvider
 def password_auth_callback(username: str, password: str) -> Optional[cl.User]:
     user = password_auth_user(username, password, UserRole.chainlit_user)
 
-    if not user:
-        return None
+    if user:
+        config.config.code.on_chat_resume = wrap_user_function(
+            on_chat_resume, with_task=True
+        )
+        return cl.User(identifier=str(user.id), metadata={"user_id": str(user.id)})
+    admin = password_auth_user(username, password, UserRole.admin)
 
-    return cl.User(identifier=str(user.id), metadata={"user_id": str(user.id)})
+    if admin:
+        config.config.code.on_chat_resume = None
+        return cl.User(
+            identifier=str(admin.id),
+            metadata={"user_id": str(admin.id), "role": "admin"},
+        )
+    return None
 
 
 @cl.oauth_callback
@@ -43,12 +90,15 @@ async def oauth_callback(
 
         if not email or not verified_email or not google_id:
             return None
-
+        config.config.code.on_chat_resume = wrap_user_function(
+            on_chat_resume, with_task=True
+        )
         if google_user := get_by_email_and_role(email, UserRole.google_user):
             google_user.last_oauth_login = datetime.datetime.now()
 
             update_data = UpdateUserModel(**google_user.model_dump())
             update_user(google_user.id, update_data)
+
             return cl.User(
                 identifier=str(google_user.id),
                 metadata={"user_id": str(google_user.id), "provider": "google"},

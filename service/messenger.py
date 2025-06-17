@@ -7,7 +7,10 @@ from repositories.message import (
     get_all as get_all_messages,
 )
 from models.message import CreateMessageModel, MessageModel, MessageType
-from repositories.thread import create as create_thread, get_all as get_all_threads
+from repositories.thread import (
+    create as create_thread,
+    get_all_by_user_id as get_all_threads,
+)
 from repositories.user import (
     get_by_fb_user_id as get_user_by_fb_user_id,
     create as create_user,

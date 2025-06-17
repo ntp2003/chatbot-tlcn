@@ -26,7 +26,13 @@ def get(id: UUID) -> ThreadModel | None:
         return ThreadModel.model_validate(thread)
 
 
-def get_all(user_id: UUID) -> list[ThreadModel]:
+def get_all() -> list[ThreadModel]:
+    with Session() as session:
+        threads = session.query(Thread).order_by(Thread.created_at.desc()).all()
+        return [ThreadModel.model_validate(thread) for thread in threads]
+
+
+def get_all_by_user_id(user_id: UUID) -> list[ThreadModel]:
     with Session() as session:
         threads = (
             session.query(Thread)

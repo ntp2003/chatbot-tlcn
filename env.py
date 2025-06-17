@@ -19,6 +19,7 @@ class Env(BaseModel):
     CHAINLIT_AUTH_SECRET: str
     CHAINLIT_HOST: str
     CHAINLIT_PORT: int
+    CHAINLIT_ROOT_PATH: str
     SENDER_EMAIL: str
     RECEIVER_EMAIL: str
     CLIENT_ID: str

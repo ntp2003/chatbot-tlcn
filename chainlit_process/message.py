@@ -71,7 +71,6 @@ async def main(message: cl.Message):
     ).send()
 
 
-@cl.on_chat_resume
 async def on_chat_resume(thread: ThreadDict):
     print("Chat resumed")
     print("Thread ID:", thread["id"])
